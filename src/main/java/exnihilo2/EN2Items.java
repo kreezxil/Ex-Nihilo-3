@@ -1,6 +1,5 @@
 package exnihilo2;
 
-import exnihilo2.data.EN2Data;
 import exnihilo2.items.crooks.WoodCrook;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
