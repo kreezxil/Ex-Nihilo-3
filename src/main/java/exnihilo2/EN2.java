@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import exnihilo2.data.*;
 
-@Mod(modid = EN2Data.MODID, version = EN2Data.VERSION)
+@Mod(name = EN2Data.NAME, modid = EN2Data.MODID, version = EN2Data.VERSION)
 public class EN2
 {
     @EventHandler

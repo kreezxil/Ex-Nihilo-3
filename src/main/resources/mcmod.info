@@ -2,7 +2,6 @@
 {
   "modid": "exnihilo2", "name": "Ex Nihilo 2",
   "description": "Renew the world!",
-  "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
