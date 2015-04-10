@@ -54,12 +54,13 @@ public class ItemCrook extends Item {
 			double distance = Math.sqrt(Math.pow(player.posX - entity.posX, 2) + Math.pow(player.posZ - entity.posZ, 2));
 
 			double scalarX = (player.posX - entity.posX) / distance;
+			double scalarY = (player.posY - entity.posY) / distance;
 			double scalarZ = (player.posZ - entity.posZ) / distance;
 
 			double velX = 0 - scalarX * pushingForce;
+			double velY = 0 - scalarY * pushingForce;
 			double velZ = 0 - scalarZ * pushingForce;
-			double velY = 0; //- (player.posY - entity.posY);
-
+			
 			entity.addVelocity(velX, velY, velZ);
 		}
 		
@@ -76,12 +77,13 @@ public class ItemCrook extends Item {
 			double distance = Math.sqrt(Math.pow(player.posX - entity.posX, 2) + Math.pow(player.posZ - entity.posZ, 2));
 
 			double scalarX = (player.posX - entity.posX) / distance;
+			double scalarY = (player.posY - entity.posY) / distance;
 			double scalarZ = (player.posZ - entity.posZ) / distance;
 
 			double velX = scalarX * pullingForce;
+			double velY = scalarY * pullingForce;
 			double velZ = scalarZ * pullingForce;
-			double velY = 0; //- (player.posY - entity.posY);
-
+			
 			entity.addVelocity(velX, velY, velZ);
 		}
 
