@@ -1,4 +1,4 @@
-package exnihilo2.items.crooks;
+package exnihilo2.items;
 
 import java.util.Set;
 

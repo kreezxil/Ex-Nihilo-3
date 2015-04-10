@@ -1,6 +1,6 @@
 package exnihilo2;
 
-import exnihilo2.items.crooks.ItemCrook;
+import exnihilo2.items.ItemCrook;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
