@@ -1,10 +1,12 @@
 package exnihilo2;
 
-import exnihilo2.items.crooks.WoodCrook;
+import exnihilo2.items.crooks.ItemCrook;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class EN2Items {
@@ -13,7 +15,7 @@ public class EN2Items {
 	
 	public static void Initialize()
 	{
-		wood_crook = new WoodCrook().setUnlocalizedName("wood_crook");
+		wood_crook = new ItemCrook(ToolMaterial.WOOD).setUnlocalizedName("woodCrook");
 	}
 	
 	public static void RegisterItems()

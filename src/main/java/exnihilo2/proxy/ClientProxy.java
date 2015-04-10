@@ -1,5 +1,7 @@
 package exnihilo2.proxy;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.World;
 import exnihilo2.EN2;
 import exnihilo2.EN2Items;
 
