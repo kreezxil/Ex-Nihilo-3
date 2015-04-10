@@ -1,5 +1,6 @@
 package exnihilo2.proxy;
 
-public class ServerProxy {
+//Commands that only execute on the server.
+public class ServerProxy extends Proxy {
 
 }
