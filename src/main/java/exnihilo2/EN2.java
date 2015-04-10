@@ -25,18 +25,26 @@ public class EN2
 	public void PreInitialize(FMLPreInitializationEvent event)
 	{
     	//pre
+    	log.info("PreInit");
+    	
+    	EN2Items.Initialize();
+    	EN2Items.RegisterItems();
 	}
     
     @EventHandler
     public void Initialize(FMLInitializationEvent event)
     {
 		//init
+    	log.info("Init");
+    	
+    	proxy.RegisterItemRenderers();
     }
     
     @EventHandler
 	public void PostInitialize(FMLPostInitializationEvent event)
 	{
     	//post
+    	log.info("PostInit");
     	proxy.Test();
 	}
 }
