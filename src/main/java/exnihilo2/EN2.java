@@ -6,13 +6,11 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import exnihilo2.data.*;
 
-@Mod(modid = ExNihilo2.MODID, version = ExNihilo2.VERSION)
-public class ExNihilo2
+@Mod(modid = EN2Data.MODID, version = EN2Data.VERSION)
+public class EN2
 {
-    public static final String MODID = "exnihilo2";
-    public static final String VERSION = "1.0";
-    
     @EventHandler
 	public void PreInitialize(FMLPreInitializationEvent event)
 	{
