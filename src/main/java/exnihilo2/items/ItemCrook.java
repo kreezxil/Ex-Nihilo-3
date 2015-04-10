@@ -7,6 +7,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,6 +28,9 @@ public class ItemCrook extends Item {
 	
 	public ItemCrook(ToolMaterial material) {
 		this.material = material;
+		this.maxStackSize = 1;
+		this.setMaxDamage(material.getMaxUses());
+		this.setCreativeTab(CreativeTabs.tabTools);
 	}
 	
 	@Override
