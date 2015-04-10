@@ -12,20 +12,24 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class EN2Items {
 
 	public static Item wood_crook;
+	public static Item bone_crook;
 	
 	public static void Initialize()
 	{
 		wood_crook = new ItemCrook(ToolMaterial.WOOD).setUnlocalizedName("woodCrook");
+		bone_crook = new ItemCrook(ToolMaterial.STONE).setUnlocalizedName("boneCrook");
 	}
 	
 	public static void RegisterItems()
 	{
 		RegisterItem(wood_crook);
+		RegisterItem(bone_crook);
 	}
 	
 	public static void RegisterItemRenderers()
 	{
 		RegisterItemRenderer(wood_crook);
+		RegisterItemRenderer(bone_crook);
 	}
 	
 	private static void RegisterItem(Item item)
