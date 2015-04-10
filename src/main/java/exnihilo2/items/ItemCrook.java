@@ -34,13 +34,63 @@ public class ItemCrook extends Item {
 	}
 	
 	@Override
+	public boolean onLeftClickEntity(ItemStack item, EntityPlayer player, Entity entity)
+	{
+		if (!player.worldObj.isRemote)
+		{
+			double distance = Math.sqrt(Math.pow(player.posX - entity.posX, 2) + Math.pow(player.posZ - entity.posZ, 2));
+
+			double scalarX = (player.posX - entity.posX) / distance;
+			double scalarZ = (player.posZ - entity.posZ) / distance;
+
+			double velX = 0 - scalarX * pushingForce;
+			double velY = 0;
+			double velZ = 0 - scalarZ * pushingForce;
+			
+			
+			if (player.posY < entity.posY)
+				velY = 0.5d;
+			
+			entity.addVelocity(velX, velY, velZ);
+		}
+		
+		//Don't do damage
+		item.damageItem(1, player);
+		return true;
+	}
+	
+	@Override
+	public boolean itemInteractionForEntity(ItemStack item, EntityPlayer player, EntityLivingBase entity)
+    {
+		if (!player.worldObj.isRemote)
+		{
+			double distance = Math.sqrt(Math.pow(player.posX - entity.posX, 2) + Math.pow(player.posZ - entity.posZ, 2));
+
+			double scalarX = (player.posX - entity.posX) / distance;
+			double scalarZ = (player.posZ - entity.posZ) / distance;
+
+			double velX = scalarX * pullingForce;
+			double velY = 0;
+			double velZ = scalarZ * pullingForce;
+			
+			if (player.posY > entity.posY)
+				velY = 0.5d;
+			
+			entity.addVelocity(velX, velY, velZ);
+		}
+
+		item.damageItem(1, player);
+		return true;
+    }
+	
+	@Override
 	public boolean canHarvestBlock(Block block)
     {
 		return block.getMaterial() == Material.leaves;
     }
 	
 	@Override
-	public float getStrVsBlock(ItemStack stack, Block block)
+	public float getStrVsBlock(ItemStack item, Block block)
     {
 		if (block.getMaterial() == Material.leaves)
 		{
@@ -51,47 +101,24 @@ public class ItemCrook extends Item {
 	}
 	
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
-	{
-		if (!player.worldObj.isRemote)
+	public boolean onBlockStartBreak(ItemStack item, BlockPos pos, EntityPlayer player)
+    {
+		Block block = player.worldObj.getBlockState(pos).getBlock();
+		
+		if (block.getMaterial() == Material.leaves || block.getMaterial() == Material.vine)
 		{
-			double distance = Math.sqrt(Math.pow(player.posX - entity.posX, 2) + Math.pow(player.posZ - entity.posZ, 2));
-
-			double scalarX = (player.posX - entity.posX) / distance;
-			//double scalarY = (player.posY - entity.posY) / distance;
-			double scalarZ = (player.posZ - entity.posZ) / distance;
-
-			double velX = 0 - scalarX * pushingForce;
-			double velY = 0;// - scalarY * pushingForce;
-			double velZ = 0 - scalarZ * pushingForce;
-			
-			entity.addVelocity(velX, velY, velZ);
+			//Simulate a block break to cause the first round of items to drop.
+			block.dropBlockAsItem(player.worldObj, pos, player.worldObj.getBlockState(pos), 0);
 		}
 		
-		//Don't do damage
-		stack.damageItem(1, player);
-		return true;
-	}
+		//Returning false causes the leaves/grass to break as normal and causes items to drop a second time.
+        return false;
+    }
 	
 	@Override
-	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entity)
+	public boolean onBlockDestroyed(ItemStack item, World world, Block block, BlockPos pos, EntityLivingBase player)
     {
-		if (!player.worldObj.isRemote)
-		{
-			double distance = Math.sqrt(Math.pow(player.posX - entity.posX, 2) + Math.pow(player.posZ - entity.posZ, 2));
-
-			double scalarX = (player.posX - entity.posX) / distance;
-			//double scalarY = (player.posY - entity.posY) / distance;
-			double scalarZ = (player.posZ - entity.posZ) / distance;
-
-			double velX = scalarX * pullingForce;
-			double velY = 0;//scalarY * pullingForce;
-			double velZ = scalarZ * pullingForce;
-			
-			entity.addVelocity(velX, velY, velZ);
-		}
-
-		stack.damageItem(1, player);
+		item.damageItem(1, player);
 		return true;
     }
 }
