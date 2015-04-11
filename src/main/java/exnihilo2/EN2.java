@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
 
 @Mod(name = EN2Data.NAME, modid = EN2Data.MODID, version = EN2Data.VERSION)
@@ -25,6 +26,8 @@ public class EN2
 	{
     	//pre
     	log.info("PreInit");
+    	
+    	EN2ToolMaterials.Initialize();
     	
     	EN2Items.Initialize();
     	EN2Items.RegisterItems();

@@ -1,6 +1,7 @@
 package exnihilo2;
 
 import exnihilo2.items.ItemCrook;
+import exnihilo2.items.materials.EN2ToolMaterials;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -16,8 +17,8 @@ public class EN2Items {
 	
 	public static void Initialize()
 	{
-		wood_crook = new ItemCrook(ToolMaterial.WOOD).setUnlocalizedName("woodCrook");
-		bone_crook = new ItemCrook(ToolMaterial.STONE).setUnlocalizedName("boneCrook");
+		wood_crook = new ItemCrook(EN2ToolMaterials.Stick).setUnlocalizedName("woodCrook");
+		bone_crook = new ItemCrook(EN2ToolMaterials.Bone).setUnlocalizedName("boneCrook");
 	}
 	
 	public static void RegisterItems()
