@@ -13,9 +13,9 @@ public class EN2ToolMaterials{
 	public static void Initialize()
 	{
 		Stick = EnumHelper.addToolMaterial("Stick", 0, 59, 2.0F, 0.0F, 15);
-		Stick.setRepairItem(new ItemStack(Items.stick, 1));
+		Stick.setRepairItem(new ItemStack(Items.stick, 0));
 		
 		Bone = EnumHelper.addToolMaterial("Bone", 1, 131, 4.0F, 1.0F, 5);
-		Bone.setRepairItem(new ItemStack(Items.bone, 1));
+		Bone.setRepairItem(new ItemStack(Items.dye, 1, 15)); //bonemeal
 	}
 }
