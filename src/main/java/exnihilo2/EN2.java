@@ -24,9 +24,6 @@ public class EN2
     @EventHandler
 	public void PreInitialize(FMLPreInitializationEvent event)
 	{
-    	//pre
-    	log.info("PreInit");
-    	
     	EN2ToolMaterials.Initialize();
     	
     	EN2Items.Initialize();
@@ -36,17 +33,12 @@ public class EN2
     @EventHandler
     public void Initialize(FMLInitializationEvent event)
     {
-		//init
-    	log.info("Init");
-    	
     	proxy.RegisterItemRenderers();
     }
     
     @EventHandler
 	public void PostInitialize(FMLPostInitializationEvent event)
 	{
-    	//post
-    	log.info("PostInit");
     	proxy.Test();
 	}
 }

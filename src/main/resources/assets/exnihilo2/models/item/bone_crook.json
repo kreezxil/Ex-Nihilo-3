@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "exnihilo2:items/woodCrook"
+        "layer0": "exnihilo2:items/bone_crook"
     },
     "display": {
         "thirdperson": {

@@ -17,8 +17,8 @@ public class EN2Items {
 	
 	public static void Initialize()
 	{
-		wood_crook = new ItemCrook(EN2ToolMaterials.Stick).setUnlocalizedName("woodCrook");
-		bone_crook = new ItemCrook(EN2ToolMaterials.Bone).setUnlocalizedName("boneCrook");
+		wood_crook = new ItemCrook(EN2ToolMaterials.Stick).setUnlocalizedName("wood_crook");
+		bone_crook = new ItemCrook(EN2ToolMaterials.Bone).setUnlocalizedName("bone_crook");
 	}
 	
 	public static void RegisterItems()
