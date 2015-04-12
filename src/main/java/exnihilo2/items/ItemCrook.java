@@ -29,7 +29,7 @@ public class ItemCrook extends Item {
 	public ItemCrook(ToolMaterial material) {
 		this.material = material;
 		this.maxStackSize = 1;
-		this.setMaxDamage(material.getMaxUses());
+		this.setMaxDamage((int)(material.getMaxUses() * 1.5));
 		this.setCreativeTab(CreativeTabs.tabTools);
 	}
 	
