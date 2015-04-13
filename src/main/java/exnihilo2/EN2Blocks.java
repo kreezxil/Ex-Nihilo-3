@@ -16,20 +16,24 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class EN2Blocks {
 	
 	public static Block oak_barrel;
+	public static Block spruce_barrel;
 
 	public static void Initialize()
 	{
 		oak_barrel = new BlockBarrel(Material.wood).setUnlocalizedName("oak_barrel");
+		spruce_barrel = new BlockBarrel(Material.wood).setUnlocalizedName("spruce_barrel");
 	}
 	
 	public static void RegisterBlocks()
 	{
 		RegisterBlock(oak_barrel);
+		RegisterBlock(spruce_barrel);
 	}
 	
 	public static void RegisterBlockRenderers()
 	{
 		RegisterRenderer(oak_barrel);
+		RegisterRenderer(spruce_barrel);
 
 		TileEntitySpecialRenderer render = new RendererBarrel();
 	   	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, render);
