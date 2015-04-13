@@ -31,6 +31,7 @@ public class EN2
     	
     	EN2Items.RegisterItems();
     	EN2Blocks.RegisterBlocks();
+    	EN2Blocks.RegisterTileEntities();
 	}
     
     @EventHandler
