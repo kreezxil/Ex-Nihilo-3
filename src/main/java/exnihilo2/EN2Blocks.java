@@ -37,7 +37,6 @@ public class EN2Blocks {
 
 		TileEntitySpecialRenderer render = new RendererBarrel();
 	   	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, render);
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(wood_barrel), new ItemRendererNileTable(render, new TileEntityBarrel()));
 	}
 	
 	public static void RegisterTileEntities()
