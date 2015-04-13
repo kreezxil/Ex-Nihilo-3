@@ -20,7 +20,7 @@ import net.minecraftforge.client.model.IFlexibleBakedModel;
 
 public class RendererBarrel extends TileEntitySpecialRenderer {
 	//TODO: Fetch barrel texture from the TE state.
-    private static final ResourceLocation texture = new ResourceLocation("exnihilo2:textures/blocks/oak_sieve.png");
+    private static final ResourceLocation texture = new ResourceLocation("exnihilo2:textures/blocks/oak_barrel.png");
     private static ModelBarrel model = new ModelBarrel();
 
 	@Override
@@ -30,7 +30,8 @@ public class RendererBarrel extends TileEntitySpecialRenderer {
 		Minecraft mc = Minecraft.getMinecraft();
 		
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float)x + 0.5F,(float)y + 1.5F,(float)z + 0.5F);
+		//GL11.glTranslatef((float)x + 0.5F,(float)y + 1.5F,(float)z + 0.5F);
+		GL11.glTranslatef((float)x + 0.5F,(float)y + 3.5F,(float)z + 0.5F);
 		GL11.glScalef(-0.8F, -1F, 0.8F);
 
 		bindTexture(texture);
