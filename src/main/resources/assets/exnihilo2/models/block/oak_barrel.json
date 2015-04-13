@@ -1,6 +1,129 @@
 {
-    "parent": "block/cube_all",
+    "__createdwith": "opl's Model Creator",
+    "ambientocclusion": false,
     "textures": {
-        "all": "exnihilo2:blocks/oak_barrel"
-    }
+        "particle": "blocks/planks_oak",
+        "barrel": "blocks/planks_oak"
+    },
+    "elements": [
+        {
+            "from": [2,0,2],
+            "to": [14,1,14],
+            "faces": {
+                "up": {
+                    "uv": [0,0,16,16],
+                    "texture": "#barrel"
+                },
+                "down": {
+                    "texture": "#barrel"
+                }
+            }
+        },
+        {
+            "from": [1,0,14],
+            "to": [15,16,15],
+            "faces": {
+                "up": {
+                    "texture": "#barrel"
+                },
+                "down": {
+                    "texture": "#barrel"
+                },
+                "west": {
+                    "uv": [0,0,16,1],
+                    "texture": "#barrel",
+                    "rotation": 90
+                },
+                "east": {
+                    "uv": [0,0,16,1],
+                    "texture": "#barrel"
+                },
+                "north": {
+                    "texture": "#barrel",
+                    "rotation": 90
+                },
+                "south": {
+                    "texture": "#barrel",
+                    "rotation": 90
+                }
+            }
+        },
+        {
+            "from": [1,0,1],
+            "to": [15,16,2],
+            "faces": {
+                "up": {
+                    "uv": [0,15,16,16],
+                    "texture": "#barrel"
+                },
+                "down": {
+                    "uv": [0,15,16,16],
+                    "texture": "#barrel"
+                },
+                "west": {
+                    "uv": [0,15,16,16],
+                    "texture": "#barrel",
+                    "rotation": 90
+                },
+                "east": {
+                    "uv": [0,15,16,16],
+                    "texture": "#barrel"
+                },
+                "north": {
+                    "texture": "#barrel",
+                    "rotation": 90
+                },
+                "south": {
+                    "texture": "#barrel",
+                    "rotation": 270
+                }
+            }
+        },
+        {
+            "from": [1,0,2],
+            "to": [2,16,14],
+            "faces": {
+                "up": {
+                    "uv": [1,15,15,16],
+                    "texture": "#barrel"
+                },
+                "down": {
+                    "uv": [1,15,15,16],
+                    "texture": "#barrel"
+                },
+                "west": {
+                    "uv": [0,1,16,15],
+                    "texture": "#barrel",
+                    "rotation": 90
+                },
+                "east": {
+                    "texture": "#barrel",
+                    "rotation": 90
+                }
+            }
+        },
+        {
+            "from": [14,0,2],
+            "to": [15,16,14],
+            "faces": {
+                "up": {
+                    "uv": [1,15,15,16],
+                    "texture": "#barrel"
+                },
+                "down": {
+                    "uv": [1,15,15,16],
+                    "texture": "#barrel"
+                },
+                "west": {
+                    "texture": "#barrel",
+                    "rotation": 270
+                },
+                "east": {
+                    "uv": [0,1,16,15],
+                    "texture": "#barrel",
+                    "rotation": 270
+                }
+            }
+        }
+    ]
 }
