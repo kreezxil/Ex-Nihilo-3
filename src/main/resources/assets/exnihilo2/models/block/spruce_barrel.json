@@ -24,9 +24,11 @@
             "to": [15,16,15],
             "faces": {
                 "up": {
+                    "uv": [1,15,15,16],
                     "texture": "#barrel"
                 },
                 "down": {
+                    "uv": [1,15,15,16],
                     "texture": "#barrel"
                 },
                 "west": {
