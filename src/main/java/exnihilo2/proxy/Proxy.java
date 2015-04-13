@@ -8,5 +8,5 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 //Commands that execute on both the client and the server.
 public interface Proxy {
 	public void Test();
-	public void RegisterItemRenderers();
+	public void RegisterRenderers();
 }

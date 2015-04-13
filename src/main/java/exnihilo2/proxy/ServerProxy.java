@@ -13,7 +13,7 @@ public class ServerProxy implements Proxy {
 	}
 
 	@Override
-	public void RegisterItemRenderers() 
+	public void RegisterRenderers() 
 	{
 		//Do nothing because we're on the server side.
 	}

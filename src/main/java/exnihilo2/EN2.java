@@ -27,13 +27,16 @@ public class EN2
     	EN2ToolMaterials.Initialize();
     	
     	EN2Items.Initialize();
+    	EN2Blocks.Initialize();
+    	
     	EN2Items.RegisterItems();
+    	EN2Blocks.RegisterBlocks();
 	}
     
     @EventHandler
     public void Initialize(FMLInitializationEvent event)
     {
-    	proxy.RegisterItemRenderers();
+    	proxy.RegisterRenderers();
     }
     
     @EventHandler
