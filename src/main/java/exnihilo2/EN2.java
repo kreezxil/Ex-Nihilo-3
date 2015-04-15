@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import exnihilo2.barrels.Barrels;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
 
@@ -32,6 +33,8 @@ public class EN2
     	EN2Items.RegisterItems();
     	EN2Blocks.RegisterBlocks();
     	EN2Blocks.RegisterTileEntities();
+    	
+    	Barrels.buildBehaviorTree();
 	}
     
     @EventHandler

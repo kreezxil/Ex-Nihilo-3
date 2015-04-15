@@ -25,16 +25,6 @@ public class RendererBarrel extends TileEntitySpecialRenderer {
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int i) 
 	{
 		TileEntityBarrel barrel = (TileEntityBarrel) te;
-//		Minecraft mc = Minecraft.getMinecraft();
-//		
-//		GL11.glPushMatrix();
-//		//GL11.glTranslatef((float)x + 0.5F,(float)y + 1.5F,(float)z + 0.5F);
-//		GL11.glTranslatef((float)x + 0.5F,(float)y + 3.5F,(float)z + 0.5F);
-//		GL11.glScalef(-0.8F, -1F, 0.8F);
-//
-//		bindTexture(texture);
-//		model.simpleRender(0.0625F);
-//		
-//		GL11.glPopMatrix();
+		barrel.renderBarrelContents(x, y, z);
 	}
 }

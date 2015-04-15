@@ -35,8 +35,8 @@ public class EN2Blocks {
 		RegisterRenderer(oak_barrel);
 		RegisterRenderer(spruce_barrel);
 
-		TileEntitySpecialRenderer render = new RendererBarrel();
-	   	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, render);
+		TileEntitySpecialRenderer barrelRenderer = new RendererBarrel();
+	   	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, barrelRenderer);
 	}
 	
 	public static void RegisterTileEntities()
