@@ -1,4 +1,4 @@
-package exnihilo2.blocks.tileentities;
+package exnihilo2.barrels.tileentity;
 
 import exnihilo2.EN2;
 import exnihilo2.barrels.Barrels;
@@ -7,34 +7,38 @@ import exnihilo2.barrels.interfaces.IBarrelState;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.ITickable;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityBarrel extends TileEntity implements IUpdatePlayerListBox {
 	
-	private BaseBarrelState state;
+	protected BaseBarrelState state;
 	
-	private int generalTimer = 0;
-	private int generalTimerMax = 0;
+	protected int generalTimer = 0;
+	protected int generalTimerMax = 0;
 	
-	private int syncTimer = 0;
-	private final int syncTimerMax = 20; //Sync once per second if an update is required.
+	protected int syncTimer = 0;
+	protected final int syncTimerMax = 20; //Sync once per second if an update is required.
+	
+	protected FluidStack fluid;
+	protected ItemStack output;
 	
 	boolean updateNeeded = false;
 	
 	public void TileEnitityBarrel()
 	{
-		this.state = Barrels.getState("empty");
-		EN2.log.error("State set to empty.");
+		state = Barrels.getState("empty");
 	}
 	
 	public IBarrelState getState()
 	{
-		return this.state;
+		return state;
 	}
 	
 	public void setState(String key)
@@ -43,12 +47,14 @@ public class TileEntityBarrel extends TileEntity implements IUpdatePlayerListBox
 		
 		if (state != null)
 		{
-			this.state = newState;
+			state = newState;
 		}
 		else
 		{
-			this.state = Barrels.getState("empty");
+			state = Barrels.getState("empty");
 		}
+		
+		state.activate(this);
 	}
 	
 	public void startTimer(int maxTicks)
@@ -108,6 +114,18 @@ public class TileEntityBarrel extends TileEntity implements IUpdatePlayerListBox
 
 		setState(compound.getString("state"));
 		generalTimer = compound.getInteger("timer");
+		
+		compound.setBoolean("fluid", fluid != null);
+		if (fluid != null)
+		{
+			fluid.writeToNBT(compound);
+		}
+		
+		compound.setBoolean("item", output != null);
+		if (output != null)
+		{
+			output.writeToNBT(compound);
+		}
 	}
  
 	@Override
@@ -121,6 +139,16 @@ public class TileEntityBarrel extends TileEntity implements IUpdatePlayerListBox
 		}
 		
 		compound.setInteger("timer", generalTimer);
+		
+		if (compound.getBoolean("fluid"))
+		{
+			fluid = FluidStack.loadFluidStackFromNBT(compound);
+		}
+		
+		if (compound.getBoolean("item"))
+		{
+			output = ItemStack.loadItemStackFromNBT(compound);
+		}
 	}
 
 	@Override

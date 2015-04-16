@@ -2,7 +2,7 @@ package exnihilo2.barrels.interfaces;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import exnihilo2.blocks.tileentities.TileEntityBarrel;
+import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 public interface IBarrelStateTrigger {
 	//This must be unique!

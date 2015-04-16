@@ -14,7 +14,7 @@ import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
 import exnihilo2.barrels.interfaces.IBarrelState;
 import exnihilo2.barrels.interfaces.IBarrelStateTrigger;
-import exnihilo2.blocks.tileentities.TileEntityBarrel;
+import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 public abstract class BaseBarrelState implements IBarrelState {
 	

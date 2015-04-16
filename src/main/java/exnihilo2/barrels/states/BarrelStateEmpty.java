@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 import exnihilo2.EN2;
 import exnihilo2.barrels.bases.BaseBarrelState;
 import exnihilo2.barrels.interfaces.IBarrelState;
-import exnihilo2.blocks.tileentities.TileEntityBarrel;
+import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 //Does nothing. Renders nothing. Is simply a container for triggers.
 public class BarrelStateEmpty extends BaseBarrelState implements IBarrelState{

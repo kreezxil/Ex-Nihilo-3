@@ -1,9 +1,9 @@
-package exnihilo2.blocks.tileentities.renderers;
+package exnihilo2.barrels.renderer;
 
 import org.lwjgl.opengl.GL11;
 
 import exnihilo2.barrels.interfaces.IBarrelState;
-import exnihilo2.blocks.tileentities.TileEntityBarrel;
+import exnihilo2.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
