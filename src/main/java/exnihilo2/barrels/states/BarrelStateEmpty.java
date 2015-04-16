@@ -29,9 +29,9 @@ public class BarrelStateEmpty extends BaseBarrelState implements IBarrelState{
 		//Testing the ability to draw the contents of a barrel.
 		//TODO: Remove later.
 		Minecraft mc = Minecraft.getMinecraft();
-		TextureAtlasSprite texture = mc.getTextureMapBlocks().getAtlasSprite("minecraft:blocks/crafting_table_top");
 		mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
+		TextureAtlasSprite texture = mc.getTextureMapBlocks().getAtlasSprite("minecraft:blocks/crafting_table_top");
 
-		drawContents(texture, x, y, z);
+		renderContentTexture(texture, x, y, z, 0.9d);
 	}
 }
