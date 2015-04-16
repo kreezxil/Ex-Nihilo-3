@@ -5,9 +5,11 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -105,10 +107,10 @@ public class ItemCrook extends Item {
     {
 		Block block = player.worldObj.getBlockState(pos).getBlock();
 		
-		if (block.getMaterial() == Material.leaves || block.getMaterial() == Material.vine)
+		if (block.getMaterial() == Material.leaves || block instanceof BlockTallGrass)
 		{
 			//Simulate a block break to cause the first round of items to drop.
-			block.dropBlockAsItem(player.worldObj, pos, player.worldObj.getBlockState(pos), 0);
+			block.dropBlockAsItem(player.worldObj, pos, player.worldObj.getBlockState(pos), EnchantmentHelper.getFortuneModifier(player));
 		}
 		
 		//Returning false causes the leaves/grass to break as normal and causes items to drop a second time.
