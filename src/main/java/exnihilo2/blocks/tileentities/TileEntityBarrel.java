@@ -22,7 +22,7 @@ public class TileEntityBarrel extends TileEntity {
 		EN2.log.error("State set to empty.");
 	}
 	
-	public void changeState(String key)
+	public void setState(String key)
 	{
 		reset();
 		
@@ -38,17 +38,14 @@ public class TileEntityBarrel extends TileEntity {
 		}
 	}
 	
+	public IBarrelState getState()
+	{
+		return this.state;
+	}
+	
 	private void reset()
 	{
 		//Reset all properties to defaults.
-	}
-	
-	public void renderBarrelContents(double x, double y, double z)
-	{
-		if(worldObj.isRemote && state != null)
-		{
-			state.renderBarrelContents(this, x, y, z);
-		}
 	}
 	
 	@Override
@@ -56,7 +53,7 @@ public class TileEntityBarrel extends TileEntity {
 	{
 		super.readFromNBT(compound);
 
-		this.changeState(compound.getString("state"));
+		this.setState(compound.getString("state"));
 	}
  
 	@Override

@@ -10,5 +10,5 @@ public interface IBarrelState
 	public void onUpdate(TileEntityBarrel barrel);
 	public void onItemUse(TileEntityBarrel barrel, ItemStack item);
 	public void onFluidUse(TileEntityBarrel barrel, FluidStack fluid);
-	public void renderBarrelContents(TileEntityBarrel barrel, double x, double y, double z);
+	public void render(TileEntityBarrel barrel, double x, double y, double z);
 }

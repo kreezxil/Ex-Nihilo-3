@@ -2,6 +2,7 @@ package exnihilo2.blocks.tileentities.renderers;
 
 import org.lwjgl.opengl.GL11;
 
+import exnihilo2.barrels.interfaces.IBarrelState;
 import exnihilo2.blocks.tileentities.TileEntityBarrel;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -25,6 +26,12 @@ public class RendererBarrel extends TileEntitySpecialRenderer {
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int i) 
 	{
 		TileEntityBarrel barrel = (TileEntityBarrel) te;
-		barrel.renderBarrelContents(x, y, z);
+		IBarrelState contents = barrel.getState();
+		
+		if (contents != null)
+		{
+			contents.render(barrel, x, y, z);
+		}
+		
 	}
 }

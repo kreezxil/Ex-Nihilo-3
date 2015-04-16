@@ -85,9 +85,9 @@ public abstract class BaseBarrelState implements IBarrelState {
 
 	@Override
 	public void onFluidUse(TileEntityBarrel barrel, FluidStack fluid) {}
-
+	
 	@Override
-	public void renderBarrelContents(TileEntityBarrel barrel, double x, double y, double z) {}
+	public void render(TileEntityBarrel barrel, double x, double y, double z) {}
 
 	public void registerStateTrigger(IBarrelStateTrigger trigger) 
 	{
