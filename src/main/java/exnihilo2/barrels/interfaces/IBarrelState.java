@@ -9,7 +9,7 @@ public interface IBarrelState
 {
 	public void onActivate(TileEntityBarrel barrel);
 	public void onUpdate(TileEntityBarrel barrel);
-	public void onItemUse(TileEntityBarrel barrel, ItemStack item);
-	public void onFluidUse(TileEntityBarrel barrel, FluidStack fluid);
+	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item);
+	public void onUseItem(TileEntityBarrel barrel, ItemStack item);
 	public void render(TileEntityBarrel barrel, double x, double y, double z);
 }

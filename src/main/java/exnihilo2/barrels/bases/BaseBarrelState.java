@@ -59,20 +59,7 @@ public abstract class BaseBarrelState implements IBarrelState {
 			}
 		}
 		
-		this.onItemUse(barrel, item);
-	}
-
-	public void useFluid(TileEntityBarrel barrel, FluidStack fluid)
-	{
-		if (!triggers.isEmpty())
-		{
-			for (Map.Entry<String, IBarrelStateTrigger> entry : triggers.entrySet()) 
-			{
-				entry.getValue().fluidUse(barrel, fluid);
-			}
-		}
-		
-		this.onFluidUse(barrel, fluid);
+		this.onUseItem(barrel, item);
 	}
 	
 	@Override
@@ -82,10 +69,12 @@ public abstract class BaseBarrelState implements IBarrelState {
 	public void onUpdate(TileEntityBarrel barrel) {}
 
 	@Override
-	public void onItemUse(TileEntityBarrel barrel, ItemStack item) {}
-
+	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) {
+		return false;
+	}
+	
 	@Override
-	public void onFluidUse(TileEntityBarrel barrel, FluidStack fluid) {}
+	public void onUseItem(TileEntityBarrel barrel, ItemStack item) {}
 	
 	@Override
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {}
