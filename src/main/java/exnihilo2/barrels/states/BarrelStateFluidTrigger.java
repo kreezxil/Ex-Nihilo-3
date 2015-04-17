@@ -13,12 +13,6 @@ import exnihilo2.barrels.tileentity.TileEntityBarrel;
 public class BarrelStateFluidTrigger implements IBarrelStateTrigger {
 
 	@Override
-	public String getStateTriggerID() 
-	{
-		return "empty->fluid";
-	}
-
-	@Override
 	public boolean activate(TileEntityBarrel barrel) {
 		return false;
 	}

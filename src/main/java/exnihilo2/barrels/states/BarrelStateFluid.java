@@ -75,11 +75,6 @@ public class BarrelStateFluid extends BaseBarrelState{
 		
 		super.onUseItem(player, barrel, item);
 	}
-
-	@Override
-	public String getBarrelStateKey() {
-		return "fluid";
-	}
 	
 	@Override
 	public boolean canManipulateFluids(TileEntityBarrel barrel) {

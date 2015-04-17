@@ -10,14 +10,13 @@ import exnihilo2.barrels.states.BarrelStateFluidTrigger;
 public class BarrelStateManager {
 	public static HashMap<String, BaseBarrelState> states = new HashMap<String, BaseBarrelState>();
 	
-	public static void registerState(BaseBarrelState state)
+	public static void registerState(String key, BaseBarrelState state)
 	{
 		if (state != null)
 		{
-			String key = state.getBarrelStateKey();
-			
 			if (key != null && !key.isEmpty() && !key.trim().isEmpty() && !states.containsKey(key))
 			{
+				state.setKey(key);
 				states.put(key, state);
 			}
 		}
@@ -38,18 +37,18 @@ public class BarrelStateManager {
 	
 	public static void buildBehaviorTree()
 	{
-		registerNodes();
+		registerStates();
 		registerTriggers();
 	}
 	
-	private static void registerNodes()
+	private static void registerStates()
 	{
-		registerState(new BarrelStateEmpty());
-		registerState(new BarrelStateFluid());
+		registerState("empty", new BarrelStateEmpty());
+		registerState("fluid", new BarrelStateFluid());
 	}
 	
 	private static void registerTriggers()
 	{
-		getState("empty").registerStateTrigger(new BarrelStateFluidTrigger());
+		getState("empty").registerStateTrigger("empty->fluid", new BarrelStateFluidTrigger());
 	}
 }

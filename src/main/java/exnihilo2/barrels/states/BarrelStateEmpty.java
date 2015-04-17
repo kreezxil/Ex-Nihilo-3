@@ -22,23 +22,7 @@ import exnihilo2.barrels.tileentity.TileEntityBarrel;
 public class BarrelStateEmpty extends BaseBarrelState implements IBarrelState{
 
 	@Override
-	public String getBarrelStateKey() {
-		return "empty";
-	}
-	
-	@Override
 	public boolean canManipulateFluids(TileEntityBarrel barrel) {
 		return true;
 	}
-
-//	@Override
-//	public void render(TileEntityBarrel barrel, double x, double y, double z) {
-//		//Testing the ability to draw the contents of a barrel.
-//		//TODO: Remove later.
-//		Minecraft mc = Minecraft.getMinecraft();
-//		mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-//		TextureAtlasSprite texture = mc.getTextureMapBlocks().getAtlasSprite("minecraft:blocks/crafting_table_top");
-//		
-//		renderContentTexture(texture, x, y, z, 0.9d);
-//	}
 }

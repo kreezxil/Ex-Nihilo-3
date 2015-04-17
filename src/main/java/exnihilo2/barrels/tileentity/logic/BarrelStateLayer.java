@@ -58,7 +58,7 @@ public class BarrelStateLayer extends TileEntity{
 
 		if (state != null)
 		{
-			compound.setString("state", state.getBarrelStateKey());
+			compound.setString("state", state.getKey());
 		}
 	}
 }

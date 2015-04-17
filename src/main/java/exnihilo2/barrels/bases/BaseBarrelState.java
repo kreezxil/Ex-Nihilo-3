@@ -24,8 +24,17 @@ public abstract class BaseBarrelState implements IBarrelState
 	
 	private HashMap<String, IBarrelStateTrigger> triggers = new HashMap<String, IBarrelStateTrigger>();
 	
-	//This must be unique!
-	public abstract String getBarrelStateKey();
+	private String key;
+	
+	public void setKey(String keyIn)
+	{
+		this.key = keyIn;
+	}
+	
+	public String getKey()
+	{
+		return this.key;
+	}
 	
 	public void activate(TileEntityBarrel barrel)
 	{
@@ -111,11 +120,11 @@ public abstract class BaseBarrelState implements IBarrelState
 	@Override
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {}
 
-	public void registerStateTrigger(IBarrelStateTrigger trigger) 
+	public void registerStateTrigger(String key, IBarrelStateTrigger trigger) 
 	{
 		if (trigger != null)
 		{
-			triggers.put(trigger.getStateTriggerID(), trigger);
+			triggers.put(key, trigger);
 		}
 	}
 	
