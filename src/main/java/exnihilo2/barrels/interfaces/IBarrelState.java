@@ -11,5 +11,7 @@ public interface IBarrelState
 	public void onUpdate(TileEntityBarrel barrel);
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item);
 	public void onUseItem(TileEntityBarrel barrel, ItemStack item);
+	public boolean canExtractItem(TileEntityBarrel barrel);
+	public boolean canManipulateFluids(TileEntityBarrel barrel);
 	public void render(TileEntityBarrel barrel, double x, double y, double z);
 }

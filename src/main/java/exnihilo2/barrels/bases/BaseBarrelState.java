@@ -76,6 +76,16 @@ public abstract class BaseBarrelState implements IBarrelState {
 	@Override
 	public void onUseItem(TileEntityBarrel barrel, ItemStack item) {}
 	
+	public boolean canExtractItem(TileEntityBarrel barrel)
+	{
+		return false;
+	}
+	
+	public boolean canManipulateFluids(TileEntityBarrel barrel)
+	{
+		return false;
+	}
+	
 	@Override
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {}
 

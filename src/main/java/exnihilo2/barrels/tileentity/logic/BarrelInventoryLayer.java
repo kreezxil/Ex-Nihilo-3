@@ -1,5 +1,6 @@
 package exnihilo2.barrels.tileentity.logic;
 
+import exnihilo2.barrels.bases.BaseBarrelState;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -161,7 +162,10 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 		if (direction == EnumFacing.UP && index == 1)
 		{
 			TileEntityBarrel barrel = (TileEntityBarrel)this;
-			return barrel.getState().canUseItem(barrel, stack);
+			BaseBarrelState state = barrel.getState();
+			
+			if (state != null)
+				return state.canUseItem(barrel, stack);
 		}
 		
 		return false;
@@ -172,7 +176,11 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	{
 		if (direction == EnumFacing.DOWN && index == 0)
 		{
-			return (output != null);
+			TileEntityBarrel barrel = (TileEntityBarrel)this;
+			BaseBarrelState state = barrel.getState();
+			
+			if (state != null)
+				return (output != null);
 		}
 		
 		return false;
