@@ -2,13 +2,21 @@ package exnihilo2.barrels.states;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.barrels.bases.BaseBarrelState;
@@ -16,6 +24,80 @@ import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 public class BarrelStateFluid extends BaseBarrelState{
 	
+	@Override
+	public void onUpdate(TileEntityBarrel barrel) {
+		if (barrel.getFluid() != null)
+		{
+			World world = barrel.getWorld();
+			
+			//if the fluid is gaseous...
+			if(barrel.getFluid().getFluid().isGaseous())
+			{
+				//and the space above the barrel is empty...
+				BlockPos pos = barrel.getPos();
+				BlockPos above = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
+				
+				if(world.isAirBlock(above))
+				{
+					//float free little cloud dude!
+					Block fblock = barrel.getFluid().getFluid().getBlock();
+					
+					world.setBlockState(above, fblock.getDefaultState(), 1 & 2);
+					barrel.drain(barrel.getCapacity(), true);
+				}
+			}
+			
+			//if the fluid is hot...
+			if(barrel.getFluid().getFluid().getTemperature() > 400)
+			{
+				//and the barrel is flammable...
+				if (world.getBlockState(barrel.getPos()).getBlock().getMaterial().getCanBurn())
+				{
+					//buuuurn baby burn!
+					if (barrel.getTimerStatus() == -1.0d)
+					{
+						barrel.startTimer(400);
+					}
+					
+					if (barrel.getTimerStatus() > 0 && barrel.getTimerStatus() < 1.0d)
+					{
+						BlockPos pos = barrel.getPos();
+
+						if (barrel.getTimerTime() % 30 == 0)
+						{
+							world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double)pos.getX() + Math.random(), (double)pos.getY() + 1.2D, (double)pos.getZ() + Math.random(), 0.0D, 0.0D, 0.0D);
+						}
+
+						if (barrel.getTimerTime() % 5 == 0)
+						{
+							world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, (double)pos.getX() + Math.random(), (double)pos.getY() + 1.2D, (double)pos.getZ() + Math.random(), 0.0D, 0.0D, 0.0D);
+						}
+					}
+						
+					if (barrel.getTimerStatus() == 1.0d)
+					{
+						if (barrel.getFluidAmount() < barrel.getCapacity())
+						{
+							BlockPos pos = barrel.getPos();
+							BlockPos above = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
+							
+							if (world.isAirBlock(above))
+							{
+								world.setBlockState(above, Blocks.fire.getDefaultState(), 1 & 2);
+							}
+						}
+						else
+						{
+							Block fblock = barrel.getFluid().getFluid().getBlock();
+							
+							world.setBlockState(barrel.getPos(), fblock.getDefaultState(), 1 & 2);
+						}
+					}
+				}
+			}
+		}
+	}
+
 	@Override
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) {
 		FluidStack fluid = barrel.getFluid();

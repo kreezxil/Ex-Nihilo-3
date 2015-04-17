@@ -40,9 +40,19 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		generalTimerMax = maxTicks;
 	}
 	
+	public int getTimerTime()
+	{
+		return generalTimer;
+	}
+	
 	public double getTimerStatus()
 	{
-		if (generalTimerMax == 0 || generalTimer > generalTimerMax)
+		if(generalTimerMax == 0)
+		{
+			return -1.0d;
+		}
+		
+		if (generalTimer >= generalTimerMax)
 		{
 			return 1.0d;
 		}
@@ -52,20 +62,21 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		}
 	}
 	
+	public void resetTimer()
+	{
+		generalTimer = 0;
+		generalTimerMax = 0;
+	}
+	
 	@Override
 	public void update() 
 	{
 		super.update();
 		
 		//Update timer used by states.
-		if (generalTimerMax != 0 && generalTimer > generalTimerMax)
+		if (generalTimerMax != 0 && generalTimer < generalTimerMax)
 		{
 			generalTimer++;
-			
-			if (generalTimer > generalTimerMax)
-			{
-				generalTimerMax = 0;
-			}
 		}
 		
 		//Update timer used to sync client and server.

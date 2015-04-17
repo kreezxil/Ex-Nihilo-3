@@ -29,9 +29,9 @@ public class BarrelStateLayer extends TileEntity{
 		}
 		
 		TileEntityBarrel barrel = (TileEntityBarrel)this;
+		barrel.resetTimer();
 		state.activate(barrel);
 		barrel.updateNeeded = true;
-		
 	}
 	
 	public void update()
