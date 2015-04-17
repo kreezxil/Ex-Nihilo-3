@@ -29,7 +29,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 	
 	public boolean updateNeeded = false;
 	
-	public void TileEnitityBarrel()
+	public TileEntityBarrel()
 	{
 		state = Barrels.getState("empty");
 	}

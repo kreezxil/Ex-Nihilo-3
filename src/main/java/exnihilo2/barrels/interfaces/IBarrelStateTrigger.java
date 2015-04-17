@@ -1,5 +1,6 @@
 package exnihilo2.barrels.interfaces;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
@@ -10,6 +11,5 @@ public interface IBarrelStateTrigger {
 	
 	public boolean activate(TileEntityBarrel barrel);
 	public boolean update(TileEntityBarrel barrel);
-	public boolean itemUse(TileEntityBarrel barrel, ItemStack item);
-	public boolean fluidUse(TileEntityBarrel barrel, FluidStack fluid);
+	public boolean itemUse(EntityPlayer player, TileEntityBarrel barrel, ItemStack item);
 }

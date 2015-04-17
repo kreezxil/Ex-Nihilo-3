@@ -1,5 +1,6 @@
 package exnihilo2.barrels.interfaces;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
@@ -10,7 +11,7 @@ public interface IBarrelState
 	public void onActivate(TileEntityBarrel barrel);
 	public void onUpdate(TileEntityBarrel barrel);
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item);
-	public void onUseItem(TileEntityBarrel barrel, ItemStack item);
+	public void onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item);
 	public boolean canExtractItem(TileEntityBarrel barrel);
 	public boolean canManipulateFluids(TileEntityBarrel barrel);
 	public void render(TileEntityBarrel barrel, double x, double y, double z);

@@ -73,7 +73,7 @@ public class BarrelFluidLayer extends BarrelStateLayer implements IFluidTank
         if (fluid == null)
         {
             fluid = new FluidStack(resource, Math.min(this.CAPACITY, resource.amount));
-            //TODO: change state to render fluid.
+            barrel.setState("fluid");
 
             return fluid.amount;
         }
@@ -133,10 +133,9 @@ public class BarrelFluidLayer extends BarrelStateLayer implements IFluidTank
 	{
 		super.readFromNBT(compound);
 
-		compound.setBoolean("fluid", fluid != null);
-		if (fluid != null)
+		if (compound.getBoolean("fluid"))
 		{
-			fluid.writeToNBT(compound);
+			fluid = FluidStack.loadFluidStackFromNBT(compound);
 		}
 	}
  
@@ -145,9 +144,10 @@ public class BarrelFluidLayer extends BarrelStateLayer implements IFluidTank
 	{
 		super.writeToNBT(compound);
 
-		if (compound.getBoolean("fluid"))
+		compound.setBoolean("fluid", fluid != null);
+		if (fluid != null)
 		{
-			fluid = FluidStack.loadFluidStackFromNBT(compound);
+			fluid.writeToNBT(compound);
 		}
 	}
 }

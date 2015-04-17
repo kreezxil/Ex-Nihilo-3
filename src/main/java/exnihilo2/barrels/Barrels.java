@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import exnihilo2.barrels.bases.BaseBarrelState;
 import exnihilo2.barrels.states.BarrelStateEmpty;
+import exnihilo2.barrels.states.BarrelStateFluid;
+import exnihilo2.barrels.states.BarrelStateFluidTrigger;
 
 public class Barrels {
 	public static HashMap<String, BaseBarrelState> states = new HashMap<String, BaseBarrelState>();
@@ -36,6 +38,18 @@ public class Barrels {
 	
 	public static void buildBehaviorTree()
 	{
+		registerNodes();
+		registerTriggers();
+	}
+	
+	private static void registerNodes()
+	{
 		registerState(new BarrelStateEmpty());
+		registerState(new BarrelStateFluid());
+	}
+	
+	private static void registerTriggers()
+	{
+		getState("empty").registerStateTrigger(new BarrelStateFluidTrigger());
 	}
 }

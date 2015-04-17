@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
@@ -16,7 +17,10 @@ import exnihilo2.barrels.interfaces.IBarrelState;
 import exnihilo2.barrels.interfaces.IBarrelStateTrigger;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
-public abstract class BaseBarrelState implements IBarrelState {
+public abstract class BaseBarrelState implements IBarrelState 
+{
+	private static final double MIN_RENDER_CAPACITY = 0.1d;
+	private static final double MAX_RENDER_CAPACITY = 0.9d;
 	
 	private HashMap<String, IBarrelStateTrigger> triggers = new HashMap<String, IBarrelStateTrigger>();
 	
@@ -25,41 +29,59 @@ public abstract class BaseBarrelState implements IBarrelState {
 	
 	public void activate(TileEntityBarrel barrel)
 	{
+		boolean triggered = false;
+		
 		if (!triggers.isEmpty())
 		{
 			for (Map.Entry<String, IBarrelStateTrigger> entry : triggers.entrySet()) 
 			{
-				entry.getValue().activate(barrel);
+				triggered = entry.getValue().activate(barrel);
+				
+				if (triggered)
+					break;
 			}
 		}
 		
-		this.onActivate(barrel);
+		if (!triggered)
+			this.onActivate(barrel);
 	}
 	
 	public void update(TileEntityBarrel barrel)
 	{
+		boolean triggered = false;
+		
 		if (!triggers.isEmpty())
 		{
 			for (Map.Entry<String, IBarrelStateTrigger> entry : triggers.entrySet()) 
 			{
-				entry.getValue().update(barrel);
+				triggered = entry.getValue().update(barrel);
+				
+				if (triggered)
+					break;
 			}
 		}
 		
-		this.onUpdate(barrel);
+		if (!triggered)
+			this.onUpdate(barrel);
 	}
 	
-	public void useItem(TileEntityBarrel barrel, ItemStack item)
+	public void useItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item)
 	{
+		boolean triggered = false;
+
 		if (!triggers.isEmpty())
 		{
 			for (Map.Entry<String, IBarrelStateTrigger> entry : triggers.entrySet()) 
 			{
-				entry.getValue().itemUse(barrel, item);
+				triggered = entry.getValue().itemUse(player, barrel, item);
+				
+				if (triggered)
+					break;
 			}
 		}
 		
-		this.onUseItem(barrel, item);
+		if (!triggered)
+			this.onUseItem(player, barrel, item);
 	}
 	
 	@Override
@@ -74,7 +96,7 @@ public abstract class BaseBarrelState implements IBarrelState {
 	}
 	
 	@Override
-	public void onUseItem(TileEntityBarrel barrel, ItemStack item) {}
+	public void onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) {}
 	
 	public boolean canExtractItem(TileEntityBarrel barrel)
 	{
@@ -113,7 +135,7 @@ public abstract class BaseBarrelState implements IBarrelState {
 		GlStateManager.pushAttrib();
 		GlStateManager.pushMatrix();
 		
-		GlStateManager.translate(x + 0.1d, y + fullness, z + 0.1d);
+		GlStateManager.translate(x + 0.1d, y + getAdjustedVolume(fullness), z + 0.1d);
 		GlStateManager.scale(0.8d, 1.0d, 0.8d);
 		
 		double length = 1.0d;
@@ -133,13 +155,21 @@ public abstract class BaseBarrelState implements IBarrelState {
 		
 		renderer.startDrawingQuads();
 		renderer.setColorRGBA_F(1, 1, 1, 1);
-		renderer.addVertexWithUV(xa + width,	ya,  za + length, maxU, maxV);
-		renderer.addVertexWithUV(xa + width, ya,  za, 			maxU, minV);
-		renderer.addVertexWithUV(xa,  		ya,  za, 			minU, minV);
-		renderer.addVertexWithUV(xa,       	ya,  za + length, minU, maxV);
+		renderer.addVertexWithUV(xa + width,	ya,  	za + length, 	maxU, maxV);
+		renderer.addVertexWithUV(xa + width,	ya,  	za, 			maxU, minV);
+		renderer.addVertexWithUV(xa,  			ya,  	za, 			minU, minV);
+		renderer.addVertexWithUV(xa,       		ya,  	za + length, 	minU, maxV);
 		tessellator.draw();
 		
 		GlStateManager.popAttrib();
 		GlStateManager.popMatrix();
+	}
+	
+	private double getAdjustedVolume(double fullness)
+	{
+		double capacity = MAX_RENDER_CAPACITY - MIN_RENDER_CAPACITY;
+		double adjusted = fullness * capacity;		
+		adjusted += MIN_RENDER_CAPACITY;
+		return adjusted;
 	}
 }
