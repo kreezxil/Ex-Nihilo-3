@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -143,6 +144,7 @@ public abstract class BaseBarrelState implements IBarrelState
 	{
 		GlStateManager.pushAttrib();
 		GlStateManager.pushMatrix();
+		RenderHelper.disableStandardItemLighting();
 		
 		GlStateManager.translate(x + 0.1d, y + getAdjustedVolume(fullness), z + 0.1d);
 		GlStateManager.scale(0.8d, 1.0d, 0.8d);
@@ -170,6 +172,7 @@ public abstract class BaseBarrelState implements IBarrelState
 		renderer.addVertexWithUV(xa,       		ya,  	za + length, 	minU, maxV);
 		tessellator.draw();
 		
+		RenderHelper.enableStandardItemLighting();
 		GlStateManager.popAttrib();
 		GlStateManager.popMatrix();
 	}
