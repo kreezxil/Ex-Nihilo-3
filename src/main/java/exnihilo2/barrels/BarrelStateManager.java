@@ -7,7 +7,7 @@ import exnihilo2.barrels.states.BarrelStateEmpty;
 import exnihilo2.barrels.states.BarrelStateFluid;
 import exnihilo2.barrels.states.BarrelStateFluidTrigger;
 
-public class Barrels {
+public class BarrelStateManager {
 	public static HashMap<String, BaseBarrelState> states = new HashMap<String, BaseBarrelState>();
 	
 	public static void registerState(BaseBarrelState state)

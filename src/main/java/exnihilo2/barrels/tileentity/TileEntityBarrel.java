@@ -1,7 +1,7 @@
 package exnihilo2.barrels.tileentity;
 
 import exnihilo2.EN2;
-import exnihilo2.barrels.Barrels;
+import exnihilo2.barrels.BarrelStateManager;
 import exnihilo2.barrels.bases.BaseBarrelState;
 import exnihilo2.barrels.interfaces.IBarrelState;
 import exnihilo2.barrels.tileentity.logic.BarrelFluidLayer;
@@ -31,7 +31,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 	
 	public TileEntityBarrel()
 	{
-		state = Barrels.getState("empty");
+		state = BarrelStateManager.getState("empty");
 	}
 	
 	public void startTimer(int maxTicks)
