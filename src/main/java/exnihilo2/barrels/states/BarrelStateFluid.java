@@ -23,12 +23,13 @@ import exnihilo2.barrels.bases.BaseBarrelState;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 public class BarrelStateFluid extends BaseBarrelState{
-	
+
 	@Override
 	public void onUpdate(TileEntityBarrel barrel) {
 		if (barrel.getFluid() != null)
 		{
 			World world = barrel.getWorld();
+			barrel.setLuminosity(barrel.getFluid().getFluid().getLuminosity());
 			
 			//if the fluid is gaseous...
 			if(barrel.getFluid().getFluid().isGaseous())
@@ -200,5 +201,13 @@ public class BarrelStateFluid extends BaseBarrelState{
 			item.splitStack(1);
 			return item;
 		}
+	}
+	
+	public int getLuminosity(TileEntityBarrel barrel)
+	{
+		if (barrel.getFluid() != null)
+			return barrel.getFluid().getFluid().getLuminosity();
+		else
+			return 0;
 	}
 }

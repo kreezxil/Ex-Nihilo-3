@@ -22,6 +22,11 @@ import exnihilo2.barrels.tileentity.TileEntityBarrel;
 public class BarrelStateEmpty extends BaseBarrelState implements IBarrelState{
 
 	@Override
+	public void onActivate(TileEntityBarrel barrel) {
+		barrel.setLuminosity(0);
+	}
+	
+	@Override
 	public boolean canManipulateFluids(TileEntityBarrel barrel) {
 		return true;
 	}

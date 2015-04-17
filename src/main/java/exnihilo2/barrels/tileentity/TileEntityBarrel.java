@@ -1,5 +1,7 @@
 package exnihilo2.barrels.tileentity;
 
+import java.lang.reflect.Method;
+
 import exnihilo2.EN2;
 import exnihilo2.barrels.BarrelStateManager;
 import exnihilo2.barrels.bases.BaseBarrelState;
@@ -17,10 +19,16 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePlayerListBox 
 {
+	private int luminosity = 0;
+	
 	protected int generalTimer = 0;
 	protected int generalTimerMax = 0;
 	
@@ -89,6 +97,26 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 			{
 				this.getWorld().markBlockForUpdate(this.getPos());
 			}
+		}
+	}
+	
+	public void sync()
+	{
+		this.updateNeeded = true;
+	}
+	
+	public int getLuminosity()
+	{
+		return luminosity;
+	}
+	
+	public void setLuminosity(int level)
+	{
+		EN2.log.error("Luminosity set to " + level);
+		if (luminosity != level)
+		{
+			luminosity = level;
+			getWorld().checkLight(getPos());
 		}
 	}
 	

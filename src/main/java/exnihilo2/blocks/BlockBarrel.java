@@ -14,10 +14,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockBarrel extends BlockContainer 
 {
+	public BlockBarrel(Material material)
+	{
+		super(material);
+	}
+	
+	@Override
+	public int getLightValue(IBlockAccess world, BlockPos pos) {
+		TileEntityBarrel barrel = (TileEntityBarrel) world.getTileEntity(pos);
+
+		return barrel.getLuminosity();
+	}
+
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
@@ -59,11 +74,6 @@ public class BlockBarrel extends BlockContainer
 		return true;
 	}
 
-	public BlockBarrel(Material material) 
-	{
-		super(material);
-	}
-
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) 
 	{
@@ -92,5 +102,21 @@ public class BlockBarrel extends BlockContainer
 	public int getRenderType()
     {
         return 3;
+    }
+	
+	@Override
+	public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+		TileEntityBarrel barrel = (TileEntityBarrel) world.getTileEntity(pos);
+		barrel.setLuminosity(0);
+		
+		return super.removedByPlayer(world, pos, player, willHarvest);
+	}
+	
+	public void onBlockExploded(World world, BlockPos pos, Explosion explosion)
+    {
+		TileEntityBarrel barrel = (TileEntityBarrel) world.getTileEntity(pos);
+		barrel.setLuminosity(0);
+		
+		super.onBlockExploded(world, pos, explosion);
     }
 }
