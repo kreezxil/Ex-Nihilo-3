@@ -35,7 +35,7 @@ public class BarrelStateLayer extends TileEntity{
 			barrel.resetTimer();
 			barrel.setLuminosity(0);
 			state.activate(barrel);
-			barrel.updateNeeded = true;
+			barrel.syncNeeded = true;
 		}
 	}
 	

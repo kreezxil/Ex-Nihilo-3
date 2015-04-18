@@ -35,7 +35,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 	protected int syncTimer = 0;
 	protected final int syncTimerMax = 20; //Sync once per second if an update is required.
 	
-	public boolean updateNeeded = false;
+	public boolean syncNeeded = false;
 	
 	public TileEntityBarrel()
 	{
@@ -93,17 +93,17 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		if (syncTimer > syncTimerMax)
 		{
 			syncTimer = 0;
-			if (updateNeeded)
+			if (syncNeeded)
 			{
 				this.getWorld().markBlockForUpdate(this.getPos());
-				this.updateNeeded = false;
+				this.syncNeeded = false;
 			}
 		}
 	}
 	
 	public void sync()
 	{
-		this.updateNeeded = true;
+		this.syncNeeded = true;
 	}
 	
 	public int getLuminosity()
