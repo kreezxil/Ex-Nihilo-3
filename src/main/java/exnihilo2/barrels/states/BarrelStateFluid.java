@@ -47,6 +47,8 @@ public class BarrelStateFluid extends BaseBarrelState{
 					Block fblock = barrel.getFluid().getFluid().getBlock();
 					
 					world.setBlockState(above, fblock.getDefaultState(), 3);
+					world.notifyBlockOfStateChange(above, fblock);
+					
 					barrel.drain(barrel.getCapacity(), true);
 				}
 			}
@@ -95,6 +97,7 @@ public class BarrelStateFluid extends BaseBarrelState{
 							Block fblock = barrel.getFluid().getFluid().getBlock();
 							
 							world.setBlockState(barrel.getPos(), fblock.getDefaultState(), 3);
+							world.notifyBlockOfStateChange(barrel.getPos(), fblock);
 						}
 					}
 				}
