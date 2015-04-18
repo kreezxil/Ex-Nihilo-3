@@ -96,6 +96,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 			if (updateNeeded)
 			{
 				this.getWorld().markBlockForUpdate(this.getPos());
+				this.updateNeeded = false;
 			}
 		}
 	}
