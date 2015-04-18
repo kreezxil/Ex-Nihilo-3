@@ -20,11 +20,6 @@ import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 //Does nothing. Renders nothing. Is simply a container for triggers.
 public class BarrelStateEmpty extends BaseBarrelState implements IBarrelState{
-
-	@Override
-	public void onActivate(TileEntityBarrel barrel) {
-		barrel.setLuminosity(0);
-	}
 	
 	@Override
 	public boolean canManipulateFluids(TileEntityBarrel barrel) {

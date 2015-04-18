@@ -2,6 +2,7 @@ package exnihilo2.barrels.tileentity.logic;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import exnihilo2.EN2;
 import exnihilo2.barrels.BarrelStateManager;
 import exnihilo2.barrels.bases.BaseBarrelState;
 import exnihilo2.barrels.interfaces.IBarrelState;
@@ -17,21 +18,25 @@ public class BarrelStateLayer extends TileEntity{
 	
 	public void setState(String key)
 	{
-		BaseBarrelState newState = BarrelStateManager.getState(key);
-		
-		if (state != null)
+		if (key != this.state.getKey())
 		{
-			state = newState;
+			BaseBarrelState newState = BarrelStateManager.getState(key);
+			
+			if (newState != null)
+			{
+				state = newState;
+			}
+			else
+			{
+				state = BarrelStateManager.getState("empty");
+			}
+			
+			TileEntityBarrel barrel = (TileEntityBarrel)this;
+			barrel.resetTimer();
+			barrel.setLuminosity(0);
+			state.activate(barrel);
+			barrel.updateNeeded = true;
 		}
-		else
-		{
-			state = BarrelStateManager.getState("empty");
-		}
-		
-		TileEntityBarrel barrel = (TileEntityBarrel)this;
-		barrel.resetTimer();
-		state.activate(barrel);
-		barrel.updateNeeded = true;
 	}
 	
 	public void update()

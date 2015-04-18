@@ -112,7 +112,6 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 	
 	public void setLuminosity(int level)
 	{
-		EN2.log.error("Luminosity set to " + level);
 		if (luminosity != level)
 		{
 			luminosity = level;
@@ -126,6 +125,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		super.readFromNBT(compound);
 
 		generalTimer = compound.getInteger("timer");
+		setLuminosity(compound.getInteger("luminosity"));
 	}
  
 	@Override
@@ -134,6 +134,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		super.writeToNBT(compound);
 		
 		compound.setInteger("timer", generalTimer);
+		compound.setInteger("luminosity", getLuminosity());
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import exnihilo2.EN2;
 import exnihilo2.barrels.bases.BaseBarrelState;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
@@ -43,7 +44,7 @@ public class BarrelStateFluid extends BaseBarrelState{
 					//float free little cloud dude!
 					Block fblock = barrel.getFluid().getFluid().getBlock();
 					
-					world.setBlockState(above, fblock.getDefaultState(), 1 & 2);
+					world.setBlockState(above, fblock.getDefaultState(), 3);
 					barrel.drain(barrel.getCapacity(), true);
 				}
 			}
@@ -84,14 +85,14 @@ public class BarrelStateFluid extends BaseBarrelState{
 							
 							if (world.isAirBlock(above))
 							{
-								world.setBlockState(above, Blocks.fire.getDefaultState(), 1 & 2);
+								world.setBlockState(above, Blocks.fire.getDefaultState(), 3);
 							}
 						}
 						else
 						{
 							Block fblock = barrel.getFluid().getFluid().getBlock();
 							
-							world.setBlockState(barrel.getPos(), fblock.getDefaultState(), 1 & 2);
+							world.setBlockState(barrel.getPos(), fblock.getDefaultState(), 3);
 						}
 					}
 				}
@@ -201,13 +202,5 @@ public class BarrelStateFluid extends BaseBarrelState{
 			item.splitStack(1);
 			return item;
 		}
-	}
-	
-	public int getLuminosity(TileEntityBarrel barrel)
-	{
-		if (barrel.getFluid() != null)
-			return barrel.getFluid().getFluid().getLuminosity();
-		else
-			return 0;
 	}
 }
