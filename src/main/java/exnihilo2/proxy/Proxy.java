@@ -6,7 +6,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 //Commands that execute on both the client and the server.
-public interface Proxy {
-	public void Test();
-	public void RegisterRenderers();
+public abstract class Proxy {
+	public void registerRenderers() {}
 }

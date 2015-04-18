@@ -15,30 +15,30 @@ public class EN2Items {
 	public static Item wood_crook;
 	public static Item bone_crook;
 	
-	public static void Initialize()
+	public static void initialize()
 	{
 		wood_crook = new ItemCrook(EN2ToolMaterials.Stick).setUnlocalizedName("wood_crook");
 		bone_crook = new ItemCrook(EN2ToolMaterials.Bone).setUnlocalizedName("bone_crook");
 	}
 	
-	public static void RegisterItems()
+	public static void registerItems()
 	{
-		RegisterItem(wood_crook);
-		RegisterItem(bone_crook);
+		registerItem(wood_crook);
+		registerItem(bone_crook);
 	}
 	
-	public static void RegisterItemRenderers()
+	public static void registerItemRenderers()
 	{
-		RegisterItemRenderer(wood_crook);
-		RegisterItemRenderer(bone_crook);
+		registerItemRenderer(wood_crook);
+		registerItemRenderer(bone_crook);
 	}
 	
-	private static void RegisterItem(Item item)
+	private static void registerItem(Item item)
 	{
 		GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
 	}
 	
-	private static void RegisterItemRenderer(Item item)
+	private static void registerItemRenderer(Item item)
 	{
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(EN2Data.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
 	}

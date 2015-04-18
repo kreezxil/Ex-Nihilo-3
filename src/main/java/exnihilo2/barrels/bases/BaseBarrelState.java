@@ -45,7 +45,7 @@ public abstract class BaseBarrelState implements IBarrelState
 		{
 			for (Map.Entry<String, IBarrelStateTrigger> entry : triggers.entrySet()) 
 			{
-				triggered = entry.getValue().activate(barrel);
+				triggered = entry.getValue().onActivate(barrel);
 				
 				if (triggered)
 					break;
@@ -64,7 +64,7 @@ public abstract class BaseBarrelState implements IBarrelState
 		{
 			for (Map.Entry<String, IBarrelStateTrigger> entry : triggers.entrySet()) 
 			{
-				triggered = entry.getValue().update(barrel);
+				triggered = entry.getValue().onUpdate(barrel);
 				
 				if (triggered)
 					break;
@@ -83,7 +83,7 @@ public abstract class BaseBarrelState implements IBarrelState
 		{
 			for (Map.Entry<String, IBarrelStateTrigger> entry : triggers.entrySet()) 
 			{
-				triggered = entry.getValue().itemUse(player, barrel, item);
+				triggered = entry.getValue().onUseItem(player, barrel, item);
 				
 				if (triggered)
 					break;

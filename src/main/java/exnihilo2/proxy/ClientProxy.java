@@ -7,17 +7,12 @@ import exnihilo2.EN2Blocks;
 import exnihilo2.EN2Items;
 
 //Commands that only execute on the client.
-public class ClientProxy implements Proxy {
-	@Override
-	public void Test()
-	{
-		EN2.log.info("Client test successful!");
-	}
+public class ClientProxy extends Proxy {
 	
 	@Override
-	public void RegisterRenderers()
+	public void registerRenderers()
 	{
-		EN2Items.RegisterItemRenderers();
-		EN2Blocks.RegisterBlockRenderers();
+		EN2Items.registerItemRenderers();
+		EN2Blocks.registerBlockRenderers();
 	}
 }

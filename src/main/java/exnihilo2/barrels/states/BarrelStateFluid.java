@@ -30,6 +30,8 @@ public class BarrelStateFluid extends BaseBarrelState{
 		if (barrel.getFluid() != null)
 		{
 			World world = barrel.getWorld();
+			
+			//set the light level. Just in case the fluid has changed.
 			barrel.setLuminosity(barrel.getFluid().getFluid().getLuminosity());
 			
 			//if the fluid is gaseous...

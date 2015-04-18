@@ -18,38 +18,38 @@ public class EN2Blocks {
 	public static Block oak_barrel;
 	public static Block spruce_barrel;
 
-	public static void Initialize()
+	public static void initialize()
 	{
 		oak_barrel = new BlockBarrel(Material.wood).setUnlocalizedName("oak_barrel");
 		spruce_barrel = new BlockBarrel(Material.wood).setUnlocalizedName("spruce_barrel");
 	}
 	
-	public static void RegisterBlocks()
+	public static void registerBlocks()
 	{
-		RegisterBlock(oak_barrel);
-		RegisterBlock(spruce_barrel);
+		registerBlock(oak_barrel);
+		registerBlock(spruce_barrel);
 	}
 	
-	public static void RegisterBlockRenderers()
+	public static void registerBlockRenderers()
 	{
-		RegisterRenderer(oak_barrel);
-		RegisterRenderer(spruce_barrel);
+		registerRenderer(oak_barrel);
+		registerRenderer(spruce_barrel);
 
 		TileEntitySpecialRenderer barrelRenderer = new RendererBarrel();
 	   	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, barrelRenderer);
 	}
 	
-	public static void RegisterTileEntities()
+	public static void registerTileEntities()
 	{
 		GameRegistry.registerTileEntity(TileEntityBarrel.class, EN2Data.MODID + ":tile_entity_barrel");
 	}
 	
-	private static void RegisterBlock(Block block)
+	private static void registerBlock(Block block)
 	{
 		GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
 	}
 
-	private static void RegisterRenderer(Block block)
+	private static void registerRenderer(Block block)
 	{
 		Item item = Item.getItemFromBlock(block);
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(EN2Data.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));

@@ -23,29 +23,29 @@ public class EN2
 	 public static Logger log = LogManager.getLogger(EN2Data.NAME);
 	
     @EventHandler
-	public void PreInitialize(FMLPreInitializationEvent event)
+	public void preInitialize(FMLPreInitializationEvent event)
 	{
-    	EN2ToolMaterials.Initialize();
+    	EN2ToolMaterials.initialize();
     	
-    	EN2Items.Initialize();
-    	EN2Blocks.Initialize();
+    	EN2Items.initialize();
+    	EN2Blocks.initialize();
     	
-    	EN2Items.RegisterItems();
-    	EN2Blocks.RegisterBlocks();
-    	EN2Blocks.RegisterTileEntities();
+    	EN2Items.registerItems();
+    	EN2Blocks.registerBlocks();
+    	EN2Blocks.registerTileEntities();
     	
     	BarrelStateManager.buildBehaviorTree();
 	}
     
     @EventHandler
-    public void Initialize(FMLInitializationEvent event)
+    public void doInitialize(FMLInitializationEvent event)
     {
-    	proxy.RegisterRenderers();
+    	proxy.registerRenderers();
     }
     
     @EventHandler
-	public void PostInitialize(FMLPostInitializationEvent event)
+	public void postInitialize(FMLPostInitializationEvent event)
 	{
-    	proxy.Test();
+    	
 	}
 }

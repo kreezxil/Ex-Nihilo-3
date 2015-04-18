@@ -110,6 +110,8 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		return luminosity;
 	}
 	
+	//Call this as much as you want. 
+	//The lighting calculations don't fire unless the value is actually changed.
 	public void setLuminosity(int level)
 	{
 		if (luminosity != level)

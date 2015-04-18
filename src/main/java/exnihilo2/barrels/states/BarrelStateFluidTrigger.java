@@ -13,17 +13,17 @@ import exnihilo2.barrels.tileentity.TileEntityBarrel;
 public class BarrelStateFluidTrigger implements IBarrelStateTrigger {
 
 	@Override
-	public boolean activate(TileEntityBarrel barrel) {
+	public boolean onActivate(TileEntityBarrel barrel) {
 		return false;
 	}
 
 	@Override
-	public boolean update(TileEntityBarrel barrel) {
+	public boolean onUpdate(TileEntityBarrel barrel) {
 		return false;
 	}
 
 	@Override
-	public boolean itemUse(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) 
+	public boolean onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) 
 	{
 		FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(item);
 
