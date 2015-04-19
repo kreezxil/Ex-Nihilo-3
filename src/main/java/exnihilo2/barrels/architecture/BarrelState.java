@@ -70,7 +70,7 @@ public abstract class BarrelState
 			this.onUpdate(barrel);
 	}
 	
-	public boolean canUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item)
+	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item)
 	{
 		if (!triggers.isEmpty())
 		{
@@ -106,10 +106,6 @@ public abstract class BarrelState
 	public void onActivate(TileEntityBarrel barrel) {}
 
 	public void onUpdate(TileEntityBarrel barrel) {}
-
-	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) {
-		return false;
-	}
 	
 	public void onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) {}
 	

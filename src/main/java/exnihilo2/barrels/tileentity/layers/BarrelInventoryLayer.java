@@ -3,6 +3,7 @@ package exnihilo2.barrels.tileentity.layers;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import exnihilo2.EN2;
 import exnihilo2.barrels.architecture.BarrelState;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.entity.player.EntityPlayer;
@@ -71,11 +72,12 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) 
 	{
+		EN2.log.error("setInventorySlotContents");
 		if (stack == null || stack.getItem() == null)
 		{
-			if (index == 0)
+			if (index == 0 && output.size() > 0)
 			{
-				setState("empty");
+				output.remove(0);
 			}
 		}
 		else
@@ -111,8 +113,9 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	public boolean isItemValidForSlot(int index, ItemStack stack) 
 	{
 		TileEntityBarrel barrel = (TileEntityBarrel)this;
+		BarrelState state = barrel.getState();
 		
-		return barrel.getState().canUseItem(barrel, stack);
+		return state.canUseItem(barrel, stack);
 	}
 
 	@Override
@@ -133,10 +136,7 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	@Override
 	public void clear() 
 	{
-		output = null;
-		
-		TileEntityBarrel barrel = (TileEntityBarrel)this;
-		barrel.setState("empty");
+		output.clear();
 	}
 
 	@Override
@@ -177,6 +177,8 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	@Override
 	public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) 
 	{
+		EN2.log.error("Attempt to insert item. Index: " + index + ", Direction: " + direction.toString() + ", Item: " + stack.getDisplayName());
+		
 		if (direction == EnumFacing.UP && index == 1)
 		{
 			TileEntityBarrel barrel = (TileEntityBarrel)this;
@@ -194,11 +196,7 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	{
 		if (direction == EnumFacing.DOWN && index == 0)
 		{
-			TileEntityBarrel barrel = (TileEntityBarrel)this;
-			BarrelState state = barrel.getState();
-			
-			if (state != null)
-				return (output != null);
+			return (output.size() > 0);
 		}
 		
 		return false;

@@ -15,6 +15,14 @@ import exnihilo2.util.InventoryUtil;
 
 public class FluidStateTriggerItem extends BarrelLogic {
 	@Override
+	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) 
+	{
+		FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(item);
+		
+		return fluid != null;
+	}
+	
+	@Override
 	public boolean onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) 
 	{
 		FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(item);
@@ -23,17 +31,33 @@ public class FluidStateTriggerItem extends BarrelLogic {
 		{
 			if (item.getItem() == Items.potionitem && item.getItemDamage() == 0)
 			{
-				//Without this line, the glass bottle would be consumed.
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.glass_bottle, 1, 0));
+				if (player != null)
+				{
+					//Without this line, the glass bottle would be consumed.
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.glass_bottle, 1, 0));
+				}
+				else
+				{
+					barrel.addOutput(new ItemStack(Items.glass_bottle, 1, 0));
+				}
+
 			}else
 			{
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, InventoryUtil.getContainer(item));
+				if (player != null)
+				{
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, InventoryUtil.getContainer(item));
+				}
+				else
+				{
+					barrel.addOutput(InventoryUtil.getContainer(item));
+				}
 			}
-			
+
+
 			barrel.fill(fluid, true);
 			return true;
 		}
-		
+
 		return false;
 	}
 }

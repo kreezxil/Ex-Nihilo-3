@@ -18,6 +18,7 @@ public abstract class BarrelLogic{
 		return false;
 	}
 
+	//Player CAN be null if the item is inserted by pipes!
 	public boolean onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) {
 		return false;
 	}

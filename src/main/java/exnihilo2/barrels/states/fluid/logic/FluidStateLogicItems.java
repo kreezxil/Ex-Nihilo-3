@@ -14,7 +14,7 @@ public class FluidStateLogicItems extends BarrelLogic{
 		FluidStack fluid = barrel.getFluid();
 		FluidStack ifluid = FluidContainerRegistry.getFluidForFilledItem(item);
 
-		if (fluid != null )
+		if (fluid != null)
 		{
 			if (ifluid != null && barrel.fill(ifluid, false) > 0)
 			{
@@ -46,21 +46,28 @@ public class FluidStateLogicItems extends BarrelLogic{
 			if (FluidContainerRegistry.isEmptyContainer(item) && fluid.amount >= barrel.getCapacity())
 			{
 				ItemStack full = FluidContainerRegistry.fillFluidContainer(fluid, item);
-				
+
 				if (full != null)
 				{
-					if (item.stackSize > 1) 
+					if (player != null)
 					{
-						if (player.inventory.addItemStackToInventory(full)) 
+						if (item.stackSize > 1) 
 						{
-							item.stackSize -= 1;
+							if (player.inventory.addItemStackToInventory(full)) 
+							{
+								item.stackSize -= 1;
+							}
+						} 
+						else 
+						{
+							player.inventory.setInventorySlotContents(player.inventory.currentItem, full);
 						}
-					} 
-					else 
-					{
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, full);
 					}
-					
+					else
+					{
+						barrel.addOutput(full);
+					}
+
 					barrel.drain(barrel.getCapacity(), true);
 					return true;
 				}
