@@ -6,6 +6,7 @@ import java.util.Iterator;
 import exnihilo2.EN2;
 import exnihilo2.barrels.architecture.BarrelState;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -13,16 +14,38 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInventory{
 	protected ArrayList<ItemStack> output = new ArrayList<ItemStack>();
+	protected int MAX_OUTPUT_QUEUE_SIZE = 1;
 
 	public void addOutput(ItemStack item)
 	{
 		if (item != null && item.stackSize > 0)
 		{
-			output.add(item);
+			if (output.size() >= MAX_OUTPUT_QUEUE_SIZE)
+			{
+				TileEntityBarrel barrel = (TileEntityBarrel)this;
+				World world = barrel.getWorld();
+				
+				if(!world.isRemote)
+				{
+					EntityItem entityitem = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), item);
+
+					double f3 = 0.05F;
+					entityitem.motionX = world.rand.nextGaussian() * f3;
+					entityitem.motionY = (0.2d);
+					entityitem.motionZ = world.rand.nextGaussian() * f3;
+
+					world.spawnEntityInWorld(entityitem);
+				}
+			}
+			else
+			{
+				output.add(item);
+			}
 		}
 	}
 	
@@ -72,7 +95,6 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) 
 	{
-		EN2.log.error("setInventorySlotContents");
 		if (stack == null || stack.getItem() == null)
 		{
 			if (index == 0 && output.size() > 0)

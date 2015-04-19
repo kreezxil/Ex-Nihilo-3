@@ -51,7 +51,7 @@ public class BlockBarrel extends BlockContainer
 				//extract
 				if(!world.isRemote)
 				{
-					EntityItem entityitem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), barrel.getStackInSlot(0));
+					EntityItem entityitem = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), barrel.getStackInSlot(0));
 
 					double f3 = 0.05F;
 					entityitem.motionX = world.rand.nextGaussian() * f3;
