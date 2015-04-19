@@ -18,12 +18,12 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
-import exnihilo2.barrels.bases.BaseBarrelState;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
-public class BarrelStateFluid extends BaseBarrelState{
+public class BarrelStateFluid extends BarrelStateBase{
 
 	@Override
 	public void onUpdate(TileEntityBarrel barrel) {
@@ -100,6 +100,16 @@ public class BarrelStateFluid extends BaseBarrelState{
 							world.notifyBlockOfStateChange(barrel.getPos(), fblock);
 						}
 					}
+				}
+			}
+			
+			if (barrel.getFluid().fluidID == FluidRegistry.WATER.getID() && barrel.getWorld().getWorldInfo().isRaining() && barrel.getWorld().getBiomeGenForCoords(barrel.getPos()).rainfall > 0.0f)
+			{
+				if (barrel.getPos().getY() >= barrel.getWorld().getTopSolidOrLiquidBlock(barrel.getPos()).getY() - 1)
+				{
+					FluidStack water = new FluidStack(FluidRegistry.WATER, 1);
+					
+					barrel.fill(water, true);
 				}
 			}
 		}

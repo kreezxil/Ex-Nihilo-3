@@ -1,4 +1,4 @@
-package exnihilo2.barrels.bases;
+package exnihilo2.barrels.states;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,7 +18,7 @@ import exnihilo2.barrels.interfaces.IBarrelState;
 import exnihilo2.barrels.interfaces.IBarrelStateTrigger;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
-public abstract class BaseBarrelState implements IBarrelState 
+public abstract class BarrelStateBase implements IBarrelState 
 {
 	private static final double MIN_RENDER_CAPACITY = 0.1d;
 	private static final double MAX_RENDER_CAPACITY = 0.9d;

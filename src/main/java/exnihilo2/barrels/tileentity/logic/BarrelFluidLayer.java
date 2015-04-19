@@ -1,6 +1,6 @@
 package exnihilo2.barrels.tileentity.logic;
 
-import exnihilo2.barrels.bases.BaseBarrelState;
+import exnihilo2.barrels.states.BarrelStateBase;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -48,7 +48,7 @@ public class BarrelFluidLayer extends BarrelStateLayer implements IFluidTank
 	public int fill(FluidStack resource, boolean doFill) 
 	{
 		TileEntityBarrel barrel = (TileEntityBarrel)this;
-		BaseBarrelState state = barrel.getState();
+		BarrelStateBase state = barrel.getState();
 		
         if (resource == null || state == null || !state.canManipulateFluids(barrel))
         {
@@ -102,7 +102,7 @@ public class BarrelFluidLayer extends BarrelStateLayer implements IFluidTank
     public FluidStack drain(int maxDrain, boolean doDrain)
     {
         TileEntityBarrel barrel = (TileEntityBarrel)this;
-		BaseBarrelState state = barrel.getState();
+		BarrelStateBase state = barrel.getState();
 		
         if (fluid == null || state == null || !state.canManipulateFluids(barrel))
         {

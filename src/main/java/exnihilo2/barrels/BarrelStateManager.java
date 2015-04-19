@@ -2,15 +2,15 @@ package exnihilo2.barrels;
 
 import java.util.HashMap;
 
-import exnihilo2.barrels.bases.BaseBarrelState;
+import exnihilo2.barrels.states.BarrelStateBase;
 import exnihilo2.barrels.states.BarrelStateEmpty;
 import exnihilo2.barrels.states.BarrelStateFluid;
 import exnihilo2.barrels.states.BarrelStateFluidTrigger;
 
 public class BarrelStateManager {
-	public static HashMap<String, BaseBarrelState> states = new HashMap<String, BaseBarrelState>();
+	public static HashMap<String, BarrelStateBase> states = new HashMap<String, BarrelStateBase>();
 	
-	public static void registerState(String key, BaseBarrelState state)
+	public static void registerState(String key, BarrelStateBase state)
 	{
 		if (state != null)
 		{
@@ -30,7 +30,7 @@ public class BarrelStateManager {
 		}
 	}
 	
-	public static BaseBarrelState getState(String key)
+	public static BarrelStateBase getState(String key)
 	{
 		return states.get(key);
 	}

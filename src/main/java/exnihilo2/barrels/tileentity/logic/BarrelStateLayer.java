@@ -4,14 +4,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import exnihilo2.EN2;
 import exnihilo2.barrels.BarrelStateManager;
-import exnihilo2.barrels.bases.BaseBarrelState;
 import exnihilo2.barrels.interfaces.IBarrelState;
+import exnihilo2.barrels.states.BarrelStateBase;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 public class BarrelStateLayer extends TileEntity{
-	protected BaseBarrelState state;
+	protected BarrelStateBase state;
 	
-	public BaseBarrelState getState()
+	public BarrelStateBase getState()
 	{
 		return state;
 	}
@@ -20,7 +20,7 @@ public class BarrelStateLayer extends TileEntity{
 	{
 		if (key != this.state.getKey())
 		{
-			BaseBarrelState newState = BarrelStateManager.getState(key);
+			BarrelStateBase newState = BarrelStateManager.getState(key);
 			
 			if (newState != null)
 			{
