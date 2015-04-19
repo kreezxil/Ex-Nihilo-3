@@ -89,10 +89,12 @@ public class BarrelFluidLayer extends BarrelStateLayer implements IFluidTank
         {
             fluid.amount += resource.amount;
             avaliable = resource.amount;
+            barrel.requestSync();
         }
         else
         {
             fluid.amount = this.CAPACITY;
+            barrel.requestSync();
         }
 
         return avaliable;
@@ -123,6 +125,10 @@ public class BarrelFluidLayer extends BarrelStateLayer implements IFluidTank
             {
                 fluid = null;
                 setState("empty");
+            }
+            else
+            {
+            	barrel.requestSync();
             }
         }
         return stack;

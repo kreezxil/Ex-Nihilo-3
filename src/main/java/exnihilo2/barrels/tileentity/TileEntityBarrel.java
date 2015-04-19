@@ -101,7 +101,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		}
 	}
 	
-	public void sync()
+	public void requestSync()
 	{
 		this.syncNeeded = true;
 	}
