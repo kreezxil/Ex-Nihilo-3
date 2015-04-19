@@ -68,8 +68,6 @@ public class RendererBarrel extends TileEntitySpecialRenderer {
 		renderer.addVertexWithUV(xa,       		ya,  	za + length, 	minU, maxV);
 		tessellator.draw();
 		
-		//RenderHelper.enableStandardItemLighting();
-		//GlStateManager.popAttrib();
 		GlStateManager.popMatrix();
 	}
 	

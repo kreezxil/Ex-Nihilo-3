@@ -1,4 +1,4 @@
-package exnihilo2.barrels.tileentity.logic;
+package exnihilo2.barrels.tileentity.layers;
 
 import exnihilo2.barrels.architecture.BarrelState;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;

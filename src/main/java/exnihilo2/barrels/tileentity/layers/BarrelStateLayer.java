@@ -1,4 +1,4 @@
-package exnihilo2.barrels.tileentity.logic;
+package exnihilo2.barrels.tileentity.layers;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
