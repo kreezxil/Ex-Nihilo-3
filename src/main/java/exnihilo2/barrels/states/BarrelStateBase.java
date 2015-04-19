@@ -20,9 +20,6 @@ import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 public abstract class BarrelStateBase implements IBarrelState 
 {
-	private static final double MIN_RENDER_CAPACITY = 0.1d;
-	private static final double MAX_RENDER_CAPACITY = 0.9d;
-	
 	private HashMap<String, IBarrelStateTrigger> triggers = new HashMap<String, IBarrelStateTrigger>();
 	
 	private String key;
@@ -138,50 +135,5 @@ public abstract class BarrelStateBase implements IBarrelState
 				triggers.remove(key);
 			}
 		}
-	}
-	
-	protected void renderContentTexture(TextureAtlasSprite texture, double x, double y, double z, double fullness)
-	{
-		GlStateManager.pushAttrib();
-		GlStateManager.pushMatrix();
-		RenderHelper.disableStandardItemLighting();
-		
-		GlStateManager.translate(x + 0.1d, y + getAdjustedVolume(fullness), z + 0.1d);
-		GlStateManager.scale(0.8d, 1.0d, 0.8d);
-		
-		double length = 1.0d;
-		double width = 1.0d;
-		
-		double xa = 0;
-		double ya = 0;
-		double za = 0;
-		
-		double minU = (double)texture.getMinU();
-		double maxU = (double)texture.getMaxU();
-		double minV = (double)texture.getMinV();
-		double maxV = (double)texture.getMaxV();
-		
-		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer renderer = tessellator.getWorldRenderer();
-		
-		renderer.startDrawingQuads();
-		renderer.setColorRGBA_F(1, 1, 1, 1);
-		renderer.addVertexWithUV(xa + width,	ya,  	za + length, 	maxU, maxV);
-		renderer.addVertexWithUV(xa + width,	ya,  	za, 			maxU, minV);
-		renderer.addVertexWithUV(xa,  			ya,  	za, 			minU, minV);
-		renderer.addVertexWithUV(xa,       		ya,  	za + length, 	minU, maxV);
-		tessellator.draw();
-		
-		RenderHelper.enableStandardItemLighting();
-		GlStateManager.popAttrib();
-		GlStateManager.popMatrix();
-	}
-	
-	private double getAdjustedVolume(double fullness)
-	{
-		double capacity = MAX_RENDER_CAPACITY - MIN_RENDER_CAPACITY;
-		double adjusted = fullness * capacity;		
-		adjusted += MIN_RENDER_CAPACITY;
-		return adjusted;
 	}
 }

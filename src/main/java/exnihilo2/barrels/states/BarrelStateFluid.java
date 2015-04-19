@@ -21,6 +21,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
+import exnihilo2.barrels.renderer.RendererBarrel;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 public class BarrelStateFluid extends BarrelStateBase{
@@ -186,8 +187,6 @@ public class BarrelStateFluid extends BarrelStateBase{
 		
 		if (fluid != null)
 		{
-			GlStateManager.pushAttrib();
-			
 			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			
@@ -195,9 +194,7 @@ public class BarrelStateFluid extends BarrelStateBase{
 			mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
 			TextureAtlasSprite texture = fluid.getFluid().getIcon();
 			
-			renderContentTexture(texture, x, y, z, (double)barrel.getFluidAmount() / (double)barrel.getCapacity());
-			
-			GlStateManager.popAttrib();
+			RendererBarrel.renderContentTexture(texture, x, y, z, (double)barrel.getFluidAmount() / (double)barrel.getCapacity());
 		}
 	}
 	
