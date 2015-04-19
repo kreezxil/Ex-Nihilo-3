@@ -2,15 +2,16 @@ package exnihilo2.barrels;
 
 import java.util.HashMap;
 
-import exnihilo2.barrels.states.BarrelStateBase;
+import exnihilo2.barrels.design.bases.BarrelState;
 import exnihilo2.barrels.states.empty.BarrelStateEmpty;
-import exnihilo2.barrels.states.empty.logic.BarrelStateFluidTrigger;
+import exnihilo2.barrels.states.empty.logic.FluidStateItemTrigger;
+import exnihilo2.barrels.states.empty.logic.FluidStateWeatherTrigger;
 import exnihilo2.barrels.states.fluid.BarrelStateFluid;
 
 public class BarrelStateManager {
-	public static HashMap<String, BarrelStateBase> states = new HashMap<String, BarrelStateBase>();
+	public static HashMap<String, BarrelState> states = new HashMap<String, BarrelState>();
 	
-	public static void registerState(String key, BarrelStateBase state)
+	public static void registerState(String key, BarrelState state)
 	{
 		if (state != null)
 		{
@@ -30,7 +31,7 @@ public class BarrelStateManager {
 		}
 	}
 	
-	public static BarrelStateBase getState(String key)
+	public static BarrelState getState(String key)
 	{
 		return states.get(key);
 	}
@@ -49,6 +50,7 @@ public class BarrelStateManager {
 	
 	private static void registerTriggers()
 	{
-		getState("empty").registerStateTrigger("empty->fluid", new BarrelStateFluidTrigger());
+		getState("empty").registerStateTrigger("empty->fluid(item)", new FluidStateItemTrigger());
+		getState("empty").registerStateTrigger("empty->fluid(weather)", new FluidStateWeatherTrigger());
 	}
 }

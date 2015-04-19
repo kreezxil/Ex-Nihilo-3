@@ -1,4 +1,4 @@
-package exnihilo2.barrels.interfaces;
+package exnihilo2.barrels.design.interfaces;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

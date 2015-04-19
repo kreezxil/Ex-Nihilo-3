@@ -1,4 +1,4 @@
-package exnihilo2.barrels.states;
+package exnihilo2.barrels.design.bases;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,13 +14,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
-import exnihilo2.barrels.interfaces.IBarrelState;
-import exnihilo2.barrels.interfaces.IBarrelStateTrigger;
+import exnihilo2.barrels.design.interfaces.IBarrelState;
+import exnihilo2.barrels.design.interfaces.IBarrelLogic;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
-public abstract class BarrelStateBase implements IBarrelState 
+public abstract class BarrelState implements IBarrelState 
 {
-	private HashMap<String, IBarrelStateTrigger> triggers = new HashMap<String, IBarrelStateTrigger>();
+	private HashMap<String, BarrelLogic> triggers = new HashMap<String, BarrelLogic>();
 	
 	private String key;
 	
@@ -40,7 +40,7 @@ public abstract class BarrelStateBase implements IBarrelState
 		
 		if (!triggers.isEmpty())
 		{
-			for (Map.Entry<String, IBarrelStateTrigger> entry : triggers.entrySet()) 
+			for (Map.Entry<String, BarrelLogic> entry : triggers.entrySet()) 
 			{
 				triggered = entry.getValue().onActivate(barrel);
 				
@@ -59,7 +59,7 @@ public abstract class BarrelStateBase implements IBarrelState
 		
 		if (!triggers.isEmpty())
 		{
-			for (Map.Entry<String, IBarrelStateTrigger> entry : triggers.entrySet()) 
+			for (Map.Entry<String, BarrelLogic> entry : triggers.entrySet()) 
 			{
 				triggered = entry.getValue().onUpdate(barrel);
 				
@@ -78,7 +78,7 @@ public abstract class BarrelStateBase implements IBarrelState
 
 		if (!triggers.isEmpty())
 		{
-			for (Map.Entry<String, IBarrelStateTrigger> entry : triggers.entrySet()) 
+			for (Map.Entry<String, BarrelLogic> entry : triggers.entrySet()) 
 			{
 				triggered = entry.getValue().onUseItem(player, barrel, item);
 				
@@ -118,7 +118,7 @@ public abstract class BarrelStateBase implements IBarrelState
 	@Override
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {}
 
-	public void registerStateTrigger(String key, IBarrelStateTrigger trigger) 
+	public void registerStateTrigger(String key, BarrelLogic trigger) 
 	{
 		if (trigger != null)
 		{

@@ -21,11 +21,11 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
+import exnihilo2.barrels.design.bases.BarrelState;
 import exnihilo2.barrels.renderer.RendererBarrel;
-import exnihilo2.barrels.states.BarrelStateBase;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
-public class BarrelStateFluid extends BarrelStateBase{
+public class BarrelStateFluid extends BarrelState{
 
 	@Override
 	public void onUpdate(TileEntityBarrel barrel) {
