@@ -1,5 +1,8 @@
 package exnihilo2.barrels.tileentity.layers;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import exnihilo2.barrels.architecture.BarrelState;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,8 +15,16 @@ import net.minecraft.util.IChatComponent;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInventory{
-	protected ItemStack output;
+	protected ArrayList<ItemStack> output = new ArrayList<ItemStack>();
 
+	public void addOutput(ItemStack item)
+	{
+		if (item != null && item.stackSize > 0)
+		{
+			output.add(item);
+		}
+	}
+	
 	@Override
 	public int getSizeInventory() 
 	{
@@ -23,9 +34,9 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	@Override
 	public ItemStack getStackInSlot(int index) 
 	{
-		if (index == 0 && output != null)
+		if (index == 0 && output.size() > 0)
 		{
-			return output;
+			return output.get(0);
 		}
 		
 		return null;
@@ -34,14 +45,21 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	@Override
 	public ItemStack decrStackSize(int index, int count) 
 	{
-		if (index == 0 && output != null)
-		{
-			setState("empty");
-			
-			return output;
-		}
+		ItemStack item = getStackInSlot(index);
 		
-		return null;
+        if (item != null && count > 0) 
+        {
+            if (item.stackSize <= count) 
+            {
+                setInventorySlotContents(index, null);
+            }
+            else 
+            {
+                item = item.splitStack(count);
+            }
+        }
+        
+        return item;
 	}
 
 	@Override
@@ -192,11 +210,13 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	{
 		super.readFromNBT(compound);
 
-		compound.setBoolean("item", output != null);
-		if (output != null)
-		{
-			output.writeToNBT(compound);
-		}
+		compound.setInteger("items", output.size());
+		
+		Iterator<ItemStack> iterator = output.iterator();
+        while (iterator.hasNext()) 
+        {
+            iterator.next().writeToNBT(compound);
+        }
 	}
  
 	@Override
@@ -204,9 +224,11 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	{
 		super.writeToNBT(compound);
 		
-		if (compound.getBoolean("item"))
+		int items = compound.getInteger("items");
+		
+		for (int x = 0; x < items; x++)
 		{
-			output = ItemStack.loadItemStackFromNBT(compound);
+			output.add(ItemStack.loadItemStackFromNBT(compound));
 		}
 	}
 }
