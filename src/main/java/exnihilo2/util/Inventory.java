@@ -2,7 +2,7 @@ package exnihilo2.util;
 
 import net.minecraft.item.ItemStack;
 
-public class InventoryUtil {
+public class Inventory {
 	public static ItemStack getContainer(ItemStack item)
 	{
 		if (item.stackSize == 1) 

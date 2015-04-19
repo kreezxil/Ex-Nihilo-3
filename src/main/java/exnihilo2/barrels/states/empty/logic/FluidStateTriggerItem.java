@@ -11,7 +11,7 @@ import exnihilo2.EN2;
 import exnihilo2.barrels.architecture.BarrelLogic;
 import exnihilo2.barrels.states.fluid.BarrelStateFluid;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
-import exnihilo2.util.InventoryUtil;
+import exnihilo2.util.Inventory;
 
 public class FluidStateTriggerItem extends BarrelLogic {
 	@Override
@@ -45,11 +45,11 @@ public class FluidStateTriggerItem extends BarrelLogic {
 			{
 				if (player != null)
 				{
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, InventoryUtil.getContainer(item));
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, Inventory.getContainer(item));
 				}
 				else
 				{
-					barrel.addOutput(InventoryUtil.getContainer(item));
+					barrel.addOutput(Inventory.getContainer(item));
 				}
 			}
 
