@@ -4,8 +4,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import exnihilo2.EN2;
 import exnihilo2.barrels.BarrelStateManager;
-import exnihilo2.barrels.design.bases.BarrelState;
-import exnihilo2.barrels.design.interfaces.IBarrelState;
+import exnihilo2.barrels.architecture.BarrelState;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 public class BarrelStateLayer extends TileEntity{

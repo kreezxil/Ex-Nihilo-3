@@ -1,7 +1,7 @@
 package exnihilo2.blocks;
 
 import exnihilo2.EN2;
-import exnihilo2.barrels.design.bases.BarrelState;
+import exnihilo2.barrels.architecture.BarrelState;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

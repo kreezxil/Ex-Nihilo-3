@@ -3,7 +3,7 @@ package exnihilo2.barrels.states.fluid.logic;
 import net.minecraft.block.Block;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import exnihilo2.barrels.design.bases.BarrelLogic;
+import exnihilo2.barrels.architecture.BarrelLogic;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 public class FluidStateLogicGas extends BarrelLogic{

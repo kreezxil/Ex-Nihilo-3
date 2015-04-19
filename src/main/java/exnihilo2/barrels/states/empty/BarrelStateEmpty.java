@@ -14,12 +14,11 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import exnihilo2.EN2;
-import exnihilo2.barrels.design.bases.BarrelState;
-import exnihilo2.barrels.design.interfaces.IBarrelState;
+import exnihilo2.barrels.architecture.BarrelState;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 //Does nothing. Renders nothing. Is simply a container for triggers.
-public class BarrelStateEmpty extends BarrelState implements IBarrelState{
+public class BarrelStateEmpty extends BarrelState{
 	
 	@Override
 	public boolean canManipulateFluids(TileEntityBarrel barrel) {

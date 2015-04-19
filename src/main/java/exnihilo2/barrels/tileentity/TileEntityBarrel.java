@@ -4,8 +4,7 @@ import java.lang.reflect.Method;
 
 import exnihilo2.EN2;
 import exnihilo2.barrels.BarrelStateManager;
-import exnihilo2.barrels.design.bases.BarrelState;
-import exnihilo2.barrels.design.interfaces.IBarrelState;
+import exnihilo2.barrels.architecture.BarrelState;
 import exnihilo2.barrels.tileentity.logic.BarrelFluidLayer;
 import exnihilo2.barrels.tileentity.logic.BarrelInventoryLayer;
 import exnihilo2.barrels.tileentity.logic.BarrelStateLayer;

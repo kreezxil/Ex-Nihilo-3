@@ -2,13 +2,15 @@ package exnihilo2.barrels;
 
 import java.util.HashMap;
 
-import exnihilo2.barrels.design.bases.BarrelState;
+import exnihilo2.barrels.architecture.BarrelState;
 import exnihilo2.barrels.states.empty.BarrelStateEmpty;
 import exnihilo2.barrels.states.empty.logic.FluidStateItemTrigger;
 import exnihilo2.barrels.states.empty.logic.FluidStateWeatherTrigger;
 import exnihilo2.barrels.states.fluid.BarrelStateFluid;
 import exnihilo2.barrels.states.fluid.logic.FluidStateLogicGas;
 import exnihilo2.barrels.states.fluid.logic.FluidStateLogicHot;
+import exnihilo2.barrels.states.fluid.logic.FluidStateLogicItems;
+import exnihilo2.barrels.states.fluid.logic.FluidStateLogicLuminosity;
 import exnihilo2.barrels.states.fluid.logic.FluidStateLogicRain;
 
 public class BarrelStateManager {
@@ -55,8 +57,11 @@ public class BarrelStateManager {
 	{
 		getState("empty").registerStateLogic("empty to fluid (item)", new FluidStateItemTrigger());
 		getState("empty").registerStateLogic("empty to fluid (weather)", new FluidStateWeatherTrigger());
+		
 		getState("fluid").registerStateLogic("fluid logic (gas)", new FluidStateLogicHot());
 		getState("fluid").registerStateLogic("fluid logic (hot)", new FluidStateLogicGas());
 		getState("fluid").registerStateLogic("fluid logic (rain)", new FluidStateLogicRain());
+		getState("fluid").registerStateLogic("fluid logic (luminosity)", new FluidStateLogicLuminosity());
+		getState("fluid").registerStateLogic("fluid logic (items)", new FluidStateLogicItems());
 	}
 }

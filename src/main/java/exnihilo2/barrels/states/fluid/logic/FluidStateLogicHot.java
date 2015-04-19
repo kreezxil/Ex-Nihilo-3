@@ -5,7 +5,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
-import exnihilo2.barrels.design.bases.BarrelLogic;
+import exnihilo2.barrels.architecture.BarrelLogic;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 public class FluidStateLogicHot extends BarrelLogic{

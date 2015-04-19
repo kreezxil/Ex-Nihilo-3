@@ -1,6 +1,6 @@
 package exnihilo2.barrels.tileentity.logic;
 
-import exnihilo2.barrels.design.bases.BarrelState;
+import exnihilo2.barrels.architecture.BarrelState;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

@@ -8,8 +8,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
-import exnihilo2.barrels.design.bases.BarrelLogic;
-import exnihilo2.barrels.design.interfaces.IBarrelLogic;
+import exnihilo2.barrels.architecture.BarrelLogic;
 import exnihilo2.barrels.states.fluid.BarrelStateFluid;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 

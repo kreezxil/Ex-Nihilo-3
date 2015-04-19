@@ -1,4 +1,4 @@
-package exnihilo2.barrels.design.bases;
+package exnihilo2.barrels.architecture;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,11 +14,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
-import exnihilo2.barrels.design.interfaces.IBarrelState;
-import exnihilo2.barrels.design.interfaces.IBarrelLogic;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
-public abstract class BarrelState implements IBarrelState 
+public abstract class BarrelState
 {
 	private HashMap<String, BarrelLogic> triggers = new HashMap<String, BarrelLogic>();
 	
@@ -72,6 +70,20 @@ public abstract class BarrelState implements IBarrelState
 			this.onUpdate(barrel);
 	}
 	
+	public boolean canUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item)
+	{
+		if (!triggers.isEmpty())
+		{
+			for (Map.Entry<String, BarrelLogic> entry : triggers.entrySet()) 
+			{
+				if (entry.getValue().canUseItem(barrel, item))
+					return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public void useItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item)
 	{
 		boolean triggered = false;
@@ -91,18 +103,14 @@ public abstract class BarrelState implements IBarrelState
 			this.onUseItem(player, barrel, item);
 	}
 	
-	@Override
 	public void onActivate(TileEntityBarrel barrel) {}
 
-	@Override
 	public void onUpdate(TileEntityBarrel barrel) {}
 
-	@Override
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) {
 		return false;
 	}
 	
-	@Override
 	public void onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) {}
 	
 	public boolean canExtractItem(TileEntityBarrel barrel)
@@ -115,7 +123,6 @@ public abstract class BarrelState implements IBarrelState
 		return false;
 	}
 	
-	@Override
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {}
 
 	public void registerStateLogic(String key, BarrelLogic trigger) 
