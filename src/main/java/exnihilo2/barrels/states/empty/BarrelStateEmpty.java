@@ -1,4 +1,4 @@
-package exnihilo2.barrels.states;
+package exnihilo2.barrels.states.empty;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -15,6 +15,7 @@ import org.lwjgl.opengl.GL11;
 
 import exnihilo2.EN2;
 import exnihilo2.barrels.interfaces.IBarrelState;
+import exnihilo2.barrels.states.BarrelStateBase;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 //Does nothing. Renders nothing. Is simply a container for triggers.

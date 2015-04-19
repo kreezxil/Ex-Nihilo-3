@@ -1,4 +1,4 @@
-package exnihilo2.barrels.states;
+package exnihilo2.barrels.states.empty.logic;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -9,6 +9,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
 import exnihilo2.barrels.interfaces.IBarrelStateTrigger;
+import exnihilo2.barrels.states.fluid.BarrelStateFluid;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 public class BarrelStateFluidTrigger implements IBarrelStateTrigger {

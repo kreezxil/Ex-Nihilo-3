@@ -3,9 +3,9 @@ package exnihilo2.barrels;
 import java.util.HashMap;
 
 import exnihilo2.barrels.states.BarrelStateBase;
-import exnihilo2.barrels.states.BarrelStateEmpty;
-import exnihilo2.barrels.states.BarrelStateFluid;
-import exnihilo2.barrels.states.BarrelStateFluidTrigger;
+import exnihilo2.barrels.states.empty.BarrelStateEmpty;
+import exnihilo2.barrels.states.empty.logic.BarrelStateFluidTrigger;
+import exnihilo2.barrels.states.fluid.BarrelStateFluid;
 
 public class BarrelStateManager {
 	public static HashMap<String, BarrelStateBase> states = new HashMap<String, BarrelStateBase>();

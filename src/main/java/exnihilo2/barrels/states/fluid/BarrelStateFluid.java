@@ -1,4 +1,4 @@
-package exnihilo2.barrels.states;
+package exnihilo2.barrels.states.fluid;
 
 import org.lwjgl.opengl.GL11;
 
@@ -22,6 +22,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
 import exnihilo2.barrels.renderer.RendererBarrel;
+import exnihilo2.barrels.states.BarrelStateBase;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
 public class BarrelStateFluid extends BarrelStateBase{
