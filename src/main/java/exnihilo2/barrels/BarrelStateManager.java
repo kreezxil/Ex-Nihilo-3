@@ -7,6 +7,9 @@ import exnihilo2.barrels.states.empty.BarrelStateEmpty;
 import exnihilo2.barrels.states.empty.logic.FluidStateItemTrigger;
 import exnihilo2.barrels.states.empty.logic.FluidStateWeatherTrigger;
 import exnihilo2.barrels.states.fluid.BarrelStateFluid;
+import exnihilo2.barrels.states.fluid.logic.FluidStateLogicGas;
+import exnihilo2.barrels.states.fluid.logic.FluidStateLogicHot;
+import exnihilo2.barrels.states.fluid.logic.FluidStateLogicRain;
 
 public class BarrelStateManager {
 	public static HashMap<String, BarrelState> states = new HashMap<String, BarrelState>();
@@ -39,7 +42,7 @@ public class BarrelStateManager {
 	public static void buildBehaviorTree()
 	{
 		registerStates();
-		registerTriggers();
+		registerLogic();
 	}
 	
 	private static void registerStates()
@@ -48,9 +51,12 @@ public class BarrelStateManager {
 		registerState("fluid", new BarrelStateFluid());
 	}
 	
-	private static void registerTriggers()
+	private static void registerLogic()
 	{
-		getState("empty").registerStateTrigger("empty->fluid(item)", new FluidStateItemTrigger());
-		getState("empty").registerStateTrigger("empty->fluid(weather)", new FluidStateWeatherTrigger());
+		getState("empty").registerStateLogic("empty to fluid (item)", new FluidStateItemTrigger());
+		getState("empty").registerStateLogic("empty to fluid (weather)", new FluidStateWeatherTrigger());
+		getState("fluid").registerStateLogic("fluid logic (gas)", new FluidStateLogicHot());
+		getState("fluid").registerStateLogic("fluid logic (hot)", new FluidStateLogicGas());
+		getState("fluid").registerStateLogic("fluid logic (rain)", new FluidStateLogicRain());
 	}
 }

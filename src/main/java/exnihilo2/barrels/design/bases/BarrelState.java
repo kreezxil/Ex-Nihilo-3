@@ -118,7 +118,7 @@ public abstract class BarrelState implements IBarrelState
 	@Override
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {}
 
-	public void registerStateTrigger(String key, BarrelLogic trigger) 
+	public void registerStateLogic(String key, BarrelLogic trigger) 
 	{
 		if (trigger != null)
 		{

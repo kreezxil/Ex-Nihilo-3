@@ -35,85 +35,6 @@ public class BarrelStateFluid extends BarrelState{
 			
 			//set the light level. Just in case the fluid has changed.
 			barrel.setLuminosity(barrel.getFluid().getFluid().getLuminosity());
-			
-			//if the fluid is gaseous...
-			if(barrel.getFluid().getFluid().isGaseous())
-			{
-				//and the space above the barrel is empty...
-				BlockPos pos = barrel.getPos();
-				BlockPos above = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
-				
-				if(world.isAirBlock(above))
-				{
-					//float free little cloud dude!
-					Block fblock = barrel.getFluid().getFluid().getBlock();
-					
-					world.setBlockState(above, fblock.getDefaultState(), 3);
-					world.notifyBlockOfStateChange(above, fblock);
-					
-					barrel.drain(barrel.getCapacity(), true);
-				}
-			}
-			
-			//if the fluid is hot...
-			if(barrel.getFluid().getFluid().getTemperature() > 400)
-			{
-				//and the barrel is flammable...
-				if (world.getBlockState(barrel.getPos()).getBlock().getMaterial().getCanBurn())
-				{
-					//buuuurn baby burn!
-					if (barrel.getTimerStatus() == -1.0d)
-					{
-						barrel.startTimer(400);
-					}
-					
-					if (barrel.getTimerStatus() > 0 && barrel.getTimerStatus() < 1.0d)
-					{
-						BlockPos pos = barrel.getPos();
-
-						if (barrel.getTimerTime() % 30 == 0)
-						{
-							world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double)pos.getX() + Math.random(), (double)pos.getY() + 1.2D, (double)pos.getZ() + Math.random(), 0.0D, 0.0D, 0.0D);
-						}
-
-						if (barrel.getTimerTime() % 5 == 0)
-						{
-							world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, (double)pos.getX() + Math.random(), (double)pos.getY() + 1.2D, (double)pos.getZ() + Math.random(), 0.0D, 0.0D, 0.0D);
-						}
-					}
-						
-					if (barrel.getTimerStatus() == 1.0d)
-					{
-						if (barrel.getFluidAmount() < barrel.getCapacity())
-						{
-							BlockPos pos = barrel.getPos();
-							BlockPos above = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
-							
-							if (world.isAirBlock(above))
-							{
-								world.setBlockState(above, Blocks.fire.getDefaultState(), 3);
-							}
-						}
-						else
-						{
-							Block fblock = barrel.getFluid().getFluid().getBlock();
-							
-							world.setBlockState(barrel.getPos(), fblock.getDefaultState(), 3);
-							world.notifyBlockOfStateChange(barrel.getPos(), fblock);
-						}
-					}
-				}
-			}
-			
-			if (barrel.getFluid().fluidID == FluidRegistry.WATER.getID() && barrel.getWorld().getWorldInfo().isRaining() && barrel.getWorld().getBiomeGenForCoords(barrel.getPos()).rainfall > 0.0f)
-			{
-				if (barrel.getPos().getY() >= barrel.getWorld().getTopSolidOrLiquidBlock(barrel.getPos()).getY() - 1)
-				{
-					FluidStack water = new FluidStack(FluidRegistry.WATER, 1);
-					
-					barrel.fill(water, true);
-				}
-			}
 		}
 	}
 
@@ -135,7 +56,7 @@ public class BarrelStateFluid extends BarrelState{
 			}
 		}
 		
-		return super.canUseItem(barrel, item);
+		return false;
 	}
 
 	@Override
@@ -173,8 +94,6 @@ public class BarrelStateFluid extends BarrelState{
 				}
 			}
 		}
-		
-		super.onUseItem(player, barrel, item);
 	}
 	
 	@Override
