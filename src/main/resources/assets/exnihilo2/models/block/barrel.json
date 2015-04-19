@@ -16,7 +16,7 @@
                     "rotation": 90
                 },
                 "down": {
-                    "uv": [2,1,14,14],
+                    "uv": [2,0,14,15],
                     "texture": "#barrel"
                 }
             }
@@ -26,7 +26,7 @@
             "to": [14,16,15],
             "faces": {
                 "up": {
-                    "uv": [15,1,16,16],
+                    "uv": [15,0,16,16],
                     "texture": "#barrel",
                     "rotation": 90
                 },
@@ -35,22 +35,17 @@
                     "texture": "#barrel"
                 },
                 "west": {
-                    "uv": [0,0,16,1],
-                    "texture": "#barrel",
-                    "rotation": 90
-                },
-                "east": {
-                    "uv": [0,15,16,16],
+                    "uv": [16,15,0,16],
                     "texture": "#barrel",
                     "rotation": 90
                 },
                 "north": {
-                    "uv": [1,1,14,16],
+                    "uv": [1,0,15,16],
                     "texture": "#barrel",
                     "rotation": 270
                 },
                 "south": {
-                    "uv": [0,1,16,16],
+                    "uv": [0,0,16,16],
                     "texture": "#barrel",
                     "rotation": 90
                 }
@@ -61,7 +56,7 @@
             "to": [15,16,2],
             "faces": {
                 "up": {
-                    "uv": [15,1,16,16],
+                    "uv": [15,0,16,16],
                     "texture": "#barrel",
                     "rotation": 270
                 },
@@ -69,23 +64,18 @@
                     "uv": [0,11,16,12],
                     "texture": "#barrel"
                 },
-                "west": {
-                    "uv": [0,15,16,16],
-                    "texture": "#barrel",
-                    "rotation": 90
-                },
                 "east": {
-                    "uv": [0,0,16,1],
+                    "uv": [16,15,0,16],
                     "texture": "#barrel",
                     "rotation": 90
                 },
                 "north": {
-                    "uv": [0,1,16,16],
+                    "uv": [0,0,16,16],
                     "texture": "#barrel",
                     "rotation": 90
                 },
                 "south": {
-                    "uv": [1,1,15,16],
+                    "uv": [1,0,15,16],
                     "texture": "#barrel",
                     "rotation": 270
                 }
@@ -96,7 +86,7 @@
             "to": [2,16,14],
             "faces": {
                 "up": {
-                    "uv": [15,1,16,16],
+                    "uv": [15,0,16,16],
                     "texture": "#barrel",
                     "rotation": 180
                 },
@@ -106,17 +96,17 @@
                     "rotation": 90
                 },
                 "west": {
-                    "uv": [0,1,16,16],
+                    "uv": [0,0,16,16],
                     "texture": "#barrel",
                     "rotation": 90
                 },
                 "east": {
-                    "uv": [0,1,16,16],
+                    "uv": [1,0,15,16],
                     "texture": "#barrel",
                     "rotation": 270
                 },
                 "north": {
-                    "uv": [0,0,16,1],
+                    "uv": [16,15,0,16],
                     "texture": "#barrel",
                     "rotation": 90
                 }
@@ -127,7 +117,7 @@
             "to": [15,16,15],
             "faces": {
                 "up": {
-                    "uv": [15,1,16,16],
+                    "uv": [15,0,16,16],
                     "texture": "#barrel"
                 },
                 "down": {
@@ -136,17 +126,17 @@
                     "rotation": 90
                 },
                 "west": {
-                    "uv": [1,1,15,16],
+                    "uv": [1,0,15,16],
                     "texture": "#barrel",
                     "rotation": 270
                 },
                 "east": {
-                    "uv": [0,1,16,16],
+                    "uv": [0,0,16,16],
                     "texture": "#barrel",
                     "rotation": 90
                 },
                 "south": {
-                    "uv": [0,0,16,1],
+                    "uv": [16,15,0,16],
                     "texture": "#barrel",
                     "rotation": 90
                 }
