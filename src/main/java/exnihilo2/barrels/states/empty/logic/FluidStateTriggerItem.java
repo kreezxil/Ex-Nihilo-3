@@ -13,7 +13,7 @@ import exnihilo2.barrels.states.fluid.BarrelStateFluid;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.util.InventoryUtil;
 
-public class FluidStateItemTrigger extends BarrelLogic {
+public class FluidStateTriggerItem extends BarrelLogic {
 	@Override
 	public boolean onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) 
 	{

@@ -12,7 +12,7 @@ import exnihilo2.barrels.architecture.BarrelLogic;
 import exnihilo2.barrels.states.fluid.BarrelStateFluid;
 import exnihilo2.barrels.tileentity.TileEntityBarrel;
 
-public class FluidStateWeatherTrigger extends BarrelLogic {
+public class FluidStateTriggerWeather extends BarrelLogic {
 	@Override
 	public boolean onUpdate(TileEntityBarrel barrel) {
 		

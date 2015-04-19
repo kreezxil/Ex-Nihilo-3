@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 import exnihilo2.barrels.architecture.BarrelState;
 import exnihilo2.barrels.states.empty.BarrelStateEmpty;
-import exnihilo2.barrels.states.empty.logic.FluidStateItemTrigger;
-import exnihilo2.barrels.states.empty.logic.FluidStateWeatherTrigger;
+import exnihilo2.barrels.states.empty.logic.FluidStateTriggerItem;
+import exnihilo2.barrels.states.empty.logic.FluidStateTriggerWeather;
 import exnihilo2.barrels.states.fluid.BarrelStateFluid;
 import exnihilo2.barrels.states.fluid.logic.FluidStateLogicGas;
 import exnihilo2.barrels.states.fluid.logic.FluidStateLogicHot;
@@ -55,8 +55,8 @@ public class BarrelStateManager {
 	
 	private static void registerLogic()
 	{
-		getState("empty").registerStateLogic("empty to fluid (item)", new FluidStateItemTrigger());
-		getState("empty").registerStateLogic("empty to fluid (weather)", new FluidStateWeatherTrigger());
+		getState("empty").registerStateLogic("empty to fluid (item)", new FluidStateTriggerItem());
+		getState("empty").registerStateLogic("empty to fluid (weather)", new FluidStateTriggerWeather());
 		
 		getState("fluid").registerStateLogic("fluid logic (gas)", new FluidStateLogicHot());
 		getState("fluid").registerStateLogic("fluid logic (hot)", new FluidStateLogicGas());
