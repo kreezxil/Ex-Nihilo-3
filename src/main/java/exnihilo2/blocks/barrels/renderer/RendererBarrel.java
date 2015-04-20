@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.util.Color;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -39,6 +40,11 @@ public class RendererBarrel extends TileEntitySpecialRenderer {
 	
 	public static void renderContentTexture(TextureAtlasSprite texture, double x, double y, double z, double fullness)
 	{
+		renderContentTexture(texture, x, y, z, fullness, new Color("FFFFFF"));
+	}
+	
+	public static void renderContentTexture(TextureAtlasSprite texture, double x, double y, double z, double fullness, Color color)
+	{
 		GlStateManager.pushMatrix();
 		RenderHelper.disableStandardItemLighting();
 		
@@ -61,7 +67,7 @@ public class RendererBarrel extends TileEntitySpecialRenderer {
 		WorldRenderer renderer = tessellator.getWorldRenderer();
 		
 		renderer.startDrawingQuads();
-		renderer.setColorRGBA_F(1, 1, 1, 1);
+		renderer.setColorRGBA_F(color.r, color.g, color.b, color.a);
 		renderer.addVertexWithUV(xa + width,	ya,  	za + length, 	maxU, maxV);
 		renderer.addVertexWithUV(xa + width,	ya,  	za, 			maxU, minV);
 		renderer.addVertexWithUV(xa,  			ya,  	za, 			minU, minV);
