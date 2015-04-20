@@ -17,23 +17,27 @@ public class EN2Blocks {
 	
 	public static Block oak_barrel;
 	public static Block spruce_barrel;
+	public static Block dark_oak_barrel;
 
 	public static void initialize()
 	{
 		oak_barrel = new BlockBarrel(Material.wood).setUnlocalizedName("oak_barrel");
 		spruce_barrel = new BlockBarrel(Material.wood).setUnlocalizedName("spruce_barrel");
+		dark_oak_barrel = new BlockBarrel(Material.wood).setUnlocalizedName("dark_oak_barrel");
 	}
 	
 	public static void registerBlocks()
 	{
 		registerBlock(oak_barrel);
 		registerBlock(spruce_barrel);
+		registerBlock(dark_oak_barrel);
 	}
 	
 	public static void registerBlockRenderers()
 	{
 		registerRenderer(oak_barrel);
 		registerRenderer(spruce_barrel);
+		registerRenderer(dark_oak_barrel);
 
 		TileEntitySpecialRenderer barrelRenderer = new RendererBarrel();
 	   	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, barrelRenderer);
