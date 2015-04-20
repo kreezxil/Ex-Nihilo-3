@@ -13,6 +13,7 @@ public class FluidStateLogicItems extends BarrelLogic{
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) {
 		FluidStack fluid = barrel.getFluid();
 		FluidStack ifluid = FluidContainerRegistry.getFluidForFilledItem(item);
+		ItemStack full = FluidContainerRegistry.fillFluidContainer(fluid, item);
 
 		if (fluid != null)
 		{
@@ -21,7 +22,7 @@ public class FluidStateLogicItems extends BarrelLogic{
 				return true;
 			}
 			
-			if (FluidContainerRegistry.isEmptyContainer(item) && fluid.amount >= barrel.getCapacity())
+			if (full != null && fluid.amount >= barrel.getCapacity())
 			{
 				return true;
 			}

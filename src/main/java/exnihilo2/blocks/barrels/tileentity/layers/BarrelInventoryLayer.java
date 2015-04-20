@@ -19,34 +19,25 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInventory{
 	protected ArrayList<ItemStack> output = new ArrayList<ItemStack>();
+	protected ItemStack block = null;
 	protected int MAX_OUTPUT_QUEUE_SIZE = 1;
 
 	public void addOutput(ItemStack item)
 	{
 		if (item != null && item.stackSize > 0)
 		{
-			if (output.size() >= MAX_OUTPUT_QUEUE_SIZE)
-			{
-				TileEntityBarrel barrel = (TileEntityBarrel)this;
-				World world = barrel.getWorld();
-				
-				if(!world.isRemote)
-				{
-					EntityItem entityitem = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), item);
-
-					double f3 = 0.05F;
-					entityitem.motionX = world.rand.nextGaussian() * f3;
-					entityitem.motionY = (0.2d);
-					entityitem.motionZ = world.rand.nextGaussian() * f3;
-
-					world.spawnEntityInWorld(entityitem);
-				}
-			}
-			else
-			{
-				output.add(item);
-			}
+			output.add(item);
 		}
+	}
+	
+	public void setBlock(ItemStack item)
+	{
+		this.block = item;
+	}
+	
+	public ItemStack getBlock()
+	{
+		return block;
 	}
 	
 	@Override
@@ -58,9 +49,16 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	@Override
 	public ItemStack getStackInSlot(int index) 
 	{
-		if (index == 0 && output.size() > 0)
+		if (index == 0)
 		{
-			return output.get(0);
+			if ( output.size() > 0)
+			{
+				return output.get(0);
+			}
+			else if (block != null)
+			{
+				return block;
+			}
 		}
 		
 		return null;
@@ -101,6 +99,10 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 			{
 				output.remove(0);
 			}
+			else if (block != null)
+			{
+				block = null;
+			}
 		}
 		else
 		{
@@ -134,10 +136,19 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) 
 	{
-		TileEntityBarrel barrel = (TileEntityBarrel)this;
-		BarrelState state = barrel.getState();
+		if (this.output.size() < MAX_OUTPUT_QUEUE_SIZE)
+		{
+			TileEntityBarrel barrel = (TileEntityBarrel)this;
+			BarrelState state = barrel.getState();
+			
+			return state.canUseItem(barrel, stack);
+		}
+		else
+		{
+			EN2.log.error("insert rejected due to output being full.");
+		}
 		
-		return state.canUseItem(barrel, stack);
+		return false;
 	}
 
 	@Override
@@ -199,8 +210,6 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	@Override
 	public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) 
 	{
-		EN2.log.error("Attempt to insert item. Index: " + index + ", Direction: " + direction.toString() + ", Item: " + stack.getDisplayName());
-		
 		if (direction == EnumFacing.UP && index == 1)
 		{
 			TileEntityBarrel barrel = (TileEntityBarrel)this;
@@ -218,7 +227,7 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	{
 		if (direction == EnumFacing.DOWN && index == 0)
 		{
-			return (output.size() > 0);
+			return (output.size() > 0 || block!= null);
 		}
 		
 		return false;
@@ -237,6 +246,12 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
         {
             iterator.next().writeToNBT(compound);
         }
+        
+        compound.setBoolean("block", block!=null);
+        if (block != null)
+        {
+        	block.writeToNBT(compound);
+        }
 	}
  
 	@Override
@@ -249,6 +264,11 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 		for (int x = 0; x < items; x++)
 		{
 			output.add(ItemStack.loadItemStackFromNBT(compound));
+		}
+		
+		if (compound.getBoolean("block"))
+		{
+			block = ItemStack.loadItemStackFromNBT(compound);
 		}
 	}
 }
