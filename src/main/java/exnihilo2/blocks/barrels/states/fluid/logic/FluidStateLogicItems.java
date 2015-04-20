@@ -1,11 +1,11 @@
-package exnihilo2.barrels.states.fluid.logic;
+package exnihilo2.blocks.barrels.states.fluid.logic;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import exnihilo2.barrels.architecture.BarrelLogic;
-import exnihilo2.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.barrels.architecture.BarrelLogic;
+import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.util.Inventory;
 
 public class FluidStateLogicItems extends BarrelLogic{

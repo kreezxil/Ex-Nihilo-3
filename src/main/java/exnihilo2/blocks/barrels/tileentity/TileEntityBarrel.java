@@ -1,13 +1,13 @@
-package exnihilo2.barrels.tileentity;
+package exnihilo2.blocks.barrels.tileentity;
 
 import java.lang.reflect.Method;
 
 import exnihilo2.EN2;
-import exnihilo2.barrels.BarrelStateManager;
-import exnihilo2.barrels.architecture.BarrelState;
-import exnihilo2.barrels.tileentity.layers.BarrelFluidLayer;
-import exnihilo2.barrels.tileentity.layers.BarrelInventoryLayer;
-import exnihilo2.barrels.tileentity.layers.BarrelStateLayer;
+import exnihilo2.blocks.barrels.BarrelStateManager;
+import exnihilo2.blocks.barrels.architecture.BarrelState;
+import exnihilo2.blocks.barrels.tileentity.layers.BarrelFluidLayer;
+import exnihilo2.blocks.barrels.tileentity.layers.BarrelInventoryLayer;
+import exnihilo2.blocks.barrels.tileentity.layers.BarrelStateLayer;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.ITickable;

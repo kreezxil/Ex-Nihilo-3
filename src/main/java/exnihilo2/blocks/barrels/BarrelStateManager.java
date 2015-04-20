@@ -1,17 +1,17 @@
-package exnihilo2.barrels;
+package exnihilo2.blocks.barrels;
 
 import java.util.HashMap;
 
-import exnihilo2.barrels.architecture.BarrelState;
-import exnihilo2.barrels.states.empty.BarrelStateEmpty;
-import exnihilo2.barrels.states.empty.logic.FluidStateTriggerItem;
-import exnihilo2.barrels.states.empty.logic.FluidStateTriggerWeather;
-import exnihilo2.barrels.states.fluid.BarrelStateFluid;
-import exnihilo2.barrels.states.fluid.logic.FluidStateLogicGas;
-import exnihilo2.barrels.states.fluid.logic.FluidStateLogicHot;
-import exnihilo2.barrels.states.fluid.logic.FluidStateLogicItems;
-import exnihilo2.barrels.states.fluid.logic.FluidStateLogicLuminosity;
-import exnihilo2.barrels.states.fluid.logic.FluidStateLogicRain;
+import exnihilo2.blocks.barrels.architecture.BarrelState;
+import exnihilo2.blocks.barrels.states.empty.BarrelStateEmpty;
+import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerItem;
+import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerWeather;
+import exnihilo2.blocks.barrels.states.fluid.BarrelStateFluid;
+import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicGas;
+import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicHot;
+import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicItems;
+import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicLuminosity;
+import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicRain;
 
 public class BarrelStateManager {
 	public static HashMap<String, BarrelState> states = new HashMap<String, BarrelState>();

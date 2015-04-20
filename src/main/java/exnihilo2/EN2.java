@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import exnihilo2.barrels.BarrelStateManager;
+import exnihilo2.blocks.barrels.BarrelStateManager;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
 

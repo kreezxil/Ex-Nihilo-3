@@ -1,8 +1,8 @@
-package exnihilo2.barrels.states.fluid.logic;
+package exnihilo2.blocks.barrels.states.fluid.logic;
 
 import net.minecraftforge.fluids.Fluid;
-import exnihilo2.barrels.architecture.BarrelLogic;
-import exnihilo2.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.barrels.architecture.BarrelLogic;
+import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
 public class FluidStateLogicLuminosity extends BarrelLogic{
 	@Override

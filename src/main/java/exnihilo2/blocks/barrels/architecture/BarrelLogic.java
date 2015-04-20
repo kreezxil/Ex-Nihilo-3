@@ -1,8 +1,8 @@
-package exnihilo2.barrels.architecture;
+package exnihilo2.blocks.barrels.architecture;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import exnihilo2.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
 public abstract class BarrelLogic{
 

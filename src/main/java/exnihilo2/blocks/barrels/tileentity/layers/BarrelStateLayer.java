@@ -1,11 +1,11 @@
-package exnihilo2.barrels.tileentity.layers;
+package exnihilo2.blocks.barrels.tileentity.layers;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import exnihilo2.EN2;
-import exnihilo2.barrels.BarrelStateManager;
-import exnihilo2.barrels.architecture.BarrelState;
-import exnihilo2.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.barrels.BarrelStateManager;
+import exnihilo2.blocks.barrels.architecture.BarrelState;
+import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
 public class BarrelStateLayer extends TileEntity{
 	protected BarrelState state;

@@ -1,4 +1,4 @@
-package exnihilo2.barrels.architecture;
+package exnihilo2.blocks.barrels.architecture;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
-import exnihilo2.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
 public abstract class BarrelState
 {

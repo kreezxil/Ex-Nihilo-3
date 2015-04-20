@@ -1,11 +1,11 @@
-package exnihilo2.barrels.tileentity.layers;
+package exnihilo2.blocks.barrels.tileentity.layers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import exnihilo2.EN2;
-import exnihilo2.barrels.architecture.BarrelState;
-import exnihilo2.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.barrels.architecture.BarrelState;
+import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
