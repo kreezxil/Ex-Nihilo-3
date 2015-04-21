@@ -19,7 +19,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInventory{
 	protected ArrayList<ItemStack> output = new ArrayList<ItemStack>();
-	protected ItemStack block = null;
+	protected ItemStack contents = null;
 	protected int MAX_OUTPUT_QUEUE_SIZE = 1;
 
 	public void addOutput(ItemStack item)
@@ -30,14 +30,25 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 		}
 	}
 	
-	public void setBlock(ItemStack item)
+	public void setContents(ItemStack item)
 	{
-		this.block = item;
+		if (contents != null)
+		{
+			this.contents = item;
+		}
+		else
+		{
+			this.contents = null;
+			
+			TileEntityBarrel barrel = (TileEntityBarrel)this;
+			barrel.setState("empty");
+		}
+		
 	}
 	
-	public ItemStack getBlock()
+	public ItemStack getContents()
 	{
-		return block;
+		return contents;
 	}
 	
 	@Override
@@ -55,9 +66,9 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 			{
 				return output.get(0);
 			}
-			else if (block != null)
+			else if (contents != null)
 			{
-				return block;
+				return contents;
 			}
 		}
 		
@@ -99,9 +110,9 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 			{
 				output.remove(0);
 			}
-			else if (block != null)
+			else if (contents != null)
 			{
-				block = null;
+				contents = null;
 			}
 		}
 		else
@@ -227,7 +238,7 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	{
 		if (direction == EnumFacing.DOWN && index == 0)
 		{
-			return (output.size() > 0 || block!= null);
+			return (output.size() > 0 || contents!= null);
 		}
 		
 		return false;
@@ -247,10 +258,10 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
             iterator.next().writeToNBT(compound);
         }
         
-        compound.setBoolean("block", block!=null);
-        if (block != null)
+        compound.setBoolean("block", contents!=null);
+        if (contents != null)
         {
-        	block.writeToNBT(compound);
+        	contents.writeToNBT(compound);
         }
 	}
  
@@ -268,7 +279,7 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 		
 		if (compound.getBoolean("block"))
 		{
-			block = ItemStack.loadItemStackFromNBT(compound);
+			contents = ItemStack.loadItemStackFromNBT(compound);
 		}
 	}
 }
