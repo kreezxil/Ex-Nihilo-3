@@ -32,7 +32,7 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	
 	public void setContents(ItemStack item)
 	{
-		if (contents != null)
+		if (item != null)
 		{
 			this.contents = item;
 		}
@@ -61,13 +61,13 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	{
 		if (index == 0)
 		{
-			if ( output.size() > 0)
-			{
-				return output.get(0);
-			}
-			else if (contents != null)
+			if (contents != null)
 			{
 				return contents;
+			}
+			else if ( output.size() > 0)
+			{
+				return output.get(0);
 			}
 		}
 		
@@ -105,13 +105,13 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	{
 		if (stack == null || stack.getItem() == null)
 		{
-			if (index == 0 && output.size() > 0)
-			{
-				output.remove(0);
-			}
-			else if (contents != null)
+			if (contents != null)
 			{
 				setContents(null);
+			}
+			else if (index == 0 && output.size() > 0)
+			{
+				output.remove(0);
 			}
 		}
 		else

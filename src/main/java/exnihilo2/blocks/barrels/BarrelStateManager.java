@@ -3,10 +3,12 @@ package exnihilo2.blocks.barrels;
 import java.util.HashMap;
 
 import exnihilo2.blocks.barrels.architecture.BarrelState;
+import exnihilo2.blocks.barrels.states.block.BarrelStateBlock;
 import exnihilo2.blocks.barrels.states.empty.BarrelStateEmpty;
 import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerItem;
 import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerWeather;
 import exnihilo2.blocks.barrels.states.fluid.BarrelStateFluid;
+import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftNetherrackTrigger;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicGas;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicHot;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicItems;
@@ -51,6 +53,7 @@ public class BarrelStateManager {
 	{
 		registerState("empty", new BarrelStateEmpty());
 		registerState("fluid", new BarrelStateFluid());
+		registerState("block", new BarrelStateBlock());
 	}
 	
 	private static void registerLogic()
@@ -63,5 +66,6 @@ public class BarrelStateManager {
 		getState("fluid").registerStateLogic("fluid logic (rain)", new FluidStateLogicRain());
 		getState("fluid").registerStateLogic("fluid logic (luminosity)", new FluidStateLogicLuminosity());
 		getState("fluid").registerStateLogic("fluid logic (items)", new FluidStateLogicItems());
+		getState("fluid").registerStateLogic("barrel crafting (netherrack)", new FluidCraftNetherrackTrigger());
 	}
 }

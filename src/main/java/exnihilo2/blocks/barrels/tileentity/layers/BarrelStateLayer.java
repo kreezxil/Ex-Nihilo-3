@@ -34,7 +34,9 @@ public class BarrelStateLayer extends TileEntity{
 			barrel.resetTimer();
 			barrel.setLuminosity(0);
 			state.activate(barrel);
-			barrel.syncNeeded = true;
+			
+			if (getWorld() != null)
+				this.getWorld().markBlockForUpdate(this.getPos());
 		}
 	}
 	
