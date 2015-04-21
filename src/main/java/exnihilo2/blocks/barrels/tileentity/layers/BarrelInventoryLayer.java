@@ -43,7 +43,6 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 			TileEntityBarrel barrel = (TileEntityBarrel)this;
 			barrel.setState("empty");
 		}
-		
 	}
 	
 	public ItemStack getContents()
@@ -112,7 +111,7 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 			}
 			else if (contents != null)
 			{
-				contents = null;
+				setContents(null);
 			}
 		}
 		else
