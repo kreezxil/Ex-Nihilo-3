@@ -59,11 +59,11 @@ public class BarrelStateFluid extends BarrelState{
 
 			if (barrel.getBlockType().getMaterial().isOpaque())
 			{
-				drawFluidSimple(texture, x, y, z, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
+				renderFluidSimple(texture, x, y, z, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
 			}
 			else
 			{
-				drawFluidComplex(texture, x, y, z, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
+				renderFluidComplex(texture, x, y, z, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
 			}
 			
 			
@@ -71,7 +71,7 @@ public class BarrelStateFluid extends BarrelState{
 		}
 	}
 	
-	private static void drawFluidSimple(TextureAtlasSprite texture, double x, double y, double z, double fullness, Color color)
+	private static void renderFluidSimple(TextureAtlasSprite texture, double x, double y, double z, double fullness, Color color)
 	{
 		GlStateManager.pushMatrix();
 		RenderHelper.disableStandardItemLighting();
@@ -98,7 +98,7 @@ public class BarrelStateFluid extends BarrelState{
 		GlStateManager.popMatrix();
 	}
 
-	private static void drawFluidComplex(TextureAtlasSprite texture, double x, double y, double z, double fullness, Color color)
+	private static void renderFluidComplex(TextureAtlasSprite texture, double x, double y, double z, double fullness, Color color)
 	{
 		GlStateManager.pushMatrix();
 		RenderHelper.disableStandardItemLighting();
@@ -178,19 +178,19 @@ public class BarrelStateFluid extends BarrelState{
 		
 		renderer.startDrawingQuads();
 		renderer.setColorRGBA_F(color.r, color.g, color.b, color.a);
-		drawPlane(renderer, texture, top, fullness, color);
-		drawPlane(renderer, texture, bottom, fullness, color);
-		drawPlane(renderer, texture, north, fullness, color);
-		drawPlane(renderer, texture, east, fullness, color);
-		drawPlane(renderer, texture, south, fullness, color);
-		drawPlane(renderer, texture, west, fullness, color);
+		renderTexturedQuad(renderer, texture, top, fullness, color);
+		renderTexturedQuad(renderer, texture, bottom, fullness, color);
+		renderTexturedQuad(renderer, texture, north, fullness, color);
+		renderTexturedQuad(renderer, texture, east, fullness, color);
+		renderTexturedQuad(renderer, texture, south, fullness, color);
+		renderTexturedQuad(renderer, texture, west, fullness, color);
 		tessellator.draw();
 		
 		RenderHelper.enableStandardItemLighting();
 		GlStateManager.popMatrix();
 	}
 	
-	private static void drawPlane(WorldRenderer renderer, TextureAtlasSprite texture, Vec3[] vertices, double fullness, Color color)
+	private static void renderTexturedQuad(WorldRenderer renderer, TextureAtlasSprite texture, Vec3[] vertices, double fullness, Color color)
 	{
 		double minU = (double)texture.getMinU();
 		double maxU = (double)texture.getMaxU();
