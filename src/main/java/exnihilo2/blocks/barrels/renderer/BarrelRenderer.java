@@ -22,9 +22,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
 
-public class RendererBarrel extends TileEntitySpecialRenderer {
-	private static final double MIN_RENDER_CAPACITY = 0.1d;
-	private static final double MAX_RENDER_CAPACITY = 0.9d;
+public class BarrelRenderer extends TileEntitySpecialRenderer {
+	public static final double MIN_RENDER_CAPACITY = 0.1d;
+	public static final double MAX_RENDER_CAPACITY = 0.9d;
 	
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int i) 
@@ -77,7 +77,7 @@ public class RendererBarrel extends TileEntitySpecialRenderer {
 		GlStateManager.popMatrix();
 	}
 	
-	private static double getAdjustedVolume(double fullness)
+	public static double getAdjustedVolume(double fullness)
 	{
 		double capacity = MAX_RENDER_CAPACITY - MIN_RENDER_CAPACITY;
 		double adjusted = fullness * capacity;		

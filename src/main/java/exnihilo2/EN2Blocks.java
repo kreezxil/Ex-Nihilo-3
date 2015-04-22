@@ -1,7 +1,7 @@
 package exnihilo2;
 
 import exnihilo2.blocks.BlockBarrel;
-import exnihilo2.blocks.barrels.renderer.RendererBarrel;
+import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -18,12 +18,14 @@ public class EN2Blocks {
 	public static Block oak_barrel;
 	public static Block spruce_barrel;
 	public static Block dark_oak_barrel;
+	public static Block glass_barrel;
 
 	public static void initialize()
 	{
 		oak_barrel = new BlockBarrel(Material.wood).setUnlocalizedName("oak_barrel");
 		spruce_barrel = new BlockBarrel(Material.wood).setUnlocalizedName("spruce_barrel");
 		dark_oak_barrel = new BlockBarrel(Material.wood).setUnlocalizedName("dark_oak_barrel");
+		glass_barrel = new BlockBarrel(Material.glass).setUnlocalizedName("glass_barrel");
 	}
 	
 	public static void registerBlocks()
@@ -31,6 +33,7 @@ public class EN2Blocks {
 		registerBlock(oak_barrel);
 		registerBlock(spruce_barrel);
 		registerBlock(dark_oak_barrel);
+		registerBlock(glass_barrel);
 	}
 	
 	public static void registerBlockRenderers()
@@ -38,8 +41,9 @@ public class EN2Blocks {
 		registerRenderer(oak_barrel);
 		registerRenderer(spruce_barrel);
 		registerRenderer(dark_oak_barrel);
+		registerRenderer(glass_barrel);
 
-		TileEntitySpecialRenderer barrelRenderer = new RendererBarrel();
+		TileEntitySpecialRenderer barrelRenderer = new BarrelRenderer();
 	   	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, barrelRenderer);
 	}
 	

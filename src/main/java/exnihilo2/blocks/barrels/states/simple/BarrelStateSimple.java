@@ -24,7 +24,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
-import exnihilo2.blocks.barrels.renderer.RendererBarrel;
+import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
 public class BarrelStateSimple extends BarrelState{	

@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -104,6 +105,19 @@ public class BlockBarrel extends BlockContainer
 	public boolean isOpaqueCube() 
 	{
 		return false;
+	}
+	
+	@Override
+	public EnumWorldBlockLayer getBlockLayer()
+	{
+		if (this.getMaterial().isOpaque())
+		{
+			return EnumWorldBlockLayer.SOLID;
+		}
+		else
+		{
+			return EnumWorldBlockLayer.CUTOUT_MIPPED;
+		}
 	}
 	
 	@Override

@@ -117,7 +117,11 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		if (luminosity != level)
 		{
 			luminosity = level;
-			getWorld().checkLight(getPos());
+			
+			if (getWorld() != null)
+			{
+				getWorld().checkLight(getPos());
+			}
 		}
 	}
 	
