@@ -21,6 +21,12 @@ import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 public class BarrelStateEmpty extends BarrelState{
 	
 	@Override
+	public void onActivate(TileEntityBarrel barrel) {
+		barrel.setContents(null);
+		barrel.drain(barrel.getCapacity(), true);
+	}
+
+	@Override
 	public boolean canManipulateFluids(TileEntityBarrel barrel) {
 		return true;
 	}

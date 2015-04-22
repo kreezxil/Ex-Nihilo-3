@@ -3,7 +3,6 @@ package exnihilo2.blocks.barrels;
 import java.util.HashMap;
 
 import exnihilo2.blocks.barrels.architecture.BarrelState;
-import exnihilo2.blocks.barrels.states.block.BarrelStateBlock;
 import exnihilo2.blocks.barrels.states.empty.BarrelStateEmpty;
 import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerItem;
 import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerWeather;
@@ -14,6 +13,7 @@ import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicHot;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicItems;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicLuminosity;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicRain;
+import exnihilo2.blocks.barrels.states.simple.BarrelStateSimple;
 
 public class BarrelStateManager {
 	public static HashMap<String, BarrelState> states = new HashMap<String, BarrelState>();
@@ -53,7 +53,7 @@ public class BarrelStateManager {
 	{
 		registerState("empty", new BarrelStateEmpty());
 		registerState("fluid", new BarrelStateFluid());
-		registerState("block", new BarrelStateBlock());
+		registerState("simple", new BarrelStateSimple());
 	}
 	
 	private static void registerLogic()

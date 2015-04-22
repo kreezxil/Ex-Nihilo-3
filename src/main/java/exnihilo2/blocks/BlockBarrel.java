@@ -33,7 +33,12 @@ public class BlockBarrel extends BlockContainer
 	public int getLightValue(IBlockAccess world, BlockPos pos) {
 		TileEntityBarrel barrel = (TileEntityBarrel) world.getTileEntity(pos);
 
-		return barrel.getLuminosity();
+		if (barrel != null)
+		{
+			return barrel.getLuminosity();
+		}
+		
+		return 0;
 	}
 
 	@Override

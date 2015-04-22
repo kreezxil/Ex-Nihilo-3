@@ -10,11 +10,14 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInventory{
@@ -242,43 +245,54 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 		
 		return false;
 	}
-	
-	
+
+
 	@Override
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
 
-		compound.setInteger("items", output.size());
+		NBTTagList items = compound.getTagList("items", Constants.NBT.TAG_COMPOUND);
 		
-		Iterator<ItemStack> iterator = output.iterator();
-        while (iterator.hasNext()) 
-        {
-            iterator.next().writeToNBT(compound);
-        }
-        
-        compound.setBoolean("block", contents!=null);
-        if (contents != null)
-        {
-        	contents.writeToNBT(compound);
-        }
+		for (int x = 0; x < items.tagCount(); x++)
+		{
+			NBTTagCompound item = items.getCompoundTagAt(x);
+			output.add(ItemStack.loadItemStackFromNBT(item));
+		}
+
+		NBTTagList content = compound.getTagList("content", Constants.NBT.TAG_COMPOUND);
+		if (content.tagCount() > 0)
+		{
+			EN2.log.error("READING BARREL CONTENT!");
+			
+			NBTTagCompound item = content.getCompoundTagAt(0);
+			contents = ItemStack.loadItemStackFromNBT(item);
+		}
 	}
- 
+
 	@Override
 	public void writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
-		
-		int items = compound.getInteger("items");
-		
-		for (int x = 0; x < items; x++)
+
+		NBTTagList items = new NBTTagList();
+		for (int x = 0; x < output.size(); x++)
 		{
-			output.add(ItemStack.loadItemStackFromNBT(compound));
+			NBTTagCompound item = new NBTTagCompound();
+			output.get(x).writeToNBT(item);
+			items.appendTag(item);
 		}
 		
-		if (compound.getBoolean("block"))
+		compound.setTag("item", items);
+
+		NBTTagList content = new NBTTagList();
+		if (contents != null)
 		{
-			contents = ItemStack.loadItemStackFromNBT(compound);
+			NBTTagCompound item = new NBTTagCompound();
+			contents.writeToNBT(item);
+			content.appendTag(item);
 		}
+		
+		compound.setTag("content", content);
 	}
 }
