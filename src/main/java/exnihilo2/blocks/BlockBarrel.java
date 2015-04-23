@@ -68,9 +68,9 @@ public class BlockBarrel extends BlockContainer
 					entityitem.motionZ = world.rand.nextGaussian() * f3;
 
 					world.spawnEntityInWorld(entityitem);
-					
-					barrel.setInventorySlotContents(0, null);
 				}
+				
+				barrel.setInventorySlotContents(0, null);
 			}
 			else if (item != null)
 			{
