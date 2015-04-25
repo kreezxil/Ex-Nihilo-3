@@ -23,6 +23,16 @@ public class CompostRegistry {
 		}
 	}
 	
+	public void removeRecipe(ItemStack item)
+	{
+		CompostRecipe recipe = getRecipe(item);
+		
+		if (recipe != null)
+		{
+			recipes.remove(getRecipeKey(recipe));
+		}
+	}
+	
 	public boolean isCompostable(ItemStack item)
 	{
 		return getRecipe(item) != null;
