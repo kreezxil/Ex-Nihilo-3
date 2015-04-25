@@ -10,7 +10,7 @@ public class CompostRecipe {
 	private Color color;
 	private ItemStack input; 
 	private int volume;
-	private MetadataBehavior behavior = MetadataBehavior.Ignored;
+	private MetadataBehavior behavior = MetadataBehavior.Specified;
 	
 	public CompostRecipe(ItemStack input, int volume, Color color)
 	{

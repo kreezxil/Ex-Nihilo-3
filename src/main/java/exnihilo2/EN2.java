@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import exnihilo2.blocks.barrels.BarrelStateManager;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
+import exnihilo2.registries.CompostRegistry;
 
 @Mod(name = EN2Data.NAME, modid = EN2Data.MODID, version = EN2Data.VERSION)
 public class EN2
@@ -35,6 +36,7 @@ public class EN2
     	EN2Blocks.registerTileEntities();
     	
     	BarrelStateManager.buildBehaviorTree();
+    	CompostRegistry.addVanillaRecipes();
 	}
     
     @EventHandler

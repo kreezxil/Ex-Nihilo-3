@@ -34,8 +34,6 @@ import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.util.Color;
 
 public class BarrelStateFluid extends BarrelState{
-	public static final double MIN_RENDER_CAPACITY = 0.05d;
-	public static final double MAX_RENDER_CAPACITY = 0.95d;
 	
 	@Override
 	public boolean canManipulateFluids(TileEntityBarrel barrel) {
@@ -49,6 +47,7 @@ public class BarrelStateFluid extends BarrelState{
 		if (fluid != null)
 		{
 			GlStateManager.pushMatrix();
+			RenderHelper.disableStandardItemLighting();
 			
 			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -57,157 +56,22 @@ public class BarrelStateFluid extends BarrelState{
 			mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
 			TextureAtlasSprite texture = fluid.getFluid().getIcon();
 
+			GlStateManager.translate(x + 0.125d, y, z + 0.125d);
+			GlStateManager.scale(0.75d, 1.0d, 0.75d);
+			
 			if (barrel.getBlockType().getMaterial().isOpaque())
 			{
-				renderFluidSimple(texture, x, y, z, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
+				BarrelRenderer.renderFluidSimple(texture, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
 			}
 			else
 			{
-				renderFluidComplex(texture, x, y, z, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
+				BarrelRenderer.renderFluidComplex(texture, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
 			}
 			
-			
+			RenderHelper.enableStandardItemLighting();
 			GlStateManager.popMatrix();
 		}
 	}
 	
-	private static void renderFluidSimple(TextureAtlasSprite texture, double x, double y, double z, double fullness, Color color)
-	{
-		GlStateManager.pushMatrix();
-		RenderHelper.disableStandardItemLighting();
-		
-		GlStateManager.translate(x + 0.125d, y + getAdjustedVolume(fullness), z + 0.125d);
-		GlStateManager.scale(0.75d, 1.0d, 0.75d);
-		
-		double minU = (double)texture.getMinU();
-		double maxU = (double)texture.getMaxU();
-		double minV = (double)texture.getMinV();
-		double maxV = (double)texture.getMaxV();
-		
-		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer renderer = tessellator.getWorldRenderer();
-		
-		renderer.startDrawingQuads();
-		renderer.setColorRGBA_F(color.r, color.g, color.b, color.a);
-		renderer.addVertexWithUV(1.0d, 	0, 	1.0d, 	maxU, maxV);
-		renderer.addVertexWithUV(1.0d, 	0, 	0, 		maxU, minV);
-		renderer.addVertexWithUV(0, 	0, 	0, 		minU, minV);
-		renderer.addVertexWithUV(0, 	0, 	1.0d, 	minU, maxV);
-		tessellator.draw();
-		
-		GlStateManager.popMatrix();
-	}
-
-	private static void renderFluidComplex(TextureAtlasSprite texture, double x, double y, double z, double fullness, Color color)
-	{
-		GlStateManager.pushMatrix();
-		RenderHelper.disableStandardItemLighting();
-
-		GlStateManager.translate(x + 0.125d, y, z + 0.125d);
-		GlStateManager.scale(0.75d, 1.0d, 0.75d);
-
-		double minU = (double)texture.getMinU();
-		double maxU = (double)texture.getMaxU();
-		double minV = (double)texture.getMinV();
-		double maxV = (double)texture.getMaxV();
-		
-		double height = getAdjustedVolume(fullness);
-		
-		Vec3[] vertices = 
-			{
-				new Vec3(1.0d, height, 1.0d),
-				new Vec3(1.0d, height, 0),
-				new Vec3(0, height, 0),
-				new Vec3(0, height, 1.0d),
-				new Vec3(0, MIN_RENDER_CAPACITY, 1.0d),
-				new Vec3(0, MIN_RENDER_CAPACITY, 0),
-				new Vec3(1.0d, MIN_RENDER_CAPACITY, 0),
-				new Vec3(1.0d, MIN_RENDER_CAPACITY, 1.0d)
-			};
-		
-		Vec3[] top = 
-			{
-				vertices[0],
-				vertices[1],
-				vertices[2],
-				vertices[3]
-			};
-		
-		Vec3[] bottom = 
-			{
-				vertices[4],
-				vertices[5],
-				vertices[6],
-				vertices[7]
-			};
-		
-		Vec3[] north = 
-			{
-				vertices[5],
-				vertices[2],
-				vertices[1],
-				vertices[6]
-			};
-		
-		Vec3[] east = 
-			{
-				vertices[6],
-				vertices[1],
-				vertices[0],
-				vertices[7]
-			};
-		
-		Vec3[] south = 
-			{
-				vertices[7],
-				vertices[0],
-				vertices[3],
-				vertices[4]
-			};
-		
-		Vec3[] west = 
-			{
-				vertices[4],
-				vertices[3],
-				vertices[2],
-				vertices[5]
-			};
-		
-		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer renderer = tessellator.getWorldRenderer();
-		
-		renderer.startDrawingQuads();
-		renderer.setColorRGBA_F(color.r, color.g, color.b, color.a);
-		renderTexturedQuad(renderer, texture, top, fullness, color);
-		renderTexturedQuad(renderer, texture, bottom, fullness, color);
-		renderTexturedQuad(renderer, texture, north, fullness, color);
-		renderTexturedQuad(renderer, texture, east, fullness, color);
-		renderTexturedQuad(renderer, texture, south, fullness, color);
-		renderTexturedQuad(renderer, texture, west, fullness, color);
-		tessellator.draw();
-		
-		RenderHelper.enableStandardItemLighting();
-		GlStateManager.popMatrix();
-	}
 	
-	private static void renderTexturedQuad(WorldRenderer renderer, TextureAtlasSprite texture, Vec3[] vertices, double fullness, Color color)
-	{
-		double minU = (double)texture.getMinU();
-		double maxU = (double)texture.getMaxU();
-		double minV = (double)texture.getMinV();
-		double maxV = (double)texture.getMaxV();
-		
-		renderer.addVertexWithUV(vertices[0].xCoord, vertices[0].yCoord, vertices[0].zCoord, maxU, maxV);
-		renderer.addVertexWithUV(vertices[1].xCoord, vertices[1].yCoord, vertices[1].zCoord, maxU, minV);
-		renderer.addVertexWithUV(vertices[2].xCoord, vertices[2].yCoord, vertices[2].zCoord, minU, minV);
-		renderer.addVertexWithUV(vertices[3].xCoord, vertices[3].yCoord, vertices[3].zCoord, minU, maxV);
-	}
-	
-	private static double getAdjustedVolume(double fullness)
-	{
-		double capacity = MAX_RENDER_CAPACITY - MIN_RENDER_CAPACITY;
-		double adjusted = fullness * capacity;		
-		adjusted += MIN_RENDER_CAPACITY;
-		return adjusted;
-	}
 }
