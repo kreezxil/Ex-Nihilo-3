@@ -14,7 +14,7 @@ public class CompostRegistry {
 	{
 		if (recipe != null)
 		{
-			String s = getRecipeString(recipe);
+			String s = getRecipeKey(recipe);
 			
 			if (s != null && s.trim().length() > 0)
 			{
@@ -42,7 +42,7 @@ public class CompostRegistry {
 		}
 	}
 	
-	private String getRecipeString(CompostRecipe recipe)
+	private String getRecipeKey(CompostRecipe recipe)
 	{
 		String s = recipe.getInput().getUnlocalizedName();
 		
