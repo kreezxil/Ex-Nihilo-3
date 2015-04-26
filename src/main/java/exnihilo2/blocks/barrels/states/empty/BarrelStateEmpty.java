@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.util.Color;
 
 //Does nothing. Renders nothing. Is simply a container for triggers.
 public class BarrelStateEmpty extends BarrelState{
@@ -24,6 +25,8 @@ public class BarrelStateEmpty extends BarrelState{
 	public void onActivate(TileEntityBarrel barrel) {
 		barrel.setContents(null);
 		barrel.drain(barrel.getCapacity(), true);
+		barrel.setColor(new Color("FFFFFF"));
+		barrel.setVolume(0);
 	}
 
 	@Override

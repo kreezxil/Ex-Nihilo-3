@@ -39,7 +39,7 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 		}
 	}
 	
-	public static void renderFluidSimple(TextureAtlasSprite texture, double height, Color color)
+	public static void renderContentsSimple(TextureAtlasSprite texture, double height, Color color)
 	{
 		GlStateManager.pushMatrix();
 		
@@ -64,7 +64,7 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 		GlStateManager.popMatrix();
 	}
 
-	public static void renderFluidComplex(TextureAtlasSprite texture, double height, Color color)
+	public static void renderContentsComplex(TextureAtlasSprite texture, double height, Color color)
 	{
 		GlStateManager.pushMatrix();
 
@@ -73,14 +73,14 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 		double minV = (double)texture.getMinV();
 		double maxV = (double)texture.getMaxV();
 		
-		height = getAdjustedContentLevel(height);
+		double heightA = getAdjustedContentLevel(height);
 		
 		Vec3[] vertices = 
 			{
-				new Vec3(1.0d, height, 1.0d),
-				new Vec3(1.0d, height, 0),
-				new Vec3(0, height, 0),
-				new Vec3(0, height, 1.0d),
+				new Vec3(1.0d, heightA, 1.0d),
+				new Vec3(1.0d, heightA, 0),
+				new Vec3(0, heightA, 0),
+				new Vec3(0, heightA, 1.0d),
 				new Vec3(0, MIN_RENDER_CAPACITY, 1.0d),
 				new Vec3(0, MIN_RENDER_CAPACITY, 0),
 				new Vec3(1.0d, MIN_RENDER_CAPACITY, 0),
@@ -140,23 +140,23 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 		
 		renderer.startDrawingQuads();
 		renderer.setColorRGBA_F(color.r, color.g, color.b, color.a);
-		renderTexturedQuad(renderer, texture, top, color);
-		renderTexturedQuad(renderer, texture, bottom, color);
-		renderTexturedQuad(renderer, texture, north, color);
-		renderTexturedQuad(renderer, texture, east, color);
-		renderTexturedQuad(renderer, texture, south, color);
-		renderTexturedQuad(renderer, texture, west, color);
+		renderTexturedQuad(renderer, texture, top, color, 1.0d);
+		renderTexturedQuad(renderer, texture, bottom, color, 1.0d);
+		renderTexturedQuad(renderer, texture, north, color, height);
+		renderTexturedQuad(renderer, texture, east, color, height);
+		renderTexturedQuad(renderer, texture, south, color, height);
+		renderTexturedQuad(renderer, texture, west, color, height);
 		tessellator.draw();
 		
 		RenderHelper.enableStandardItemLighting();
 		GlStateManager.popMatrix();
 	}
 	
-	private static void renderTexturedQuad(WorldRenderer renderer, TextureAtlasSprite texture, Vec3[] vertices, Color color)
+	private static void renderTexturedQuad(WorldRenderer renderer, TextureAtlasSprite texture, Vec3[] vertices, Color color, double contentHeight)
 	{
 		double minU = (double)texture.getMinU();
 		double maxU = (double)texture.getMaxU();
-		double minV = (double)texture.getMinV();
+		double minV = (double)texture.getInterpolatedV(texture.getIconHeight() - (texture.getIconHeight() * contentHeight));
 		double maxV = (double)texture.getMaxV();
 		
 		renderer.addVertexWithUV(vertices[0].xCoord, vertices[0].yCoord, vertices[0].zCoord, maxU, maxV);

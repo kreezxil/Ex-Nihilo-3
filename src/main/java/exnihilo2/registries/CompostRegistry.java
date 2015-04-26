@@ -2,6 +2,7 @@ package exnihilo2.registries;
 
 import java.util.HashMap;
 
+import exnihilo2.EN2;
 import exnihilo2.registries.recipes.CompostRecipe;
 import exnihilo2.util.Color;
 import exnihilo2.util.enums.MetadataBehavior;
@@ -73,12 +74,12 @@ public class CompostRegistry {
 	public static void addVanillaRecipes()
 	{
 		//saplings
-		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 0), 125, new Color("35A82A"), MetadataBehavior.Specified)); //oak
-		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 1), 125, new Color("2E8042"), MetadataBehavior.Specified)); //spruce
-		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 2), 125, new Color("6CC449"), MetadataBehavior.Specified)); //birch
-		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 3), 125, new Color("22A116"), MetadataBehavior.Specified)); //jungle
-		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 4), 125, new Color("B8C754"), MetadataBehavior.Specified)); //acacia
-		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 5), 125, new Color("378030"), MetadataBehavior.Specified)); //dark_oak
+		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 1, 0), 125, new Color("35A82A"), MetadataBehavior.Specified)); //oak
+		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 1, 1), 125, new Color("2E8042"), MetadataBehavior.Specified)); //spruce
+		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 1, 2), 125, new Color("6CC449"), MetadataBehavior.Specified)); //birch
+		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 1, 3), 125, new Color("22A116"), MetadataBehavior.Specified)); //jungle
+		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 1, 4), 125, new Color("B8C754"), MetadataBehavior.Specified)); //acacia
+		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 1, 5), 125, new Color("378030"), MetadataBehavior.Specified)); //dark_oak
 
 //		//leaves
 //		register(Item.getItemFromBlock(Blocks.leaves), 0, 0.125f, ColorRegistry.color("oak"));

@@ -1,5 +1,7 @@
 package exnihilo2.util;
 
+import exnihilo2.EN2;
+
 public class Color {
 	public float r;
 	public float g;
@@ -16,15 +18,17 @@ public class Color {
 	
 	public Color (int color)
 	{
-		//stupid minecraft color is RGB not ARGB.
-		//need to simulate the Alpha value.
-		//this.a = (float) (color >> 24 & 255) / 255.0F;
 		this(color, true);
 	}
 	
-	public Color (int color, boolean ignoreAlpha)
+	public Color (String hex)
 	{
-		if (ignoreAlpha)
+		this(parseString(hex), false);
+	}
+	
+	private Color (int color, boolean hasAlpha)
+	{
+		if (!hasAlpha)
 		{
 			this.a = 1.0f;
 			this.r = (float) (color >> 16 & 255) / 255.0F;
@@ -39,10 +43,21 @@ public class Color {
 			this.b = (float) (color & 255) / 255.0F;
 		}
 	}
-	
-	public Color (String hex)
+
+	private static int parseString(String hex)
 	{
-		this(Integer.parseInt(hex, 16));
+		int val = 0;
+
+		try
+		{
+			val = Integer.parseInt(hex, 16);
+		}
+		catch (Exception e)
+		{
+			EN2.log.error("Unable to parse color: " + hex);
+		}
+
+		return val;
 	}
 
 	public int toInt()

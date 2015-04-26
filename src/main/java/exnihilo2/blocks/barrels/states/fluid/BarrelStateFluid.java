@@ -61,17 +61,15 @@ public class BarrelStateFluid extends BarrelState{
 			
 			if (barrel.getBlockType().getMaterial().isOpaque())
 			{
-				BarrelRenderer.renderFluidSimple(texture, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
+				BarrelRenderer.renderContentsSimple(texture, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
 			}
 			else
 			{
-				BarrelRenderer.renderFluidComplex(texture, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
+				BarrelRenderer.renderContentsComplex(texture, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
 			}
 			
 			RenderHelper.enableStandardItemLighting();
 			GlStateManager.popMatrix();
 		}
 	}
-	
-	
 }

@@ -263,8 +263,6 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 		NBTTagList content = compound.getTagList("content", Constants.NBT.TAG_COMPOUND);
 		if (content.tagCount() > 0)
 		{
-			EN2.log.error("READING BARREL CONTENT!");
-			
 			NBTTagCompound item = content.getCompoundTagAt(0);
 			contents = ItemStack.loadItemStackFromNBT(item);
 		}

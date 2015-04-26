@@ -92,10 +92,13 @@ public abstract class BarrelState
 		{
 			for (Map.Entry<String, BarrelLogic> entry : triggers.entrySet()) 
 			{
-				triggered = entry.getValue().onUseItem(player, barrel, item);
-				
-				if (triggered)
-					break;
+				if (entry.getValue().canUseItem(barrel, item))
+				{
+					triggered = entry.getValue().onUseItem(player, barrel, item);
+
+					if (triggered)
+						break;
+				}
 			}
 		}
 		

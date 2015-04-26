@@ -27,7 +27,7 @@ public class FluidStateTriggerItem extends BarrelLogic {
 	{
 		FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(item);
 
-		if (fluid != null)
+		if (fluid != null && fluid.amount > 0)
 		{
 			if (item.getItem() == Items.potionitem && item.getItemDamage() == 0)
 			{
@@ -52,7 +52,6 @@ public class FluidStateTriggerItem extends BarrelLogic {
 					barrel.addOutput(Inventory.getContainer(item));
 				}
 			}
-
 
 			barrel.fill(fluid, true);
 			return true;

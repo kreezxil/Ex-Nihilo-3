@@ -8,6 +8,7 @@ import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.tileentity.layers.BarrelFluidLayer;
 import exnihilo2.blocks.barrels.tileentity.layers.BarrelInventoryLayer;
 import exnihilo2.blocks.barrels.tileentity.layers.BarrelStateLayer;
+import exnihilo2.util.Color;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.ITickable;
@@ -26,15 +27,17 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePlayerListBox 
 {
-	private int luminosity = 0;
+	protected int luminosity = 0;
+	protected int volume = 0;
+	protected int MAX_VOLUME = 1000;
+	protected Color color = new Color("FFFFFF");
 	
 	protected int generalTimer = 0;
 	protected int generalTimerMax = 0;
 	
 	protected int syncTimer = 0;
 	protected final int syncTimerMax = 20; //Sync if an update is required.
-	
-	public boolean syncNeeded = false;
+	protected boolean syncNeeded = false;
 	
 	public TileEntityBarrel()
 	{
@@ -125,6 +128,36 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		}
 	}
 	
+	public int getVolume()
+	{
+		return volume;
+	}
+	
+	public void setVolume(int volume)
+	{
+		this.volume = volume;
+		
+		if (this.volume > this.getVolumeMax())
+		{
+			this.volume = getVolumeMax();
+		}
+	}
+	
+	public int getVolumeMax()
+	{
+		return this.MAX_VOLUME;
+	}
+	
+	public Color getColor()
+	{
+		return color;
+	}
+	
+	public void setColor(Color color)
+	{
+		this.color = color;
+	}
+	
 	@Override
 	public void readFromNBT(NBTTagCompound compound)
 	{
@@ -132,6 +165,8 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 
 		generalTimer = compound.getInteger("timer");
 		setLuminosity(compound.getInteger("luminosity"));
+		volume = compound.getInteger("volume");
+		color = new Color(compound.getInteger("color"));
 	}
  
 	@Override
@@ -141,6 +176,8 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		
 		compound.setInteger("timer", generalTimer);
 		compound.setInteger("luminosity", getLuminosity());
+		compound.setInteger("volume", volume);
+		compound.setInteger("color", this.color.toInt());
 	}
 
 	@Override

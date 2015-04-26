@@ -18,7 +18,7 @@ public class BarrelStateLayer extends TileEntity{
 	public void setState(String key)
 	{
 		if (key != this.state.getKey())
-		{
+		{	
 			BarrelState newState = BarrelStateManager.getState(key);
 			
 			if (newState != null)

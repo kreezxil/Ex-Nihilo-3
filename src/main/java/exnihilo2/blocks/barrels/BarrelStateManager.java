@@ -3,7 +3,9 @@ package exnihilo2.blocks.barrels;
 import java.util.HashMap;
 
 import exnihilo2.blocks.barrels.architecture.BarrelState;
+import exnihilo2.blocks.barrels.states.compost.BarrelStateCompost;
 import exnihilo2.blocks.barrels.states.empty.BarrelStateEmpty;
+import exnihilo2.blocks.barrels.states.empty.logic.CompostStateTrigger;
 import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerItem;
 import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerWeather;
 import exnihilo2.blocks.barrels.states.fluid.BarrelStateFluid;
@@ -54,10 +56,12 @@ public class BarrelStateManager {
 		registerState("empty", new BarrelStateEmpty());
 		registerState("fluid", new BarrelStateFluid());
 		registerState("simple", new BarrelStateSimple());
+		registerState("compost", new BarrelStateCompost());
 	}
 	
 	private static void registerLogic()
 	{
+		getState("empty").registerStateLogic("empty to compost (item)", new CompostStateTrigger());
 		getState("empty").registerStateLogic("empty to fluid (item)", new FluidStateTriggerItem());
 		getState("empty").registerStateLogic("empty to fluid (weather)", new FluidStateTriggerWeather());
 		

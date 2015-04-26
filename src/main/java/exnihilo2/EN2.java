@@ -3,13 +3,20 @@ package exnihilo2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import exnihilo2.blocks.barrels.BarrelStateManager;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
@@ -26,6 +33,8 @@ public class EN2
     @EventHandler
 	public void preInitialize(FMLPreInitializationEvent event)
 	{
+    	MinecraftForge.EVENT_BUS.register(this);
+    	
     	EN2ToolMaterials.initialize();
     	
     	EN2Items.initialize();
@@ -49,5 +58,11 @@ public class EN2
 	public void postInitialize(FMLPostInitializationEvent event)
 	{
     	
+	}
+    
+    @SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void textureHook(TextureStitchEvent.Pre event) {
+		event.map.registerSprite(new ResourceLocation("exnihilo2:blocks/compost"));
 	}
 }
