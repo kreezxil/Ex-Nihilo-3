@@ -27,6 +27,7 @@ public class BarrelStateEmpty extends BarrelState{
 		barrel.drain(barrel.getCapacity(), true);
 		barrel.setColor(new Color("FFFFFF"));
 		barrel.setVolume(0);
+		barrel.resetTimer();
 	}
 
 	@Override

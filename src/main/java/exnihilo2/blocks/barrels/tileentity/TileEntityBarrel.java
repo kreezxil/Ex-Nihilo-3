@@ -36,7 +36,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 	protected int generalTimerMax = 0;
 	
 	protected int syncTimer = 0;
-	protected final int syncTimerMax = 20; //Sync if an update is required.
+	protected final int syncTimerMax = 5; //Sync if an update is required.
 	protected boolean syncNeeded = false;
 	
 	public TileEntityBarrel()
@@ -164,6 +164,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		super.readFromNBT(compound);
 
 		generalTimer = compound.getInteger("timer");
+		generalTimerMax = compound.getInteger("timermax");
 		setLuminosity(compound.getInteger("luminosity"));
 		volume = compound.getInteger("volume");
 		color = new Color(compound.getInteger("color"));
@@ -175,6 +176,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		super.writeToNBT(compound);
 		
 		compound.setInteger("timer", generalTimer);
+		compound.setInteger("timermax", generalTimerMax);
 		compound.setInteger("luminosity", getLuminosity());
 		compound.setInteger("volume", volume);
 		compound.setInteger("color", this.color.toInt());

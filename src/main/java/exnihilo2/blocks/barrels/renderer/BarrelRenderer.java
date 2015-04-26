@@ -148,7 +148,6 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 		renderTexturedQuad(renderer, texture, west, color, height);
 		tessellator.draw();
 		
-		RenderHelper.enableStandardItemLighting();
 		GlStateManager.popMatrix();
 	}
 	

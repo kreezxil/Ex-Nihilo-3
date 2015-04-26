@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.states.compost.BarrelStateCompost;
+import exnihilo2.blocks.barrels.states.compost.logic.CompostStateLogicDirtComplete;
+import exnihilo2.blocks.barrels.states.compost.logic.CompostStateLogicItems;
 import exnihilo2.blocks.barrels.states.empty.BarrelStateEmpty;
 import exnihilo2.blocks.barrels.states.empty.logic.CompostStateTrigger;
 import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerItem;
@@ -71,5 +73,8 @@ public class BarrelStateManager {
 		getState("fluid").registerStateLogic("fluid logic (luminosity)", new FluidStateLogicLuminosity());
 		getState("fluid").registerStateLogic("fluid logic (items)", new FluidStateLogicItems());
 		getState("fluid").registerStateLogic("barrel crafting (netherrack)", new FluidCraftNetherrackTrigger());
+		
+		getState("compost").registerStateLogic("compost logic (items)", new CompostStateLogicItems());
+		getState("compost").registerStateLogic("compost complete", new CompostStateLogicDirtComplete());
 	}
 }

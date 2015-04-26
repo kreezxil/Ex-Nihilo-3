@@ -97,13 +97,19 @@ public abstract class BarrelState
 					triggered = entry.getValue().onUseItem(player, barrel, item);
 
 					if (triggered)
+					{
+						barrel.getWorld().markBlockForUpdate(barrel.getPos());
+						
 						break;
+					}
 				}
 			}
 		}
 		
 		if (!triggered)
+		{
 			this.onUseItem(player, barrel, item);
+		}
 	}
 	
 	public void onActivate(TileEntityBarrel barrel) {}
