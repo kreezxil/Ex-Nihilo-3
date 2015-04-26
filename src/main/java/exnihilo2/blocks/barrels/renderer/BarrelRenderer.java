@@ -68,11 +68,6 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 	{
 		GlStateManager.pushMatrix();
 
-		double minU = (double)texture.getMinU();
-		double maxU = (double)texture.getMaxU();
-		double minV = (double)texture.getMinV();
-		double maxV = (double)texture.getMaxV();
-		
 		double heightA = getAdjustedContentLevel(height);
 		
 		Vec3[] vertices = 
@@ -146,6 +141,88 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 		renderTexturedQuad(renderer, texture, east, color, height);
 		renderTexturedQuad(renderer, texture, south, color, height);
 		renderTexturedQuad(renderer, texture, west, color, height);
+		tessellator.draw();
+		
+		GlStateManager.popMatrix();
+	}
+	
+	public static void renderContentsMultiTexture(TextureAtlasSprite topTexture, TextureAtlasSprite sideTexture, TextureAtlasSprite bottomTexture, double height, Color color)
+	{
+		GlStateManager.pushMatrix();
+		
+		double heightA = getAdjustedContentLevel(height);
+		
+		Vec3[] vertices = 
+			{
+				new Vec3(1.0d, heightA, 1.0d),
+				new Vec3(1.0d, heightA, 0),
+				new Vec3(0, heightA, 0),
+				new Vec3(0, heightA, 1.0d),
+				new Vec3(0, MIN_RENDER_CAPACITY, 1.0d),
+				new Vec3(0, MIN_RENDER_CAPACITY, 0),
+				new Vec3(1.0d, MIN_RENDER_CAPACITY, 0),
+				new Vec3(1.0d, MIN_RENDER_CAPACITY, 1.0d)
+			};
+		
+		Vec3[] top = 
+			{
+				vertices[0],
+				vertices[1],
+				vertices[2],
+				vertices[3]
+			};
+		
+		Vec3[] bottom = 
+			{
+				vertices[4],
+				vertices[5],
+				vertices[6],
+				vertices[7]
+			};
+		
+		Vec3[] north = 
+			{
+				vertices[5],
+				vertices[2],
+				vertices[1],
+				vertices[6]
+			};
+		
+		Vec3[] east = 
+			{
+				vertices[6],
+				vertices[1],
+				vertices[0],
+				vertices[7]
+			};
+		
+		Vec3[] south = 
+			{
+				vertices[7],
+				vertices[0],
+				vertices[3],
+				vertices[4]
+			};
+		
+		Vec3[] west = 
+			{
+				vertices[4],
+				vertices[3],
+				vertices[2],
+				vertices[5]
+			};
+		
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer renderer = tessellator.getWorldRenderer();
+		
+		renderer.startDrawingQuads();
+		renderer.setColorRGBA_F(color.r, color.g, color.b, color.a);
+		renderTexturedQuad(renderer, topTexture, top, color, 1.0d);
+		renderTexturedQuad(renderer, bottomTexture, bottom, color, 1.0d);
+		renderTexturedQuad(renderer, sideTexture, north, color, height);
+		renderTexturedQuad(renderer, sideTexture, east, color, height);
+		renderTexturedQuad(renderer, sideTexture, south, color, height);
+		renderTexturedQuad(renderer, sideTexture, west, color, height);
 		tessellator.draw();
 		
 		GlStateManager.popMatrix();

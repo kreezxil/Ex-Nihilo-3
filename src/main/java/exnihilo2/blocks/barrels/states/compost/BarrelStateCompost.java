@@ -37,16 +37,25 @@ public class BarrelStateCompost extends BarrelState{
 
 		Minecraft mc = Minecraft.getMinecraft();
 		mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-		TextureAtlasSprite compost = getStartTexture();
-		TextureAtlasSprite dirt = getEndTexture();
 		
 		GlStateManager.translate(x + 0.125d, y, z + 0.125d);
 		GlStateManager.scale(0.75d, 1.0d, 0.75d);
 		
+		renderBlockTexture(barrel);
+		renderCompostTexture(barrel);
+
+		RenderHelper.enableStandardItemLighting();
+		GlStateManager.popMatrix();
+	}
+	
+	public void renderBlockTexture(TileEntityBarrel barrel)
+	{
 		double timer = barrel.getTimerStatus();
 		//Draw the dirt texture.
 		if (timer > 0.0d)
 		{
+			TextureAtlasSprite dirt = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/compost");
+			
 			if (barrel.getBlockType().getMaterial().isOpaque())
 			{
 				BarrelRenderer.renderContentsSimple(dirt, (double)barrel.getVolume() / (double)barrel.getVolumeMax(), white);
@@ -56,10 +65,16 @@ public class BarrelStateCompost extends BarrelState{
 				BarrelRenderer.renderContentsComplex(dirt, (double)barrel.getVolume() / (double)barrel.getVolumeMax(), white);
 			}
 		}
+	}
+	
+	public void renderCompostTexture(TileEntityBarrel barrel)
+	{
+		double timer = barrel.getTimerStatus();
 		
-		//Draw the compost texture over it.
 		if (timer < 1.0d)
 		{
+			TextureAtlasSprite compost = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("minecraft:blocks/dirt");
+			
 			Color colorA = barrel.getColor();
 			Color colorB = new Color(colorA.r, colorA.g, colorA.b, colorA.a * (1.0f - (float)timer));
 			
@@ -72,18 +87,5 @@ public class BarrelStateCompost extends BarrelState{
 				BarrelRenderer.renderContentsComplex(compost, (double)barrel.getVolume() / (double)barrel.getVolumeMax(), colorB);
 			}
 		}
-
-		RenderHelper.enableStandardItemLighting();
-		GlStateManager.popMatrix();
-	}
-	
-	protected TextureAtlasSprite getStartTexture()
-	{
-		return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/compost");
-	}
-	
-	protected TextureAtlasSprite getEndTexture()
-	{
-		return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("minecraft:blocks/dirt");
 	}
 }
