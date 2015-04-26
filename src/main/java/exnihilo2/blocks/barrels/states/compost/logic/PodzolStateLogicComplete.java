@@ -5,19 +5,17 @@ import net.minecraft.item.ItemStack;
 import exnihilo2.blocks.barrels.architecture.BarrelLogic;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
-public class CompostStateLogicDirtComplete extends BarrelLogic{
-
+public class PodzolStateLogicComplete extends BarrelLogic{
 	@Override
 	public boolean onUpdate(TileEntityBarrel barrel) {
 		if (barrel.getTimerStatus() >= 1.0d)
 		{
 			barrel.setState("simple");
-			barrel.setContents(new ItemStack(Blocks.dirt, 1));
+			barrel.setContents(new ItemStack(Blocks.dirt, 1, 2));
 			
 			return true;
 		}
 		
 		return false;
 	}
-	
 }

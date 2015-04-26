@@ -4,8 +4,11 @@ import java.util.HashMap;
 
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.states.compost.BarrelStateCompost;
-import exnihilo2.blocks.barrels.states.compost.logic.CompostStateLogicDirtComplete;
+import exnihilo2.blocks.barrels.states.compost.BarrelStatePodzol;
+import exnihilo2.blocks.barrels.states.compost.logic.CompostStateLogicComplete;
 import exnihilo2.blocks.barrels.states.compost.logic.CompostStateLogicItems;
+import exnihilo2.blocks.barrels.states.compost.logic.PodzolStateLogicComplete;
+import exnihilo2.blocks.barrels.states.compost.logic.PodzolStateTrigger;
 import exnihilo2.blocks.barrels.states.empty.BarrelStateEmpty;
 import exnihilo2.blocks.barrels.states.empty.logic.CompostStateTrigger;
 import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerItem;
@@ -59,6 +62,7 @@ public class BarrelStateManager {
 		registerState("fluid", new BarrelStateFluid());
 		registerState("simple", new BarrelStateSimple());
 		registerState("compost", new BarrelStateCompost());
+		registerState("podzol", new BarrelStatePodzol());
 	}
 	
 	private static void registerLogic()
@@ -75,6 +79,10 @@ public class BarrelStateManager {
 		getState("fluid").registerStateLogic("barrel crafting (netherrack)", new FluidCraftNetherrackTrigger());
 		
 		getState("compost").registerStateLogic("compost logic (items)", new CompostStateLogicItems());
-		getState("compost").registerStateLogic("compost complete", new CompostStateLogicDirtComplete());
+		getState("compost").registerStateLogic("compost complete", new CompostStateLogicComplete());
+		getState("compost").registerStateLogic("compost to podzol (items)", new PodzolStateTrigger());
+		
+		getState("podzol").registerStateLogic("podzol complete", new PodzolStateLogicComplete());
+		getState("podzol").registerStateLogic("compost logic (items)", new CompostStateLogicItems());
 	}
 }
