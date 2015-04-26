@@ -1,5 +1,32 @@
 package exnihilo2.blocks.barrels.states.compost;
 
-public class BarrelStatePodzol extends BarrelStateCompost{
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
+import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
+public class BarrelStatePodzol extends BarrelStateCompost{
+	
+	@Override
+	protected void renderBlockTexture(TileEntityBarrel barrel)
+	{
+		double timer = barrel.getTimerStatus();
+
+		if (timer > 0.0d)
+		{
+			TextureAtlasSprite top = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("minecraft:blocks/dirt_podzol_top");
+			TextureAtlasSprite side = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("minecraft:blocks/dirt_podzol_side");
+			TextureAtlasSprite bottom = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("minecraft:blocks/dirt");
+			
+			if (barrel.getBlockType().getMaterial().isOpaque())
+			{
+				BarrelRenderer.renderContentsSimple(top, (double)barrel.getVolume() / (double)barrel.getVolumeMax(), white);
+			}
+			else
+			{
+				BarrelRenderer.renderContentsMultiTexture(top, side, bottom, (double)barrel.getVolume() / (double)barrel.getVolumeMax(), white);
+
+			}
+		}
+	}
 }

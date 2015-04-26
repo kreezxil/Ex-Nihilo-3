@@ -24,8 +24,7 @@ import exnihilo2.registries.recipes.CompostRecipe;
 import exnihilo2.util.Color;
 
 public class BarrelStateCompost extends BarrelState{
-	private static ItemStack dirt = new ItemStack(Blocks.dirt);
-	private static Color white = new Color("FFFFFF");
+	protected static Color white = new Color("FFFFFF");
 	
 	@Override
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {
@@ -48,13 +47,13 @@ public class BarrelStateCompost extends BarrelState{
 		GlStateManager.popMatrix();
 	}
 	
-	public void renderBlockTexture(TileEntityBarrel barrel)
+	protected void renderBlockTexture(TileEntityBarrel barrel)
 	{
 		double timer = barrel.getTimerStatus();
-		//Draw the dirt texture.
+
 		if (timer > 0.0d)
 		{
-			TextureAtlasSprite dirt = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/compost");
+			TextureAtlasSprite dirt = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("minecraft:blocks/dirt");
 			
 			if (barrel.getBlockType().getMaterial().isOpaque())
 			{
@@ -67,13 +66,13 @@ public class BarrelStateCompost extends BarrelState{
 		}
 	}
 	
-	public void renderCompostTexture(TileEntityBarrel barrel)
+	protected void renderCompostTexture(TileEntityBarrel barrel)
 	{
 		double timer = barrel.getTimerStatus();
 		
 		if (timer < 1.0d)
 		{
-			TextureAtlasSprite compost = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("minecraft:blocks/dirt");
+			TextureAtlasSprite compost = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/compost");
 			
 			Color colorA = barrel.getColor();
 			Color colorB = new Color(colorA.r, colorA.g, colorA.b, colorA.a * (1.0f - (float)timer));

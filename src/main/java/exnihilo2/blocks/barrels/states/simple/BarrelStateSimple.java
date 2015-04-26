@@ -36,10 +36,14 @@ public class BarrelStateSimple extends BarrelState{
 		{
 			GlStateManager.pushMatrix();
 			
+			GlStateManager.disableLighting();
+			
 			GlStateManager.translate(x + 0.5d, y + 0.5d, z + 0.5d);
 			GlStateManager.scale(0.75d, 0.9d, 0.75d);
 
 			Minecraft.getMinecraft().getItemRenderer().renderItem(null, contents, TransformType.NONE);
+			
+			GlStateManager.enableLighting();
 
 			GlStateManager.popMatrix();
 		}

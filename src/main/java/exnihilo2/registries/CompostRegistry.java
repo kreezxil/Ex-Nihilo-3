@@ -81,14 +81,14 @@ public class CompostRegistry {
 		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 1, 4), 125, new Color("B8C754"), MetadataBehavior.Specified)); //acacia
 		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 1, 5), 125, new Color("378030"), MetadataBehavior.Specified)); //dark_oak
 
-//		//leaves
-//		register(Item.getItemFromBlock(Blocks.leaves), 0, 0.125f, ColorRegistry.color("oak"));
-//		register(Item.getItemFromBlock(Blocks.leaves), 1, 0.125f, ColorRegistry.color("spruce"));
-//		register(Item.getItemFromBlock(Blocks.leaves), 2, 0.125f, ColorRegistry.color("birch"));
-//		register(Item.getItemFromBlock(Blocks.leaves), 3, 0.125f,  ColorRegistry.color("jungle"));
-//		register(Item.getItemFromBlock(Blocks.leaves2), 0, 0.125f,  ColorRegistry.color("acacia_leaves")); 
-//		register(Item.getItemFromBlock(Blocks.leaves2), 1, 0.125f,  ColorRegistry.color("dark_oak")); 
-//		
+		//leaves
+		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.leaves), 1, 0), 125, new Color("35A82A"), MetadataBehavior.Specified)); //oak
+		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.leaves), 1, 1), 125, new Color("2E8042"), MetadataBehavior.Specified)); //spruce
+		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.leaves), 1, 2), 125, new Color("6CC449"), MetadataBehavior.Specified)); //birch
+		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.leaves), 1, 3), 125, new Color("22A116"), MetadataBehavior.Specified)); //jungle
+		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.leaves2), 1, 0), 125, new Color("B8C754"), MetadataBehavior.Specified)); //acacia
+		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.leaves2), 1, 1), 125, new Color("378030"), MetadataBehavior.Specified)); //dark_oak
+
 //		//rotten flesh
 //		register(Items.rotten_flesh, 0, 0.10f, ColorRegistry.color("rotten_flesh"));
 //		//spider eye
