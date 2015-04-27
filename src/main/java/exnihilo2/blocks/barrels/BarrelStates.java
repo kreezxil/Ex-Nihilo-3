@@ -122,9 +122,9 @@ public class BarrelStates {
 		}
 	}
 	
-	public static void unregisterState(String key)
+	public static void unregisterState(BarrelState state)
 	{
-		states.remove(key);
+		states.remove(state.getUniqueIdentifier());
 	}
 	
 	public static BarrelState getState(String key)
