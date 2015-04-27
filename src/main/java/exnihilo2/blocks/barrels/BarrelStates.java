@@ -22,7 +22,6 @@ import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftNetherrackTrigger;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicGas;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicHot;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicItems;
-import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicLuminosity;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicRain;
 import exnihilo2.blocks.barrels.states.simple.BarrelStateSimple;
 
@@ -47,7 +46,6 @@ public class BarrelStates {
 	public static BarrelLogic fluid_state_logic_hot;
 	public static BarrelLogic fluid_state_logic_weather;
 	public static BarrelLogic fluid_state_logic_gas;
-	public static BarrelLogic fluid_state_logic_light;
 	public static BarrelLogic fluid_state_logic_items;
 	public static BarrelLogic fluid_state_trigger_crafting_netherrack;
 	
@@ -75,7 +73,6 @@ public class BarrelStates {
 		fluid_state_logic_hot = new FluidStateLogicHot();
 		fluid_state_logic_weather = new FluidStateLogicRain();
 		fluid_state_logic_gas = new FluidStateLogicGas();
-		fluid_state_logic_light = new FluidStateLogicLuminosity();
 		fluid_state_logic_items = new FluidStateLogicItems();
 		fluid_state_trigger_crafting_netherrack = new FluidCraftNetherrackTrigger();
 		
@@ -106,7 +103,6 @@ public class BarrelStates {
 		BarrelStates.fluid.addLogic(fluid_state_logic_hot);
 		BarrelStates.fluid.addLogic(fluid_state_logic_weather);
 		BarrelStates.fluid.addLogic(fluid_state_logic_gas);
-		BarrelStates.fluid.addLogic(fluid_state_logic_light);
 		BarrelStates.fluid.addLogic(fluid_state_logic_items);
 		BarrelStates.fluid.addLogic(fluid_state_trigger_crafting_netherrack);
 		

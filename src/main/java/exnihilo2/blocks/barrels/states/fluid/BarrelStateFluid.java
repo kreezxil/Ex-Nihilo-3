@@ -44,6 +44,17 @@ public class BarrelStateFluid extends BarrelState{
 	public boolean canManipulateFluids(TileEntityBarrel barrel) {
 		return true;
 	}
+	
+	@Override
+	public int getLuminosity(TileEntityBarrel barrel)
+	{
+		FluidStack fluid = barrel.getFluid();
+		
+		if (fluid != null)
+			return fluid.getFluid().getLuminosity();
+		
+		return 0;
+	}
 
 	@Override
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {

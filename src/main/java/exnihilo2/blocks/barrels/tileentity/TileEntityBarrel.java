@@ -83,6 +83,9 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 	{
 		super.update();
 		
+		if (state != null)
+			setLuminosity(state.getLuminosity(this));
+		
 		//Update timer used by states.
 		if (generalTimerMax != 0 && generalTimer < generalTimerMax)
 		{

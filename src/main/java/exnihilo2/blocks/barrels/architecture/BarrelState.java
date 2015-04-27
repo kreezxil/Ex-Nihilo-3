@@ -114,6 +114,11 @@ public abstract class BarrelState
 	{
 		return false;
 	}
+	
+	public int getLuminosity(TileEntityBarrel barrel)
+	{
+		return 0;
+	}
 
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {}
 
