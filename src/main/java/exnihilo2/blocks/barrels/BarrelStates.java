@@ -131,9 +131,4 @@ public class BarrelStates {
 	{
 		return states.get(key);
 	}
-	
-	public static void buildBehaviorTree()
-	{
-		registerLogic();
-	}
 }
