@@ -1,5 +1,6 @@
 package exnihilo2.blocks.barrels.tileentity.layers;
 
+import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.item.ItemStack;
@@ -73,7 +74,7 @@ public class BarrelFluidLayer extends BarrelStateLayer implements IFluidTank
         if (fluid == null)
         {
             fluid = new FluidStack(resource, Math.min(this.CAPACITY, resource.amount));
-            barrel.setState("fluid");
+            barrel.setState(BarrelStates.fluid);
 
             return fluid.amount;
         }
@@ -124,7 +125,7 @@ public class BarrelFluidLayer extends BarrelStateLayer implements IFluidTank
             if (fluid.amount <= 0)
             {
                 fluid = null;
-                setState("empty");
+                setState(BarrelStates.empty);
             }
             else
             {

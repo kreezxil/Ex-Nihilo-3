@@ -36,6 +36,11 @@ import exnihilo2.util.Color;
 public class BarrelStateFluid extends BarrelState{
 	
 	@Override
+	public String getUniqueIdentifier() {
+		return "barrel.fluid";
+	}
+	
+	@Override
 	public boolean canManipulateFluids(TileEntityBarrel barrel) {
 		return true;
 	}

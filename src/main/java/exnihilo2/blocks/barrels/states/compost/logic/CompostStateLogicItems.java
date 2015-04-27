@@ -10,6 +10,7 @@ import exnihilo2.registries.recipes.CompostRecipe;
 import exnihilo2.util.Color;
 
 public class CompostStateLogicItems extends BarrelLogic{
+	
 	@Override
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) 
 	{

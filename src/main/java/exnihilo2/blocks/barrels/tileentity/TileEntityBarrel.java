@@ -3,7 +3,7 @@ package exnihilo2.blocks.barrels.tileentity;
 import java.lang.reflect.Method;
 
 import exnihilo2.EN2;
-import exnihilo2.blocks.barrels.BarrelStateManager;
+import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.tileentity.layers.BarrelFluidLayer;
 import exnihilo2.blocks.barrels.tileentity.layers.BarrelInventoryLayer;
@@ -41,7 +41,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 	
 	public TileEntityBarrel()
 	{
-		state = BarrelStateManager.getState("empty");
+		state = BarrelStates.empty;
 	}
 	
 	public void startTimer(int maxTicks)

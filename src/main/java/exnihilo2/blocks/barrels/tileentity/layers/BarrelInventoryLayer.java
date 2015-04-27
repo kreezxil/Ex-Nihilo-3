@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import exnihilo2.EN2;
+import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.entity.item.EntityItem;
@@ -44,7 +45,7 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 			this.contents = null;
 			
 			TileEntityBarrel barrel = (TileEntityBarrel)this;
-			barrel.setState("empty");
+			barrel.setState(BarrelStates.empty);
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package exnihilo2.blocks.barrels.architecture;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,39 +15,34 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
+import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
 public abstract class BarrelState
 {
-	private HashMap<String, BarrelLogic> triggers = new HashMap<String, BarrelLogic>();
+	private ArrayList<BarrelLogic> triggers = new ArrayList<BarrelLogic>();
 	
-	private String key;
+	public abstract String getUniqueIdentifier();
 	
-	public void setKey(String keyIn)
+	public BarrelState()
 	{
-		this.key = keyIn;
-	}
-	
-	public String getKey()
-	{
-		return this.key;
+		super();
+		
+		BarrelStates.registerState(this);
 	}
 	
 	public void activate(TileEntityBarrel barrel)
 	{
 		boolean triggered = false;
-		
-		if (!triggers.isEmpty())
+
+		for (BarrelLogic entry : triggers) 
 		{
-			for (Map.Entry<String, BarrelLogic> entry : triggers.entrySet()) 
-			{
-				triggered = entry.getValue().onActivate(barrel);
-				
-				if (triggered)
-					break;
-			}
+			triggered = entry.onActivate(barrel);
+
+			if (triggered)
+				break;
 		}
-		
+
 		if (!triggered)
 			this.onActivate(barrel);
 	}
@@ -54,33 +50,27 @@ public abstract class BarrelState
 	public void update(TileEntityBarrel barrel)
 	{
 		boolean triggered = false;
-		
-		if (!triggers.isEmpty())
+
+		for (BarrelLogic entry : triggers) 
 		{
-			for (Map.Entry<String, BarrelLogic> entry : triggers.entrySet()) 
-			{
-				triggered = entry.getValue().onUpdate(barrel);
-				
-				if (triggered)
-					break;
-			}
+			triggered = entry.onUpdate(barrel);
+
+			if (triggered)
+				break;
 		}
-		
+
 		if (!triggered)
 			this.onUpdate(barrel);
 	}
 	
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item)
 	{
-		if (!triggers.isEmpty())
+		for (BarrelLogic entry : triggers) 
 		{
-			for (Map.Entry<String, BarrelLogic> entry : triggers.entrySet()) 
-			{
-				if (entry.getValue().canUseItem(barrel, item))
-					return true;
-			}
+			if (entry.canUseItem(barrel, item))
+				return true;
 		}
-		
+
 		return false;
 	}
 	
@@ -88,24 +78,21 @@ public abstract class BarrelState
 	{
 		boolean triggered = false;
 
-		if (!triggers.isEmpty())
+		for (BarrelLogic entry : triggers) 
 		{
-			for (Map.Entry<String, BarrelLogic> entry : triggers.entrySet()) 
+			if (entry.canUseItem(barrel, item))
 			{
-				if (entry.getValue().canUseItem(barrel, item))
-				{
-					triggered = entry.getValue().onUseItem(player, barrel, item);
+				triggered = entry.onUseItem(player, barrel, item);
 
-					if (triggered)
-					{
-						barrel.getWorld().markBlockForUpdate(barrel.getPos());
-						
-						break;
-					}
+				if (triggered)
+				{
+					barrel.getWorld().markBlockForUpdate(barrel.getPos());
+
+					break;
 				}
 			}
 		}
-		
+
 		if (!triggered)
 		{
 			this.onUseItem(player, barrel, item);
@@ -127,25 +114,19 @@ public abstract class BarrelState
 	{
 		return false;
 	}
-	
+
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {}
 
-	public void registerStateLogic(String key, BarrelLogic trigger) 
+	public void addLogic(BarrelLogic logic) 
 	{
-		if (trigger != null)
+		if (logic != null)
 		{
-			triggers.put(key, trigger);
+			triggers.add(logic);
 		}
 	}
-	
-	public void unregisterStateTrigger(String key) 
+
+	public void removeLogic(BarrelLogic logic) 
 	{
-		if (key != null && !key.isEmpty() && !key.trim().isEmpty())
-		{
-			if (triggers.containsKey(key))
-			{
-				triggers.remove(key);
-			}
-		}
+		triggers.remove(logic);
 	}
 }

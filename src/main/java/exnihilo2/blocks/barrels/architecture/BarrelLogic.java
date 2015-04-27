@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
 public abstract class BarrelLogic{
-
 	public boolean onActivate(TileEntityBarrel barrel) {
 		return false;
 	}

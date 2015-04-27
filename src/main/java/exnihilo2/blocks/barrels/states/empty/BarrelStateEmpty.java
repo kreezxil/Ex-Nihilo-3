@@ -22,6 +22,11 @@ import exnihilo2.util.Color;
 public class BarrelStateEmpty extends BarrelState{
 	
 	@Override
+	public String getUniqueIdentifier() {
+		return "barrel.empty";
+	}
+	
+	@Override
 	public void onActivate(TileEntityBarrel barrel) {
 		barrel.setContents(null);
 		barrel.drain(barrel.getCapacity(), true);

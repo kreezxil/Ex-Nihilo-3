@@ -27,6 +27,11 @@ public class BarrelStateCompost extends BarrelState{
 	protected static Color white = new Color("FFFFFF");
 	
 	@Override
+	public String getUniqueIdentifier() {
+		return "barrel.compost";
+	}
+	
+	@Override
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {
 		GlStateManager.pushMatrix();
 		RenderHelper.disableStandardItemLighting();

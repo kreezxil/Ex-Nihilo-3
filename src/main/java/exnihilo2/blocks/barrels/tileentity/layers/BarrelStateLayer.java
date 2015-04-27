@@ -3,7 +3,7 @@ package exnihilo2.blocks.barrels.tileentity.layers;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import exnihilo2.EN2;
-import exnihilo2.blocks.barrels.BarrelStateManager;
+import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
@@ -15,24 +15,30 @@ public class BarrelStateLayer extends TileEntity{
 		return state;
 	}
 	
-	public void setState(String key)
+	public void setState(BarrelState stateIn)
 	{
-		if (key != this.state.getKey())
+		String keyA = "";
+		String keyB = "";
+		
+		if (this.state != null)
+		{
+			keyA = this.state.getUniqueIdentifier();
+		}
+		
+		if (stateIn != null)
+		{
+			state = stateIn;
+		}
+		else
+		{
+			state = BarrelStates.empty;
+		}
+		
+		keyB = this.state.getUniqueIdentifier();
+		
+		if (keyA != keyB)
 		{	
-			BarrelState newState = BarrelStateManager.getState(key);
-			
-			if (newState != null)
-			{
-				state = newState;
-			}
-			else
-			{
-				state = BarrelStateManager.getState("empty");
-			}
-			
 			TileEntityBarrel barrel = (TileEntityBarrel)this;
-			barrel.resetTimer();
-			barrel.setLuminosity(0);
 			state.activate(barrel);
 			barrel.requestSync();
 		}
@@ -52,7 +58,7 @@ public class BarrelStateLayer extends TileEntity{
 	{
 		super.readFromNBT(compound);
 
-		setState(compound.getString("state"));
+		this.setState(BarrelStates.getState(compound.getString("state")));
 	}
  
 	@Override
@@ -62,7 +68,7 @@ public class BarrelStateLayer extends TileEntity{
 
 		if (state != null)
 		{
-			compound.setString("state", state.getKey());
+			compound.setString("state", state.getUniqueIdentifier());
 		}
 	}
 }

@@ -8,6 +8,11 @@ import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 public class BarrelStatePodzol extends BarrelStateCompost{
 	
 	@Override
+	public String getUniqueIdentifier() {
+		return "barrel.podzol";
+	}
+	
+	@Override
 	protected void renderBlockTexture(TileEntityBarrel barrel)
 	{
 		double timer = barrel.getTimerStatus();

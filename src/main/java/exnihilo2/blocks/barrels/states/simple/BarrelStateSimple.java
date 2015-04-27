@@ -28,6 +28,12 @@ import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
 public class BarrelStateSimple extends BarrelState{	
+	
+	@Override
+	public String getUniqueIdentifier() {
+		return "barrel.simple";
+	}
+	
 	@Override
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {
 		ItemStack contents = barrel.getContents();

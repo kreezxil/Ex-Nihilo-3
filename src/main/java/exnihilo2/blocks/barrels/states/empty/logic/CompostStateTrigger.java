@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.EN2;
+import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.blocks.barrels.architecture.BarrelLogic;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.registries.CompostRegistry;
@@ -13,6 +14,7 @@ import exnihilo2.registries.recipes.CompostRecipe;
 import exnihilo2.util.Inventory;
 
 public class CompostStateTrigger extends BarrelLogic{
+	
 	@Override
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) 
 	{
@@ -26,7 +28,7 @@ public class CompostStateTrigger extends BarrelLogic{
 		
 		if (recipe != null)
 		{
-			barrel.setState("compost");
+			barrel.setState(BarrelStates.compost);
 			barrel.setVolume(recipe.getVolume());
 			barrel.setColor(recipe.getColor());
 			

@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import exnihilo2.blocks.barrels.BarrelStateManager;
+import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
 import exnihilo2.registries.CompostRegistry;
@@ -39,12 +39,12 @@ public class EN2
     	
     	EN2Items.initialize();
     	EN2Blocks.initialize();
+    	BarrelStates.initialize();
     	
     	EN2Items.registerItems();
     	EN2Blocks.registerBlocks();
     	EN2Blocks.registerTileEntities();
     	
-    	BarrelStateManager.buildBehaviorTree();
     	CompostRegistry.addVanillaRecipes();
 	}
     
