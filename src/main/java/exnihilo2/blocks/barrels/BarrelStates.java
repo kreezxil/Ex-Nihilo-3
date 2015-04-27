@@ -5,9 +5,12 @@ import java.util.HashMap;
 import exnihilo2.blocks.barrels.architecture.BarrelLogic;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.states.compost.BarrelStateCompost;
+import exnihilo2.blocks.barrels.states.compost.BarrelStateMycelium;
 import exnihilo2.blocks.barrels.states.compost.BarrelStatePodzol;
 import exnihilo2.blocks.barrels.states.compost.logic.CompostStateLogicComplete;
 import exnihilo2.blocks.barrels.states.compost.logic.CompostStateLogicItems;
+import exnihilo2.blocks.barrels.states.compost.logic.MyceliumStateLogicComplete;
+import exnihilo2.blocks.barrels.states.compost.logic.MyceliumStateTrigger;
 import exnihilo2.blocks.barrels.states.compost.logic.PodzolStateLogicComplete;
 import exnihilo2.blocks.barrels.states.compost.logic.PodzolStateTrigger;
 import exnihilo2.blocks.barrels.states.empty.BarrelStateEmpty;
@@ -32,6 +35,7 @@ public class BarrelStates {
 	public static BarrelState fluid;
 	public static BarrelState compost;
 	public static BarrelState podzol;
+	public static BarrelState mycelium;
 	
 	//Logic
 	//-empty
@@ -51,7 +55,9 @@ public class BarrelStates {
 	public static BarrelLogic compost_state_logic_items;
 	public static BarrelLogic compost_state_trigger_complete;
 	public static BarrelLogic compost_state_trigger_podzol;
+	public static BarrelLogic compost_state_trigger_mycelium;
 	public static BarrelLogic podzol_state_trigger_complete;
+	public static BarrelLogic mycelium_state_trigger_complete;
 	
 	public static void initialize()
 	{
@@ -76,7 +82,9 @@ public class BarrelStates {
 		compost_state_logic_items = new CompostStateLogicItems();
 		compost_state_trigger_complete = new CompostStateLogicComplete();
 		compost_state_trigger_podzol = new PodzolStateTrigger();
+		compost_state_trigger_mycelium = new MyceliumStateTrigger();
 		podzol_state_trigger_complete = new PodzolStateLogicComplete();
+		mycelium_state_trigger_complete = new MyceliumStateLogicComplete();
 	}
 	
 	private static void initializeStates()
@@ -86,6 +94,7 @@ public class BarrelStates {
 		fluid = new BarrelStateFluid();
 		compost = new BarrelStateCompost();
 		podzol = new BarrelStatePodzol();
+		mycelium = new BarrelStateMycelium();
 	}
 	
 	private static void registerLogic()
@@ -104,9 +113,14 @@ public class BarrelStates {
 		BarrelStates.compost.addLogic(compost_state_logic_items);
 		BarrelStates.compost.addLogic(compost_state_trigger_complete);
 		BarrelStates.compost.addLogic(compost_state_trigger_podzol);
+		BarrelStates.compost.addLogic(compost_state_trigger_mycelium);
 		
 		BarrelStates.podzol.addLogic(compost_state_logic_items);
+		BarrelStates.podzol.addLogic(compost_state_trigger_mycelium);
 		BarrelStates.podzol.addLogic(podzol_state_trigger_complete);
+		
+		BarrelStates.mycelium.addLogic(compost_state_logic_items);
+		BarrelStates.mycelium.addLogic(mycelium_state_trigger_complete);
 	}
 	
 	public static void registerState(BarrelState state)

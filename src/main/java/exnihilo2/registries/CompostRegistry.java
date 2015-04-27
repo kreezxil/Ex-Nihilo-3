@@ -1,5 +1,6 @@
 package exnihilo2.registries;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import exnihilo2.EN2;
@@ -7,11 +8,13 @@ import exnihilo2.registries.recipes.CompostRecipe;
 import exnihilo2.util.Color;
 import exnihilo2.util.enums.MetadataBehavior;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class CompostRegistry {
 	private static HashMap<String, CompostRecipe> recipes = new HashMap<String, CompostRecipe>();
+	private static ArrayList<String> mycelium_ingredients = new ArrayList<String>();
 	
 	public static void addRecipe(CompostRecipe recipe)
 	{
@@ -71,6 +74,32 @@ public class CompostRegistry {
 		return null;
 	}
 	
+	public static void addMyceliumIngredient(ItemStack item, MetadataBehavior behavior)
+	{
+		if (item != null && behavior != null)
+		{
+			if (behavior == MetadataBehavior.Ignored)
+			{
+				mycelium_ingredients.add(item.getUnlocalizedName() + ":*");
+			}
+			
+			if (behavior == MetadataBehavior.Ignored)
+			{
+				mycelium_ingredients.add(item.getUnlocalizedName() + ":" + item.getMetadata());
+			}
+		}
+	}
+	
+	public static boolean isMyceliumIngredient(ItemStack item)
+	{
+		if (mycelium_ingredients.contains(item.getUnlocalizedName() + ":*") || mycelium_ingredients.contains(item.getUnlocalizedName() + ":" + item.getMetadata()))
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public static void addVanillaRecipes()
 	{
 		//saplings
@@ -89,7 +118,10 @@ public class CompostRegistry {
 		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.leaves2), 1, 0), 125, new Color("B8C754"), MetadataBehavior.Specified)); //acacia
 		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.leaves2), 1, 1), 125, new Color("378030"), MetadataBehavior.Specified)); //dark_oak
 
-//		//rotten flesh
+		//rotten flesh
+		addRecipe(new CompostRecipe(new ItemStack(Items.rotten_flesh, 1), 100, new Color("C45631"), MetadataBehavior.Ignored));
+		addMyceliumIngredient(new ItemStack(Items.rotten_flesh, 1), MetadataBehavior.Ignored);
+		
 //		register(Items.rotten_flesh, 0, 0.10f, ColorRegistry.color("rotten_flesh"));
 //		//spider eye
 //		register(Items.spider_eye, 0, 0.08f, ColorRegistry.color("spider_eye"));
