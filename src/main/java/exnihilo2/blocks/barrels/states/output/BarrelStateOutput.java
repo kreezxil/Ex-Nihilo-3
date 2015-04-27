@@ -1,4 +1,4 @@
-package exnihilo2.blocks.barrels.states.simple;
+package exnihilo2.blocks.barrels.states.output;
 
 import org.lwjgl.opengl.GL11;
 
@@ -27,7 +27,7 @@ import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
-public class BarrelStateSimple extends BarrelState{	
+public class BarrelStateOutput extends BarrelState{	
 	
 	@Override
 	public String getUniqueIdentifier() {

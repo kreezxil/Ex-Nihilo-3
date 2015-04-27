@@ -23,7 +23,8 @@ import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicGas;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicHot;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicItems;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicRain;
-import exnihilo2.blocks.barrels.states.simple.BarrelStateSimple;
+import exnihilo2.blocks.barrels.states.output.BarrelStateOutput;
+import exnihilo2.blocks.barrels.states.output.logic.OutputStateLogicGrowingGrass;
 
 public class BarrelStates {
 	public static HashMap<String, BarrelState> states = new HashMap<String, BarrelState>();
@@ -41,6 +42,9 @@ public class BarrelStates {
 	public static BarrelLogic empty_state_trigger_compost_item;
 	public static BarrelLogic empty_state_trigger_fluid_item;
 	public static BarrelLogic empty_state_trigger_fluid_weather;
+	
+	//-output
+	public static BarrelLogic output_state_logic_growing_grass;
 	
 	//-fluid
 	public static BarrelLogic fluid_state_logic_hot;
@@ -70,6 +74,8 @@ public class BarrelStates {
 		empty_state_trigger_fluid_item = new FluidStateTriggerItem();
 		empty_state_trigger_fluid_weather = new FluidStateTriggerWeather();
 		
+		output_state_logic_growing_grass = new OutputStateLogicGrowingGrass();
+		
 		fluid_state_logic_hot = new FluidStateLogicHot();
 		fluid_state_logic_weather = new FluidStateLogicRain();
 		fluid_state_logic_gas = new FluidStateLogicGas();
@@ -87,7 +93,7 @@ public class BarrelStates {
 	private static void initializeStates()
 	{
 		empty = new BarrelStateEmpty();
-		output = new BarrelStateSimple();
+		output = new BarrelStateOutput();
 		fluid = new BarrelStateFluid();
 		compost = new BarrelStateCompost();
 		podzol = new BarrelStatePodzol();
@@ -99,6 +105,8 @@ public class BarrelStates {
 		BarrelStates.empty.addLogic(empty_state_trigger_compost_item);
 		BarrelStates.empty.addLogic(empty_state_trigger_fluid_item);
 		BarrelStates.empty.addLogic(empty_state_trigger_fluid_weather);
+		
+		BarrelStates.output.addLogic(output_state_logic_growing_grass);
 		
 		BarrelStates.fluid.addLogic(fluid_state_logic_hot);
 		BarrelStates.fluid.addLogic(fluid_state_logic_weather);
