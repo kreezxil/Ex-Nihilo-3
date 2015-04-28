@@ -1,0 +1,7 @@
+{
+    "parent": "exnihilo2:block/glass_barrel",
+    "ambientocclusion": false,
+    "textures": {
+        "barrel": "blocks/glass_purple"
+    }
+}

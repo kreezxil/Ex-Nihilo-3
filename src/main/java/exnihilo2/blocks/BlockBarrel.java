@@ -114,7 +114,7 @@ public class BlockBarrel extends BlockContainer
 		}
 		else
 		{
-			return EnumWorldBlockLayer.CUTOUT_MIPPED;
+			return EnumWorldBlockLayer.TRANSLUCENT;
 		}
 	}
 	
