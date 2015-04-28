@@ -119,6 +119,7 @@ public class CompostRegistry {
 		addRecipe(new CompostRecipe(new ItemStack(Item.getItemFromBlock(Blocks.leaves2), 1, 1), 125, new Color("378030"), MetadataBehavior.Specified)); //dark_oak
 
 		//rotten flesh
+		addRecipe(new CompostRecipe(new ItemStack(Items.ghast_tear, 1), 5, new Color("FFFFFF"), MetadataBehavior.Ignored));
 		addRecipe(new CompostRecipe(new ItemStack(Items.rotten_flesh, 1), 100, new Color("C45631"), MetadataBehavior.Ignored));
 		addMyceliumIngredient(new ItemStack(Items.rotten_flesh, 1), MetadataBehavior.Ignored);
 		

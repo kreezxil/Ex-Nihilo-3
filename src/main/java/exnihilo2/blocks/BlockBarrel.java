@@ -55,7 +55,7 @@ public class BlockBarrel extends BlockContainer
 
 		if (barrel != null)
 		{
-			if (barrel.getState().canUseItem(barrel, item))
+			if (item != null && barrel.getState().canUseItem(barrel, item))
 			{
 				barrel.getState().useItem(player, barrel, item);
 			}

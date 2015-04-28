@@ -3,6 +3,7 @@ package exnihilo2.blocks.barrels.states.compost.logic;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.blocks.barrels.architecture.BarrelLogic;
@@ -18,7 +19,7 @@ public class MyceliumStateTrigger extends BarrelLogic{
 	{
 		if (barrel.getVolume() < barrel.getVolumeMax())
 		{
-			if (CompostRegistry.isMyceliumIngredient(item))
+			if (item.getItem() == Items.ghast_tear)
 				return true;
 		}
 		
@@ -30,7 +31,7 @@ public class MyceliumStateTrigger extends BarrelLogic{
 	{
 		if (barrel.getVolume() < barrel.getVolumeMax())
 		{
-			if (CompostRegistry.isMyceliumIngredient(item))
+			if (item.getItem() == Items.ghast_tear)
 				barrel.setState(BarrelStates.mycelium);
 		}
 		
