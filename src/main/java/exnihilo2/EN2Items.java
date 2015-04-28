@@ -12,25 +12,25 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class EN2Items {
 
-	public static Item wood_crook;
-	public static Item bone_crook;
+	public static Item crook_wood;
+	public static Item crook_bone;
 	
 	public static void initialize()
 	{
-		wood_crook = new ItemCrook(EN2ToolMaterials.Stick).setUnlocalizedName("wood_crook");
-		bone_crook = new ItemCrook(EN2ToolMaterials.Bone).setUnlocalizedName("bone_crook");
+		crook_wood = new ItemCrook(EN2ToolMaterials.Stick).setUnlocalizedName("crook_wood");
+		crook_bone = new ItemCrook(EN2ToolMaterials.Bone).setUnlocalizedName("crook_bone");
 	}
 	
 	public static void registerItems()
 	{
-		registerItem(wood_crook);
-		registerItem(bone_crook);
+		registerItem(crook_wood);
+		registerItem(crook_bone);
 	}
 	
 	public static void registerItemRenderers()
 	{
-		registerItemRenderer(wood_crook);
-		registerItemRenderer(bone_crook);
+		registerItemRenderer(crook_wood);
+		registerItemRenderer(crook_bone);
 	}
 	
 	private static void registerItem(Item item)
