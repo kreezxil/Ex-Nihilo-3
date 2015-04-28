@@ -105,9 +105,14 @@ public abstract class BarrelState
 	
 	public void onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) {}
 	
-	public boolean canExtractItem(TileEntityBarrel barrel)
+	public boolean canExtractContents(TileEntityBarrel barrel)
 	{
 		return false;
+	}
+	
+	public void onExtractContents(TileEntityBarrel barrel)
+	{
+		barrel.setState(BarrelStates.empty);
 	}
 	
 	public boolean canManipulateFluids(TileEntityBarrel barrel)

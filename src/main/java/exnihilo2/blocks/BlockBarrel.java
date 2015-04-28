@@ -55,9 +55,12 @@ public class BlockBarrel extends BlockContainer
 
 		if (barrel != null)
 		{
-			if (barrel.canExtractItem(0, barrel.getStackInSlot(0), EnumFacing.DOWN))
+			if (barrel.getState().canUseItem(barrel, item))
 			{
-				//extract
+				barrel.getState().useItem(player, barrel, item);
+			}
+			else if (barrel.canExtractItem(0, barrel.getStackInSlot(0), EnumFacing.DOWN))
+			{
 				if(!world.isRemote)
 				{
 					EntityItem entityitem = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), barrel.getStackInSlot(0));
@@ -71,11 +74,6 @@ public class BlockBarrel extends BlockContainer
 				}
 				
 				barrel.setInventorySlotContents(0, null);
-			}
-			else if (item != null)
-			{
-				//insert
-				barrel.getState().useItem(player, barrel, item);
 			}
 		}
 

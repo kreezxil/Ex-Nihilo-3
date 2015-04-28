@@ -28,8 +28,8 @@ public class BarrelStateEmpty extends BarrelState{
 	
 	@Override
 	public void onActivate(TileEntityBarrel barrel) {
-		barrel.setContents(null);
 		barrel.drain(barrel.getCapacity(), true);
+		barrel.setContents(null);
 		barrel.setColor(new Color("FFFFFF"));
 		barrel.setVolume(0);
 		barrel.resetTimer();

@@ -42,10 +42,11 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 		}
 		else
 		{
-			this.contents = null;
-			
-			TileEntityBarrel barrel = (TileEntityBarrel)this;
-			barrel.setState(BarrelStates.empty);
+			if (contents != null)
+			{
+				this.contents = null;
+				this.state.onExtractContents((TileEntityBarrel)this);
+			}
 		}
 	}
 	
@@ -65,7 +66,7 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	{
 		if (index == 0)
 		{
-			if (contents != null)
+			if (contents != null && this.state.canExtractContents((TileEntityBarrel)this))
 			{
 				return contents;
 			}
@@ -241,7 +242,14 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	{
 		if (direction == EnumFacing.DOWN && index == 0)
 		{
-			return (output.size() > 0 || contents!= null);
+			if (output.size() > 0)
+			{
+				return true;
+			} 
+			else if (contents != null && state.canExtractContents((TileEntityBarrel)this))
+			{
+				return true;
+			}
 		}
 		
 		return false;

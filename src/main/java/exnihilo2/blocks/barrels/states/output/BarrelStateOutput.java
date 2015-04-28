@@ -54,4 +54,10 @@ public class BarrelStateOutput extends BarrelState{
 			GlStateManager.popMatrix();
 		}
 	}
+	
+	@Override
+	public boolean canExtractContents(TileEntityBarrel barrel)
+	{
+		return true;
+	}
 }
