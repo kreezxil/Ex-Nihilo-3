@@ -29,18 +29,22 @@ public class Moss {
 	
 	private static void spreadToAdjacentBlocks(World world, BlockPos pos)
 	{
-		boolean spread = trySpreadToBlock(world, new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()));
-		
-		if (!spread)
-			spread = trySpreadToBlock(world, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()));
-		else if (!spread)
-			spread = trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1));
-		else if (!spread)
-			spread = trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1));
-		else if (!spread)
-			spread = trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
-		else if (!spread)
-			spread = trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()));
+		if (!trySpreadToBlock(world, new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ())))
+		{
+			if (trySpreadToBlock(world, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ())))
+			{
+				if (trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)))
+				{
+					if (trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)))
+					{
+						if (trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())))
+						{
+							trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()));
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	private static boolean trySpreadToBlock(World world, BlockPos pos)
