@@ -31,13 +31,13 @@ public class Moss {
 	{
 		if (!trySpreadToBlock(world, new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ())))
 		{
-			if (trySpreadToBlock(world, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ())))
+			if (!trySpreadToBlock(world, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ())))
 			{
-				if (trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)))
+				if (!trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)))
 				{
-					if (trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)))
+					if (!trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)))
 					{
-						if (trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())))
+						if (!trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())))
 						{
 							trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()));
 						}
