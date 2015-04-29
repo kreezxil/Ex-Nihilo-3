@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 public class Moss {
-	private static int speed = 256;
+	private static int speed = 16;
 
 	public static void grow(World world, Chunk chunk)
 	{
