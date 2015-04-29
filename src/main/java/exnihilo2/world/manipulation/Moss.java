@@ -29,38 +29,37 @@ public class Moss {
 	
 	private static void spreadToAdjacentBlocks(World world, BlockPos pos)
 	{
+		boolean spread = trySpreadToBlock(world, new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()));
+		
+		if (!spread)
+			spread = trySpreadToBlock(world, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()));
+		else if (!spread)
+			spread = trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1));
+		else if (!spread)
+			spread = trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1));
+		else if (!spread)
+			spread = trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
+		else if (!spread)
+			spread = trySpreadToBlock(world, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()));
+	}
+	
+	private static boolean trySpreadToBlock(World world, BlockPos pos)
+	{
 		boolean spread = false;
 		
-		for (int x = -1; x < 2; x++)
-		{
-			if (spread)
-				break;
-			
-			for (int y = -1; y < 2; y++)
-			{
-				if (spread)
-					break;
-				
-				for (int z = -1; z < 2; z++)
-				{
-					if (spread)
-						break;
-					
-					BlockPos dest = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-					IBlockState destState = world.getBlockState(dest);
+		IBlockState state = world.getBlockState(pos);
 
-					if (destState.getBlock() == Blocks.cobblestone)
-					{
-						world.setBlockState(dest, Blocks.mossy_cobblestone.getDefaultState());
-						spread = true;
-					}
-					else if (destState.getBlock() == Blocks.stonebrick)
-					{
-						world.setBlockState(dest, Blocks.stonebrick.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY));
-						spread = true; 
-					}
-				}
-			}
+		if (state.getBlock() == Blocks.cobblestone)
+		{
+			world.setBlockState(pos, Blocks.mossy_cobblestone.getDefaultState());
+			spread = true;
 		}
+		else if (state.getBlock() == Blocks.stonebrick)
+		{
+			world.setBlockState(pos, Blocks.stonebrick.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY));
+			spread = true; 
+		}
+		
+		return spread;
 	}
 }
