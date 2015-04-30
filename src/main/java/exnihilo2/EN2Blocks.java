@@ -47,19 +47,6 @@ public class EN2Blocks {
 		registerBlock(barrel_dark_oak);
 		registerBlock(barrel_glass);
 		registerBlock(barrel_glass_colored, ItemBarrelGlassColored.class);
-		registerBlockVariantsFromMeta(barrel_glass_colored);
-	}
-	
-	public static void registerBlockRenderers()
-	{
-		registerRenderer(barrel_oak);
-		registerRenderer(barrel_spruce);
-		registerRenderer(barrel_dark_oak);
-		registerRenderer(barrel_glass);
-		registerRenderer(barrel_glass_colored);
-
-		TileEntitySpecialRenderer barrelRenderer = new BarrelRenderer();
-	   	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, barrelRenderer);
 	}
 	
 	public static void registerTileEntities()
@@ -75,45 +62,5 @@ public class EN2Blocks {
 	private static void registerBlock(Block block, Class<? extends ItemBlock> itemBlock)
 	{
 		GameRegistry.registerBlock(block, itemBlock, block.getUnlocalizedName().substring(5));
-	}
-	
-	@SideOnly(Side.CLIENT)
-	private static void registerBlockVariantsFromMeta(Block block)
-	{
-		Item item = Item.getItemFromBlock(block);
-		
-		if (item != null)
-		{
-			ArrayList<ItemStack> list = new ArrayList<ItemStack>();
-			
-			block.getSubBlocks(item, null, list);
-			
-			for (ItemStack i : list)
-			{
-				ModelBakery.addVariantName(item, EN2Data.MODID + ":" + i.getUnlocalizedName().substring(5));
-			}
-		}
-	}
-
-	private static void registerRenderer(Block block)
-	{
-		Item item = Item.getItemFromBlock(block);
-		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-		
-		if (item.getHasSubtypes())
-		{
-			ArrayList<ItemStack> list = new ArrayList<ItemStack>();
-			
-			block.getSubBlocks(item, null, list);
-			
-			for (ItemStack i : list)
-			{
-				mesher.register(item, i.getItemDamage(), new ModelResourceLocation(EN2Data.MODID + ":" + i.getUnlocalizedName().substring(5), "inventory"));
-			}
-		}
-		else
-		{
-			mesher.register(item, 0, new ModelResourceLocation(EN2Data.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
-		}
 	}
 }

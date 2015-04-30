@@ -1,7 +1,7 @@
 package exnihilo2.blocks;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBarrelGlassColored extends BlockBarrel{
+public class BlockBarrelGlassColored extends BlockBarrel {
 	public static final PropertyEnum COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 	
 	public BlockBarrelGlassColored(Material material) {

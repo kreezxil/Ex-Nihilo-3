@@ -27,19 +27,8 @@ public class EN2Items {
 		registerItem(crook_bone);
 	}
 	
-	public static void registerItemRenderers()
-	{
-		registerItemRenderer(crook_wood);
-		registerItemRenderer(crook_bone);
-	}
-	
 	private static void registerItem(Item item)
 	{
 		GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
-	}
-	
-	private static void registerItemRenderer(Item item)
-	{
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(EN2Data.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
 	}
 }
