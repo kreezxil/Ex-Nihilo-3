@@ -82,6 +82,9 @@ public class BarrelStateCompost extends BarrelState{
 			Color colorA = barrel.getColor();
 			Color colorB = new Color(colorA.r, colorA.g, colorA.b, colorA.a * (1.0f - (float)timer));
 			
+			GlStateManager.enableBlend();
+			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			
 			if (barrel.getBlockType().getMaterial().isOpaque())
 			{
 				BarrelRenderer.renderContentsSimple(compost, (double)barrel.getVolume() / (double)barrel.getVolumeMax(), colorB);

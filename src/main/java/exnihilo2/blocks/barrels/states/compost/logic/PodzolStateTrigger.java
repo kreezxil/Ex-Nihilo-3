@@ -16,7 +16,7 @@ public class PodzolStateTrigger extends BarrelLogic{
 	@Override
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) 
 	{
-		if (CompostRegistry.isCompostable(item) && barrel.getVolume() < barrel.getVolumeMax())
+		if (barrel.getTimerStatus() == -1.0d)
 		{
 			Block block = Block.getBlockFromItem(item.getItem());
 			
@@ -30,9 +30,7 @@ public class PodzolStateTrigger extends BarrelLogic{
 	@Override
 	public boolean onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) 
 	{
-		CompostRecipe recipe = CompostRegistry.getRecipe(item);
-		
-		if (recipe != null)
+		if (barrel.getTimerStatus() == -1.0d)
 		{
 			Block block = Block.getBlockFromItem(item.getItem());
 			

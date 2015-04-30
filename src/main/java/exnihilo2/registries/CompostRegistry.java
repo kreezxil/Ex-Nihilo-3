@@ -123,6 +123,9 @@ public class CompostRegistry {
 		addRecipe(new CompostRecipe(new ItemStack(Items.rotten_flesh, 1), 100, new Color("C45631"), MetadataBehavior.Ignored));
 		addMyceliumIngredient(new ItemStack(Items.rotten_flesh, 1), MetadataBehavior.Ignored);
 		
+		addRecipe(new CompostRecipe(new ItemStack(Items.golden_apple, 1), 250, new Color("CCCC00"), MetadataBehavior.Specified));
+		addRecipe(new CompostRecipe(new ItemStack(Items.golden_apple, 1, 1), 1000, new Color("CCCC00"), MetadataBehavior.Specified));
+		
 //		register(Items.rotten_flesh, 0, 0.10f, ColorRegistry.color("rotten_flesh"));
 //		//spider eye
 //		register(Items.spider_eye, 0, 0.08f, ColorRegistry.color("spider_eye"));

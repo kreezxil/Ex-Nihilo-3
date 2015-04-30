@@ -13,9 +13,11 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
@@ -162,6 +164,19 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 		renderer.addVertexWithUV(vertices[1].xCoord, vertices[1].yCoord, vertices[1].zCoord, maxU, minV);
 		renderer.addVertexWithUV(vertices[2].xCoord, vertices[2].yCoord, vertices[2].zCoord, minU, minV);
 		renderer.addVertexWithUV(vertices[3].xCoord, vertices[3].yCoord, vertices[3].zCoord, minU, maxV);
+	}
+	
+	public static void renderContentsFromItemStack(ItemStack item)
+	{
+		GlStateManager.pushMatrix();
+		GlStateManager.disableLighting();
+		
+		GlStateManager.translate(0.5d, 0.5d, 0.5d);
+		GlStateManager.scale(0.999d, 0.8999d, 0.999d);
+
+		Minecraft.getMinecraft().getItemRenderer().renderItem(null, item, TransformType.NONE);
+		
+		GlStateManager.popMatrix();
 	}
 	
 	public static double getAdjustedContentLevel(double fullness)

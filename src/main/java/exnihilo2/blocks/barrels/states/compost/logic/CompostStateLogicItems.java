@@ -30,8 +30,6 @@ public class CompostStateLogicItems extends BarrelLogic{
 		if (recipe != null)
 		{
 			barrel.setVolume(barrel.getVolume() + recipe.getVolume());
-			if (barrel.getVolume() == barrel.getVolumeMax() && barrel.getTimerStatus() == -1)
-				barrel.startTimer(1000);
 			
 			//Set the new color.
 			Color colorA = recipe.getColor();
@@ -50,6 +48,14 @@ public class CompostStateLogicItems extends BarrelLogic{
 			barrel.getWorld().markBlockForUpdate(barrel.getPos());
 		}
 		
+		return false;
+	}
+	
+	@Override
+	public boolean onUpdate(TileEntityBarrel barrel) {
+		if (barrel.getVolume() == barrel.getVolumeMax() && barrel.getTimerStatus() == -1)
+			barrel.startTimer(1000);
+
 		return false;
 	}
 }

@@ -29,8 +29,7 @@ public class CompostStateTrigger extends BarrelLogic{
 		if (recipe != null)
 		{
 			barrel.setState(BarrelStates.compost);
-			barrel.setVolume(recipe.getVolume());
-			barrel.setColor(recipe.getColor());
+			barrel.getState().useItem(player, barrel, item);
 			
 			return true;
 		}

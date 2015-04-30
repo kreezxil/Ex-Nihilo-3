@@ -42,6 +42,4 @@ public class BarrelStateMycelium extends BarrelStateCompost{
 			}
 		}
 	}
-	
-
 }
