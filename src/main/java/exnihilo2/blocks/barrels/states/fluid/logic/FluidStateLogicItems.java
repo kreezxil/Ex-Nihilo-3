@@ -52,16 +52,19 @@ public class FluidStateLogicItems extends BarrelLogic{
 				{
 					if (player != null)
 					{
-						if (item.stackSize > 1) 
+						if (!player.capabilities.isCreativeMode)
 						{
-							if (player.inventory.addItemStackToInventory(full)) 
+							if (item.stackSize > 1) 
 							{
-								item.stackSize -= 1;
+								if (player.inventory.addItemStackToInventory(full)) 
+								{
+									item.stackSize -= 1;
+								}
+							} 
+							else 
+							{
+								player.inventory.setInventorySlotContents(player.inventory.currentItem, full);
 							}
-						} 
-						else 
-						{
-							player.inventory.setInventorySlotContents(player.inventory.currentItem, full);
 						}
 					}
 					else

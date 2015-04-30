@@ -18,6 +18,7 @@ import exnihilo2.blocks.barrels.states.compost.logic.PodzolStateLogicComplete;
 import exnihilo2.blocks.barrels.states.compost.logic.PodzolStateTrigger;
 import exnihilo2.blocks.barrels.states.empty.BarrelStateEmpty;
 import exnihilo2.blocks.barrels.states.empty.logic.CompostStateTrigger;
+import exnihilo2.blocks.barrels.states.empty.logic.EmptyStateLogic;
 import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerItem;
 import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerWeather;
 import exnihilo2.blocks.barrels.states.fluid.BarrelStateFluid;
@@ -43,6 +44,7 @@ public class BarrelStates {
 	
 	//Logic
 	//-empty
+	public static BarrelLogic empty_state_logic;
 	public static BarrelLogic empty_state_trigger_compost_item;
 	public static BarrelLogic empty_state_trigger_fluid_item;
 	public static BarrelLogic empty_state_trigger_fluid_weather;
@@ -78,6 +80,7 @@ public class BarrelStates {
 	
 	private static void initializeLogic()
 	{
+		empty_state_logic = new EmptyStateLogic();
 		empty_state_trigger_compost_item = new CompostStateTrigger();
 		empty_state_trigger_fluid_item = new FluidStateTriggerItem();
 		empty_state_trigger_fluid_weather = new FluidStateTriggerWeather();
@@ -113,6 +116,7 @@ public class BarrelStates {
 	
 	private static void registerLogic()
 	{
+		BarrelStates.empty.addLogic(empty_state_logic);
 		BarrelStates.empty.addLogic(empty_state_trigger_compost_item);
 		BarrelStates.empty.addLogic(empty_state_trigger_fluid_item);
 		BarrelStates.empty.addLogic(empty_state_trigger_fluid_weather);

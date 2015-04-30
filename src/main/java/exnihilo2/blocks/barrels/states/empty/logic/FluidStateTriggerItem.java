@@ -33,8 +33,11 @@ public class FluidStateTriggerItem extends BarrelLogic {
 			{
 				if (player != null)
 				{
-					//Without this line, the glass bottle would be consumed.
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.glass_bottle, 1, 0));
+					if (!player.capabilities.isCreativeMode)
+					{
+						//Without this line, the glass bottle would be consumed.
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.glass_bottle, 1, 0));
+					}
 				}
 				else
 				{
@@ -45,7 +48,10 @@ public class FluidStateTriggerItem extends BarrelLogic {
 			{
 				if (player != null)
 				{
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, Inventory.getContainer(item));
+					if (!player.capabilities.isCreativeMode)
+					{
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, Inventory.getContainer(item));
+					}
 				}
 				else
 				{

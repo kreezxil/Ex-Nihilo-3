@@ -42,9 +42,6 @@ public abstract class BarrelState
 			if (triggered)
 				break;
 		}
-
-		if (!triggered)
-			this.onActivate(barrel);
 	}
 	
 	public void update(TileEntityBarrel barrel)
@@ -58,9 +55,6 @@ public abstract class BarrelState
 			if (triggered)
 				break;
 		}
-
-		if (!triggered)
-			this.onUpdate(barrel);
 	}
 	
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item)
@@ -76,15 +70,11 @@ public abstract class BarrelState
 	
 	public void useItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item)
 	{
-		boolean triggered = false;
-
 		for (BarrelLogic entry : triggers) 
 		{
 			if (entry.canUseItem(barrel, item))
 			{
-				triggered = entry.onUseItem(player, barrel, item);
-
-				if (triggered)
+				if (entry.onUseItem(player, barrel, item))
 				{
 					barrel.getWorld().markBlockForUpdate(barrel.getPos());
 
@@ -92,18 +82,7 @@ public abstract class BarrelState
 				}
 			}
 		}
-
-		if (!triggered)
-		{
-			this.onUseItem(player, barrel, item);
-		}
 	}
-	
-	public void onActivate(TileEntityBarrel barrel) {}
-
-	public void onUpdate(TileEntityBarrel barrel) {}
-	
-	public void onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) {}
 	
 	public boolean canExtractContents(TileEntityBarrel barrel)
 	{

@@ -48,6 +48,8 @@ public class CompostStateLogicItems extends BarrelLogic{
 			barrel.getWorld().markBlockForUpdate(barrel.getPos());
 		}
 		
+		consumeItem(player, item);
+		
 		return false;
 	}
 	

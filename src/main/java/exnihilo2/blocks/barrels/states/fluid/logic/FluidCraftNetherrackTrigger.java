@@ -28,6 +28,7 @@ public class FluidCraftNetherrackTrigger extends BarrelLogic{
 		{
 			barrel.setState(BarrelStates.output);
 			barrel.setContents(new ItemStack(Blocks.netherrack, 1));
+			consumeItem(player, item);
 			
 			return true;
 		}

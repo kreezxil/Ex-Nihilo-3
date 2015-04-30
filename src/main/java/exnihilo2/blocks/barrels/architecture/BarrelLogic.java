@@ -22,4 +22,15 @@ public abstract class BarrelLogic{
 		return false;
 	}
 
+	protected void consumeItem(EntityPlayer player, ItemStack item)
+	{
+		if (player == null || !player.capabilities.isCreativeMode)
+		{
+			item.stackSize -= 1;
+			if (item.stackSize == 0)
+			{
+				item = null;
+			}
+		}
+	}
 }

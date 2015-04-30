@@ -26,14 +26,7 @@ public class BarrelStateEmpty extends BarrelState{
 		return "barrel.empty";
 	}
 	
-	@Override
-	public void onActivate(TileEntityBarrel barrel) {
-		barrel.drain(barrel.getCapacity(), true);
-		barrel.setContents(null);
-		barrel.setColor(new Color("FFFFFF"));
-		barrel.setVolume(0);
-		barrel.resetTimer();
-	}
+
 
 	@Override
 	public boolean canManipulateFluids(TileEntityBarrel barrel) {
