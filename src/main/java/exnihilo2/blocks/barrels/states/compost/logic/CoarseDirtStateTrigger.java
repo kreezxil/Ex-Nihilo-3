@@ -7,20 +7,21 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.blocks.barrels.architecture.BarrelLogic;
+import exnihilo2.blocks.barrels.states.compost.BarrelStateCoarseDirt;
 import exnihilo2.blocks.barrels.states.compost.BarrelStateGrass;
 import exnihilo2.blocks.barrels.states.compost.BarrelStateMycelium;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.registries.CompostRegistry;
 import exnihilo2.registries.recipes.CompostRecipe;
 
-public class MyceliumStateTrigger extends BarrelLogic{
+public class CoarseDirtStateTrigger extends BarrelLogic{
 	
 	@Override
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) 
 	{
 		if (barrel.getTimerStatus() == -1.0d)
 		{
-			if (((BarrelStateMycelium)BarrelStates.mycelium).isIngredient(item))
+			if (((BarrelStateCoarseDirt)BarrelStates.coarse_dirt).isIngredient(item))
 				return true;
 		}
 		
@@ -32,8 +33,8 @@ public class MyceliumStateTrigger extends BarrelLogic{
 	{
 		if (barrel.getTimerStatus() == -1.0d)
 		{
-			if (((BarrelStateMycelium)BarrelStates.mycelium).isIngredient(item))
-				barrel.setState(BarrelStates.mycelium);
+			if (((BarrelStateCoarseDirt)BarrelStates.coarse_dirt).isIngredient(item))
+				barrel.setState(BarrelStates.coarse_dirt);
 		}
 		
 		return false;

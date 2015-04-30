@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.blocks.barrels.architecture.BarrelLogic;
+import exnihilo2.blocks.barrels.states.compost.BarrelStateGrass;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
 public class GrassStateTrigger extends BarrelLogic{
@@ -15,7 +16,7 @@ public class GrassStateTrigger extends BarrelLogic{
 	{
 		if (barrel.getTimerStatus() == -1.0d)
 		{
-			if (item.getItem() == Items.golden_apple)
+			if (((BarrelStateGrass)BarrelStates.grass).isIngredient(item))
 				return true;
 		}
 		
@@ -27,7 +28,7 @@ public class GrassStateTrigger extends BarrelLogic{
 	{
 		if (barrel.getTimerStatus() == -1.0d)
 		{
-			if (item.getItem() == Items.golden_apple)
+			if (((BarrelStateGrass)BarrelStates.grass).isIngredient(item))
 				barrel.setState(BarrelStates.grass);
 		}
 		

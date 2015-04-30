@@ -13,8 +13,15 @@ import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.registries.recipes.CompostRecipe;
 import exnihilo2.util.enums.MetadataBehavior;
 
-public class BarrelStateMycelium extends BarrelStateCompost{
+public class BarrelStateMycelium extends BarrelStateCompostSpecial{
 
+	public BarrelStateMycelium()
+	{
+		super();
+		
+		addIngredient(new ItemStack(Items.ghast_tear), MetadataBehavior.Ignored);
+	}
+	
 	@Override
 	public String getUniqueIdentifier() {
 		return "barrel.mycelium";

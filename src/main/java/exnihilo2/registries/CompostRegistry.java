@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 
 public class CompostRegistry {
 	private static HashMap<String, CompostRecipe> recipes = new HashMap<String, CompostRecipe>();
-	private static ArrayList<String> mycelium_ingredients = new ArrayList<String>();
 	
 	public static void addRecipe(CompostRecipe recipe)
 	{
@@ -74,32 +73,6 @@ public class CompostRegistry {
 		return null;
 	}
 	
-	public static void addMyceliumIngredient(ItemStack item, MetadataBehavior behavior)
-	{
-		if (item != null && behavior != null)
-		{
-			if (behavior == MetadataBehavior.Ignored)
-			{
-				mycelium_ingredients.add(item.getUnlocalizedName() + ":*");
-			}
-			
-			if (behavior == MetadataBehavior.Ignored)
-			{
-				mycelium_ingredients.add(item.getUnlocalizedName() + ":" + item.getMetadata());
-			}
-		}
-	}
-	
-	public static boolean isMyceliumIngredient(ItemStack item)
-	{
-		if (mycelium_ingredients.contains(item.getUnlocalizedName() + ":*") || mycelium_ingredients.contains(item.getUnlocalizedName() + ":" + item.getMetadata()))
-		{
-			return true;
-		}
-		
-		return false;
-	}
-	
 	public static void addVanillaRecipes()
 	{
 		//saplings
@@ -121,7 +94,6 @@ public class CompostRegistry {
 		//rotten flesh
 		addRecipe(new CompostRecipe(new ItemStack(Items.ghast_tear, 1), 5, new Color("FFFFFF"), MetadataBehavior.Ignored));
 		addRecipe(new CompostRecipe(new ItemStack(Items.rotten_flesh, 1), 100, new Color("C45631"), MetadataBehavior.Ignored));
-		addMyceliumIngredient(new ItemStack(Items.rotten_flesh, 1), MetadataBehavior.Ignored);
 		
 		addRecipe(new CompostRecipe(new ItemStack(Items.golden_apple, 1), 250, new Color("CCCC00"), MetadataBehavior.Specified));
 		addRecipe(new CompostRecipe(new ItemStack(Items.golden_apple, 1, 1), 1000, new Color("CCCC00"), MetadataBehavior.Specified));
