@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkProviderServer;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -29,11 +30,14 @@ import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
 import exnihilo2.registries.CompostRegistry;
+import exnihilo2.world.generation.WorldTypeSkyblock;
 import exnihilo2.world.manipulation.Moss;
 
 @Mod(name = EN2Data.NAME, modid = EN2Data.MODID, version = EN2Data.VERSION)
 public class EN2
 {
+	private WorldType worldType;
+	
 	 @SidedProxy(serverSide = "exnihilo2.proxy.ServerProxy", clientSide = "exnihilo2.proxy.ClientProxy")
 	 public static Proxy proxy;
 	 
@@ -62,6 +66,8 @@ public class EN2
     public void doInitialize(FMLInitializationEvent event)
     {
     	proxy.registerRenderers();
+    	
+    	worldType = new WorldTypeSkyblock();
     }
     
     @EventHandler
