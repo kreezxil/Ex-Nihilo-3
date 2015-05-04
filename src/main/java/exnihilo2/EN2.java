@@ -8,11 +8,13 @@ import org.apache.logging.log4j.Logger;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkProviderServer;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -30,7 +32,7 @@ import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
 import exnihilo2.registries.CompostRegistry;
-import exnihilo2.world.generation.WorldTypeSkyblock;
+import exnihilo2.world.EN2World;
 import exnihilo2.world.manipulation.Moss;
 
 @Mod(name = EN2Data.NAME, modid = EN2Data.MODID, version = EN2Data.VERSION)
@@ -67,7 +69,7 @@ public class EN2
     {
     	proxy.registerRenderers();
     	
-    	worldType = new WorldTypeSkyblock();
+    	EN2World.registerWorldProviders();
     }
     
     @EventHandler
@@ -83,15 +85,20 @@ public class EN2
 	}
     
     @SubscribeEvent
+    public void onWorldLoad(WorldEvent.Load e)
+    {
+        if (!e.world.isRemote && e.world instanceof WorldServer)
+        {
+        	EN2World.load(e.world);
+        }
+    }
+    
+    @SubscribeEvent
     public void onWorldTick(TickEvent.WorldTickEvent e)
     {
     	if (e.side == Side.SERVER && e.phase == TickEvent.Phase.START)
     	{
-    		ChunkProviderServer provider = (ChunkProviderServer)e.world.getChunkProvider();
-            for (Object o : provider.func_152380_a().toArray())
-            {
-            	Moss.grow(e.world, (Chunk)o);
-            }
+    		EN2World.tick(e.world);
     	}
     }
 }
