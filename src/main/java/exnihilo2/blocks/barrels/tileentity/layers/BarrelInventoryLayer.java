@@ -25,7 +25,11 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	protected ArrayList<ItemStack> output = new ArrayList<ItemStack>();
 	protected ItemStack contents = null;
 	protected int MAX_OUTPUT_QUEUE_SIZE = 1;
-
+	
+	private int[] SLOTS_AVAILABLE_FROM_TOP = new int[]{1};
+	private int[] SLOTS_AVAILABLE_FROM_BOTTOM = new int[]{0};
+	private int[] SLOTS_NONE = new int[]{};
+	
 	public void addOutput(ItemStack item)
 	{
 		if (item != null && item.stackSize > 0)
@@ -211,15 +215,15 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	{
 		if (side == EnumFacing.DOWN)
 		{
-			return new int[]{0};
+			return SLOTS_AVAILABLE_FROM_BOTTOM;
 		}
 		
 		if (side == EnumFacing.UP)
 		{
-			return new int[]{1};
+			return SLOTS_AVAILABLE_FROM_TOP;
 		}
 		
-		return null;
+		return SLOTS_NONE;
 	}
 
 	@Override
