@@ -17,11 +17,6 @@ public class ChunkProviderVoidEnd extends ChunkProviderEnd{
 		this.world = world;
 	}
 
-    @Override public Chunk provideChunk(BlockPos pos)
-    { 
-    	return this.provideChunk(pos.getX() >> 4, pos.getZ() >> 4); 
-    }
-    
     @Override
     public Chunk provideChunk(int x, int z)
     {

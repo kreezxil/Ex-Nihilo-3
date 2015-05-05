@@ -18,17 +18,10 @@ public class ChunkProviderVoidHell extends ChunkProviderHell{
 		this.world = world;
 	}
 
-	@Override 
-	public Chunk provideChunk(BlockPos pos)
-	{ 
-		return this.provideChunk(pos.getX() >> 4, pos.getZ() >> 4); 
-	}
-
 	@Override
 	public Chunk provideChunk(int x, int z)
 	{
-		ChunkPrimer primer = new ChunkPrimer();
-		Chunk chunk = new Chunk(world, primer, x, z);
+		Chunk chunk = new Chunk(world, new ChunkPrimer(), x, z);
 
         chunk.generateSkylightMap();
         

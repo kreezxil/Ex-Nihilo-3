@@ -2,9 +2,11 @@ package exnihilo2.world.generation.maps;
 
 import java.util.ArrayList;
 
+import net.minecraft.init.Items;
 import exnihilo2.EN2;
 import exnihilo2.world.generation.maps.pojos.Map;
 import exnihilo2.world.generation.maps.pojos.MapBlock;
+import exnihilo2.world.generation.maps.pojos.MapItem;
 
 public class MapDefault {
 	public static Map generate()
@@ -51,6 +53,13 @@ public class MapDefault {
 		blocks.add(new MapBlock("minecraft:dirt", 0, 1, -2, -1));
 		blocks.add(new MapBlock("minecraft:dirt", 0, 1, -2, 0));
 		blocks.add(new MapBlock("minecraft:dirt", 0, 1, -2, 1));
+		
+		//chest
+		MapBlock chest = new MapBlock("minecraft:chest", 0, 0, 1, 1);
+		chest.setContents(new ArrayList<MapItem>());
+		chest.getContents().add(new MapItem("minecraft:lava_bucket", 1, 0));
+		chest.getContents().add(new MapItem("minecraft:ice", 1, 0));
+		blocks.add(chest);
 		
 		return map;
 	}

@@ -7,13 +7,19 @@ import exnihilo2.EN2;
 import exnihilo2.world.EN2World;
 import exnihilo2.world.generation.maps.pojos.Map;
 import exnihilo2.world.generation.maps.pojos.MapBlock;
+import exnihilo2.world.generation.maps.pojos.MapItem;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderFlat;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
@@ -31,31 +37,25 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
         this.world = world;
     }
     
-    @Override 
-    public Chunk provideChunk(BlockPos pos)
-    { 
-    	return this.provideChunk(pos.getX() >> 4, pos.getZ() >> 4); 
-    }
-    
     @Override
     public Chunk provideChunk(int x, int z)
     {
         Chunk chunk = new Chunk(world, new ChunkPrimer(), x, z);
-        
+
         chunk.generateSkylightMap();
-        
-        if (getChunkContainsPoint(chunk, world.getWorldInfo().getSpawnX(), world.getWorldInfo().getSpawnZ()))
-        {
-        	buildMap(world, chunk, world.getWorldInfo().getSpawnX(), world.getWorldInfo().getSpawnZ());
-        }
         
         return chunk;
     }
     
     @Override
-    public void populate(net.minecraft.world.chunk.IChunkProvider par1IChunkProvider, int par2, int par3)
+    public void populate(IChunkProvider provider, int x, int z)
     {
-    	//Do nothing.
+    	Chunk chunk = world.getChunkFromChunkCoords(x, z);
+    	
+    	if (isChunkSpawn(world, chunk))
+        {
+        	buildMap(world, chunk, world.getWorldInfo().getSpawnX(), world.getWorldInfo().getSpawnZ());
+        }
     }
     
     private void buildMap(World world, Chunk chunk, int xOffset, int zOffset)
@@ -68,15 +68,42 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
     		
     		for (MapBlock b : blocks)
     		{
-    			String[] names = b.getId().split(":");
-    			
     			//GameRegistry is currently broken. Using an ugly method I found on minecraftforgeforums instead. :(
     			//Block block = GameRegistry.findBlock(names[0], names[1]);
-    			Block block = findBlock(names[0], names[1]);
+    			Block block = findBlock(b.getId());
     			
     			if (block != null)
     			{
-    				setBlock(world, chunk, b.getX() + xOffset, b.getY() + map.getSpawnYLevel(), b.getZ() + zOffset, block, b.getMeta());
+    				int x = b.getX() + xOffset;
+    				int y = b.getY() + map.getSpawnYLevel();
+    				int z = b.getZ() + zOffset;
+    				
+    				setBlock(world, chunk, x, y, z, block, b.getMeta());
+    				
+    				TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
+    				if (b.getContents() != null && te != null && te instanceof IInventory)
+    				{
+    					IInventory inv = (IInventory) te;
+    					
+    					if (inv != null)
+    					{
+    						int i = 0;
+    						int max = inv.getSizeInventory();
+    						
+    						for (MapItem contentItem : b.getContents())
+    						{
+    							if (i < max && contentItem.getCount() > 0)
+    							{
+    								Item item = findItem(contentItem.getId());
+    								
+    								if (item != null)
+    									inv.setInventorySlotContents(i, new ItemStack(item, contentItem.getCount(), contentItem.getMeta()));
+    							}
+    								
+    							i++;
+    						}
+    					}
+    				}
     			}
     			else
     			{
@@ -90,21 +117,11 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
     	}
     }
     
-    public static boolean getChunkContainsPoint(Chunk chunk, int x, int z)
-	{
-		int chunkXMin = chunk.xPosition * 16;
-    	int chunkXMax = chunk.xPosition * 16 + 16;
-    	int chunkZMin = chunk.zPosition * 16;
-    	int chunkZMax = chunk.zPosition * 16 + 16;
-    	
-    	return (x >= chunkXMin && x < chunkXMax && z >= chunkZMin && z < chunkZMax);
-	}
-	
 	public static void setBlock(World world, Chunk chunk, int x, int y, int z, Block block, int meta)
 	{
 		BlockPos pos = new BlockPos(x, y, z);
 		
-		if (getChunkContainsPoint(chunk, pos.getX(), pos.getZ()))
+		if (getChunkContainsPoint(chunk, x, z))
 		{
 			chunk.setBlockState(pos, block.getStateFromMeta(meta));
 		}
@@ -112,6 +129,37 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
 		{
 			world.getChunkFromBlockCoords(pos).setBlockState(pos, block.getStateFromMeta(meta));
 		}
+	}
+	
+	public static boolean isChunkSpawn(World world, Chunk chunk)
+	{
+		return getChunkContainsPoint(chunk, world.getWorldInfo().getSpawnX(), world.getWorldInfo().getSpawnZ());
+	}
+	
+	public static boolean getChunkContainsPoint(Chunk chunk, int x, int z)
+	{
+    	return (x >> 4 == chunk.xPosition && z >> 4 == chunk.zPosition);
+	}
+	
+	public static Block findBlock(String id)
+	{
+		String[] names = id.split(":");
+		
+		//GameRegistry is currently broken. Using an ugly method I found on minecraftforgeforums instead. :(
+		//TODO: Uncomment this when someone fixes it.
+		//Block block = GameRegistry.findBlock(names[0], names[1]);
+		Block block = findBlock(names[0], names[1]);
+		
+		return block;
+	}
+	
+	public static Item findItem(String id)
+	{
+		String[] names = id.split(":");
+		
+		Item item = GameRegistry.findItem(names[0], names[1]);
+		
+		return item;
 	}
 	
 	//Method found @ http://www.minecraftforge.net/forum/index.php?topic=29989.0
