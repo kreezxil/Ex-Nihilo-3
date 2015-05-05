@@ -1,12 +1,14 @@
 package exnihilo2.world.generation;
 
+import exnihilo2.world.EN2World;
+import exnihilo2.world.generation.maps.pojos.Map;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldProviderVoidSurface extends WorldProviderSurface{
-
+	
 	@Override
     public IChunkProvider createChunkGenerator()
     {
@@ -23,7 +25,16 @@ public class WorldProviderVoidSurface extends WorldProviderSurface{
 	public BlockPos getRandomizedSpawnPoint()
 	{
 		BlockPos spawn = new BlockPos(worldObj.getSpawnPoint());
-		spawn = worldObj.getTopSolidOrLiquidBlock(spawn);
+		Map map = EN2World.getMap();
+		
+		if (map != null)
+		{
+			spawn = new BlockPos(spawn.getX(), map.getSpawnYLevel(), spawn.getZ());
+		}
+		else
+		{
+			spawn = worldObj.getTopSolidOrLiquidBlock(spawn);
+		}
 		
 		return spawn;
 	}

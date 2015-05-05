@@ -1,5 +1,7 @@
 package exnihilo2.world;
 
+import java.io.File;
+
 import exnihilo2.EN2;
 import exnihilo2.world.generation.WorldProviderVoidSurface;
 import exnihilo2.world.generation.WorldProviderVoidEnd;
@@ -11,15 +13,24 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkProviderServer;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.config.Configuration;
 
 public class EN2World {
+	private static String CATEGORY_WORLDGEN = "world generation";
+	
 	private static Map map;
 	
-	public static void loadMap(String path)
+	private static boolean gen_surface;
+	private static boolean gen_nether;
+	private static boolean gen_end;
+	
+	public static void load(Configuration config)
 	{
-		//TODO: Load the file at the path and pass it into the MapLoader.
+		gen_surface = config.get(CATEGORY_WORLDGEN, "void overworld", false).getBoolean(false);
+		gen_nether = config.get(CATEGORY_WORLDGEN, "void nether", false).getBoolean(false);
+		gen_end = config.get(CATEGORY_WORLDGEN, "void end", false).getBoolean(false);
 		
-		map = MapLoader.load("");
+		map = MapLoader.load(EN2.path + File.separator + "maps" + File.separator + config.get(CATEGORY_WORLDGEN, "map file", "default.json").getString());
 	}
 	
 	public static Map getMap()
@@ -29,9 +40,14 @@ public class EN2World {
 	
 	public static void registerWorldProviders()
 	{
-		hijackEndGeneration();
-		hijackOverworldGeneration();
-		hijackNetherGeneration();
+		if (gen_end)
+			hijackEndGeneration();
+		
+		if (gen_surface)
+			hijackSurfaceGeneration();
+		
+		if (gen_nether)
+			hijackNetherGeneration();
 	}
 	
 	private static void hijackEndGeneration()
@@ -47,7 +63,7 @@ public class EN2World {
 		}
 	}
 	
-	private static void hijackOverworldGeneration()
+	private static void hijackSurfaceGeneration()
 	{
 		try
 		{

@@ -76,7 +76,7 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
     			
     			if (block != null)
     			{
-    				setBlock(world, chunk, b.getX() + xOffset, b.getY(), b.getZ() + zOffset, block);
+    				setBlock(world, chunk, b.getX() + xOffset, b.getY() + map.getSpawnYLevel(), b.getZ() + zOffset, block, b.getMeta());
     			}
     			else
     			{
@@ -100,17 +100,17 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
     	return (x >= chunkXMin && x < chunkXMax && z >= chunkZMin && z < chunkZMax);
 	}
 	
-	public static void setBlock(World world, Chunk chunk, int x, int y, int z, Block block)
+	public static void setBlock(World world, Chunk chunk, int x, int y, int z, Block block, int meta)
 	{
 		BlockPos pos = new BlockPos(x, y, z);
 		
 		if (getChunkContainsPoint(chunk, pos.getX(), pos.getZ()))
 		{
-			chunk.setBlockState(pos, block.getDefaultState());
+			chunk.setBlockState(pos, block.getStateFromMeta(meta));
 		}
 		else
 		{
-			world.getChunkFromBlockCoords(pos).setBlockState(pos, block.getDefaultState());
+			world.getChunkFromBlockCoords(pos).setBlockState(pos, block.getStateFromMeta(meta));
 		}
 	}
 	

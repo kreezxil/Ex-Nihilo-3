@@ -8,7 +8,7 @@ public class MapBlock {
 	private int x;
 	private int y;
 	private int z;
-	private ArrayList<MapItem>contents = new ArrayList<MapItem>();
+	private ArrayList<MapItem>contents;
 	
 	public MapBlock(){}
 	public MapBlock(String idIn, int metaIn, int xIn, int yIn, int zIn)
