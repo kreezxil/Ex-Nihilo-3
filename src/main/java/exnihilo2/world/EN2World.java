@@ -4,6 +4,8 @@ import exnihilo2.EN2;
 import exnihilo2.world.generation.WorldProviderVoidSurface;
 import exnihilo2.world.generation.WorldProviderVoidEnd;
 import exnihilo2.world.generation.WorldProviderVoidHell;
+import exnihilo2.world.generation.maps.MapLoader;
+import exnihilo2.world.generation.maps.pojos.Map;
 import exnihilo2.world.manipulation.Moss;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -11,6 +13,20 @@ import net.minecraft.world.gen.ChunkProviderServer;
 import net.minecraftforge.common.DimensionManager;
 
 public class EN2World {
+	private static Map map;
+	
+	public static void loadMap(String path)
+	{
+		//TODO: Load the file at the path and pass it into the MapLoader.
+		
+		map = MapLoader.load("");
+	}
+	
+	public static Map getMap()
+	{
+		return map;
+	}
+	
 	public static void registerWorldProviders()
 	{
 		hijackEndGeneration();

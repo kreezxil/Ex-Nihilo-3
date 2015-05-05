@@ -30,14 +30,6 @@ public class ChunkProviderVoidHell extends ChunkProviderHell{
 		ChunkPrimer primer = new ChunkPrimer();
 		Chunk chunk = new Chunk(world, primer, x, z);
 
-        BiomeGenBase[] biomes = world.getWorldChunkManager().loadBlockGeneratorData(null, x * 16, z * 16, 16, 16);
-        byte[] ids = chunk.getBiomeArray();
-
-        for (int i = 0; i < ids.length; ++i)
-        {
-            ids[i] = (byte)biomes[i].biomeID;
-        }
-
         chunk.generateSkylightMap();
         
         return chunk;

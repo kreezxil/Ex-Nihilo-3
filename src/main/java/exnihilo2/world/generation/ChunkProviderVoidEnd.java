@@ -27,14 +27,6 @@ public class ChunkProviderVoidEnd extends ChunkProviderEnd{
     {
         Chunk chunk = new Chunk(world, new ChunkPrimer(), x, z);
         
-        BiomeGenBase[] biomes = world.getWorldChunkManager().loadBlockGeneratorData(null, x * 16, z * 16, 16, 16);
-        byte[] ids = chunk.getBiomeArray();
-
-        for (int i = 0; i < ids.length; ++i)
-        {
-            ids[i] = (byte)biomes[i].biomeID;
-        }
-
         chunk.generateSkylightMap();
         
         return chunk;

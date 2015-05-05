@@ -1,5 +1,6 @@
 package exnihilo2;
 
+import java.io.File;
 import java.util.Iterator;
 
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkProviderServer;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -38,18 +40,21 @@ import exnihilo2.world.manipulation.Moss;
 @Mod(name = EN2Data.NAME, modid = EN2Data.MODID, version = EN2Data.VERSION)
 public class EN2
 {
-	private WorldType worldType;
-	
 	 @SidedProxy(serverSide = "exnihilo2.proxy.ServerProxy", clientSide = "exnihilo2.proxy.ClientProxy")
 	 public static Proxy proxy;
 	 
 	 public static Logger log = LogManager.getLogger(EN2Data.NAME);
+	 public static String path;
+	 public static Configuration config;
 	
     @EventHandler
 	public void preInitialize(FMLPreInitializationEvent event)
 	{
     	MinecraftForge.EVENT_BUS.register(this);
     	FMLCommonHandler.instance().bus().register(this);
+    	
+    	path = event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "ExNihilo2" + File.separator;
+    	config = new Configuration(new File(path + "ExNihilo2.cfg"));
     	
     	EN2ToolMaterials.initialize();
     	
@@ -62,6 +67,9 @@ public class EN2
     	EN2Blocks.registerTileEntities();
     	
     	CompostRegistry.addVanillaRecipes();
+    	
+    	//TODO: build map path from config file.
+    	EN2World.loadMap("");
 	}
     
     @EventHandler
