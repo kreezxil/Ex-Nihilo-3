@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 public class Moss {
-	private static int speed = 8;
+	private static int speed = 16;
 
 	public static void grow(World world, Chunk chunk)
 	{
@@ -22,7 +22,7 @@ public class Moss {
 
 			if (state.getBlock() == Blocks.cobblestone || state.getBlock() == Blocks.stonebrick)
 			{
-				if (hasAdjacentMossSources(world, pos))
+				if (hasNearbyWaterSource(world, pos))
 				{
 					if (state.getBlock() == Blocks.cobblestone)
 					{
@@ -37,20 +37,33 @@ public class Moss {
 		}
 	}
 
-	private static boolean hasAdjacentMossSources(World world, BlockPos pos)
+	//Not currently used
+//	private static boolean hasAdjacentMossSources(World world, BlockPos pos)
+//	{
+//		return (isMossSource(world, new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()))
+//				|| isMossSource(world, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()))
+//				|| isMossSource(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1))
+//				|| isMossSource(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1))
+//				|| isMossSource(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()))
+//				|| isMossSource(world, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ())));
+//	}
+//	
+//	private static boolean isMossSource(World world, BlockPos pos)
+//	{
+//		IBlockState state = world.getBlockState(pos);
+//
+//		return state.getBlock() == Blocks.water || state.getBlock() == Blocks.mossy_cobblestone || (state.getBlock() == Blocks.stonebrick && state.getBlock().getMetaFromState(state) == 1);
+//	}
+	
+	private static boolean hasNearbyWaterSource(World world, BlockPos pos)
 	{
-		return (isMossSource(world, new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()))
-				|| isMossSource(world, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()))
-				|| isMossSource(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1))
-				|| isMossSource(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1))
-				|| isMossSource(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()))
-				|| isMossSource(world, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ())));
+		IBlockState state = world.getBlockState(getRandomNearbyPosition(world, pos));
+		
+		return (state.getBlock() == Blocks.water);
 	}
-
-	private static boolean isMossSource(World world, BlockPos pos)
+	
+	private static BlockPos getRandomNearbyPosition(World world, BlockPos pos)
 	{
-		IBlockState state = world.getBlockState(pos);
-
-		return state.getBlock() == Blocks.water || state.getBlock() == Blocks.mossy_cobblestone || (state.getBlock() == Blocks.stonebrick && state.getBlock().getMetaFromState(state) == 1);
+		return new BlockPos(pos.getX() + world.rand.nextInt(2) - 1, pos.getY() + world.rand.nextInt(2) - 1, pos.getZ() + world.rand.nextInt(2) - 1);
 	}
 }
