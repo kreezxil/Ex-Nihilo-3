@@ -50,15 +50,13 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
     @Override
     public void populate(IChunkProvider provider, int x, int z)
     {
-    	Chunk chunk = world.getChunkFromChunkCoords(x, z);
-    	
-    	if (isChunkSpawn(world, chunk))
+    	if (isChunkSpawn(world, world.getChunkFromChunkCoords(x, z)))
         {
-        	buildMap(world, chunk, world.getWorldInfo().getSpawnX(), world.getWorldInfo().getSpawnZ());
+        	buildMap(world, world.getWorldInfo().getSpawnX(), world.getWorldInfo().getSpawnZ());
         }
     }
     
-    private void buildMap(World world, Chunk chunk, int xOffset, int zOffset)
+    private void buildMap(World world, int xOffset, int zOffset)
     {
     	Map map = EN2World.getMap();
     	
@@ -68,8 +66,6 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
     		
     		for (MapBlock b : blocks)
     		{
-    			//GameRegistry is currently broken. Using an ugly method I found on minecraftforgeforums instead. :(
-    			//Block block = GameRegistry.findBlock(names[0], names[1]);
     			Block block = findBlock(b.getId());
     			
     			if (block != null)
@@ -78,7 +74,7 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
     				int y = b.getY() + map.getSpawnYLevel();
     				int z = b.getZ() + zOffset;
     				
-    				setBlock(world, chunk, x, y, z, block, b.getMeta());
+    				world.setBlockState(new BlockPos(x, y, z), block.getStateFromMeta(b.getMeta()));
     				
     				TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
     				if (b.getContents() != null && te != null && te instanceof IInventory)
@@ -116,11 +112,6 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
     		EN2.log.error("Failed to load map.");
     	}
     }
-    
-	public static void setBlock(World world, Chunk chunk, int x, int y, int z, Block block, int meta)
-	{
-		world.setBlockState(new BlockPos(x, y, z), block.getStateFromMeta(meta));
-	}
 	
 	public static boolean isChunkSpawn(World world, Chunk chunk)
 	{
