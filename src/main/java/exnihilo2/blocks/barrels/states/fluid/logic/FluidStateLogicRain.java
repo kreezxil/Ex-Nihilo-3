@@ -16,9 +16,7 @@ public class FluidStateLogicRain extends BarrelLogic{
 		{
 			if (Position.isRainingAt(barrel.getWorld(), barrel.getPos()))
 			{
-				FluidStack water = new FluidStack(FluidRegistry.WATER, 1);
-
-				barrel.fill(water, true);
+				barrel.fill(new FluidStack(FluidRegistry.WATER, 1), true);
 			}
 		}
 		
