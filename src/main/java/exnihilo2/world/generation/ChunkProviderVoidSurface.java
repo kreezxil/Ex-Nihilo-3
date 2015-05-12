@@ -119,16 +119,7 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
     
 	public static void setBlock(World world, Chunk chunk, int x, int y, int z, Block block, int meta)
 	{
-		BlockPos pos = new BlockPos(x, y, z);
-		
-		if (getChunkContainsPoint(chunk, x, z))
-		{
-			chunk.setBlockState(pos, block.getStateFromMeta(meta));
-		}
-		else
-		{
-			world.getChunkFromBlockCoords(pos).setBlockState(pos, block.getStateFromMeta(meta));
-		}
+		world.setBlockState(new BlockPos(x, y, z), block.getStateFromMeta(meta));
 	}
 	
 	public static boolean isChunkSpawn(World world, Chunk chunk)
