@@ -1,6 +1,7 @@
 package exnihilo2.world.manipulation;
 
 import exnihilo2.EN2;
+import exnihilo2.util.Position;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStoneBrick;
 import net.minecraft.block.state.BlockState;
@@ -12,58 +13,36 @@ import net.minecraft.world.chunk.Chunk;
 
 public class Moss {
 	private static int speed = 16;
+	private static BlockPos pos = null;
+	private static IBlockState state = null;
 
 	public static void grow(World world, Chunk chunk)
 	{
 		for (int i = 0; i < speed; i++)
 		{
-			BlockPos pos = new BlockPos((chunk.xPosition * 16) + world.rand.nextInt(16), world.rand.nextInt(256), (chunk.zPosition * 16) + world.rand.nextInt(16));
-			IBlockState state = world.getBlockState(pos);
-
-			if (state.getBlock() == Blocks.cobblestone || state.getBlock() == Blocks.stonebrick)
+			pos = Position.getRandomPositionInChunk(world, chunk);
+			state = world.getBlockState(pos);
+			
+			if (isValidCobblestone(state) && Position.hasNearbyWaterSource(world, pos))
 			{
-				if (hasNearbyWaterSource(world, pos))
-				{
-					if (state.getBlock() == Blocks.cobblestone)
-					{
-						world.setBlockState(pos, Blocks.mossy_cobblestone.getDefaultState());
-					}
-					else if (state.getBlock() == Blocks.stonebrick)
-					{
-						world.setBlockState(pos, Blocks.stonebrick.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY));
-					}
-				}
+				world.setBlockState(pos, Blocks.mossy_cobblestone.getDefaultState());
+			}
+			else if (isValidStoneBrick(state) && Position.hasNearbyWaterSource(world, pos))
+			{
+				world.setBlockState(pos, Blocks.stonebrick.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY));
 			}
 		}
 	}
-
-	//Not currently used
-//	private static boolean hasAdjacentMossSources(World world, BlockPos pos)
-//	{
-//		return (isMossSource(world, new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()))
-//				|| isMossSource(world, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()))
-//				|| isMossSource(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1))
-//				|| isMossSource(world, new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1))
-//				|| isMossSource(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()))
-//				|| isMossSource(world, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ())));
-//	}
-//	
-//	private static boolean isMossSource(World world, BlockPos pos)
-//	{
-//		IBlockState state = world.getBlockState(pos);
-//
-//		return state.getBlock() == Blocks.water || state.getBlock() == Blocks.mossy_cobblestone || (state.getBlock() == Blocks.stonebrick && state.getBlock().getMetaFromState(state) == 1);
-//	}
 	
-	private static boolean hasNearbyWaterSource(World world, BlockPos pos)
+	private static boolean isValidCobblestone(IBlockState state)
 	{
-		IBlockState state = world.getBlockState(getRandomNearbyPosition(world, pos));
-		
-		return (state.getBlock() == Blocks.water);
+		return state.getBlock() == Blocks.cobblestone;
 	}
 	
-	private static BlockPos getRandomNearbyPosition(World world, BlockPos pos)
+	private static boolean isValidStoneBrick(IBlockState state)
 	{
-		return new BlockPos(pos.getX() + world.rand.nextInt(2) - 1, pos.getY() + world.rand.nextInt(2) - 1, pos.getZ() + world.rand.nextInt(2) - 1);
+		return state.getBlock() == Blocks.stonebrick 
+				&& (state.getValue(BlockStoneBrick.VARIANT) == BlockStoneBrick.EnumType.DEFAULT
+				|| state.getValue(BlockStoneBrick.VARIANT) == BlockStoneBrick.EnumType.CRACKED);
 	}
 }
