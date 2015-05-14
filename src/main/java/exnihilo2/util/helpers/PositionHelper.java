@@ -47,4 +47,17 @@ public abstract class PositionHelper {
 	{
 		return world.isRaining() && world.getBiomeGenForCoords(pos).getFloatRainfall() > 0f && isTopBlock(world, pos);
 	}
+	
+	public static boolean isChunkSpawn(World world, Chunk chunk)
+	{
+		double x = (double)world.getWorldInfo().getSpawnX() / world.provider.getMovementFactor();
+		double z = (double)world.getWorldInfo().getSpawnZ() / world.provider.getMovementFactor();
+		
+		return getChunkContainsPoint(chunk, (int)x, (int)z);
+	}
+	
+	public static boolean getChunkContainsPoint(Chunk chunk, int x, int z)
+	{
+    	return (x >> 4 == chunk.xPosition && z >> 4 == chunk.zPosition);
+	}
 }

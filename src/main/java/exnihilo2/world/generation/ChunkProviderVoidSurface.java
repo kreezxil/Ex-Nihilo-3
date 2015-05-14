@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import exnihilo2.EN2;
 import exnihilo2.util.helpers.GameRegistryHelper;
+import exnihilo2.util.helpers.PositionHelper;
 import exnihilo2.world.EN2World;
 import exnihilo2.world.generation.templates.pojos.Template;
 import exnihilo2.world.generation.templates.pojos.TemplateBlock;
@@ -51,35 +52,18 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
     @Override
     public void populate(IChunkProvider provider, int x, int z)
     {
-    	if (isChunkSpawn(world, world.getChunkFromChunkCoords(x, z)))
+    	if (PositionHelper.isChunkSpawn(world, world.getChunkFromChunkCoords(x, z)))
         {
-        	buildMap(world, world.getWorldInfo().getSpawnX(), world.getWorldInfo().getSpawnZ());
+        	Template template = EN2World.getOverworldTemplate();
+        	
+        	if (template!= null)
+        	{
+        		template.generate(world, world.getWorldInfo().getSpawnX(), world.getWorldInfo().getSpawnZ());
+        	}
+        	else
+        	{
+        		EN2.log.error("Failed to load overworld map template.");
+        	}
         }
     }
-    
-    private void buildMap(World world, int xOffset, int zOffset)
-    {
-    	Template template = EN2World.getOverworldTemplate();
-    	
-    	if (template!= null)
-    	{
-    		template.generate(world, xOffset, zOffset);
-    	}
-    	else
-    	{
-    		EN2.log.error("Failed to load map.");
-    	}
-    }
-	
-	public static boolean isChunkSpawn(World world, Chunk chunk)
-	{
-		return getChunkContainsPoint(chunk, world.getWorldInfo().getSpawnX(), world.getWorldInfo().getSpawnZ());
-	}
-	
-	public static boolean getChunkContainsPoint(Chunk chunk, int x, int z)
-	{
-    	return (x >> 4 == chunk.xPosition && z >> 4 == chunk.zPosition);
-	}
-	
-	
 }

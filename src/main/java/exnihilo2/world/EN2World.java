@@ -19,6 +19,8 @@ public class EN2World {
 	private static String CATEGORY_WORLDGEN = "world generation";
 	
 	private static Template template_overworld;
+	private static Template template_nether;
+	private static Template template_end;
 	
 	private static boolean gen_surface;
 	private static boolean gen_nether;
@@ -30,10 +32,31 @@ public class EN2World {
 		gen_nether = config.get(CATEGORY_WORLDGEN, "void nether", false).getBoolean(false);
 		gen_end = config.get(CATEGORY_WORLDGEN, "void end", false).getBoolean(false);
 		
-		template_overworld = TemplateLoader.load(EN2.path + File.separator + "templates" + File.separator + config.get(CATEGORY_WORLDGEN, "overworld template", "default.json").getString());
+		String template_overworld_name = config.get(CATEGORY_WORLDGEN, "void overworld template", "default.json").getString();
+		String template_nether_name = config.get(CATEGORY_WORLDGEN, "void nether template", "none").getString();
+		String template_end_name = config.get(CATEGORY_WORLDGEN, "void end template", "none").getString();
+		
+		if (template_overworld_name != "none" && template_overworld_name.trim().length() > 0)
+			template_overworld = TemplateLoader.load(EN2.path + File.separator + "templates" + File.separator + template_overworld_name);
+		
+		if (template_nether_name != "none" && template_nether_name.trim().length() > 0)
+			template_nether = TemplateLoader.load(EN2.path + File.separator + "templates" + File.separator + template_nether_name);
+		
+		if (template_end_name != "none" && template_end_name.trim().length() > 0)
+			template_end = TemplateLoader.load(EN2.path + File.separator + "templates" + File.separator + template_end_name);
 	}
 	
 	public static Template getOverworldTemplate()
+	{
+		return template_overworld;
+	}
+	
+	public static Template getNetherTemplate()
+	{
+		return template_overworld;
+	}
+	
+	public static Template getEndTemplate()
 	{
 		return template_overworld;
 	}
