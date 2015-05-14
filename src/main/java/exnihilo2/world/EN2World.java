@@ -24,25 +24,29 @@ public class EN2World {
 	
 	private static boolean gen_surface;
 	private static boolean gen_nether;
+	private static boolean gen_nether_allow_fortresses;
 	private static boolean gen_end;
+	private static boolean gen_end_allow_crystals;
 	
 	public static void load(Configuration config)
 	{
 		gen_surface = config.get(CATEGORY_WORLDGEN, "void overworld", false).getBoolean(false);
 		gen_nether = config.get(CATEGORY_WORLDGEN, "void nether", false).getBoolean(false);
+		gen_nether_allow_fortresses = config.get(CATEGORY_WORLDGEN, "void nether generate fortresses", false).getBoolean(false);
 		gen_end = config.get(CATEGORY_WORLDGEN, "void end", false).getBoolean(false);
+		gen_end_allow_crystals = config.get(CATEGORY_WORLDGEN, "void end generate crystals", false).getBoolean(false);
 		
 		String template_overworld_name = config.get(CATEGORY_WORLDGEN, "void overworld template", "default.json").getString();
 		String template_nether_name = config.get(CATEGORY_WORLDGEN, "void nether template", "none").getString();
 		String template_end_name = config.get(CATEGORY_WORLDGEN, "void end template", "none").getString();
 		
-		if (template_overworld_name != "none" && template_overworld_name.trim().length() > 0)
+		if (!template_overworld_name.equals("none") && template_overworld_name.trim().length() > 0)
 			template_overworld = TemplateLoader.load(EN2.path + File.separator + "templates" + File.separator + template_overworld_name);
 		
-		if (template_nether_name != "none" && template_nether_name.trim().length() > 0)
+		if (!template_nether_name.equals("none") && template_nether_name.trim().length() > 0)
 			template_nether = TemplateLoader.load(EN2.path + File.separator + "templates" + File.separator + template_nether_name);
 		
-		if (template_end_name != "none" && template_end_name.trim().length() > 0)
+		if (!template_end_name.equals("none") && template_end_name.trim().length() > 0)
 			template_end = TemplateLoader.load(EN2.path + File.separator + "templates" + File.separator + template_end_name);
 	}
 	
@@ -53,12 +57,22 @@ public class EN2World {
 	
 	public static Template getNetherTemplate()
 	{
-		return template_overworld;
+		return template_nether;
+	}
+	
+	public static boolean getNetherFortressesAllowed()
+	{
+		return gen_nether_allow_fortresses;
 	}
 	
 	public static Template getEndTemplate()
 	{
-		return template_overworld;
+		return template_end;
+	}
+	
+	public static boolean getEndCrystalsAllowed()
+	{
+		return gen_end_allow_crystals;
 	}
 	
 	public static void registerWorldProviders()
