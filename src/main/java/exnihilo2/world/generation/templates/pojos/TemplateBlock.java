@@ -1,17 +1,17 @@
-package exnihilo2.world.generation.maps.pojos;
+package exnihilo2.world.generation.templates.pojos;
 
 import java.util.ArrayList;
 
-public class MapBlock {
+public class TemplateBlock {
 	private String id;
 	private int meta;
 	private int x;
 	private int y;
 	private int z;
-	private ArrayList<MapItem>contents;
+	private ArrayList<TemplateItem>contents;
 	
-	public MapBlock(){}
-	public MapBlock(String idIn, int metaIn, int xIn, int yIn, int zIn)
+	public TemplateBlock(){}
+	public TemplateBlock(String idIn, int metaIn, int xIn, int yIn, int zIn)
 	{
 		this.id = idIn;
 		this.meta = metaIn;
@@ -50,10 +50,10 @@ public class MapBlock {
 	public void setZ(int z) {
 		this.z = z;
 	}
-	public ArrayList<MapItem> getContents() {
+	public ArrayList<TemplateItem> getContents() {
 		return contents;
 	}
-	public void setContents(ArrayList<MapItem> contents) {
+	public void setContents(ArrayList<TemplateItem> contents) {
 		this.contents = contents;
 	}
 	

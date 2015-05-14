@@ -1,8 +1,8 @@
-package exnihilo2.util;
+package exnihilo2.util.helpers;
 
 import net.minecraft.item.ItemStack;
 
-public class Inventory {
+public class InventoryHelper {
 	public static ItemStack getContainer(ItemStack item)
 	{
 		if (item.stackSize == 1) 

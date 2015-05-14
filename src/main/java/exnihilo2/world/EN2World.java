@@ -6,8 +6,8 @@ import exnihilo2.EN2;
 import exnihilo2.world.generation.WorldProviderVoidSurface;
 import exnihilo2.world.generation.WorldProviderVoidEnd;
 import exnihilo2.world.generation.WorldProviderVoidHell;
-import exnihilo2.world.generation.maps.MapLoader;
-import exnihilo2.world.generation.maps.pojos.Map;
+import exnihilo2.world.generation.templates.TemplateLoader;
+import exnihilo2.world.generation.templates.pojos.Template;
 import exnihilo2.world.manipulation.Moss;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -18,7 +18,7 @@ import net.minecraftforge.common.config.Configuration;
 public class EN2World {
 	private static String CATEGORY_WORLDGEN = "world generation";
 	
-	private static Map map;
+	private static Template template_overworld;
 	
 	private static boolean gen_surface;
 	private static boolean gen_nether;
@@ -30,12 +30,12 @@ public class EN2World {
 		gen_nether = config.get(CATEGORY_WORLDGEN, "void nether", false).getBoolean(false);
 		gen_end = config.get(CATEGORY_WORLDGEN, "void end", false).getBoolean(false);
 		
-		map = MapLoader.load(EN2.path + File.separator + "maps" + File.separator + config.get(CATEGORY_WORLDGEN, "map file", "default.json").getString());
+		template_overworld = TemplateLoader.load(EN2.path + File.separator + "templates" + File.separator + config.get(CATEGORY_WORLDGEN, "overworld template", "default.json").getString());
 	}
 	
-	public static Map getMap()
+	public static Template getOverworldTemplate()
 	{
-		return map;
+		return template_overworld;
 	}
 	
 	public static void registerWorldProviders()

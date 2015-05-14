@@ -1,12 +1,12 @@
-package exnihilo2.world.generation.maps.pojos;
+package exnihilo2.world.generation.templates.pojos;
 
-public class MapItem {
+public class TemplateItem {
 	private String id;
 	private int meta;
 	private int count;
 	
-	public MapItem(){};
-	public MapItem(String idIn, int countIn, int metaIn)
+	public TemplateItem(){};
+	public TemplateItem(String idIn, int countIn, int metaIn)
 	{
 		this.id = idIn;
 		this.count = countIn;

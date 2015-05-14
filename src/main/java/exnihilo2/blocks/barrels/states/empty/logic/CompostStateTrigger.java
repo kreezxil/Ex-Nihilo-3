@@ -11,7 +11,7 @@ import exnihilo2.blocks.barrels.architecture.BarrelLogic;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.registries.CompostRegistry;
 import exnihilo2.registries.recipes.CompostRecipe;
-import exnihilo2.util.Inventory;
+import exnihilo2.util.helpers.InventoryHelper;
 
 public class CompostStateTrigger extends BarrelLogic{
 	

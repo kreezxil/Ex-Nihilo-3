@@ -6,7 +6,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import exnihilo2.blocks.barrels.architecture.BarrelLogic;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
-import exnihilo2.util.Inventory;
+import exnihilo2.util.helpers.InventoryHelper;
 
 public class FluidStateLogicItems extends BarrelLogic{
 	@Override
@@ -40,7 +40,7 @@ public class FluidStateLogicItems extends BarrelLogic{
 		{
 			if (ifluid != null && barrel.fill(ifluid, false) > 0)
 			{
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, Inventory.getContainer(item));
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, InventoryHelper.getContainer(item));
 				barrel.fill(ifluid, true);
 			}
 			

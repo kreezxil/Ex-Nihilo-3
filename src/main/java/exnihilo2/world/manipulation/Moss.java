@@ -1,7 +1,7 @@
 package exnihilo2.world.manipulation;
 
 import exnihilo2.EN2;
-import exnihilo2.util.Position;
+import exnihilo2.util.helpers.PositionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStoneBrick;
 import net.minecraft.block.state.BlockState;
@@ -20,14 +20,14 @@ public class Moss {
 	{		
 		for (int i = 0; i < speed; i++)
 		{
-			pos = Position.getRandomPositionInChunk(world, chunk);
+			pos = PositionHelper.getRandomPositionInChunk(world, chunk);
 			state = world.getBlockState(pos);
 
-			if (isValidCobblestone(state) && (Position.hasNearbyWaterSource(world, pos) || Position.isRainingAt(world, pos)))
+			if (isValidCobblestone(state) && (PositionHelper.hasNearbyWaterSource(world, pos) || PositionHelper.isRainingAt(world, pos)))
 			{
 				world.setBlockState(pos, Blocks.mossy_cobblestone.getDefaultState());
 			}
-			else if (isValidStoneBrick(state) && (Position.hasNearbyWaterSource(world, pos) || Position.isRainingAt(world, pos)))
+			else if (isValidStoneBrick(state) && (PositionHelper.hasNearbyWaterSource(world, pos) || PositionHelper.isRainingAt(world, pos)))
 			{
 				world.setBlockState(pos, Blocks.stonebrick.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY));
 			}

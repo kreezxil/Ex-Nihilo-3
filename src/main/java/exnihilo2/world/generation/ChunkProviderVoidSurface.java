@@ -4,10 +4,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import exnihilo2.EN2;
+import exnihilo2.util.helpers.GameRegistryHelper;
 import exnihilo2.world.EN2World;
-import exnihilo2.world.generation.maps.pojos.Map;
-import exnihilo2.world.generation.maps.pojos.MapBlock;
-import exnihilo2.world.generation.maps.pojos.MapItem;
+import exnihilo2.world.generation.templates.pojos.Template;
+import exnihilo2.world.generation.templates.pojos.TemplateBlock;
+import exnihilo2.world.generation.templates.pojos.TemplateItem;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
@@ -58,54 +59,11 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
     
     private void buildMap(World world, int xOffset, int zOffset)
     {
-    	Map map = EN2World.getMap();
+    	Template template = EN2World.getOverworldTemplate();
     	
-    	if (map!= null)
+    	if (template!= null)
     	{
-    		ArrayList<MapBlock> blocks = map.getBlocks();
-    		
-    		for (MapBlock b : blocks)
-    		{
-    			Block block = findBlock(b.getId());
-    			
-    			if (block != null)
-    			{
-    				int x = b.getX() + xOffset;
-    				int y = b.getY() + map.getSpawnYLevel();
-    				int z = b.getZ() + zOffset;
-    				
-    				world.setBlockState(new BlockPos(x, y, z), block.getStateFromMeta(b.getMeta()));
-    				
-    				TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
-    				if (b.getContents() != null && te != null && te instanceof IInventory)
-    				{
-    					IInventory inv = (IInventory) te;
-    					
-    					if (inv != null)
-    					{
-    						int i = 0;
-    						int max = inv.getSizeInventory();
-    						
-    						for (MapItem contentItem : b.getContents())
-    						{
-    							if (i < max && contentItem.getCount() > 0)
-    							{
-    								Item item = findItem(contentItem.getId());
-    								
-    								if (item != null)
-    									inv.setInventorySlotContents(i, new ItemStack(item, contentItem.getCount(), contentItem.getMeta()));
-    							}
-    								
-    							i++;
-    						}
-    					}
-    				}
-    			}
-    			else
-    			{
-    				EN2.log.error("Unable to locate block (" + b.getId() + ").");
-    			}
-    		}
+    		template.generate(world, xOffset, zOffset);
     	}
     	else
     	{
@@ -123,72 +81,5 @@ public class ChunkProviderVoidSurface extends ChunkProviderGenerate
     	return (x >> 4 == chunk.xPosition && z >> 4 == chunk.zPosition);
 	}
 	
-	public static Block findBlock(String id)
-	{
-		String[] names = id.split(":");
-		
-		//GameRegistry is currently broken. Using an ugly method I found on minecraftforgeforums instead. :(
-		//TODO: Uncomment this when someone fixes it.
-		//Block block = GameRegistry.findBlock(names[0], names[1]);
-		Block block = findBlock(names[0], names[1]);
-		
-		return block;
-	}
 	
-	public static Item findItem(String id)
-	{
-		String[] names = id.split(":");
-		
-		Item item = GameRegistry.findItem(names[0], names[1]);
-		
-		return item;
-	}
-	
-	//Method found @ http://www.minecraftforge.net/forum/index.php?topic=29989.0
-	/**
-	* Tries to approach all legit ways to get a block from the game registry
-	* but will go hackish when needed to to get the desired result.
-	* @param modid String The modname
-	* @param blockname String the block name
-	* @return Blocks.air on not finding anything or the desired block.
-	*/
-	public static Block findBlock(String modid, String blockname) {
-		Block find = GameRegistry.findBlock(modid,blockname);
-		// legit way fails?
-		if(find == null) {
-			String searchkey = modid+":"+blockname;
-			// Lets fire up the reflection...
-			// You might want to put the map somewhere so you
-			// don't have to reflect every time. saves a lot of cpu time.
-			Class x = GameData.class;
-				try {
-					Method method = x.getDeclaredMethod("getMain");
-					method.setAccessible(true);
-					GameData gamedata = (GameData)method.invoke(null);
-					// and I mean saving the below list b
-					FMLControlledNamespacedRegistry<Block> b = gamedata.getBlockRegistry();
-					// lets be gracious and give it a chance to find it this way
-					if(b.containsKey(searchkey)) {
-						find = b.getObject(searchkey);
-					}
-					else {
-						// take a wild stab. returns air if nothing found
-						find = b.getObject(searchkey);
-						if(find != Blocks.air) {
-							//WhoTookMyCookies.log.warn("Chest found: "+GameRegistry.findUniqueIdentifierFor(b.getObject("minecraft:chest")).name);
-						}
-						else {
-							if(!searchkey.equals("minecraft:air")) {
-								return null;
-							}
-						}
-					}
-				}
-				catch(Exception ex) {
-					// your error handling here
-				}
-			}
-		
-		return find;
-	}
 }

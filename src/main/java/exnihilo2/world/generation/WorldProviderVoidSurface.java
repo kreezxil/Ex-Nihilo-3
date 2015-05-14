@@ -1,7 +1,7 @@
 package exnihilo2.world.generation;
 
 import exnihilo2.world.EN2World;
-import exnihilo2.world.generation.maps.pojos.Map;
+import exnihilo2.world.generation.templates.pojos.Template;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldProviderSurface;
@@ -25,7 +25,7 @@ public class WorldProviderVoidSurface extends WorldProviderSurface{
 	public BlockPos getRandomizedSpawnPoint()
 	{
 		BlockPos spawn = new BlockPos(worldObj.getSpawnPoint());
-		Map map = EN2World.getMap();
+		Template map = EN2World.getOverworldTemplate();
 		
 		if (map != null)
 		{

@@ -1,4 +1,4 @@
-package exnihilo2.util;
+package exnihilo2.util.helpers;
 
 import exnihilo2.EN2;
 import net.minecraft.block.Block;
@@ -7,7 +7,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
-public abstract class Position {
+public abstract class PositionHelper {
 	public static BlockPos getRandomPositionInChunk(World world, Chunk chunk)
 	{
 		return new BlockPos((chunk.xPosition * 16) + world.rand.nextInt(16), world.rand.nextInt(256), (chunk.zPosition * 16) + world.rand.nextInt(16));

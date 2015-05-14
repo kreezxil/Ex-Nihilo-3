@@ -11,13 +11,13 @@ import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.architecture.BarrelLogic;
 import exnihilo2.blocks.barrels.states.fluid.BarrelStateFluid;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
-import exnihilo2.util.Position;
+import exnihilo2.util.helpers.PositionHelper;
 
 public class FluidStateTriggerWeather extends BarrelLogic {
 	@Override
 	public boolean onUpdate(TileEntityBarrel barrel) {
 
-		if (Position.isRainingAt(barrel.getWorld(), barrel.getPos()))
+		if (PositionHelper.isRainingAt(barrel.getWorld(), barrel.getPos()))
 		{
 			barrel.fill(new FluidStack(FluidRegistry.WATER, 0), true);
 			return true;
