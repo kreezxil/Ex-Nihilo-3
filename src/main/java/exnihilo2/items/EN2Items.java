@@ -1,6 +1,6 @@
-package exnihilo2;
+package exnihilo2.items;
 
-import exnihilo2.items.ItemCrook;
+import exnihilo2.items.crooks.ItemCrook;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;

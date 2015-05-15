@@ -3,8 +3,8 @@ package exnihilo2.blocks.barrels.tileentity;
 import java.lang.reflect.Method;
 
 import exnihilo2.EN2;
-import exnihilo2.blocks.barrels.BarrelStates;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
+import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.blocks.barrels.tileentity.layers.BarrelFluidLayer;
 import exnihilo2.blocks.barrels.tileentity.layers.BarrelInventoryLayer;
 import exnihilo2.blocks.barrels.tileentity.layers.BarrelStateLayer;

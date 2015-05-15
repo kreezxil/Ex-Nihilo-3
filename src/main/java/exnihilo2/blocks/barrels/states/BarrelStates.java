@@ -1,4 +1,4 @@
-package exnihilo2.blocks.barrels;
+package exnihilo2.blocks.barrels.states;
 
 import java.util.HashMap;
 

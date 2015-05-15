@@ -1,12 +1,13 @@
-package exnihilo2;
+package exnihilo2.blocks;
 
 import java.util.ArrayList;
 
-import exnihilo2.blocks.BlockBarrel;
-import exnihilo2.blocks.BlockBarrelGlassColored;
+import exnihilo2.EN2;
+import exnihilo2.blocks.barrels.BlockBarrel;
+import exnihilo2.blocks.barrels.BlockBarrelGlassColored;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
-import exnihilo2.items.ItemBarrelGlassColored;
+import exnihilo2.items.itemblocks.ItemBarrelGlassColored;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -51,7 +52,7 @@ public class EN2Blocks {
 	
 	public static void registerTileEntities()
 	{
-		GameRegistry.registerTileEntity(TileEntityBarrel.class, EN2Data.MODID + ":tile_entity_barrel");
+		GameRegistry.registerTileEntity(TileEntityBarrel.class, EN2.MODID + ":tile_entity_barrel");
 	}
 	
 	private static void registerBlock(Block block)

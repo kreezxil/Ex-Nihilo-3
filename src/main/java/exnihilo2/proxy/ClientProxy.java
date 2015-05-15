@@ -20,11 +20,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import exnihilo2.EN2;
-import exnihilo2.EN2Blocks;
-import exnihilo2.EN2Data;
-import exnihilo2.EN2Items;
+import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.items.EN2Items;
 
 //Commands that only execute on the client.
 public class ClientProxy extends Proxy {
@@ -66,18 +65,18 @@ public class ClientProxy extends Proxy {
 			
 			for (ItemStack i : list)
 			{
-				ModelBakery.addVariantName(i.getItem(), EN2Data.MODID + ":" + i.getUnlocalizedName().substring(5));
-				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, i.getItemDamage(), new ModelResourceLocation(EN2Data.MODID + ":" + i.getUnlocalizedName().substring(5), "inventory"));
+				ModelBakery.addVariantName(i.getItem(), EN2.MODID + ":" + i.getUnlocalizedName().substring(5));
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, i.getItemDamage(), new ModelResourceLocation(EN2.MODID + ":" + i.getUnlocalizedName().substring(5), "inventory"));
 			}
 		}
 		else
 		{
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(EN2Data.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(EN2.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
 		}
 	}
 	
 	private static void registerRenderer(Item item)
 	{
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(EN2Data.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(EN2.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
 	}
 }

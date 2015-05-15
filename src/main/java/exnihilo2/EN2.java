@@ -30,86 +30,91 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import exnihilo2.blocks.barrels.BarrelStates;
+import exnihilo2.blocks.EN2Blocks;
+import exnihilo2.blocks.barrels.states.BarrelStates;
+import exnihilo2.items.EN2Items;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
 import exnihilo2.registries.CompostRegistry;
 import exnihilo2.world.EN2World;
 import exnihilo2.world.manipulation.Moss;
 
-@Mod(name = EN2Data.NAME, modid = EN2Data.MODID, version = EN2Data.VERSION)
+@Mod(name = EN2.NAME, modid = EN2.MODID, version = EN2.VERSION)
 public class EN2
 {
-	 @SidedProxy(serverSide = "exnihilo2.proxy.ServerProxy", clientSide = "exnihilo2.proxy.ClientProxy")
-	 public static Proxy proxy;
-	 
-	 public static Logger log = LogManager.getLogger(EN2Data.NAME);
-	 public static String path;
-	 public static Configuration config;
-	
-    @EventHandler
+	public static final String NAME = "Ex Nihilo 2";
+	public static final String MODID = "exnihilo2";
+	public static final String VERSION = "1.0";
+
+	@SidedProxy(serverSide = "exnihilo2.proxy.ServerProxy", clientSide = "exnihilo2.proxy.ClientProxy")
+	public static Proxy proxy;
+
+	public static Logger log = LogManager.getLogger(EN2.NAME);
+	public static String path;
+	public static Configuration config;
+
+	@EventHandler
 	public void preInitialize(FMLPreInitializationEvent event)
 	{
-    	MinecraftForge.EVENT_BUS.register(this);
-    	FMLCommonHandler.instance().bus().register(this);
-    	
-    	path = event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "ExNihilo2" + File.separator;
-    	config = new Configuration(new File(path + "ExNihilo2.cfg"));
-    	
-    	EN2ToolMaterials.initialize();
-    	
-    	EN2Items.initialize();
-    	EN2Blocks.initialize();
-    	BarrelStates.initialize();
-    	
-    	EN2Items.registerItems();
-    	EN2Blocks.registerBlocks();
-    	EN2Blocks.registerTileEntities();
-    	
-    	CompostRegistry.addVanillaRecipes();
-    	
-    	//TODO: build map path from config file.
-    	EN2World.configure(config);
-    	
-    	if(config.hasChanged())
+		MinecraftForge.EVENT_BUS.register(this);
+		FMLCommonHandler.instance().bus().register(this);
+
+		path = event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "ExNihilo2" + File.separator;
+		config = new Configuration(new File(path + "ExNihilo2.cfg"));
+
+		EN2ToolMaterials.initialize();
+
+		EN2Items.initialize();
+		EN2Blocks.initialize();
+		BarrelStates.initialize();
+
+		EN2Items.registerItems();
+		EN2Blocks.registerBlocks();
+		EN2Blocks.registerTileEntities();
+
+		CompostRegistry.addVanillaRecipes();
+
+		EN2World.configure(config);
+
+		if(config.hasChanged())
 			config.save();
 	}
-    
-    @EventHandler
-    public void doInitialize(FMLInitializationEvent event)
-    {
-    	proxy.registerRenderers();
-    	
-    	EN2World.registerWorldProviders();
-    }
-    
-    @EventHandler
+
+	@EventHandler
+	public void doInitialize(FMLInitializationEvent event)
+	{
+		proxy.registerRenderers();
+
+		EN2World.registerWorldProviders();
+	}
+
+	@EventHandler
 	public void postInitialize(FMLPostInitializationEvent event)
 	{
-    	
+
 	}
-    
-    @SubscribeEvent
+
+	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onTextureStitchEvent(TextureStitchEvent.Pre e) {
 		e.map.registerSprite(new ResourceLocation("exnihilo2:blocks/compost"));
 	}
-    
-    @SubscribeEvent
-    public void onWorldLoad(WorldEvent.Load e)
-    {
-        if (!e.world.isRemote && e.world instanceof WorldServer)
-        {
-        	EN2World.load(e.world);
-        }
-    }
-    
-    @SubscribeEvent
-    public void onWorldTick(TickEvent.WorldTickEvent e)
-    {
-    	if (e.side == Side.SERVER && e.phase == TickEvent.Phase.START)
-    	{
-    		EN2World.tick(e.world);
-    	}
-    }
+
+	@SubscribeEvent
+	public void onWorldLoad(WorldEvent.Load e)
+	{
+		if (!e.world.isRemote && e.world instanceof WorldServer)
+		{
+			EN2World.load(e.world);
+		}
+	}
+
+	@SubscribeEvent
+	public void onWorldTick(TickEvent.WorldTickEvent e)
+	{
+		if (e.side == Side.SERVER && e.phase == TickEvent.Phase.START)
+		{
+			EN2World.tick(e.world);
+		}
+	}
 }

@@ -1,4 +1,4 @@
-package exnihilo2.blocks;
+package exnihilo2.blocks.barrels;
 
 import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.architecture.BarrelState;

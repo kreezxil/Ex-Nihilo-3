@@ -1,4 +1,4 @@
-package exnihilo2.items;
+package exnihilo2.items.itemblocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;

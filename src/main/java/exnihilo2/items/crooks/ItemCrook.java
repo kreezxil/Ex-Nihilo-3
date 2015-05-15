@@ -1,4 +1,4 @@
-package exnihilo2.items;
+package exnihilo2.items.crooks;
 
 import java.util.Set;
 
@@ -20,7 +20,6 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import exnihilo2.EN2;
-import exnihilo2.EN2Data;
 
 public class ItemCrook extends Item {
 	public static final double pullingForce = 1.5d;

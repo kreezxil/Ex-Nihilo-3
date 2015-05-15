@@ -1,7 +1,8 @@
-package exnihilo2.blocks;
+package exnihilo2.blocks.barrels;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
