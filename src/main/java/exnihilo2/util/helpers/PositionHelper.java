@@ -18,6 +18,28 @@ public abstract class PositionHelper {
 		return new BlockPos(pos.getX() + (world.rand.nextInt(3) - 1), pos.getY() + (world.rand.nextInt(3) - 1), pos.getZ() + (world.rand.nextInt(3) - 1));
 	}
 	
+	public static BlockPos getRandomPositionAdjacentToBlock(World world, BlockPos pos)
+	{
+		int i = world.rand.nextInt(4);
+		
+		switch(i)
+		{
+		case 0:
+			return new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ());
+			
+		case 1:
+			return new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ());
+			
+		case 2:
+			return new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1);
+			
+		case 3:
+			return new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1);
+		}
+		
+		return pos;
+	}
+	
 	public static boolean hasNearbyWaterSource(World world, BlockPos pos)
 	{
 		return world.getBlockState(getRandomPositionNearBlock(world, pos)).getBlock() == Blocks.water;
@@ -57,22 +79,17 @@ public abstract class PositionHelper {
 			{
 				return true;
 			}
-			
+
 			else
 			{
-				for (int x = -1; x < 2; x += 2)
+				if (isRainingAt(world, getRandomPositionAdjacentToBlock(world, pos)))
 				{
-					for (int z = -1; z < 2; z += 2)
-					{
-						if (isRainingAt(world, new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z)))
-						{
-							return true;
-						}
-					}
+					return true;
 				}
+
 			}
 		}
-		
+
 		return false;
 	}
 	

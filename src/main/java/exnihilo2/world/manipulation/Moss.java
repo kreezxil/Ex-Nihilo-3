@@ -4,6 +4,7 @@ import exnihilo2.EN2;
 import exnihilo2.util.helpers.PositionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStoneBrick;
+import net.minecraft.block.BlockWall;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -31,6 +32,10 @@ public class Moss {
 			{
 				world.setBlockState(pos, Blocks.stonebrick.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY));
 			}
+			else if (isValidCobbleWall(state) && (PositionHelper.hasNearbyWaterSource(world, pos) || PositionHelper.canRainReach(world, pos)))
+			{
+				world.setBlockState(pos, Blocks.cobblestone_wall.getDefaultState().withProperty(BlockWall.VARIANT, BlockWall.EnumType.MOSSY));
+			}
 		}
 	}
 	
@@ -44,5 +49,11 @@ public class Moss {
 		return state.getBlock() == Blocks.stonebrick 
 				&& (state.getValue(BlockStoneBrick.VARIANT) == BlockStoneBrick.EnumType.DEFAULT
 				|| state.getValue(BlockStoneBrick.VARIANT) == BlockStoneBrick.EnumType.CRACKED);
+	}
+	
+	private static boolean isValidCobbleWall(IBlockState state)
+	{
+		return state.getBlock() == Blocks.cobblestone_wall 
+				&& (state.getValue(BlockWall.VARIANT) == BlockWall.EnumType.NORMAL);
 	}
 }
