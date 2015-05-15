@@ -16,7 +16,8 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.config.Configuration;
 
 public class EN2World {
-	private static String CATEGORY_WORLDGEN = "world generation";
+	private static String CATEGORY_WORLD_GEN = "world generation";
+	private static String CATEGORY_WORLD_MOD = "world manipulation";
 	
 	private static Template template_overworld;
 	private static Template template_nether;
@@ -28,17 +29,17 @@ public class EN2World {
 	private static boolean gen_end;
 	private static boolean gen_end_allow_crystals;
 	
-	public static void load(Configuration config)
+	public static void configure(Configuration config)
 	{
-		gen_surface = config.get(CATEGORY_WORLDGEN, "void overworld", false).getBoolean(false);
-		gen_nether = config.get(CATEGORY_WORLDGEN, "void nether", false).getBoolean(false);
-		gen_nether_allow_fortresses = config.get(CATEGORY_WORLDGEN, "void nether generate fortresses", false).getBoolean(false);
-		gen_end = config.get(CATEGORY_WORLDGEN, "void end", false).getBoolean(false);
-		gen_end_allow_crystals = config.get(CATEGORY_WORLDGEN, "void end generate crystals", false).getBoolean(false);
+		gen_surface = config.get(CATEGORY_WORLD_GEN, "void overworld", false).getBoolean(false);
+		gen_nether = config.get(CATEGORY_WORLD_GEN, "void nether", false).getBoolean(false);
+		gen_nether_allow_fortresses = config.get(CATEGORY_WORLD_GEN, "void nether generate fortresses", false).getBoolean(false);
+		gen_end = config.get(CATEGORY_WORLD_GEN, "void end", false).getBoolean(false);
+		gen_end_allow_crystals = config.get(CATEGORY_WORLD_GEN, "void end generate crystals", false).getBoolean(false);
 		
-		String template_overworld_name = config.get(CATEGORY_WORLDGEN, "void overworld template", "default.json").getString();
-		String template_nether_name = config.get(CATEGORY_WORLDGEN, "void nether template", "none").getString();
-		String template_end_name = config.get(CATEGORY_WORLDGEN, "void end template", "none").getString();
+		String template_overworld_name = config.get(CATEGORY_WORLD_GEN, "void overworld template", "default.json").getString();
+		String template_nether_name = config.get(CATEGORY_WORLD_GEN, "void nether template", "none").getString();
+		String template_end_name = config.get(CATEGORY_WORLD_GEN, "void end template", "none").getString();
 		
 		if (!template_overworld_name.equals("none") && template_overworld_name.trim().length() > 0)
 			template_overworld = TemplateLoader.load(EN2.path + File.separator + "templates" + File.separator + template_overworld_name);
@@ -48,6 +49,8 @@ public class EN2World {
 		
 		if (!template_end_name.equals("none") && template_end_name.trim().length() > 0)
 			template_end = TemplateLoader.load(EN2.path + File.separator + "templates" + File.separator + template_end_name);
+		
+		Moss.setGrowth(config.get(CATEGORY_WORLD_MOD, "moss growth speed", Moss.DEFAULT_GROWTH_SPEED).getInt());
 	}
 	
 	public static Template getOverworldTemplate()

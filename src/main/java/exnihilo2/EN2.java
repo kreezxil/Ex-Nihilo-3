@@ -69,7 +69,7 @@ public class EN2
     	CompostRegistry.addVanillaRecipes();
     	
     	//TODO: build map path from config file.
-    	EN2World.load(config);
+    	EN2World.configure(config);
     	
     	if(config.hasChanged())
 			config.save();

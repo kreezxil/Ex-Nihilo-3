@@ -13,13 +13,23 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 public class Moss {
-	private static int speed = 16;
+	public static final int DEFAULT_GROWTH_SPEED = 16;
+	private static int growth = 16;
+	
 	private static BlockPos pos = null;
 	private static IBlockState state = null;
+	
+	public static int getGrowth() {
+		return growth;
+	}
+
+	public static void setGrowth(int growth) {
+		Moss.growth = growth;
+	}
 
 	public static void grow(World world, Chunk chunk)
 	{		
-		for (int i = 0; i < speed; i++)
+		for (int i = 0; i < growth; i++)
 		{
 			pos = PositionHelper.getRandomPositionInChunk(world, chunk);
 			state = world.getBlockState(pos);
