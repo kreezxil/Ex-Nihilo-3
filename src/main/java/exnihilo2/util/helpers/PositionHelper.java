@@ -40,12 +40,40 @@ public abstract class PositionHelper {
 			}
 		}
 		
-		return false;
+		//There are no blocks above the current position. It technically counts.
+		return true;
 	}
 	
 	public static boolean isRainingAt(World world, BlockPos pos)
 	{
 		return world.isRaining() && world.getBiomeGenForCoords(pos).getFloatRainfall() > 0f && isTopBlock(world, pos);
+	}
+	
+	public static boolean canRainReach(World world, BlockPos pos)
+	{
+		if (world.isRaining())
+		{
+			if (isRainingAt(world, pos))
+			{
+				return true;
+			}
+			
+			else
+			{
+				for (int x = -1; x < 2; x += 2)
+				{
+					for (int z = -1; z < 2; z += 2)
+					{
+						if (isRainingAt(world, new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z)))
+						{
+							return true;
+						}
+					}
+				}
+			}
+		}
+		
+		return false;
 	}
 	
 	public static boolean isChunkSpawn(World world, Chunk chunk)

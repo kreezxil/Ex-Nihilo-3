@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 public class Moss {
-	private static int speed = 256;
+	private static int speed = 16;
 	private static BlockPos pos = null;
 	private static IBlockState state = null;
 
@@ -23,11 +23,11 @@ public class Moss {
 			pos = PositionHelper.getRandomPositionInChunk(world, chunk);
 			state = world.getBlockState(pos);
 
-			if (isValidCobblestone(state) && (PositionHelper.hasNearbyWaterSource(world, pos) || PositionHelper.isRainingAt(world, pos)))
+			if (isValidCobblestone(state) && (PositionHelper.hasNearbyWaterSource(world, pos) || PositionHelper.canRainReach(world, pos)))
 			{
 				world.setBlockState(pos, Blocks.mossy_cobblestone.getDefaultState());
 			}
-			else if (isValidStoneBrick(state) && (PositionHelper.hasNearbyWaterSource(world, pos) || PositionHelper.isRainingAt(world, pos)))
+			else if (isValidStoneBrick(state) && (PositionHelper.hasNearbyWaterSource(world, pos) || PositionHelper.canRainReach(world, pos)))
 			{
 				world.setBlockState(pos, Blocks.stonebrick.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY));
 			}
