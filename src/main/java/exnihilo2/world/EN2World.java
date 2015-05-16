@@ -9,6 +9,7 @@ import exnihilo2.world.generation.WorldProviderVoidHell;
 import exnihilo2.world.generation.templates.TemplateLoader;
 import exnihilo2.world.generation.templates.pojos.Template;
 import exnihilo2.world.manipulation.Moss;
+import exnihilo2.world.manipulation.Mycelium;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkProviderServer;
@@ -51,6 +52,7 @@ public class EN2World {
 			template_end = TemplateLoader.load(EN2.path + File.separator + "templates" + File.separator + template_end_name);
 		
 		Moss.setGrowth(config.get(CATEGORY_WORLD_MOD, "moss growth speed", Moss.DEFAULT_GROWTH_SPEED).getInt());
+		Mycelium.setGrowth(config.get(CATEGORY_WORLD_MOD, "mycelium sprout speed", Mycelium.DEFAULT_GROWTH_SPEED).getInt());
 	}
 	
 	public static Template getOverworldTemplate()
@@ -143,6 +145,7 @@ public class EN2World {
         for (Object o : provider.func_152380_a().toArray())
         {
         	Moss.grow(world, (Chunk)o);
+        	Mycelium.grow(world, (Chunk)o);
         }
 	}
 }

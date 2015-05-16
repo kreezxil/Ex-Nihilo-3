@@ -14,7 +14,7 @@ import net.minecraft.world.chunk.Chunk;
 
 public class Moss {
 	public static final int DEFAULT_GROWTH_SPEED = 16;
-	private static int growth = 16;
+	private static int growth = 0;
 	
 	private static BlockPos pos = null;
 	private static IBlockState state = null;

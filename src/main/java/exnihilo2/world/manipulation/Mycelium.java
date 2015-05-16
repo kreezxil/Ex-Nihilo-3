@@ -1,0 +1,70 @@
+package exnihilo2.world.manipulation;
+
+import java.math.BigInteger;
+import java.util.Random;
+
+import exnihilo2.EN2;
+import exnihilo2.util.helpers.PositionHelper;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
+
+public class Mycelium {
+	public static final int DEFAULT_GROWTH_SPEED = 16;
+	private static int growth = 0;
+	
+	private static BlockPos pos = null;
+	private static IBlockState state = null;
+	private static Random rng = new Random();
+	
+	public static int getGrowth() {
+		return growth;
+	}
+
+	public static void setGrowth(int growth) {
+		Mycelium.growth = growth;
+	}
+	
+	public static void grow(World world, Chunk chunk)
+	{		
+		for (int i = 0; i < growth; i++)
+		{
+			pos = PositionHelper.getRandomPositionInChunk(world, chunk);
+			state = world.getBlockState(pos);
+			
+			if (state.getBlock() == Blocks.mycelium && world.getBlockState(pos.up()).getBlock() == Blocks.air)
+			{
+				if (PositionHelper.hasNearbyWaterSource(world, pos))
+				{
+					spawnRandomMushroom(world, pos);
+				}
+				else if (PositionHelper.isRainingAt(world, pos))
+				{
+					rng.setSeed(pos.getX() * pos.getZ());
+					rng.nextDouble(); //The first value is not very random at all. Skip that.
+
+					if (rng.nextInt(12) == 0)
+					{
+						spawnRandomMushroom(world, pos);
+					}
+				}
+			}
+		}
+	}
+
+	private static void spawnRandomMushroom(World world, BlockPos pos)
+	{
+		switch (world.rand.nextInt(2))
+		{
+		case 0:
+			world.setBlockState(pos.up(), Blocks.brown_mushroom.getDefaultState());
+			break;
+
+		case 1:
+			world.setBlockState(pos.up(), Blocks.red_mushroom.getDefaultState());
+			break;
+		}
+	}
+}
