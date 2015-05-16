@@ -73,7 +73,6 @@ public class EN2
 		EN2Blocks.registerTileEntities();
 
 		CompostRegistry.initialize();
-		CompostRegistry.addVanillaRecipes();
 
 		EN2World.initialize(config);
 

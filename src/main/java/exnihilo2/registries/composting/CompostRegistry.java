@@ -3,6 +3,7 @@ package exnihilo2.registries.composting;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import exnihilo2.EN2;
 import exnihilo2.registries.composting.files.CompostRecipeLoader;
@@ -12,13 +13,23 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CompostRegistry {
 	private static HashMap<String, CompostRegistryEntry> recipes = new HashMap<String, CompostRegistryEntry>();
 	
 	public static void initialize()
 	{
-		CompostRecipeLoader.load(EN2.path + File.separator + "recipes" + File.separator + "compost" + File.separator);
+		addVanillaRecipes();
+		List<CompostRegistryEntry> entries = CompostRecipeLoader.load(EN2.path + File.separator + "recipes" + File.separator + "compost" + File.separator);
+	
+		if (entries != null && !entries.isEmpty())
+		{
+			for (CompostRegistryEntry entry : entries)
+			{
+				addRecipe(entry);
+			}
+		}
 	}
 	
 	public static void addRecipe(CompostRegistryEntry recipe)
@@ -29,7 +40,14 @@ public class CompostRegistry {
 			
 			if (s != null && s.trim().length() > 0)
 			{
-				recipes.put(s, recipe);
+				if (recipe.getVolume() > 0)
+				{
+					recipes.put(s, recipe);
+				}
+				else
+				{
+					recipes.remove(s);
+				}
 			}
 		}
 	}
@@ -51,7 +69,7 @@ public class CompostRegistry {
 	
 	public static CompostRegistryEntry getRecipe(ItemStack item)
 	{
-		CompostRegistryEntry recipe = recipes.get(item.getUnlocalizedName() + ":*");
+		CompostRegistryEntry recipe = recipes.get(GameRegistry.findUniqueIdentifierFor(item.getItem())  + ":*");
 		
 		if (recipe != null)
 		{
@@ -59,13 +77,13 @@ public class CompostRegistry {
 		}
 		else
 		{
-			return recipes.get(item.getUnlocalizedName() + ":" + item.getMetadata());
+			return recipes.get(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":" + item.getMetadata());
 		}
 	}
 	
 	private static String getRecipeKey(CompostRegistryEntry recipe)
 	{
-		String s = recipe.getInput().getUnlocalizedName();
+		String s = GameRegistry.findUniqueIdentifierFor(recipe.getInput().getItem()).toString();
 		
 		if (recipe.getMetadataBehavior() == MetadataBehavior.IGNORED)
 		{
