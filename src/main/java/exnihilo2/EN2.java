@@ -66,7 +66,7 @@ public class EN2
 
 		EN2Items.initialize();
 		EN2Blocks.initialize();
-		BarrelStates.initialize();
+		BarrelStates.initialize(config);
 
 		EN2Items.registerItems();
 		EN2Blocks.registerBlocks();
@@ -74,7 +74,7 @@ public class EN2
 
 		CompostRegistry.addVanillaRecipes();
 
-		EN2World.configure(config);
+		EN2World.initialize(config);
 
 		if(config.hasChanged())
 			config.save();

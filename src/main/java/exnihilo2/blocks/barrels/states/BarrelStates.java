@@ -2,6 +2,7 @@ package exnihilo2.blocks.barrels.states;
 
 import java.util.HashMap;
 
+import net.minecraftforge.common.config.Configuration;
 import exnihilo2.blocks.barrels.architecture.BarrelLogic;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.states.compost.BarrelStateCoarseDirt;
@@ -76,12 +77,26 @@ public class BarrelStates {
 	public static BarrelLogic grass_state_trigger_complete;
 	public static BarrelLogic coarse_dirt_state_trigger_complete;
 	
+	private static final String CATEGORY_BARREL_OPTIONS = "barrel options";
+	private static boolean allow_compost;
+	private static boolean allow_rain_filling;
+	private static boolean allow_crafting_netherrack;
 	
-	public static void initialize()
+	public static void initialize(Configuration config)
 	{
+		loadSettings(config);
+		
 		initializeLogic();
 		initializeStates();
-		registerLogic();
+		
+		buildBehaviorTree();
+	}
+	
+	private static void loadSettings(Configuration config)
+	{
+		allow_compost = config.get(CATEGORY_BARREL_OPTIONS, "allow composting", true).getBoolean(true);
+		allow_rain_filling = config.get(CATEGORY_BARREL_OPTIONS, "allow rain to fill barrels", true).getBoolean(true);
+		allow_crafting_netherrack = config.get(CATEGORY_BARREL_OPTIONS, "allow netherrack crafting", true).getBoolean(true);
 	}
 	
 	private static void initializeLogic()
@@ -90,15 +105,15 @@ public class BarrelStates {
 		empty_state_trigger_compost_item = new CompostStateTrigger();
 		empty_state_trigger_fluid_item = new FluidStateTriggerItem();
 		empty_state_trigger_fluid_weather = new FluidStateTriggerWeather();
-		
+
 		output_state_logic_growing_grass = new OutputStateLogicGrowingGrass();
-		
+
 		fluid_state_logic_hot = new FluidStateLogicHot();
 		fluid_state_logic_weather = new FluidStateLogicRain();
 		fluid_state_logic_gas = new FluidStateLogicGas();
 		fluid_state_logic_items = new FluidStateLogicItems();
 		fluid_state_trigger_crafting_netherrack = new FluidCraftNetherrackTrigger();
-		
+
 		compost_state_logic_items = new CompostStateLogicItems();
 		compost_state_trigger_complete = new CompostStateLogicComplete();
 		compost_state_trigger_podzol = new PodzolStateTrigger();
@@ -123,44 +138,52 @@ public class BarrelStates {
 		coarse_dirt = new BarrelStateCoarseDirt();
 	}
 	
-	private static void registerLogic()
+	private static void buildBehaviorTree()
 	{
 		BarrelStates.empty.addLogic(empty_state_logic);
-		BarrelStates.empty.addLogic(empty_state_trigger_compost_item);
+		
+		if (allow_compost)
+			BarrelStates.empty.addLogic(empty_state_trigger_compost_item);
 		BarrelStates.empty.addLogic(empty_state_trigger_fluid_item);
-		BarrelStates.empty.addLogic(empty_state_trigger_fluid_weather);
-		
+		if (allow_rain_filling)
+			BarrelStates.empty.addLogic(empty_state_trigger_fluid_weather);
+
 		BarrelStates.output.addLogic(output_state_logic_growing_grass);
-		
+
 		BarrelStates.fluid.addLogic(fluid_state_logic_hot);
-		BarrelStates.fluid.addLogic(fluid_state_logic_weather);
+		if (allow_rain_filling)
+			BarrelStates.fluid.addLogic(fluid_state_logic_weather);
 		BarrelStates.fluid.addLogic(fluid_state_logic_gas);
 		BarrelStates.fluid.addLogic(fluid_state_logic_items);
-		BarrelStates.fluid.addLogic(fluid_state_trigger_crafting_netherrack);
-		
-		BarrelStates.compost.addLogic(compost_state_logic_items);
-		BarrelStates.compost.addLogic(compost_state_trigger_complete);
-		BarrelStates.compost.addLogic(compost_state_trigger_podzol);
-		BarrelStates.compost.addLogic(compost_state_trigger_mycelium);
-		BarrelStates.compost.addLogic(compost_state_trigger_grass);
-		BarrelStates.compost.addLogic(compost_state_trigger_coarse_dirt);
-		
-		BarrelStates.podzol.addLogic(compost_state_logic_items);
-		BarrelStates.podzol.addLogic(compost_state_trigger_coarse_dirt);
-		BarrelStates.podzol.addLogic(compost_state_trigger_mycelium);
-		BarrelStates.podzol.addLogic(podzol_state_trigger_complete);
-		
-		BarrelStates.mycelium.addLogic(compost_state_logic_items);
-		BarrelStates.mycelium.addLogic(compost_state_trigger_grass);
-		BarrelStates.mycelium.addLogic(compost_state_trigger_coarse_dirt);
-		BarrelStates.mycelium.addLogic(mycelium_state_trigger_complete);
-		
-		BarrelStates.grass.addLogic(compost_state_logic_items);
-		BarrelStates.grass.addLogic(compost_state_trigger_coarse_dirt);
-		BarrelStates.grass.addLogic(grass_state_trigger_complete);
-		
-		BarrelStates.coarse_dirt.addLogic(compost_state_logic_items);
-		BarrelStates.coarse_dirt.addLogic(coarse_dirt_state_trigger_complete);
+		if (allow_crafting_netherrack)
+			BarrelStates.fluid.addLogic(fluid_state_trigger_crafting_netherrack);
+
+		if (allow_compost)
+		{
+			BarrelStates.compost.addLogic(compost_state_logic_items);
+			BarrelStates.compost.addLogic(compost_state_trigger_complete);
+			BarrelStates.compost.addLogic(compost_state_trigger_podzol);
+			BarrelStates.compost.addLogic(compost_state_trigger_mycelium);
+			BarrelStates.compost.addLogic(compost_state_trigger_grass);
+			BarrelStates.compost.addLogic(compost_state_trigger_coarse_dirt);
+
+			BarrelStates.podzol.addLogic(compost_state_logic_items);
+			BarrelStates.podzol.addLogic(compost_state_trigger_coarse_dirt);
+			BarrelStates.podzol.addLogic(compost_state_trigger_mycelium);
+			BarrelStates.podzol.addLogic(podzol_state_trigger_complete);
+
+			BarrelStates.mycelium.addLogic(compost_state_logic_items);
+			BarrelStates.mycelium.addLogic(compost_state_trigger_grass);
+			BarrelStates.mycelium.addLogic(compost_state_trigger_coarse_dirt);
+			BarrelStates.mycelium.addLogic(mycelium_state_trigger_complete);
+
+			BarrelStates.grass.addLogic(compost_state_logic_items);
+			BarrelStates.grass.addLogic(compost_state_trigger_coarse_dirt);
+			BarrelStates.grass.addLogic(grass_state_trigger_complete);
+
+			BarrelStates.coarse_dirt.addLogic(compost_state_logic_items);
+			BarrelStates.coarse_dirt.addLogic(coarse_dirt_state_trigger_complete);
+		}
 	}
 	
 	public static void registerState(BarrelState state)
