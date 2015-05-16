@@ -1,4 +1,4 @@
-package exnihilo2.registries.recipes;
+package exnihilo2.registries.composting;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -6,20 +6,20 @@ import net.minecraft.item.ItemStack;
 import exnihilo2.util.Color;
 import exnihilo2.util.enums.MetadataBehavior;
 
-public class CompostRecipe {
+public class CompostRegistryEntry {
 	private Color color;
 	private ItemStack input; 
 	private int volume;
 	private MetadataBehavior behavior = MetadataBehavior.SPECIFIC;
 	
-	public CompostRecipe(ItemStack input, int volume, Color color)
+	public CompostRegistryEntry(ItemStack input, int volume, Color color)
 	{
 		this.input = input;
 		this.color = color;
 		this.volume = volume;
 	}
 	
-	public CompostRecipe(ItemStack input, int amount, Color color, MetadataBehavior meta)
+	public CompostRegistryEntry(ItemStack input, int amount, Color color, MetadataBehavior meta)
 	{
 		this(input, amount, color);
 		

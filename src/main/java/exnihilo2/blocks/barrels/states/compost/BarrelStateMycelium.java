@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
-import exnihilo2.registries.recipes.CompostRecipe;
+import exnihilo2.registries.composting.CompostRegistryEntry;
 import exnihilo2.util.enums.MetadataBehavior;
 
 public class BarrelStateMycelium extends BarrelStateCompostSpecial{
