@@ -2,6 +2,7 @@ package exnihilo2.util.helpers;
 
 import exnihilo2.EN2;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -104,5 +105,13 @@ public abstract class PositionHelper {
 	public static boolean getChunkContainsPoint(Chunk chunk, int x, int z)
 	{
     	return (x >> 4 == chunk.xPosition && z >> 4 == chunk.zPosition);
+	}
+	
+	public static void setBlockStateWithoutReplace(World world, BlockPos pos, IBlockState state)
+	{
+		if (world.isAirBlock(pos))
+		{
+			world.setBlockState(pos, state);
+		}
 	}
 }

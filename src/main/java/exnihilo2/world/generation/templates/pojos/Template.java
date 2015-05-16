@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import exnihilo2.EN2;
 import exnihilo2.util.helpers.GameRegistryHelper;
+import exnihilo2.util.helpers.PositionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -46,7 +47,7 @@ public class Template {
 				int y = b.getY() + this.getSpawnYLevel();
 				int z = b.getZ() + zOffset;
 				
-				world.setBlockState(new BlockPos(x, y, z), block.getStateFromMeta(b.getMeta()));
+				PositionHelper.setBlockStateWithoutReplace(world, new BlockPos(x, y, z), block.getStateFromMeta(b.getMeta()));
 				
 				TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
 				if (b.getContents() != null && te != null && te instanceof IInventory)
