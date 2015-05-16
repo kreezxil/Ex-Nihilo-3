@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import exnihilo2.blocks.barrels.architecture.BarrelLogic;
 import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
-import exnihilo2.registries.CompostRegistry;
+import exnihilo2.registries.compost.CompostRecipeRegistry;
 import exnihilo2.registries.recipes.CompostRecipe;
 import exnihilo2.util.Color;
 

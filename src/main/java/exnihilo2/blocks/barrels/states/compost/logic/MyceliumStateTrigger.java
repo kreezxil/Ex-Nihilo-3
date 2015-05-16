@@ -10,7 +10,7 @@ import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.blocks.barrels.states.compost.BarrelStateGrass;
 import exnihilo2.blocks.barrels.states.compost.BarrelStateMycelium;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
-import exnihilo2.registries.CompostRegistry;
+import exnihilo2.registries.compost.CompostRecipeRegistry;
 import exnihilo2.registries.recipes.CompostRecipe;
 
 public class MyceliumStateTrigger extends BarrelLogic{

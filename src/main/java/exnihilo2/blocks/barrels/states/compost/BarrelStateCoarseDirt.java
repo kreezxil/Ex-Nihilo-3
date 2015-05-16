@@ -14,7 +14,7 @@ public class BarrelStateCoarseDirt extends BarrelStateCompostSpecial{
 	{
 		super();
 		
-		addIngredient(new ItemStack(Items.rotten_flesh, 1), MetadataBehavior.Ignored);
+		addIngredient(new ItemStack(Items.rotten_flesh, 1), MetadataBehavior.IGNORED);
 	}
 
 	@Override

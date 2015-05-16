@@ -22,7 +22,7 @@ public class BarrelStateGrass extends BarrelStateCompostSpecial{
 	{
 		super();
 		
-		addIngredient(new ItemStack(Items.golden_apple), MetadataBehavior.Ignored);
+		addIngredient(new ItemStack(Items.golden_apple), MetadataBehavior.IGNORED);
 	}
 	
 	@Override

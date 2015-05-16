@@ -12,12 +12,12 @@ public class BarrelStateCompostSpecial extends BarrelStateCompost{
 	{
 		if (item != null && behavior != null)
 		{
-			if (behavior == MetadataBehavior.Ignored)
+			if (behavior == MetadataBehavior.IGNORED)
 			{
 				ingredients.add(item.getUnlocalizedName() + ":*");
 			}
 			
-			if (behavior == MetadataBehavior.Ignored)
+			if (behavior == MetadataBehavior.IGNORED)
 			{
 				ingredients.add(item.getUnlocalizedName() + ":" + item.getMetadata());
 			}

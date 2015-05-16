@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public enum MetadataBehavior
 {
-	@SerializedName("0")
-	Ignored, // Metadata is ignored.
-	@SerializedName("1")
-	Specified // Specific metadata value is required
+	@SerializedName("ignored")
+	IGNORED, // Metadata is ignored.
+	@SerializedName("specific")
+	SPECIFIC // Specific metadata value is required
 }

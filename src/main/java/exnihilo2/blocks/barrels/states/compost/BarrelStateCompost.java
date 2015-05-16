@@ -19,7 +19,7 @@ import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
-import exnihilo2.registries.CompostRegistry;
+import exnihilo2.registries.compost.CompostRecipeRegistry;
 import exnihilo2.registries.recipes.CompostRecipe;
 import exnihilo2.util.Color;
 

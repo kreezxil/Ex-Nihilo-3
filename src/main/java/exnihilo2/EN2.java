@@ -35,7 +35,7 @@ import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.items.EN2Items;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
-import exnihilo2.registries.CompostRegistry;
+import exnihilo2.registries.compost.CompostRecipeRegistry;
 import exnihilo2.world.EN2World;
 import exnihilo2.world.manipulation.Moss;
 
@@ -72,7 +72,7 @@ public class EN2
 		EN2Blocks.registerBlocks();
 		EN2Blocks.registerTileEntities();
 
-		CompostRegistry.addVanillaRecipes();
+		CompostRecipeRegistry.addVanillaRecipes();
 
 		EN2World.initialize(config);
 

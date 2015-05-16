@@ -5,7 +5,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import exnihilo2.blocks.barrels.architecture.BarrelLogic;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
-import exnihilo2.registries.CompostRegistry;
+import exnihilo2.registries.compost.CompostRecipeRegistry;
 import exnihilo2.registries.recipes.CompostRecipe;
 import exnihilo2.util.Color;
 
@@ -14,7 +14,7 @@ public class CompostStateLogicItems extends BarrelLogic{
 	@Override
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) 
 	{
-		if (CompostRegistry.isCompostable(item) && barrel.getVolume() < barrel.getVolumeMax())
+		if (CompostRecipeRegistry.isCompostable(item) && barrel.getVolume() < barrel.getVolumeMax())
 		{
 			return true;
 		}
@@ -25,7 +25,7 @@ public class CompostStateLogicItems extends BarrelLogic{
 	@Override
 	public boolean onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) 
 	{
-		CompostRecipe recipe = CompostRegistry.getRecipe(item);
+		CompostRecipe recipe = CompostRecipeRegistry.getRecipe(item);
 		
 		if (recipe != null)
 		{

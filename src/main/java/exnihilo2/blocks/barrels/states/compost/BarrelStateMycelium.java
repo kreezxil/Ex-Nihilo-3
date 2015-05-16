@@ -19,7 +19,7 @@ public class BarrelStateMycelium extends BarrelStateCompostSpecial{
 	{
 		super();
 		
-		addIngredient(new ItemStack(Items.ghast_tear), MetadataBehavior.Ignored);
+		addIngredient(new ItemStack(Items.ghast_tear), MetadataBehavior.IGNORED);
 	}
 	
 	@Override
