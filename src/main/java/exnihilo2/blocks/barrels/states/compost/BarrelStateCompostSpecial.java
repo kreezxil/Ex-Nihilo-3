@@ -3,6 +3,7 @@ package exnihilo2.blocks.barrels.states.compost;
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import exnihilo2.util.enums.MetadataBehavior;
 
 public class BarrelStateCompostSpecial extends BarrelStateCompost{
@@ -14,25 +15,25 @@ public class BarrelStateCompostSpecial extends BarrelStateCompost{
 		{
 			if (behavior == MetadataBehavior.IGNORED)
 			{
-				ingredients.add(item.getUnlocalizedName() + ":*");
+				ingredients.add(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":*");
 			}
 			
 			if (behavior == MetadataBehavior.IGNORED)
 			{
-				ingredients.add(item.getUnlocalizedName() + ":" + item.getMetadata());
+				ingredients.add(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":" + item.getMetadata());
 			}
 		}
 	}
 
 	public void removeIngredient(ItemStack item)
 	{
-		ingredients.remove(item.getUnlocalizedName() + ":*");
-		ingredients.remove(item.getUnlocalizedName() + ":" + item.getMetadata());
+		ingredients.remove(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":*");
+		ingredients.remove(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":" + item.getMetadata());
 	}
 	
 	public boolean isIngredient(ItemStack item)
 	{
-		if (ingredients.contains(item.getUnlocalizedName() + ":*") || ingredients.contains(item.getUnlocalizedName() + ":" + item.getMetadata()))
+		if (ingredients.contains(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":*") || ingredients.contains(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":" + item.getMetadata()))
 		{
 			return true;
 		}
