@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.BlockBarrel;
 import exnihilo2.blocks.barrels.BlockBarrelGlassColored;
+import exnihilo2.blocks.barrels.BlockBarrelWood;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.items.itemblocks.ItemBarrelGlassColored;
+import exnihilo2.items.itemblocks.ItemBarrelWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -26,26 +28,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EN2Blocks {
 	
-	public static Block barrel_oak;
-	public static Block barrel_spruce;
-	public static Block barrel_dark_oak;
+	public static Block barrel_wood;
 	public static Block barrel_glass;
 	public static Block barrel_glass_colored;
 
 	public static void initialize()
 	{
-		barrel_oak = new BlockBarrel(Material.wood).setUnlocalizedName("barrel_oak");
-		barrel_spruce = new BlockBarrel(Material.wood).setUnlocalizedName("barrel_spruce");
-		barrel_dark_oak = new BlockBarrel(Material.wood).setUnlocalizedName("barrel_dark_oak");
+		barrel_wood = new BlockBarrelWood(Material.wood).setUnlocalizedName("barrel_wood");
 		barrel_glass = new BlockBarrel(Material.glass).setUnlocalizedName("barrel_glass");
 		barrel_glass_colored = new BlockBarrelGlassColored(Material.glass).setUnlocalizedName("barrel_glass_colored");
 	}
 	
 	public static void registerBlocks()
 	{
-		registerBlock(barrel_oak);
-		registerBlock(barrel_spruce);
-		registerBlock(barrel_dark_oak);
+		registerBlock(barrel_wood, ItemBarrelWood.class);
 		registerBlock(barrel_glass);
 		registerBlock(barrel_glass_colored, ItemBarrelGlassColored.class);
 	}

@@ -1,5 +1,5 @@
 {
-    "parent": "exnihilo2:block/barrel_dark_oak",
+    "parent": "exnihilo2:block/barrel_wood_dark_oak",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

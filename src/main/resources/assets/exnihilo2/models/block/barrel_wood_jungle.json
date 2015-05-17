@@ -1,0 +1,7 @@
+{
+    "parent": "exnihilo2:block/barrel",
+    "ambientocclusion": false,
+    "textures": {
+        "barrel": "blocks/planks_jungle"
+    }
+}
