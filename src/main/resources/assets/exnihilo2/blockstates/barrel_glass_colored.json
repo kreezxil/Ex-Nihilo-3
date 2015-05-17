@@ -6,7 +6,7 @@
         "color=cyan": { "model": "exnihilo2:barrel_glass_colored_cyan" },
         "color=gray": { "model": "exnihilo2:barrel_glass_colored_gray" },
         "color=green": { "model": "exnihilo2:barrel_glass_colored_green" },
-        "color=light_blue": { "model": "exnihilo2:barrel_glass_colored_lightblue" },
+        "color=light_blue": { "model": "exnihilo2:barrel_glass_colored_light_blue" },
         "color=silver": { "model": "exnihilo2:barrel_glass_colored_silver" },
         "color=lime": { "model": "exnihilo2:barrel_glass_colored_lime" },
         "color=magenta": { "model": "exnihilo2:barrel_glass_colored_magenta" },

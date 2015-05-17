@@ -1,5 +1,5 @@
 {
-    "parent": "exnihilo2:block/barrel_glass_colored_lightblue",
+    "parent": "exnihilo2:block/barrel_glass_colored_light_blue",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

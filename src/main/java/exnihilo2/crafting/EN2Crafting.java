@@ -1,5 +1,6 @@
 package exnihilo2.crafting;
 
+import exnihilo2.crafting.recipes.BarrelRecipes;
 import exnihilo2.crafting.recipes.CrookRecipes;
 import net.minecraftforge.common.config.Configuration;
 
@@ -19,6 +20,9 @@ public class EN2Crafting {
 
 	public static void registerRecipes()
 	{
+		if (barrels_allowed)
+			BarrelRecipes.register();
+		
 		if (crooks_allowed)
 			CrookRecipes.register();
 	}
