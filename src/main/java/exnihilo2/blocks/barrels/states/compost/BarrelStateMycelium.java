@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.registries.composting.CompostRegistryEntry;
-import exnihilo2.util.enums.MetadataBehavior;
+import exnihilo2.util.enums.EnumMetadataBehavior;
 
 public class BarrelStateMycelium extends BarrelStateCompostSpecial{
 
@@ -19,7 +19,7 @@ public class BarrelStateMycelium extends BarrelStateCompostSpecial{
 	{
 		super();
 		
-		addIngredient(new ItemStack(Items.ghast_tear), MetadataBehavior.IGNORED);
+		addIngredient(new ItemStack(Items.ghast_tear), EnumMetadataBehavior.IGNORED);
 	}
 	
 	@Override

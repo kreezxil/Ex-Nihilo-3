@@ -1,17 +1,17 @@
 package exnihilo2.registries.composting.pojos;
 
-import exnihilo2.util.enums.MetadataBehavior;
+import exnihilo2.util.enums.EnumMetadataBehavior;
 
 public class CompostRecipe {
 	private String id;
 	private int meta;
-	private MetadataBehavior behavior = MetadataBehavior.IGNORED;
+	private EnumMetadataBehavior behavior = EnumMetadataBehavior.IGNORED;
 	private int value;
 	private String color;
 	
 	public CompostRecipe() {}
 	
-	public CompostRecipe(String id, int meta, MetadataBehavior behavior, int value, String color)
+	public CompostRecipe(String id, int meta, EnumMetadataBehavior behavior, int value, String color)
 	{
 		this.id = id;
 		this.meta = meta;
@@ -32,10 +32,10 @@ public class CompostRecipe {
 	public void setMeta(int meta) {
 		this.meta = meta;
 	}
-	public MetadataBehavior getBehavior() {
+	public EnumMetadataBehavior getBehavior() {
 		return behavior;
 	}
-	public void setBehavior(MetadataBehavior behavior) {
+	public void setBehavior(EnumMetadataBehavior behavior) {
 		this.behavior = behavior;
 	}
 	public int getValue() {

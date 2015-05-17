@@ -13,7 +13,7 @@ import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.util.Color;
-import exnihilo2.util.enums.MetadataBehavior;
+import exnihilo2.util.enums.EnumMetadataBehavior;
 
 public class BarrelStateGrass extends BarrelStateCompostSpecial{
 	private static ItemStack grass = new ItemStack(Blocks.grass, 1);
@@ -22,7 +22,7 @@ public class BarrelStateGrass extends BarrelStateCompostSpecial{
 	{
 		super();
 		
-		addIngredient(new ItemStack(Items.golden_apple), MetadataBehavior.IGNORED);
+		addIngredient(new ItemStack(Items.golden_apple), EnumMetadataBehavior.IGNORED);
 	}
 	
 	@Override

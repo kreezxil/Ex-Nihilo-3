@@ -4,21 +4,21 @@ import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import exnihilo2.util.enums.MetadataBehavior;
+import exnihilo2.util.enums.EnumMetadataBehavior;
 
 public class BarrelStateCompostSpecial extends BarrelStateCompost{
 	private ArrayList<String> ingredients = new ArrayList<String>();
 	
-	public void addIngredient(ItemStack item, MetadataBehavior behavior)
+	public void addIngredient(ItemStack item, EnumMetadataBehavior behavior)
 	{
 		if (item != null && behavior != null)
 		{
-			if (behavior == MetadataBehavior.IGNORED)
+			if (behavior == EnumMetadataBehavior.IGNORED)
 			{
 				ingredients.add(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":*");
 			}
 			
-			if (behavior == MetadataBehavior.IGNORED)
+			if (behavior == EnumMetadataBehavior.IGNORED)
 			{
 				ingredients.add(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":" + item.getMetadata());
 			}

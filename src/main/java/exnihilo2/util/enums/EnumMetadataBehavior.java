@@ -2,7 +2,7 @@ package exnihilo2.util.enums;
 
 import com.google.gson.annotations.SerializedName;
 
-public enum MetadataBehavior
+public enum EnumMetadataBehavior
 {
 	@SerializedName("meta_ignored")
 	IGNORED, // Metadata is ignored.

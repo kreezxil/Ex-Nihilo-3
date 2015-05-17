@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import exnihilo2.EN2;
 import exnihilo2.registries.composting.pojos.CompostRecipe;
 import exnihilo2.util.Color;
-import exnihilo2.util.enums.MetadataBehavior;
+import exnihilo2.util.enums.EnumMetadataBehavior;
 import exnihilo2.util.helpers.GameRegistryHelper;
 
 public class CompostRegistryEntry {
@@ -16,7 +16,7 @@ public class CompostRegistryEntry {
 	private Color color;
 	private ItemStack input; 
 	private int value;
-	private MetadataBehavior behavior = MetadataBehavior.SPECIFIC;
+	private EnumMetadataBehavior behavior = EnumMetadataBehavior.SPECIFIC;
 	
 	public CompostRegistryEntry(ItemStack input, int value, Color color)
 	{
@@ -25,7 +25,7 @@ public class CompostRegistryEntry {
 		this.value = value;
 	}
 	
-	public CompostRegistryEntry(ItemStack input, int value, Color color, MetadataBehavior behavior)
+	public CompostRegistryEntry(ItemStack input, int value, Color color, EnumMetadataBehavior behavior)
 	{
 		this(input, value, color);
 		
@@ -72,7 +72,7 @@ public class CompostRegistryEntry {
 		return this.value;
 	}
 	
-	public MetadataBehavior getMetadataBehavior()
+	public EnumMetadataBehavior getMetadataBehavior()
 	{
 		return this.behavior;
 	}

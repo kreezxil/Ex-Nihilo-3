@@ -6,7 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
-import exnihilo2.util.enums.MetadataBehavior;
+import exnihilo2.util.enums.EnumMetadataBehavior;
 
 public class BarrelStateCoarseDirt extends BarrelStateCompostSpecial{
 	
@@ -14,7 +14,7 @@ public class BarrelStateCoarseDirt extends BarrelStateCompostSpecial{
 	{
 		super();
 		
-		addIngredient(new ItemStack(Items.rotten_flesh, 1), MetadataBehavior.IGNORED);
+		addIngredient(new ItemStack(Items.rotten_flesh, 1), EnumMetadataBehavior.IGNORED);
 	}
 
 	@Override
