@@ -47,6 +47,7 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Blocks.barrel_stone);
 		registerRenderer(EN2Blocks.barrel_glass);
 		registerRenderer(EN2Blocks.barrel_glass_colored);
+		registerRenderer(EN2Blocks.dust);
 		
 		TileEntitySpecialRenderer barrelRenderer = new BarrelRenderer();
 	   	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, barrelRenderer);

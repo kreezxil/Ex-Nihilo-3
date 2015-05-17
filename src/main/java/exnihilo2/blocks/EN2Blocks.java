@@ -8,9 +8,11 @@ import exnihilo2.blocks.barrels.BlockBarrelGlassColored;
 import exnihilo2.blocks.barrels.BlockBarrelWood;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.misc.BlockDust;
 import exnihilo2.items.itemblocks.ItemBarrelGlassColored;
 import exnihilo2.items.itemblocks.ItemBarrelWood;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -32,6 +34,8 @@ public class EN2Blocks {
 	public static Block barrel_stone;
 	public static Block barrel_glass;
 	public static Block barrel_glass_colored;
+	
+	public static Block dust;
 
 	public static void initialize()
 	{
@@ -39,6 +43,8 @@ public class EN2Blocks {
 		barrel_stone = new BlockBarrel(Material.rock).setUnlocalizedName("barrel_stone");
 		barrel_glass = new BlockBarrel(Material.glass).setUnlocalizedName("barrel_glass");
 		barrel_glass_colored = new BlockBarrelGlassColored(Material.glass).setUnlocalizedName("barrel_glass_colored");
+		
+		dust = new BlockDust().setUnlocalizedName("dust");
 	}
 	
 	public static void registerBlocks()
@@ -47,6 +53,8 @@ public class EN2Blocks {
 		registerBlock(barrel_stone);
 		registerBlock(barrel_glass);
 		registerBlock(barrel_glass_colored, ItemBarrelGlassColored.class);
+		
+		registerBlock(dust);
 	}
 	
 	public static void registerTileEntities()

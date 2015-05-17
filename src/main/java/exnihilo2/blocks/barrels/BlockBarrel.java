@@ -29,6 +29,7 @@ public class BlockBarrel extends BlockContainer
 		
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setHardness(1.2f);
+		this.setBlockBounds(0.06f, 0.0f, 0.06f, 0.94f, 1.0f, 0.94f);
 	}
 	
 	@Override

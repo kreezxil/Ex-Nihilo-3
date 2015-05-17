@@ -64,21 +64,18 @@ public class EN2
 		config = new Configuration(new File(path + "ExNihilo2.cfg"));
 
 		EN2ToolMaterials.initialize();
-
 		EN2Items.initialize();
 		EN2Blocks.initialize();
 		EN2Crafting.initialize(config);
 		BarrelStates.initialize(config);
+		CompostRegistry.initialize();
+		EN2World.initialize(config);
 
 		EN2Items.registerItems();
 		EN2Blocks.registerBlocks();
 		EN2Blocks.registerTileEntities();
 		EN2Crafting.registerRecipes();
-
-		CompostRegistry.initialize();
-
-		EN2World.initialize(config);
-
+		
 		if(config.hasChanged())
 			config.save();
 	}
