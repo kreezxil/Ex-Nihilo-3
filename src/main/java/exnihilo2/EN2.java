@@ -32,6 +32,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.barrels.states.BarrelStates;
+import exnihilo2.crafting.EN2Crafting;
 import exnihilo2.items.EN2Items;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
@@ -66,11 +67,13 @@ public class EN2
 
 		EN2Items.initialize();
 		EN2Blocks.initialize();
+		EN2Crafting.initialize(config);
 		BarrelStates.initialize(config);
 
 		EN2Items.registerItems();
 		EN2Blocks.registerBlocks();
 		EN2Blocks.registerTileEntities();
+		EN2Crafting.registerRecipes();
 
 		CompostRegistry.initialize();
 

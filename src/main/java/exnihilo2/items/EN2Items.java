@@ -11,7 +11,6 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class EN2Items {
-
 	public static Item crook_wood;
 	public static Item crook_bone;
 	
