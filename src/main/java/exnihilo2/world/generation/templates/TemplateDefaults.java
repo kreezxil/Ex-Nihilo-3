@@ -19,6 +19,7 @@ public class TemplateDefaults {
 	public static void generateDefaultTemplateFiles(String path)
 	{
 		generateTemplateFile(path + File.separator + "skyblock_2-1_overworld.json", getOverworldTemplate());
+		generateTemplateFile(path + File.separator + "skyblock_2-1_nether.json", getNetherTemplate());
 	}
 	
 	private static void generateTemplateFile(String path, Template template)
@@ -302,6 +303,63 @@ public class TemplateDefaults {
 		
 		//sand island cactus
 		blocks.add(new TemplateBlock("minecraft:cactus", 0, 66, 1, -1));
+
+		return map;
+	}
+	
+	private static Template getNetherTemplate()
+	{
+		Template map = new Template();
+		map.setSpawnYLevel(50);
+		
+		ArrayList<TemplateBlock> blocks = map.getBlocks();
+		//glowstone island
+		//layer 0
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, -1, 0, -1));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, -1, 0, 0));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, -1, 0, 1));
+
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 0, 0, -1));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 0, 0, 0));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 0, 0, 1));
+
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 1, 0, -1));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 1, 0, 0));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 1, 0, 1));
+
+		//layer 1
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, -1, -1, -1));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, -1, -1, 0));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, -1, -1, 1));
+
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 0, -1, -1));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 0, -1, 0));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 0, -1, 1));
+
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 1, -1, -1));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 1, -1, 0));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 1, -1, 1));
+
+		//layer 2
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, -1, -2, -1));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, -1, -2, 0));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, -1, -2, 1));
+
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 0, -2, -1));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 0, -2, 0));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 0, -2, 1));
+
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 1, -2, -1));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 1, -2, 0));
+		blocks.add(new TemplateBlock("minecraft:glowstone", 0, 1, -2, 1));
+
+		//chest
+		TemplateBlock chest = new TemplateBlock("minecraft:chest", 0, 0, 1, 0);
+		chest.setContents(new ArrayList<TemplateItem>());
+		chest.getContents().add(new TemplateItem("minecraft:sapling", 1, 2));
+		chest.getContents().add(new TemplateItem("minecraft:reeds", 1, 0));
+		chest.getContents().add(new TemplateItem("minecraft:ice", 1, 0));
+		blocks.add(chest);
 
 		return map;
 	}

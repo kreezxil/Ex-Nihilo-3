@@ -41,7 +41,7 @@ public class EN2World {
 		
 		TemplateDefaults.generateDefaultTemplateFiles(EN2.path + File.separator + "templates");
 		String template_overworld_name = config.get(CATEGORY_WORLD_GEN, "void overworld template", "skyblock_2-1_overworld.json").getString();
-		String template_nether_name = config.get(CATEGORY_WORLD_GEN, "void nether template", "none").getString();
+		String template_nether_name = config.get(CATEGORY_WORLD_GEN, "void nether template", "skyblock_2-1_nether.json").getString();
 		String template_end_name = config.get(CATEGORY_WORLD_GEN, "void end template", "none").getString();
 		
 		if (!template_overworld_name.equals("none") && template_overworld_name.trim().length() > 0)
