@@ -20,7 +20,7 @@ public class CompostRegistry {
 	
 	public static void initialize()
 	{
-		addVanillaRecipes();
+		registerVanillaRecipes();
 		List<CompostRegistryEntry> entries = CompostRecipeLoader.load(EN2.path + File.separator + "recipes" + File.separator + "compost" + File.separator);
 	
 		if (entries != null && !entries.isEmpty())
@@ -97,7 +97,7 @@ public class CompostRegistry {
 		return null;
 	}
 	
-	public static void addVanillaRecipes()
+	public static void registerVanillaRecipes()
 	{
 		//saplings
 		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.sapling), 1, 0), 125, new Color("35A82A"), MetadataBehavior.SPECIFIC)); //oak
@@ -115,130 +115,137 @@ public class CompostRegistry {
 		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.leaves2), 1, 0), 125, new Color("B8C754"), MetadataBehavior.SPECIFIC)); //acacia
 		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.leaves2), 1, 1), 125, new Color("378030"), MetadataBehavior.SPECIFIC)); //dark_oak
 
-		//rotten flesh
+		//ghast tear
 		addRecipe(new CompostRegistryEntry(new ItemStack(Items.ghast_tear, 1), 5, new Color("FFFFFF"), MetadataBehavior.IGNORED));
-		addRecipe(new CompostRegistryEntry(new ItemStack(Items.rotten_flesh, 1), 100, new Color("C45631"), MetadataBehavior.IGNORED));
+		//rotten flesh
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.rotten_flesh, 1), 85, new Color("C45631"), MetadataBehavior.IGNORED));
+		//spider eye
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.spider_eye, 1), 85, new Color("963E44"), MetadataBehavior.IGNORED));
 		
-		addRecipe(new CompostRegistryEntry(new ItemStack(Items.golden_apple, 1), 250, new Color("CCCC00"), MetadataBehavior.SPECIFIC));
-		addRecipe(new CompostRegistryEntry(new ItemStack(Items.golden_apple, 1, 1), 1000, new Color("CCCC00"), MetadataBehavior.SPECIFIC));
+		//dandelion
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.yellow_flower), 1), 100, new Color("FFF461"), MetadataBehavior.SPECIFIC));
+		//poppy
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.red_flower), 1, 0), 100, new Color("FF1212"), MetadataBehavior.SPECIFIC));
+		//blue orchid
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.red_flower), 1, 1), 100, new Color("33CFFF"), MetadataBehavior.SPECIFIC));
+		//allium
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.red_flower), 1, 2), 100, new Color("F59DFA"), MetadataBehavior.SPECIFIC));
+		//azure bluet
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.red_flower), 1, 3), 100, new Color("E3E3E3"), MetadataBehavior.SPECIFIC));
+		//red_tulip
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.red_flower), 1, 4), 100, new Color("FF3D12"), MetadataBehavior.SPECIFIC));
+		//orange tulip
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.red_flower), 1, 5), 100, new Color("FF7E29"), MetadataBehavior.SPECIFIC));
+		//white tulip
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.red_flower), 1, 6), 100, new Color("FFFFFF"), MetadataBehavior.SPECIFIC));
+		//pink tulip
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.red_flower), 1, 7), 100, new Color("F5C4FF"), MetadataBehavior.SPECIFIC));
+		//oxeye daisy
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.red_flower), 1, 8), 100, new Color("E9E9E9"), MetadataBehavior.SPECIFIC));
+
+		//sunflower
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.double_plant), 1, 0), 100, new Color("FFDD00"), MetadataBehavior.SPECIFIC));
+		//lilac
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.double_plant), 1, 1), 100, new Color("FCC7F0"), MetadataBehavior.SPECIFIC));
+		//tall grass
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.double_plant), 1, 2), 100, new Color("23630E"), MetadataBehavior.SPECIFIC));
+		//large fern
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.double_plant), 1, 3), 100, new Color("23630E"), MetadataBehavior.SPECIFIC));
+		//rose bush
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.double_plant), 1, 4), 100, new Color("FF1212"), MetadataBehavior.SPECIFIC));
+		//peony
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.double_plant), 1, 5), 100, new Color("F3D2FC"), MetadataBehavior.SPECIFIC));
+
+		//mushroom_brown
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.brown_mushroom), 1), 100, new Color("CFBFB6"), MetadataBehavior.IGNORED));
+		//mushroom_red
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.red_mushroom), 1), 100, new Color("D6A8A5"), MetadataBehavior.IGNORED));
 		
-//		register(Items.rotten_flesh, 0, 0.10f, ColorRegistry.color("rotten_flesh"));
-//		//spider eye
-//		register(Items.spider_eye, 0, 0.08f, ColorRegistry.color("spider_eye"));
-//		
-//		//wheat
-//		register(Items.wheat, 0, 0.08f, ColorRegistry.color("wheat"));
-//		//bread
-//		register(Items.bread, 0, 0.16f, ColorRegistry.color("bread"));
-//		
-//		//dandelion
-//		register(Item.getItemFromBlock(Blocks.yellow_flower), 0, 0.10f, ColorRegistry.color("dandelion"));
-//		//poppy
-//		register(Item.getItemFromBlock(Blocks.red_flower), 0, 0.10f, ColorRegistry.color("poppy"));
-//		//blue orchid
-//		register(Item.getItemFromBlock(Blocks.red_flower), 1, 0.10f, ColorRegistry.color("blue_orchid"));
-//		//allium
-//		register(Item.getItemFromBlock(Blocks.red_flower), 2, 0.10f, ColorRegistry.color("allium"));
-//		//azure bluet
-//		register(Item.getItemFromBlock(Blocks.red_flower), 3, 0.10f, ColorRegistry.color("azure_bluet"));
-//		//red_tulip
-//		register(Item.getItemFromBlock(Blocks.red_flower), 4, 0.10f, ColorRegistry.color("red_tulip"));
-//		//orange tulip
-//		register(Item.getItemFromBlock(Blocks.red_flower), 5, 0.10f, ColorRegistry.color("orange_tulip"));
-//		//white tulip
-//		register(Item.getItemFromBlock(Blocks.red_flower), 6, 0.10f, ColorRegistry.color("white_tulip"));
-//		//pink tulip
-//		register(Item.getItemFromBlock(Blocks.red_flower), 7, 0.10f, ColorRegistry.color("pink_tulip"));
-//		//oxeye daisy
-//		register(Item.getItemFromBlock(Blocks.red_flower), 8, 0.10f, ColorRegistry.color("oxeye_daisy"));
-//		
-//		//sunflower
-//		register(Item.getItemFromBlock(Blocks.double_plant), 0, 0.10f, ColorRegistry.color("sunflower"));
-//		//lilac
-//		register(Item.getItemFromBlock(Blocks.double_plant), 1, 0.10f, ColorRegistry.color("lilac"));
-//		//rose buse
-//		register(Item.getItemFromBlock(Blocks.double_plant), 4, 0.10f, ColorRegistry.color("rose"));
-//		//peony
-//		register(Item.getItemFromBlock(Blocks.double_plant), 5, 0.10f, ColorRegistry.color("peony"));
-//		
-//		//mushroom_brown
-//		register(Item.getItemFromBlock(Blocks.brown_mushroom), 0, 0.10f, ColorRegistry.color("mushroom_brown"));
-//		//mushroom_red
-//		register(Item.getItemFromBlock(Blocks.red_mushroom), 0, 0.10f, ColorRegistry.color("mushroom_red"));
-//		
-//		//pumpkin pie
-//		register(Items.pumpkin_pie, 0, 0.16f, ColorRegistry.color("pumpkin_pie"));
-//		
-//		//pork
-//		register(Items.porkchop, 0, 0.2f, ColorRegistry.color("pork_raw"));
-//		//cooked pork
-//		register(Items.cooked_porkchop, 0, 0.2f, ColorRegistry.color("pork_cooked"));
-//		
-//		//beef
-//		register(Items.beef, 0, 0.2f, ColorRegistry.color("beef_raw"));
-//		//cooked beef
-//		register(Items.cooked_beef, 0, 0.2f, ColorRegistry.color("beef_cooked"));
-//		
-//		//chicken
-//		register(Items.chicken, 0, 0.2f, ColorRegistry.color("chicken_raw"));
-//		//cooked chicken
-//		register(Items.cooked_chicken, 0, 0.2f, ColorRegistry.color("chicken_cooked"));
-//		
-//		//fish
-//		register(Items.fish, 0, 0.15f, ColorRegistry.color("fish_raw"));
-//		//cooked fish
-//		register(Items.cooked_fished, 0, 0.15f, ColorRegistry.color("fish_cooked"));
-//		
-//		//salmon
-//		register(Items.fish, 1, 0.15f, ColorRegistry.color("salmon_raw"));
-//		//cooked salmon
-//		register(Items.cooked_fished, 1, 0.15f, ColorRegistry.color("salmon_cooked"));
-//		
-//		//clownfish
-//		register(Items.fish, 2, 0.15f, ColorRegistry.color("clownfish"));
-//		//blowfish
-//		register(Items.fish, 3, 0.15f, ColorRegistry.color("pufferfish"));
-//		
-//		//cooked silkworms
-//		register(ENItems.Silkworm, 0, 0.04f, ColorRegistry.color("silkworm_raw"));
-//		//cooked silkworms
-//		register(ENItems.SilkwormCooked, 0, 0.04f, ColorRegistry.color("silkworm_cooked"));
-//		
-//		//apple
-//		register(Items.apple, 0, 0.10f, ColorRegistry.color("apple"));
-//		//melon slice
-//		register(Items.melon, 0, 0.04f, ColorRegistry.color("melon"));
-//		//melon
-//		register(Item.getItemFromBlock(Blocks.melon_block), 0, 1.0f / 6, ColorRegistry.color("melon"));
-//		//pumpkin
-//		register(Item.getItemFromBlock(Blocks.pumpkin), 0, 1.0f / 6, ColorRegistry.color("pumpkin"));
-//		//jack o lantern
-//		register(Item.getItemFromBlock(Blocks.lit_pumpkin), 0, 1.0f / 6, ColorRegistry.color("pumpkin"));
-//		//cactus
-//		register(Item.getItemFromBlock(Blocks.cactus), 0, 0.10f, ColorRegistry.color("cactus"));
-//		
-//		//carrot
-//		register(Items.carrot, 0, 0.08f, ColorRegistry.color("carrot"));
-//		//potato
-//		register(Items.potato, 0, 0.08f, ColorRegistry.color("potato"));
-//		//baked potato
-//		register(Items.baked_potato, 0, 0.08f, ColorRegistry.color("potato_baked"));
-//		//poison potato
-//		register(Items.poisonous_potato, 0, 0.08f, ColorRegistry.color("potato_poison"));
-//		
-//		//waterlily
-//		register(Item.getItemFromBlock(Blocks.waterlily), 0, 0.10f, ColorRegistry.color("waterlily"));
-//		//vine
-//		register(Item.getItemFromBlock(Blocks.vine), 0, 0.10f, ColorRegistry.color("vine"));
-//		//tall grass
-//		register(Item.getItemFromBlock(Blocks.tallgrass), 1, 0.08f, ColorRegistry.color("tall_grass"));
-//		//egg
-//		register(Items.egg, 0, 0.08f, ColorRegistry.color("egg"));
-//		//netherwart
-//		register(Items.nether_wart, 0, 0.10f, ColorRegistry.color("netherwart"));
-//		//sugar cane
-//		register(Items.reeds, 0, 0.08f, ColorRegistry.color("sugar_cane"));
-//		//string
-//		register(Items.string, 0, 0.04f, ColorRegistry.color("white"));
+		//wheat
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.wheat, 1), 85, new Color("E3E162"), MetadataBehavior.IGNORED));
+		//bread
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.bread, 1), 125, new Color("D1AF60"), MetadataBehavior.IGNORED));
+
+		//pumpkin pie
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.pumpkin_pie, 1), 175, new Color("E39A6D"), MetadataBehavior.IGNORED));
+		//egg
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.egg, 1), 80, new Color("FFFA66"), MetadataBehavior.IGNORED));
+
+		//pork
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.porkchop, 1), 175, new Color("FFA091"), MetadataBehavior.IGNORED));
+		//cooked pork
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.cooked_porkchop, 1), 175, new Color("FFFDBD"), MetadataBehavior.IGNORED));
+	
+		//beef
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.beef, 1), 175, new Color("FF4242"), MetadataBehavior.IGNORED));
+		//cooked beef
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.cooked_beef, 1), 175, new Color("80543D"), MetadataBehavior.IGNORED));
+
+		//mutton
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.mutton, 1), 175, new Color("FF4242"), MetadataBehavior.IGNORED));
+		//cooked mutton
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.cooked_mutton, 1), 175, new Color("80543D"), MetadataBehavior.IGNORED));
+
+		//chicken
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.chicken, 1), 175, new Color("FFE8E8"), MetadataBehavior.IGNORED));
+		//cooked chicken
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.cooked_chicken, 1), 175, new Color("FA955F"), MetadataBehavior.IGNORED));
+
+		//rabbit
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.rabbit, 1), 175, new Color("FFE8E8"), MetadataBehavior.IGNORED));
+		//cooked rabbit
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.cooked_rabbit, 1), 175, new Color("FA955F"), MetadataBehavior.IGNORED));
+
+		//fish
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.fish, 1, 0), 120, new Color("6DCFB3"), MetadataBehavior.SPECIFIC));
+		//cooked fish
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.cooked_fish, 1, 0), 120, new Color("D8EBE5"), MetadataBehavior.SPECIFIC));
+
+		//salmon
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.fish, 1, 1), 120, new Color("FF2E4A"), MetadataBehavior.SPECIFIC));
+		//cooked salmon
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.fish, 1, 1), 120, new Color("E87A3F"), MetadataBehavior.SPECIFIC));
+
+		//clownfish
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.fish, 1, 2), 120, new Color("FF771C"), MetadataBehavior.SPECIFIC));
+		//blowfish
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.fish, 1, 3), 120, new Color("DBFAFF"), MetadataBehavior.SPECIFIC));
+
+		//apple
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.apple, 1), 100, new Color("FFF68F"), MetadataBehavior.IGNORED));
+		//golden apple
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.golden_apple, 1), 200, new Color("CCCC00"), MetadataBehavior.IGNORED));
+		//melon slice
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.melon, 1), 40, new Color("FF443B"), MetadataBehavior.IGNORED));
+		//melon
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.melon_block), 1), 150, new Color("FF443B"), MetadataBehavior.IGNORED));
+		//pumpkin
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.pumpkin), 1), 150, new Color("FFDB66"), MetadataBehavior.IGNORED));
+		//jack o lantern
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.lit_pumpkin), 1), 150, new Color("FFDB66"), MetadataBehavior.IGNORED));
+		//cactus
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.cactus), 1), 100, new Color("DEFFB5"), MetadataBehavior.IGNORED));
+
+		//carrot
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.carrot, 1), 80, new Color("FF9B0F"), MetadataBehavior.IGNORED));
+		//potato
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.potato, 1), 80, new Color("FFF1B5"), MetadataBehavior.IGNORED));
+		//baked potato
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.baked_potato, 1), 80, new Color("FFF1B5"), MetadataBehavior.IGNORED));
+		//poison potato
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.poisonous_potato, 1), 80, new Color("E0FF8A"), MetadataBehavior.IGNORED));
+
+		//waterlily
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.waterlily), 1), 80, new Color("269900"), MetadataBehavior.IGNORED));
+		//vine
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.vine), 1), 80, new Color("23630E"), MetadataBehavior.IGNORED));
+		//tall grass
+		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.tallgrass), 1), 80, new Color("23630E"), MetadataBehavior.IGNORED));
+		//netherwart
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.nether_wart, 1), 80, new Color("FF2B52"), MetadataBehavior.IGNORED));
+		//sugar cane
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.reeds, 1), 80, new Color("9BFF8A"), MetadataBehavior.IGNORED));
+		//string
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.string, 1), 40, new Color("FFFFFF"), MetadataBehavior.IGNORED));
 	}
 }
