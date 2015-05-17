@@ -6,12 +6,17 @@ import exnihilo2.EN2;
 import exnihilo2.util.helpers.GameRegistryHelper;
 import exnihilo2.util.helpers.PositionHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 
 public class Template {
 	private int spawnYLevel = 64;
@@ -46,8 +51,9 @@ public class Template {
 				int x = b.getX() + xOffset;
 				int y = b.getY() + this.getSpawnYLevel();
 				int z = b.getZ() + zOffset;
+				BlockPos pos = new BlockPos(x, y, z);
 				
-				PositionHelper.setBlockStateWithoutReplace(world, new BlockPos(x, y, z), block.getStateFromMeta(b.getMeta()));
+				setBlockWithoutUpdate(world, pos, block.getStateFromMeta(b.getMeta()));
 				
 				TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
 				if (b.getContents() != null && te != null && te instanceof IInventory)
@@ -79,5 +85,20 @@ public class Template {
 				EN2.log.error("Unable to locate block (" + b.getId() + ").");
 			}
 		}
+	}
+
+	private void setBlockWithoutUpdate(World world, BlockPos pos, IBlockState state)
+	{
+		Chunk chunk =  world.getChunkFromBlockCoords(pos);
+		ExtendedBlockStorage[] storage = chunk.getBlockStorageArray();
+		
+		if (storage[(pos.getY() >> 4)] == null)
+		{
+			//This call generates the sky light map and block storage so I don't have to.
+			chunk.setLightFor(EnumSkyBlock.SKY, pos, 0);
+		}
+		
+		storage[(pos.getY() >> 4)].set(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15, state);
+		//world.checkLight(pos);
 	}
 }

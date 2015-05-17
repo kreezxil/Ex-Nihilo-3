@@ -20,28 +20,7 @@ public class TemplateLoader {
 		File file = new File(path);
 		Template template = null;
 		
-		if (!file.exists())
-		{
-			EN2.log.info("Map file not found '" + file + "'. Attempting to generate default map at this path.");
-			
-			template = TemplateDefault.generate();
-			FileWriter writer;
-			
-			try 
-			{
-				file.getParentFile().mkdirs();
-				
-				writer = new FileWriter(file);
-				writer.write(gson.toJson(template)); 
-				writer.close();
-			} 
-			catch (Exception e) 
-			{
-				EN2.log.error("Failed to write file: '" + file + "'.");
-				EN2.log.error(e);
-			}  
-		}
-		else
+		if (file.exists())
 		{
 			try 
 			{
@@ -56,8 +35,6 @@ public class TemplateLoader {
 			} 
 			catch (Exception e) 
 			{
-				template = TemplateDefault.generate();
-				
 				EN2.log.error("Failed to read map file: '" + file + "'.");
 				EN2.log.error(e);
 			}  
