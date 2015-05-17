@@ -46,20 +46,19 @@ public class CompostRegistry {
 				}
 				else
 				{
-					recipes.remove(s);
+					removeRecipe(recipe.getInput(), recipe.getMetadataBehavior());
 				}
 			}
 		}
 	}
 	
-	public static void removeRecipe(ItemStack item)
+	public static void removeRecipe(ItemStack item, MetadataBehavior behavior)
 	{
-		CompostRegistryEntry recipe = getRecipe(item);
+		if (behavior == MetadataBehavior.IGNORED)
+			recipes.remove(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":*");
 		
-		if (recipe != null)
-		{
-			recipes.remove(getRecipeKey(recipe));
-		}
+		if (behavior == MetadataBehavior.SPECIFIC)
+			recipes.remove(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":" + item.getMetadata());
 	}
 	
 	public static boolean isCompostable(ItemStack item)
@@ -69,7 +68,7 @@ public class CompostRegistry {
 	
 	public static CompostRegistryEntry getRecipe(ItemStack item)
 	{
-		CompostRegistryEntry recipe = recipes.get(GameRegistry.findUniqueIdentifierFor(item.getItem())  + ":*");
+		CompostRegistryEntry recipe = recipes.get(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":" + item.getMetadata());
 		
 		if (recipe != null)
 		{
@@ -77,7 +76,7 @@ public class CompostRegistry {
 		}
 		else
 		{
-			return recipes.get(GameRegistry.findUniqueIdentifierFor(item.getItem()) + ":" + item.getMetadata());
+			return recipes.get(GameRegistry.findUniqueIdentifierFor(item.getItem())  + ":*");
 		}
 	}
 	
@@ -121,6 +120,8 @@ public class CompostRegistry {
 		addRecipe(new CompostRegistryEntry(new ItemStack(Items.rotten_flesh, 1), 85, new Color("C45631"), MetadataBehavior.IGNORED));
 		//spider eye
 		addRecipe(new CompostRegistryEntry(new ItemStack(Items.spider_eye, 1), 85, new Color("963E44"), MetadataBehavior.IGNORED));
+		//spider eye fermented
+		addRecipe(new CompostRegistryEntry(new ItemStack(Items.fermented_spider_eye, 1), 85, new Color("963E44"), MetadataBehavior.IGNORED));
 		
 		//dandelion
 		addRecipe(new CompostRegistryEntry(new ItemStack(Item.getItemFromBlock(Blocks.yellow_flower), 1), 100, new Color("FFF461"), MetadataBehavior.SPECIFIC));
