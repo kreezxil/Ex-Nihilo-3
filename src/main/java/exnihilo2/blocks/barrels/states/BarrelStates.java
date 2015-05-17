@@ -26,6 +26,8 @@ import exnihilo2.blocks.barrels.states.empty.logic.EmptyStateLogic;
 import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerItem;
 import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerWeather;
 import exnihilo2.blocks.barrels.states.fluid.BarrelStateFluid;
+import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftClayTrigger;
+import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftEndstoneTrigger;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftNetherrackTrigger;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicGas;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicHot;
@@ -63,6 +65,8 @@ public class BarrelStates {
 	public static BarrelLogic fluid_state_logic_gas;
 	public static BarrelLogic fluid_state_logic_items;
 	public static BarrelLogic fluid_state_trigger_crafting_netherrack;
+	public static BarrelLogic fluid_state_trigger_crafting_end_stone;
+	public static BarrelLogic fluid_state_trigger_crafting_clay;
 	
 	//-compost
 	public static BarrelLogic compost_state_logic_items;
@@ -81,6 +85,8 @@ public class BarrelStates {
 	private static boolean allow_compost;
 	private static boolean allow_rain_filling;
 	private static boolean allow_crafting_netherrack;
+	private static boolean allow_crafting_end_stone;
+	private static boolean allow_crafting_clay;
 	
 	public static void initialize(Configuration config)
 	{
@@ -96,7 +102,9 @@ public class BarrelStates {
 	{
 		allow_compost = config.get(CATEGORY_BARREL_OPTIONS, "allow composting", true).getBoolean(true);
 		allow_rain_filling = config.get(CATEGORY_BARREL_OPTIONS, "allow rain to fill barrels", true).getBoolean(true);
-		allow_crafting_netherrack = config.get(CATEGORY_BARREL_OPTIONS, "allow netherrack crafting", true).getBoolean(true);
+		allow_crafting_netherrack = config.get(CATEGORY_BARREL_OPTIONS, "allow creating netherrack", true).getBoolean(true);
+		allow_crafting_end_stone = config.get(CATEGORY_BARREL_OPTIONS, "allow creating end stone", true).getBoolean(true);
+		allow_crafting_clay = config.get(CATEGORY_BARREL_OPTIONS, "allow creating clay", true).getBoolean(true);
 	}
 	
 	private static void initializeLogic()
@@ -113,6 +121,8 @@ public class BarrelStates {
 		fluid_state_logic_gas = new FluidStateLogicGas();
 		fluid_state_logic_items = new FluidStateLogicItems();
 		fluid_state_trigger_crafting_netherrack = new FluidCraftNetherrackTrigger();
+		fluid_state_trigger_crafting_end_stone = new FluidCraftEndstoneTrigger();
+		fluid_state_trigger_crafting_clay = new FluidCraftClayTrigger();
 
 		compost_state_logic_items = new CompostStateLogicItems();
 		compost_state_trigger_complete = new CompostStateLogicComplete();
@@ -157,6 +167,10 @@ public class BarrelStates {
 		BarrelStates.fluid.addLogic(fluid_state_logic_items);
 		if (allow_crafting_netherrack)
 			BarrelStates.fluid.addLogic(fluid_state_trigger_crafting_netherrack);
+		if (allow_crafting_end_stone)
+			BarrelStates.fluid.addLogic(fluid_state_trigger_crafting_end_stone);
+		if (allow_crafting_clay)
+			BarrelStates.fluid.addLogic(fluid_state_trigger_crafting_clay);
 
 		if (allow_compost)
 		{

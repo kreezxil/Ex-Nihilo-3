@@ -60,6 +60,7 @@ public class FluidStateTriggerItem extends BarrelLogic {
 			}
 
 			barrel.fill(fluid, true);
+			barrel.getWorld().playSoundEffect(barrel.getPos().getX() + 0.5f, barrel.getPos().getY() + 0.5f, barrel.getPos().getZ() + 0.5f, "game.neutral.swim", 0.2f, 0.8f);
 			return true;
 		}
 

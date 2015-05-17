@@ -49,6 +49,7 @@ public class CompostStateLogicItems extends BarrelLogic{
 		}
 		
 		consumeItem(player, item);
+		barrel.getWorld().playSoundEffect(barrel.getPos().getX() + 0.5f, barrel.getPos().getY() + 0.5f, barrel.getPos().getZ() + 0.5f, "step.snow", 0.7f, 0.15f);
 		
 		return false;
 	}
