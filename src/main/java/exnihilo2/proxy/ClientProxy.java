@@ -44,6 +44,7 @@ public class ClientProxy extends Proxy {
 	private void registerBlockRenderers()
 	{
 		registerRenderer(EN2Blocks.barrel_wood);
+		registerRenderer(EN2Blocks.barrel_stone);
 		registerRenderer(EN2Blocks.barrel_glass);
 		registerRenderer(EN2Blocks.barrel_glass_colored);
 		

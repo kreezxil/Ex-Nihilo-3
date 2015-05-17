@@ -29,12 +29,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EN2Blocks {
 	
 	public static Block barrel_wood;
+	public static Block barrel_stone;
 	public static Block barrel_glass;
 	public static Block barrel_glass_colored;
 
 	public static void initialize()
 	{
 		barrel_wood = new BlockBarrelWood(Material.wood).setUnlocalizedName("barrel_wood");
+		barrel_stone = new BlockBarrel(Material.rock).setUnlocalizedName("barrel_stone");
 		barrel_glass = new BlockBarrel(Material.glass).setUnlocalizedName("barrel_glass");
 		barrel_glass_colored = new BlockBarrelGlassColored(Material.glass).setUnlocalizedName("barrel_glass_colored");
 	}
@@ -42,6 +44,7 @@ public class EN2Blocks {
 	public static void registerBlocks()
 	{
 		registerBlock(barrel_wood, ItemBarrelWood.class);
+		registerBlock(barrel_stone);
 		registerBlock(barrel_glass);
 		registerBlock(barrel_glass_colored, ItemBarrelGlassColored.class);
 	}

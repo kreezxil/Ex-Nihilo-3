@@ -133,6 +133,7 @@ public class BlockBarrel extends BlockContainer
 		return super.removedByPlayer(world, pos, player, willHarvest);
 	}
 	
+	@Override
 	public void onBlockExploded(World world, BlockPos pos, Explosion explosion)
     {
 		TileEntityBarrel barrel = (TileEntityBarrel) world.getTileEntity(pos);
@@ -140,4 +141,10 @@ public class BlockBarrel extends BlockContainer
 		
 		super.onBlockExploded(world, pos, explosion);
     }
+	
+	@Override
+	public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player) {
+		//Barrels should never break with the wrong tool.
+		return true;
+	}
 }

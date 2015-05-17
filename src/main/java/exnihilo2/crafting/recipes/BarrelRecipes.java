@@ -18,7 +18,15 @@ public class BarrelRecipes {
 					'x', new ItemStack(Blocks.planks, 1, i), 
 					'y', new ItemStack(Blocks.wooden_slab, 1, i));
 		}
-		
+
+		//stone barrel
+		GameRegistry.addRecipe(new ItemStack(EN2Blocks.barrel_stone, 1, 0),
+				"x x",
+				"x x",
+				"xyx",
+				'x', new ItemStack(Blocks.stone, 1, 0), 
+				'y', new ItemStack(Blocks.stone_slab, 1, 0));
+
 		//glass barrel
 		GameRegistry.addRecipe(new ItemStack(EN2Blocks.barrel_glass, 1, 0),
 				"x x",
@@ -26,7 +34,7 @@ public class BarrelRecipes {
 				"xyx",
 				'x', new ItemStack(Blocks.glass, 1, 0), 
 				'y', new ItemStack(Blocks.glass_pane, 1, 0));
-		
+
 		//stained glass barrels
 		for(int i = 0; i < 16; i++)
 		{
