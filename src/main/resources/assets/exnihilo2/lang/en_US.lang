@@ -1,5 +1,10 @@
 item.crook_wood.name=Wooden Crook
 item.crook_bone.name=Bone Crook
+item.hammer_wood.name=Wooden Hammer
+item.hammer_stone.name=Stone Hammer
+item.hammer_iron.name=Iron Hammer
+item.hammer_gold.name=Gold Hammer
+item.hammer_diamond.name=Diamond Hammer
 tile.barrel_glass.name=Glass Barrel
 tile.barrel_glass_colored_white.name=White Glass Barrel
 tile.barrel_glass_colored_orange.name=Orange Glass Barrel
