@@ -2,6 +2,7 @@ package exnihilo2.crafting;
 
 import exnihilo2.crafting.recipes.BarrelRecipes;
 import exnihilo2.crafting.recipes.CrookRecipes;
+import exnihilo2.crafting.recipes.HammerRecipes;
 import net.minecraftforge.common.config.Configuration;
 
 public class EN2Crafting {
@@ -25,5 +26,8 @@ public class EN2Crafting {
 		
 		if (crooks_allowed)
 			CrookRecipes.register();
+		
+		if (hammers_allowed)
+			HammerRecipes.register();
 	}
 }
