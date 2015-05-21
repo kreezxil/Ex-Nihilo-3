@@ -42,14 +42,16 @@ public class ItemHammer extends Item{
 		World world = player.worldObj;
 		IBlockState state = world.getBlockState(pos);
 		
-		if (HammerRegistry.isHammerable(state))
+		if (HammerRegistry.isHammerable(state) 
+				&& (state.getBlock().getMaterial().isToolNotRequired())
+				|| state.getBlock().getHarvestLevel(state) <= this.material.getHarvestLevel())
 		{
 			if (!world.isRemote)
 			{
 				HammerRegistry.getEntryForBlockState(state).dropRewards(player, pos);
+				world.destroyBlock(pos, false);
 			}
 			
-			world.destroyBlock(pos, false);
 			item.damageItem(1, player);
 			return true;
 		}

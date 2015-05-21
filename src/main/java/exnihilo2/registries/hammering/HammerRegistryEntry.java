@@ -2,11 +2,16 @@ package exnihilo2.registries.hammering;
 
 import java.util.ArrayList;
 
+import exnihilo2.registries.hammering.pojos.HammerRecipe;
+import exnihilo2.registries.hammering.pojos.HammerRecipeReward;
 import exnihilo2.util.enums.EnumMetadataBehavior;
+import exnihilo2.util.helpers.GameRegistryHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -26,6 +31,11 @@ public class HammerRegistryEntry {
 	public void addReward(ItemStack item, int base_chance, int luck_modifier)
 	{
 		this.rewards.add(new HammerReward(item, base_chance, luck_modifier));
+	}
+	
+	public ArrayList<HammerReward> getRewards()
+	{
+		return rewards;
 	}
 	
 	public EnumMetadataBehavior getMetadataBehavior()
@@ -53,6 +63,35 @@ public class HammerRegistryEntry {
 		{
 			return s + ":" + input.getBlock().getMetaFromState(input);
 		}
+	}
+	
+	public static HammerRegistryEntry fromRecipe(HammerRecipe recipe)
+	{
+		Block block = GameRegistryHelper.findBlock(recipe.getId());
+
+		if (block != null)
+		{
+			IBlockState state = block.getStateFromMeta(recipe.getMeta());
+
+			if (state != null)
+			{
+				HammerRegistryEntry entry = new HammerRegistryEntry(state, recipe.getBehavior());
+
+				for (HammerRecipeReward reward : recipe.getRewards())
+				{
+					Item item = GameRegistryHelper.findItem(reward.getId());
+					
+					if (item != null)
+					{
+						entry.addReward(new ItemStack(item, reward.getAmount(), reward.getMeta()), reward.getBaseChance(), reward.getFortuneModifier());
+					}
+				}
+				
+				return entry;
+			}
+		}
+
+		return null;
 	}
 	
 	private class HammerReward

@@ -12,6 +12,7 @@ import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.registries.composting.CompostRegistryEntry;
 import exnihilo2.registries.composting.files.CompostRecipeLoader;
+import exnihilo2.registries.hammering.files.HammerRecipeLoader;
 import exnihilo2.util.enums.EnumMetadataBehavior;
 
 public class HammerRegistry {
@@ -21,22 +22,23 @@ public class HammerRegistry {
 	{
 		entries = new HashMap<String, HammerRegistryEntry>();
 		registerVanillaRecipes();
-//		List<CompostRegistryEntry> loaded = CompostRecipeLoader.load(EN2.path + File.separator + "recipes" + File.separator + "compost" + File.separator);
-//	
-//		if (loaded != null && !loaded.isEmpty())
-//		{
-//			for (CompostRegistryEntry entry : loaded)
-//			{
-//				if (entry.getVolume() > 0)
-//				{
-//					add(entry);
-//				}
-//				else
-//				{
-//					remove(entry);
-//				}
-//			}
-//		}
+		
+		List<HammerRegistryEntry> loaded = HammerRecipeLoader.load(EN2.path + File.separator + "recipes" + File.separator + "hammer" + File.separator);
+	
+		if (loaded != null && !loaded.isEmpty())
+		{
+			for (HammerRegistryEntry entry : loaded)
+			{
+				if (entry.getRewards().size() > 0)
+				{
+					add(entry);
+				}
+				else
+				{
+					remove(entry);
+				}
+			}
+		}
 	}
 	
 	public static void add(HammerRegistryEntry entry)
