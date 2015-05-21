@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import exnihilo2.EN2;
 import exnihilo2.registries.composting.pojos.CompostRecipe;
 import exnihilo2.util.Color;
@@ -75,6 +76,19 @@ public class CompostRegistryEntry {
 	public EnumMetadataBehavior getMetadataBehavior()
 	{
 		return this.behavior;
+	}
+
+	public String getKey() {
+		String s = GameRegistry.findUniqueIdentifierFor(input.getItem()).toString();
+		
+		if (behavior == EnumMetadataBehavior.IGNORED)
+		{
+			return s + ":*";
+		}
+		else 
+		{
+			return s + ":" + input.getMetadata();
+		}
 	}
 }
 

@@ -25,7 +25,7 @@ public class CompostStateLogicItems extends BarrelLogic{
 	@Override
 	public boolean onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) 
 	{
-		CompostRegistryEntry recipe = CompostRegistry.getRecipe(item);
+		CompostRegistryEntry recipe = CompostRegistry.getEntryForItemStack(item);
 		
 		if (recipe != null)
 		{

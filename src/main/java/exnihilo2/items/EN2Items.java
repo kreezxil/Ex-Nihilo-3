@@ -32,9 +32,11 @@ public class EN2Items {
 		hammer_iron = new ItemHammer(ToolMaterial.IRON).setUnlocalizedName("hammer_iron");
 		hammer_gold = new ItemHammer(ToolMaterial.GOLD).setUnlocalizedName("hammer_gold");
 		hammer_diamond = new ItemHammer(ToolMaterial.EMERALD).setUnlocalizedName("hammer_diamond");
+		
+		registerItems();
 	}
 	
-	public static void registerItems()
+	private static void registerItems()
 	{
 		registerItem(crook_wood);
 		registerItem(crook_bone);

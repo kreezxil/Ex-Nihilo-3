@@ -45,9 +45,11 @@ public class EN2Blocks {
 		barrel_glass_colored = new BlockBarrelGlassColored(Material.glass).setUnlocalizedName("barrel_glass_colored");
 		
 		dust = new BlockDust().setUnlocalizedName("dust");
+		
+		registerBlocks();
 	}
 	
-	public static void registerBlocks()
+	private static void registerBlocks()
 	{
 		registerBlock(barrel_wood, ItemBarrelWood.class);
 		registerBlock(barrel_stone);
