@@ -46,7 +46,7 @@ public class EN2
 {
 	public static final String NAME = "Ex Nihilo 2";
 	public static final String MODID = "exnihilo2";
-	public static final String VERSION = "1.0";
+	public static final String VERSION = "0.11";
 
 	@SidedProxy(serverSide = "exnihilo2.proxy.ServerProxy", clientSide = "exnihilo2.proxy.ClientProxy")
 	public static Proxy proxy;
