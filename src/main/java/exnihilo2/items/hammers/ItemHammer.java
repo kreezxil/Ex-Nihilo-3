@@ -43,8 +43,8 @@ public class ItemHammer extends Item{
 		IBlockState state = world.getBlockState(pos);
 		
 		if (HammerRegistry.isHammerable(state) 
-				&& (state.getBlock().getMaterial().isToolNotRequired())
-				|| state.getBlock().getHarvestLevel(state) <= this.material.getHarvestLevel())
+				&& (state.getBlock().getMaterial().isToolNotRequired()
+				|| state.getBlock().getHarvestLevel(state) <= this.material.getHarvestLevel()))
 		{
 			if (!world.isRemote)
 			{
