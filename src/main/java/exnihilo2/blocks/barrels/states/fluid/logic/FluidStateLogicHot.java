@@ -12,7 +12,7 @@ public class FluidStateLogicHot extends BarrelLogic{
 	@Override
 	public boolean onUpdate(TileEntityBarrel barrel) 
 	{
-		if (barrel.getFluid() != null)
+		if (barrel.getFluid() != null && barrel.getFluid().getFluid() != null)
 		{
 			//if the fluid is hot...
 			if(barrel.getFluid().getFluid().getTemperature() > 400)
