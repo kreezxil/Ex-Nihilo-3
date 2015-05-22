@@ -69,7 +69,7 @@ public abstract class PositionHelper {
 	
 	public static boolean isRainingAt(World world, BlockPos pos)
 	{
-		return world.isRaining() && world.getBiomeGenForCoords(pos).getFloatRainfall() > 0f && isTopBlock(world, pos);
+		return world.isRaining() && world.getBiomeGenForCoords(pos).rainfall > 0f && isTopBlock(world, pos);
 	}
 	
 	public static boolean canRainReach(World world, BlockPos pos)

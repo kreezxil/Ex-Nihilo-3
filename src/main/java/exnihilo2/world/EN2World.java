@@ -143,11 +143,14 @@ public class EN2World {
 	
 	public static void tick(World world)
 	{
-		ChunkProviderServer provider = (ChunkProviderServer)world.getChunkProvider();
-        for (Object o : provider.func_152380_a().toArray())
-        {
-        	Moss.grow(world, (Chunk)o);
-        	Mycelium.grow(world, (Chunk)o);
-        }
+		if (!world.isRemote)
+		{
+			ChunkProviderServer provider = (ChunkProviderServer)world.getChunkProvider();
+	        for (Object o : provider.func_152380_a().toArray())
+	        {
+	        	Moss.grow(world, (Chunk)o);
+	        	Mycelium.grow(world, (Chunk)o);
+	        }
+		}
 	}
 }
