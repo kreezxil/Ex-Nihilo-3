@@ -94,36 +94,6 @@ public class HammerRegistryEntry {
 		return null;
 	}
 	
-	private class HammerReward
-	{
-		private int base_chance;
-		private int luck_modifier; //the effectiveness of Fortune enchantments.
-		private ItemStack item;
-		
-		public HammerReward(ItemStack item, int base_chance, int luck_modifier)
-		{
-			this.item = item;
-			this.base_chance = base_chance;
-			this.luck_modifier = luck_modifier;
-		}
-
-		public void dropReward(EntityPlayer player, BlockPos pos)
-		{
-			World world = player.worldObj;
-			int luck_level = EnchantmentHelper.getFortuneModifier(player);
-			int chance = base_chance + (luck_modifier * luck_level);
-
-			if (world.rand.nextInt(100) < chance)
-			{
-				EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, item.copy());
-
-				entityitem.motionX = world.rand.nextGaussian() * 0.05F;
-				entityitem.motionY = (0.2d);
-				entityitem.motionZ = world.rand.nextGaussian() * 0.05F;
-
-				world.spawnEntityInWorld(entityitem);
-			}
-		}
-	}
+	
 }
 
