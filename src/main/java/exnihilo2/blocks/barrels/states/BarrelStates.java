@@ -30,6 +30,7 @@ import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftClayTrigger;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftEndstoneTrigger;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftNetherrackTrigger;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftObsidianTrigger;
+import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftStoneTrigger;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicGas;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicHot;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicItems;
@@ -69,6 +70,7 @@ public class BarrelStates {
 	public static BarrelLogic fluid_state_trigger_crafting_end_stone;
 	public static BarrelLogic fluid_state_trigger_crafting_clay;
 	public static BarrelLogic fluid_state_trigger_crafting_obsidian;
+	public static BarrelLogic fluid_state_trigger_crafting_stone;
 	
 	//-compost
 	public static BarrelLogic compost_state_logic_items;
@@ -84,12 +86,13 @@ public class BarrelStates {
 	public static BarrelLogic coarse_dirt_state_trigger_complete;
 	
 	private static final String CATEGORY_BARREL_OPTIONS = "barrel options";
-	private static boolean allow_compost;
-	private static boolean allow_rain_filling;
-	private static boolean allow_crafting_netherrack;
-	private static boolean allow_crafting_end_stone;
-	private static boolean allow_crafting_clay;
-	private static boolean allow_crafting_obsidian;
+	public static boolean allow_compost;
+	public static boolean allow_rain_filling;
+	public static boolean allow_crafting_netherrack;
+	public static boolean allow_crafting_end_stone;
+	public static boolean allow_crafting_clay;
+	public static boolean allow_crafting_obsidian;
+	public static boolean allow_crafting_stone;
 	
 	public static void initialize(Configuration config)
 	{
@@ -109,6 +112,7 @@ public class BarrelStates {
 		allow_crafting_end_stone = config.get(CATEGORY_BARREL_OPTIONS, "allow creating end stone", true).getBoolean(true);
 		allow_crafting_clay = config.get(CATEGORY_BARREL_OPTIONS, "allow creating clay", true).getBoolean(true);
 		allow_crafting_obsidian = config.get(CATEGORY_BARREL_OPTIONS, "allow creating obsidian", true).getBoolean(true);
+		allow_crafting_stone = config.get(CATEGORY_BARREL_OPTIONS, "allow creating stone and cobblestone", true).getBoolean(true);
 	}
 	
 	private static void initializeLogic()
@@ -128,6 +132,7 @@ public class BarrelStates {
 		fluid_state_trigger_crafting_end_stone = new FluidCraftEndstoneTrigger();
 		fluid_state_trigger_crafting_clay = new FluidCraftClayTrigger();
 		fluid_state_trigger_crafting_obsidian = new FluidCraftObsidianTrigger();
+		fluid_state_trigger_crafting_stone = new FluidCraftStoneTrigger();
 
 		compost_state_logic_items = new CompostStateLogicItems();
 		compost_state_trigger_complete = new CompostStateLogicComplete();
@@ -178,6 +183,8 @@ public class BarrelStates {
 			BarrelStates.fluid.addLogic(fluid_state_trigger_crafting_clay);
 		if (allow_crafting_obsidian)
 			BarrelStates.fluid.addLogic(fluid_state_trigger_crafting_obsidian);
+		if (allow_crafting_stone)
+			BarrelStates.fluid.addLogic(fluid_state_trigger_crafting_stone);
 
 		if (allow_compost)
 		{

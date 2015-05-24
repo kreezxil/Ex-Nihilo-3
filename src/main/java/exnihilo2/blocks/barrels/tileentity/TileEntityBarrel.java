@@ -36,7 +36,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 	protected int generalTimerMax = 0;
 	
 	protected int updateTimer = 0;
-	protected int updateTimerMax = 5; //Sync if an update is required.
+	protected int updateTimerMax = 8; //Sync if an update is required.
 	protected boolean updateQueued = false;
 	protected boolean updateTimerRunning = false;
 	
