@@ -44,8 +44,7 @@ public class CompostStateLogicItems extends BarrelLogic{
 			float a = weightA * colorA.a + weightB * colorB.a;
 
 			barrel.setColor(new Color(r,g,b,a));
-			
-			barrel.getWorld().markBlockForUpdate(barrel.getPos());
+			barrel.requestSync();
 		}
 		
 		consumeItem(player, item);
