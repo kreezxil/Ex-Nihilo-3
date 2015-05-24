@@ -23,6 +23,8 @@ public class FluidCraftStoneTrigger extends BarrelLogic{
 					barrel.setContents(new ItemStack(Blocks.stone, 1));
 					barrel.setState(BarrelStates.output);
 					
+					barrel.getWorld().playSoundEffect(barrel.getPos().getX() + 0.5f, barrel.getPos().getY() + 0.5f, barrel.getPos().getZ() + 0.5f, "random.fizz", 0.5f, 4.5f);
+					
 					return true;
 				}
 				
@@ -30,6 +32,8 @@ public class FluidCraftStoneTrigger extends BarrelLogic{
 				{
 					barrel.setContents(new ItemStack(Blocks.cobblestone, 1));
 					barrel.setState(BarrelStates.output);
+					
+					barrel.getWorld().playSoundEffect(barrel.getPos().getX() + 0.5f, barrel.getPos().getY() + 0.5f, barrel.getPos().getZ() + 0.5f, "random.fizz", 0.5f, 4.5f);
 					
 					return true;
 				}
