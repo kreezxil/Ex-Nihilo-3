@@ -40,7 +40,26 @@ public class FluidStateLogicItems extends BarrelLogic{
 		{
 			if (ifluid != null && barrel.fill(ifluid, false) > 0)
 			{
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, InventoryHelper.getContainer(item));
+				if (player != null)
+				{
+					if (!player.capabilities.isCreativeMode)
+					{
+						if(item.stackSize > 1)
+						{
+							item.stackSize--;
+							InventoryHelper.giveItemStackToPlayer(player, InventoryHelper.getContainer(item));
+						}
+						else
+						{
+							player.setCurrentItemOrArmor(0, InventoryHelper.getContainer(item));
+						}
+					}
+				}
+				else
+				{
+					barrel.addOutput(InventoryHelper.getContainer(item));
+				}
+				
 				barrel.fill(ifluid, true);
 			}
 			
@@ -56,14 +75,12 @@ public class FluidStateLogicItems extends BarrelLogic{
 						{
 							if (item.stackSize > 1) 
 							{
-								if (player.inventory.addItemStackToInventory(full)) 
-								{
-									item.stackSize -= 1;
-								}
+								item.stackSize--;
+								InventoryHelper.giveItemStackToPlayer(player, full);
 							} 
 							else 
 							{
-								player.inventory.setInventorySlotContents(player.inventory.currentItem, full);
+								player.setCurrentItemOrArmor(0, full);
 							}
 						}
 					}

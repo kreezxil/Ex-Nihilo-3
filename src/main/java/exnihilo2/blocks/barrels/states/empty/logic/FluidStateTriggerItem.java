@@ -29,34 +29,24 @@ public class FluidStateTriggerItem extends BarrelLogic {
 
 		if (fluid != null && fluid.amount > 0)
 		{
-			if (item.getItem() == Items.potionitem && item.getItemDamage() == 0)
+			if (player != null)
 			{
-				if (player != null)
+				if (!player.capabilities.isCreativeMode)
 				{
-					if (!player.capabilities.isCreativeMode)
+					if(item.stackSize > 1)
 					{
-						//Without this line, the glass bottle would be consumed.
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.glass_bottle, 1, 0));
+						item.stackSize--;
+						InventoryHelper.giveItemStackToPlayer(player, InventoryHelper.getContainer(item));
+					}
+					else
+					{
+						player.setCurrentItemOrArmor(0, InventoryHelper.getContainer(item));
 					}
 				}
-				else
-				{
-					barrel.addOutput(new ItemStack(Items.glass_bottle, 1, 0));
-				}
-
-			}else
+			}
+			else
 			{
-				if (player != null)
-				{
-					if (!player.capabilities.isCreativeMode)
-					{
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, InventoryHelper.getContainer(item));
-					}
-				}
-				else
-				{
-					barrel.addOutput(InventoryHelper.getContainer(item));
-				}
+				barrel.addOutput(InventoryHelper.getContainer(item));
 			}
 
 			barrel.fill(fluid, true);
