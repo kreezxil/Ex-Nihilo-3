@@ -11,7 +11,7 @@ import exnihilo2.blocks.barrels.architecture.BarrelLogic;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.util.helpers.PositionHelper;
 
-public class OutputStateLogicGrowingGrass extends BarrelLogic{
+public class OutputStateLogicGrowingMycelium extends BarrelLogic{
 	@Override
 	public boolean onUpdate(TileEntityBarrel barrel) 
 	{
@@ -19,9 +19,9 @@ public class OutputStateLogicGrowingGrass extends BarrelLogic{
 		{
 			if (barrel.getWorld().rand.nextInt(1000) == 0)
 			{
-				if (isRandomNearbyBlockGrass(barrel) && PositionHelper.getLightLevelAbove(barrel.getWorld(), barrel.getPos()) >= 9)
+				if (isRandomNearbyBlockMycelium(barrel) && PositionHelper.getLightLevelAbove(barrel.getWorld(), barrel.getPos()) >= 9)
 				{
-					barrel.setContents(new ItemStack(Blocks.mycelium, 1));
+					barrel.setContents(new ItemStack(Blocks.grass, 1));
 				}
 			}
 		}
@@ -29,7 +29,7 @@ public class OutputStateLogicGrowingGrass extends BarrelLogic{
 		return false;
 	}
 	
-	private static boolean isRandomNearbyBlockGrass(TileEntityBarrel barrel)
+	private static boolean isRandomNearbyBlockMycelium(TileEntityBarrel barrel)
 	{
 		World world = barrel.getWorld();
 		BlockPos pos = barrel.getPos();
@@ -39,11 +39,16 @@ public class OutputStateLogicGrowingGrass extends BarrelLogic{
 		int y = world.rand.nextInt(3) - 1;
 		int z = world.rand.nextInt(3) - 1;
 		
-		if (world.getBlockState(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z)).getBlock() == Blocks.mycelium)
+		if (world.getBlockState(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z)).getBlock() == Blocks.grass)
 		{
 			return true;
 		}
 		
 		return false;
+	}
+	
+	private static int getLightLevel(TileEntityBarrel barrel)
+	{
+		return barrel.getWorld().getLight(new BlockPos(barrel.getPos().getX(), barrel.getPos().getY() + 1, barrel.getPos().getZ()));
 	}
 }

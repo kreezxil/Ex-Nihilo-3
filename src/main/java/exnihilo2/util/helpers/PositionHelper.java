@@ -1,6 +1,7 @@
 package exnihilo2.util.helpers;
 
 import exnihilo2.EN2;
+import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -112,6 +113,20 @@ public abstract class PositionHelper {
 		if (world.isAirBlock(pos))
 		{
 			world.setBlockState(pos, state);
+		}
+	}
+	
+	public static int getLightLevelAbove(World world, BlockPos pos)
+	{
+		BlockPos above = pos.up();
+		
+		if (!world.isAirBlock(above))
+		{
+			return 0;
+		}
+		else
+		{
+			return world.getLight(new BlockPos(above.getX(), above.getY() + 1, above.getZ()));
 		}
 	}
 }

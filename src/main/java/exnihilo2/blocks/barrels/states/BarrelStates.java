@@ -37,6 +37,7 @@ import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicItems;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicRain;
 import exnihilo2.blocks.barrels.states.output.BarrelStateOutput;
 import exnihilo2.blocks.barrels.states.output.logic.OutputStateLogicGrowingGrass;
+import exnihilo2.blocks.barrels.states.output.logic.OutputStateLogicGrowingMycelium;
 
 public class BarrelStates {
 	public static HashMap<String, BarrelState> states = new HashMap<String, BarrelState>();
@@ -60,6 +61,7 @@ public class BarrelStates {
 	
 	//-output
 	public static BarrelLogic output_state_logic_growing_grass;
+	public static BarrelLogic output_state_logic_growing_mycelium;
 	
 	//-fluid
 	public static BarrelLogic fluid_state_logic_hot;
@@ -123,6 +125,7 @@ public class BarrelStates {
 		empty_state_trigger_fluid_weather = new FluidStateTriggerWeather();
 
 		output_state_logic_growing_grass = new OutputStateLogicGrowingGrass();
+		output_state_logic_growing_mycelium = new OutputStateLogicGrowingMycelium();
 
 		fluid_state_logic_hot = new FluidStateLogicHot();
 		fluid_state_logic_weather = new FluidStateLogicRain();
@@ -169,6 +172,7 @@ public class BarrelStates {
 			BarrelStates.empty.addLogic(empty_state_trigger_fluid_weather);
 
 		BarrelStates.output.addLogic(output_state_logic_growing_grass);
+		BarrelStates.output.addLogic(output_state_logic_growing_mycelium);
 
 		BarrelStates.fluid.addLogic(fluid_state_logic_hot);
 		if (allow_rain_filling)
