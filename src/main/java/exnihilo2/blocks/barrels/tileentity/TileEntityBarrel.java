@@ -36,14 +36,15 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 	protected int generalTimerMax = 0;
 	
 	protected int syncTimer = 0;
-	protected final int syncTimerMax = 5; //Sync if an update is required.
+	protected int syncTimerMax = 5; //Sync if an update is required.
 	protected boolean syncNeeded = false;
 	
-	public TileEntityBarrel()
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) 
 	{
-		state = BarrelStates.empty;
+		return !oldState.getBlock().equals(newState.getBlock());
 	}
-	
+
 	public void startTimer(int maxTicks)
 	{
 		generalTimer = 0;
@@ -84,7 +85,9 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		super.update();
 		
 		if (state != null)
+		{
 			setLuminosity(state.getLuminosity(this));
+		}
 		
 		//Update timer used by states.
 		if (generalTimerMax != 0 && generalTimer < generalTimerMax)
@@ -92,17 +95,24 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 			generalTimer++;
 		}
 		
-		//Update timer used to sync client and server.
-		syncTimer++;
-		
-		if (syncTimer > syncTimerMax)
+		if (!this.worldObj.isRemote)
 		{
-			syncTimer = 0;
-			if (syncNeeded)
+			//Update timer used to sync client and server.
+			syncTimer++;
+			
+			if (syncTimer > syncTimerMax)
 			{
-				this.getWorld().markBlockForUpdate(this.getPos());
-				this.syncNeeded = false;
+				syncTimer = 0;
+				if (syncNeeded)
+				{
+					this.syncNeeded = false;
+					this.getWorld().markBlockForUpdate(this.getPos());
+				}
 			}
+		}
+		else
+		{
+			this.syncNeeded = false;
 		}
 	}
 	

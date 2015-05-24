@@ -25,8 +25,6 @@ public class BarrelStateEmpty extends BarrelState{
 	public String getUniqueIdentifier() {
 		return "barrel.empty";
 	}
-	
-
 
 	@Override
 	public boolean canManipulateFluids(TileEntityBarrel barrel) {

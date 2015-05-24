@@ -15,19 +15,19 @@ public class BarrelStateLayer extends TileEntity{
 		return state;
 	}
 	
-	public void setState(BarrelState stateIn)
+	public void setState(BarrelState new_state)
 	{
 		String keyA = "";
 		String keyB = "";
 		
-		if (this.state != null)
+		if (state != null)
 		{
 			keyA = this.state.getUniqueIdentifier();
 		}
 		
-		if (stateIn != null)
+		if (new_state != null)
 		{
-			state = stateIn;
+			state = new_state;
 		}
 		else
 		{
@@ -36,9 +36,10 @@ public class BarrelStateLayer extends TileEntity{
 		
 		keyB = this.state.getUniqueIdentifier();
 		
-		if (keyA != keyB)
-		{	
+		if (!keyA.equals(keyB))
+		{
 			TileEntityBarrel barrel = (TileEntityBarrel)this;
+
 			state.activate(barrel);
 			barrel.requestSync();
 		}

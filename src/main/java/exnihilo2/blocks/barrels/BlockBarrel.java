@@ -2,6 +2,7 @@ package exnihilo2.blocks.barrels;
 
 import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
+import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -65,7 +66,7 @@ public class BlockBarrel extends BlockContainer
 			{
 				if(!world.isRemote)
 				{
-					EntityItem entityitem = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), barrel.getStackInSlot(0));
+					EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5f, pos.getY() + 1.0f, pos.getZ() + 0.5f, barrel.getStackInSlot(0));
 
 					double f3 = 0.05F;
 					entityitem.motionX = world.rand.nextGaussian() * f3;
@@ -86,7 +87,10 @@ public class BlockBarrel extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) 
 	{
-		return new TileEntityBarrel();
+		TileEntityBarrel barrel = new TileEntityBarrel();
+		barrel.setState(BarrelStates.empty);
+		
+		return barrel;
 	}
 
 	@Override
