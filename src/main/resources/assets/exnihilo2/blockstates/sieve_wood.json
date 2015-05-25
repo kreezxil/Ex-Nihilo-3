@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "wood=oak": { "model": "exnihilo2:sieve_wood_oak" },
+        "wood=spruce": { "model": "exnihilo2:sieve_wood_spruce" },
+        "wood=birch": { "model": "exnihilo2:sieve_wood_birch" },
+        "wood=jungle": { "model": "exnihilo2:sieve_wood_jungle" },
+        "wood=acacia": { "model": "exnihilo2:sieve_wood_acacia" },
+        "wood=dark_oak": { "model": "exnihilo2:sieve_wood_dark_oak" }
+    }
+}

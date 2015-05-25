@@ -23,6 +23,8 @@ import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.sieves.renderer.SieveRenderer;
+import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
 import exnihilo2.items.EN2Items;
 
 //Commands that only execute on the client.
@@ -53,9 +55,10 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Blocks.barrel_glass);
 		registerRenderer(EN2Blocks.barrel_glass_colored);
 		registerRenderer(EN2Blocks.dust);
+		registerRenderer(EN2Blocks.sieve_wood);
 		
-		TileEntitySpecialRenderer barrelRenderer = new BarrelRenderer();
-	   	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, barrelRenderer);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, new BarrelRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySieve.class, new SieveRenderer());
 	}
 	
 	private static void registerRenderer(Block block)

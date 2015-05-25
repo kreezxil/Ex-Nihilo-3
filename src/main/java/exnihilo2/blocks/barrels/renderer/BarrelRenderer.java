@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.util.Color;
+import exnihilo2.util.helpers.ContentRenderHelper;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -43,27 +44,9 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 	
 	public static void renderContentsSimple(TextureAtlasSprite texture, double height, Color color)
 	{
-		GlStateManager.pushMatrix();
+		height = ContentRenderHelper.getAdjustedContentLevel(MIN_RENDER_CAPACITY, MAX_RENDER_CAPACITY, height);
 		
-		double minU = (double)texture.getMinU();
-		double maxU = (double)texture.getMaxU();
-		double minV = (double)texture.getMinV();
-		double maxV = (double)texture.getMaxV();
-		
-		height = getAdjustedContentLevel(height);
-		
-		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer renderer = tessellator.getWorldRenderer();
-		
-		renderer.startDrawingQuads();
-		renderer.setColorRGBA_F(color.r, color.g, color.b, color.a);
-		renderer.addVertexWithUV(1.0d, 	height, 	1.0d, 	maxU, maxV);
-		renderer.addVertexWithUV(1.0d, 	height, 	0, 		maxU, minV);
-		renderer.addVertexWithUV(0, 	height, 	0, 		minU, minV);
-		renderer.addVertexWithUV(0, 	height, 	1.0d, 	minU, maxV);
-		tessellator.draw();
-		
-		GlStateManager.popMatrix();
+		ContentRenderHelper.renderContentsSimple(texture, height, color);
 	}
 
 	public static void renderContentsComplex(TextureAtlasSprite texture, double height, Color color)

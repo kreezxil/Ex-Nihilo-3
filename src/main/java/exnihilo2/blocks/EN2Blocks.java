@@ -9,8 +9,11 @@ import exnihilo2.blocks.barrels.BlockBarrelWood;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.blocks.misc.BlockDust;
+import exnihilo2.blocks.sieves.BlockSieveWood;
+import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
 import exnihilo2.items.itemblocks.ItemBarrelGlassColored;
 import exnihilo2.items.itemblocks.ItemBarrelWood;
+import exnihilo2.items.itemblocks.ItemSieveWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
@@ -36,6 +39,8 @@ public class EN2Blocks {
 	public static Block barrel_glass_colored;
 	
 	public static Block dust;
+	
+	public static Block sieve_wood;
 
 	public static void initialize()
 	{
@@ -45,6 +50,8 @@ public class EN2Blocks {
 		barrel_glass_colored = new BlockBarrelGlassColored(Material.glass).setUnlocalizedName("barrel_glass_colored");
 		
 		dust = new BlockDust().setUnlocalizedName("dust");
+		
+		sieve_wood = new BlockSieveWood(Material.wood).setUnlocalizedName("sieve_wood");
 		
 		registerBlocks();
 	}
@@ -57,11 +64,14 @@ public class EN2Blocks {
 		registerBlock(barrel_glass_colored, ItemBarrelGlassColored.class);
 		
 		registerBlock(dust);
+		
+		registerBlock(sieve_wood, ItemSieveWood.class);
 	}
 	
 	public static void registerTileEntities()
 	{
 		GameRegistry.registerTileEntity(TileEntityBarrel.class, EN2.MODID + ":tile_entity_barrel");
+		GameRegistry.registerTileEntity(TileEntitySieve.class, EN2.MODID + ":tile_entity_sieve");
 	}
 	
 	private static void registerBlock(Block block)
