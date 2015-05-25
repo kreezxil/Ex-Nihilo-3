@@ -3,20 +3,23 @@ package exnihilo2.crafting;
 import exnihilo2.crafting.recipes.BarrelRecipes;
 import exnihilo2.crafting.recipes.CrookRecipes;
 import exnihilo2.crafting.recipes.HammerRecipes;
+import exnihilo2.crafting.recipes.SieveRecipes;
 import net.minecraftforge.common.config.Configuration;
 
 public class EN2Crafting {
 	private static final String CATEGORY_CRAFTING_OPTIONS = "crafting options";
 	
-	private static boolean barrels_allowed;
-	private static boolean crooks_allowed;
-	private static boolean hammers_allowed;
+	public static boolean barrels_allowed;
+	public static boolean crooks_allowed;
+	public static boolean hammers_allowed;
+	public static boolean sieves_allowed;
 	
 	public static void initialize(Configuration config)
 	{
 		barrels_allowed = config.get(CATEGORY_CRAFTING_OPTIONS, "allow barrels", true).getBoolean(true);
 		crooks_allowed = config.get(CATEGORY_CRAFTING_OPTIONS, "allow crooks", true).getBoolean(true);
 		hammers_allowed = config.get(CATEGORY_CRAFTING_OPTIONS, "allow hammers", true).getBoolean(true);
+		sieves_allowed = config.get(CATEGORY_CRAFTING_OPTIONS, "allow sieves", true).getBoolean(true);
 	}
 
 	public static void registerRecipes()
@@ -29,5 +32,8 @@ public class EN2Crafting {
 		
 		if (hammers_allowed)
 			HammerRecipes.register();
+		
+		if (sieves_allowed)
+			SieveRecipes.register();
 	}
 }
