@@ -100,6 +100,7 @@ public class EN2
 	public void onTextureStitchEvent(TextureStitchEvent.Pre e) {
 		e.map.registerSprite(new ResourceLocation("exnihilo2:blocks/compost"));
 		e.map.registerSprite(new ResourceLocation("exnihilo2:blocks/sieve_mesh_silk_white"));
+		e.map.registerSprite(new ResourceLocation("exnihilo2:blocks/sieve_mesh_wood"));
 	}
 
 	@SubscribeEvent

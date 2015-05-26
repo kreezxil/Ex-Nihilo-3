@@ -3,6 +3,8 @@ package exnihilo2.items;
 import exnihilo2.items.crooks.ItemCrook;
 import exnihilo2.items.hammers.ItemHammer;
 import exnihilo2.items.materials.EN2ToolMaterials;
+import exnihilo2.items.meshs.ItemMeshSilk;
+import exnihilo2.items.meshs.ItemMeshWood;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -14,11 +16,15 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class EN2Items {
 	public static Item crook_wood;
 	public static Item crook_bone;
+	
 	public static Item hammer_wood;
 	public static Item hammer_stone;
 	public static Item hammer_iron;
 	public static Item hammer_gold;
 	public static Item hammer_diamond;
+	
+	public static Item mesh_silk_white;
+	public static Item mesh_wood;
 	
 	public static void initialize()
 	{
@@ -33,6 +39,9 @@ public class EN2Items {
 		hammer_gold = new ItemHammer(ToolMaterial.GOLD).setUnlocalizedName("hammer_gold");
 		hammer_diamond = new ItemHammer(ToolMaterial.EMERALD).setUnlocalizedName("hammer_diamond");
 		
+		mesh_silk_white = new ItemMeshSilk().setUnlocalizedName("mesh_silk_white");
+		mesh_wood = new ItemMeshWood().setUnlocalizedName("mesh_wood");
+		
 		registerItems();
 	}
 	
@@ -46,6 +55,9 @@ public class EN2Items {
 		registerItem(hammer_iron);
 		registerItem(hammer_gold);
 		registerItem(hammer_diamond);
+		
+		registerItem(mesh_silk_white);
+		registerItem(mesh_wood);
 	}
 	
 	private static void registerItem(Item item)

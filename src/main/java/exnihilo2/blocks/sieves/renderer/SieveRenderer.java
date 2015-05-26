@@ -37,7 +37,8 @@ public class SieveRenderer extends TileEntitySpecialRenderer{
 			GlStateManager.scale(0.95d, 1.0d, 0.95d);
 			
 			renderMeshTexture(sieve);
-
+			//TODO: Render contents.
+			
 			RenderHelper.enableStandardItemLighting();
 			GlStateManager.popMatrix();
 		}
@@ -45,12 +46,13 @@ public class SieveRenderer extends TileEntitySpecialRenderer{
 	
 	private void renderMeshTexture(TileEntitySieve sieve)
 	{
-		TextureAtlasSprite mesh = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/sieve_mesh_silk_white");
+		TextureAtlasSprite mesh = sieve.getMeshTexture();
 		
-		GlStateManager.disableCull();
-		ContentRenderHelper.renderContentsSimple(mesh, 0.6d, new Color("FFFFFF"));
-		GlStateManager.enableCull();
-		
-		//TODO: Render contents.
+		if (mesh != null)
+		{
+			GlStateManager.disableCull();
+			ContentRenderHelper.renderContentsSimple(mesh, 0.6d, new Color("FFFFFF"));
+			GlStateManager.enableCull();
+		}
 	}
 }

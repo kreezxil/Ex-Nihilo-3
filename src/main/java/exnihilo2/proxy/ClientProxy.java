@@ -46,6 +46,8 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Items.hammer_iron);
 		registerRenderer(EN2Items.hammer_gold);
 		registerRenderer(EN2Items.hammer_diamond);
+		registerRenderer(EN2Items.mesh_silk_white);
+		registerRenderer(EN2Items.mesh_wood);
 	}
 	
 	private void registerBlockRenderers()
