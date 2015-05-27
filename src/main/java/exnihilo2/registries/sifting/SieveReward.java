@@ -1,4 +1,4 @@
-package exnihilo2.registries.hammering;
+package exnihilo2.registries.sifting;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
@@ -7,26 +7,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-public class HammerReward
-{
+public class SieveReward {
 	private int base_chance;
-	private int fortune_modifier; //the effectiveness of Fortune enchantments.
 	private ItemStack item;
 	
-	public HammerReward(ItemStack item, int base_chance, int fortune_modifier)
+	public SieveReward(ItemStack item, int base_chance)
 	{
 		this.item = item;
 		this.base_chance = base_chance;
-		this.fortune_modifier = fortune_modifier;
 	}
 
-	public void dropReward(EntityPlayer player, BlockPos pos)
+	public void dropReward(World world, BlockPos pos)
 	{
-		World world = player.worldObj;
-		int luck_level = EnchantmentHelper.getFortuneModifier(player);
-		int chance = base_chance + (fortune_modifier * luck_level);
-
-		if (world.rand.nextInt(100) < chance)
+		if (world.rand.nextInt(100) < base_chance)
 		{
 			EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, item.copy());
 
@@ -44,14 +37,6 @@ public class HammerReward
 
 	public void setBaseChance(int base_chance) {
 		this.base_chance = base_chance;
-	}
-
-	public int getFortuneModifier() {
-		return fortune_modifier;
-	}
-
-	public void setFortuneModifier(int luck_modifier) {
-		this.fortune_modifier = luck_modifier;
 	}
 
 	public ItemStack getItem() {

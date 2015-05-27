@@ -38,6 +38,7 @@ import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
 import exnihilo2.registries.composting.CompostRegistry;
 import exnihilo2.registries.hammering.HammerRegistry;
+import exnihilo2.registries.sifting.SieveRegistry;
 import exnihilo2.world.EN2World;
 import exnihilo2.world.manipulation.Moss;
 
@@ -76,6 +77,7 @@ public class EN2
 		
 		CompostRegistry.initialize();
 		HammerRegistry.initialize();
+		SieveRegistry.initialize();
 		
 		if(config.hasChanged())
 			config.save();

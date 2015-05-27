@@ -2,7 +2,9 @@ package exnihilo2.blocks.sieves.tileentity;
 
 import exnihilo2.EN2;
 import exnihilo2.items.meshs.ISieveMesh;
+import exnihilo2.registries.sifting.SieveRegistry;
 import exnihilo2.util.Color;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.init.Blocks;
@@ -124,7 +126,12 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 			
 			if (work > workMax)
 			{
-				//TODO generate drops.
+				Block block = Block.getBlockFromItem(contents.getItem());
+				
+				if (block != null)
+				{
+					SieveRegistry.getEntryForBlockState(block.getStateFromMeta(contents.getMetadata())).dropRewards(worldObj, pos.up());
+				}
 				
 				work = 0;
 				contents = null;

@@ -4,6 +4,7 @@ import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
 import exnihilo2.items.meshs.ISieveMesh;
+import exnihilo2.registries.sifting.SieveRegistry;
 import exnihilo2.util.helpers.InventoryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -52,12 +53,16 @@ public class BlockSieve extends BlockContainer {
 				{
 					if (item != null)
 					{
-						//TODO Check to see if the sieve will actually accept the block first...
-						ItemStack contents = item.copy();
-						contents.stackSize = 1;
+						Block block = Block.getBlockFromItem(item.getItem());
+						
+						if (block != null && SieveRegistry.isSiftable(block.getStateFromMeta(item.getMetadata())))
+						{
+							ItemStack contents = item.copy();
+							contents.stackSize = 1;
 
-						sieve.setContents(contents);
-						InventoryHelper.consumeItem(player, item);
+							sieve.setContents(contents);
+							InventoryHelper.consumeItem(player, item);
+						}
 					}
 				}
 				else

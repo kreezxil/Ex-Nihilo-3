@@ -1,4 +1,4 @@
-package exnihilo2.registries.hammering.files;
+package exnihilo2.registries.sifting.files;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,17 +17,20 @@ import exnihilo2.registries.composting.pojos.CompostRecipeList;
 import exnihilo2.registries.hammering.HammerRegistryEntry;
 import exnihilo2.registries.hammering.pojos.HammerRecipe;
 import exnihilo2.registries.hammering.pojos.HammerRecipeList;
+import exnihilo2.registries.sifting.SieveRegistryEntry;
+import exnihilo2.registries.sifting.pojos.SieveRecipe;
+import exnihilo2.registries.sifting.pojos.SieveRecipeList;
 import exnihilo2.world.generation.templates.TemplateDefaults;
 import exnihilo2.world.generation.templates.pojos.Template;
 
-public class HammerRecipeLoader {
+public class SieveRecipeLoader {
 	public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	public static ArrayList<HammerRegistryEntry> entries; 
+	public static ArrayList<SieveRegistryEntry> entries; 
 	
-	public static List<HammerRegistryEntry> load(String path)
+	public static List<SieveRegistryEntry> load(String path)
 	{	
 		generateExampleJsonFile(path);
-		entries = new ArrayList<HammerRegistryEntry>();
+		entries = new ArrayList<SieveRegistryEntry>();
 		
 		File[] files = new File(path).listFiles();
 		
@@ -35,13 +38,13 @@ public class HammerRecipeLoader {
 		{
 			if (!file.getName().equals("example.json"))//Ignore the example file
 			{
-				HammerRecipeList list = loadRecipes(file);
+				SieveRecipeList list = loadRecipes(file);
 				
 				if (list != null && !list.getRecipes().isEmpty())
 				{
-					for (HammerRecipe recipe : list.getRecipes())
+					for (SieveRecipe recipe : list.getRecipes())
 					{
-						HammerRegistryEntry entry = HammerRegistryEntry.fromRecipe(recipe);
+						SieveRegistryEntry entry = SieveRegistryEntry.fromRecipe(recipe);
 						
 						if (entry != null)
 						{
@@ -58,13 +61,13 @@ public class HammerRecipeLoader {
 	private static void generateExampleJsonFile(String path)
 	{
 		File file = new File(path + "example.json");
-		HammerRecipeList recipes = null;
+		SieveRecipeList recipes = null;
 		
 		if (!file.exists())
 		{
-			EN2.log.info("Attempting to generate example hammer recipe file: '" + file + "'.");
+			EN2.log.info("Attempting to generate example sieve recipe file: '" + file + "'.");
 			
-			recipes = HammerRecipeExample.getExampleRecipeList();
+			recipes = SieveRecipeExample.getExampleRecipeList();
 			FileWriter writer;
 			
 			try 
@@ -83,9 +86,9 @@ public class HammerRecipeLoader {
 		}
 	}
 	
-	private static HammerRecipeList loadRecipes(File file)
+	private static SieveRecipeList loadRecipes(File file)
 	{
-		HammerRecipeList recipes = null;
+		SieveRecipeList recipes = null;
 		
 		try 
 		{
@@ -93,14 +96,14 @@ public class HammerRecipeLoader {
 			
 			if (reader.ready())
 			{
-				recipes = gson.fromJson(reader, HammerRecipeList.class);
+				recipes = gson.fromJson(reader, SieveRecipeList.class);
 			}
 			
 			reader.close();
 		} 
 		catch (Exception e) 
 		{
-			EN2.log.error("Failed to read hammer recipe file: '" + file + "'.");
+			EN2.log.error("Failed to read sieve recipe file: '" + file + "'.");
 			EN2.log.error(e);
 		}  
 		
