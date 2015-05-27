@@ -1,11 +1,13 @@
 package exnihilo2.blocks.sieves.tileentity;
 
 import exnihilo2.EN2;
+import exnihilo2.client.particles.ParticleSieve;
 import exnihilo2.items.meshs.ISieveMesh;
 import exnihilo2.registries.sifting.SieveRegistry;
 import exnihilo2.util.Color;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -19,10 +21,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox {
 	protected ItemStack mesh;
 	protected ItemStack contents;
+	protected IBlockState contentsState;
 	
 	protected int work = 0;
 	protected int workMax = 1000;
@@ -39,6 +44,10 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 	protected int workPerCycleLimit = 130;
 	protected int workCycleTimer = 0;
 	protected int workCycleTimerMax = 20;
+	
+	protected boolean spawningParticles = false;
+	protected int spawnParticlesTimer = 0;
+	protected int spawnParticlesTimerMax = 5;
 	
 	@Override
 	public void update() 
@@ -69,6 +78,19 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 
 						getWorld().markBlockForUpdate(this.getPos());
 					}
+				}
+			}
+		}
+		else
+		{
+			if (spawningParticles)
+			{
+				generateParticles(contentsState);
+				
+				spawnParticlesTimer++;
+				if (spawnParticlesTimer > spawnParticlesTimerMax)
+				{
+					spawningParticles = false;
 				}
 			}
 		}
@@ -110,6 +132,21 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 	public void setContents(ItemStack input)
 	{
 		this.contents = input;
+		
+		if (contents != null)
+		{
+			Block block = Block.getBlockFromItem(contents.getItem());
+
+			if (block != null)
+			{
+				contentsState = block.getStateFromMeta(contents.getMetadata());
+			}
+		}
+		else
+		{
+			contentsState = null;
+		}
+		
 		sync();
 	}
 	
@@ -122,15 +159,14 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 	{
 		if (!this.worldObj.isRemote)
 		{
+			this.spawningParticles = true;
 			addThrottledWork(workSpeed);
 			
 			if (work > workMax)
 			{
-				Block block = Block.getBlockFromItem(contents.getItem());
-				
-				if (block != null)
+				if (contentsState != null)
 				{
-					SieveRegistry.getEntryForBlockState(block.getStateFromMeta(contents.getMetadata())).dropRewards(worldObj, pos.up());
+					SieveRegistry.getEntryForBlockState(contentsState).dropRewards(worldObj, pos.up());
 				}
 				
 				work = 0;
@@ -179,6 +215,32 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 			return null;
 	}
 	
+	public void startSpawningParticles()
+	{
+		this.spawningParticles = true;
+		this.spawnParticlesTimer = 0;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	private void generateParticles(IBlockState block)
+	{
+		if (block != null)
+		{
+			TextureAtlasSprite texture = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(block);
+
+			for (int x = 0; x < 6; x++)
+			{	
+				ParticleSieve dust = new ParticleSieve(worldObj, 
+						pos.getX() + 0.8d * worldObj.rand.nextFloat() + 0.15d, 
+						pos.getY() + 0.585d, 
+						pos.getZ() + 0.8d * worldObj.rand.nextFloat() + 0.15d, 
+						0.0d, 0.0d, 0.0d, texture);
+				
+				Minecraft.getMinecraft().effectRenderer.addEffect(dust);
+			}
+		}
+	}
+	
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) 
 	{
@@ -192,16 +254,18 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 		
 		work = compound.getInteger("work");
 		damage = compound.getInteger("damage");
+		if(compound.getBoolean("particles"))
+			startSpawningParticles();
 		
 		NBTTagList items = compound.getTagList("items", Constants.NBT.TAG_COMPOUND);
 		
 		NBTTagCompound meshTag = items.getCompoundTagAt(0);
-		mesh = ItemStack.loadItemStackFromNBT(meshTag);
+		setMesh(ItemStack.loadItemStackFromNBT(meshTag));
 		
 		NBTTagCompound contentsTag = items.getCompoundTagAt(1);
-		contents = ItemStack.loadItemStackFromNBT(contentsTag);
+		setContents(ItemStack.loadItemStackFromNBT(contentsTag));
 	}
- 
+
 	@Override
 	public void writeToNBT(NBTTagCompound compound)
 	{
@@ -209,6 +273,7 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 		
 		compound.setInteger("work", work);
 		compound.setInteger("damage", damage);
+		compound.setBoolean("particles", spawningParticles);
 		
 		NBTTagList items = new NBTTagList();
 		

@@ -46,6 +46,7 @@ public class BlockSieve extends BlockContainer {
 			if (sieve.canWork())
 			{
 				sieve.doWork();
+				world.playSoundEffect(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, "step.sand", 0.3f, 0.6f);
 			}
 			else
 			{
@@ -60,6 +61,8 @@ public class BlockSieve extends BlockContainer {
 							ItemStack contents = item.copy();
 							contents.stackSize = 1;
 
+							world.playSoundEffect(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, "step.gravel", 0.5f, 1.0f);
+							
 							sieve.setContents(contents);
 							InventoryHelper.consumeItem(player, item);
 						}
