@@ -10,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
+import exnihilo2.items.EN2Items;
+import exnihilo2.registries.EN2Registries;
 import exnihilo2.registries.composting.CompostRegistryEntry;
 import exnihilo2.registries.composting.files.CompostRecipeLoader;
 import exnihilo2.registries.hammering.files.HammerRecipeLoader;
@@ -21,7 +23,9 @@ public class HammerRegistry {
 	public static void initialize()
 	{
 		entries = new HashMap<String, HammerRegistryEntry>();
-		registerVanillaRecipes();
+		
+		if (EN2Registries.loadHammerDefaults)
+			registerVanillaRecipes();
 		
 		List<HammerRegistryEntry> loaded = HammerRecipeLoader.load(EN2.path + File.separator + "recipes" + File.separator + "hammer" + File.separator);
 	
@@ -75,6 +79,12 @@ public class HammerRegistry {
 	
 	public static void registerVanillaRecipes()
 	{
+		HammerRegistryEntry stone = new HammerRegistryEntry(Blocks.stone.getDefaultState(), EnumMetadataBehavior.SPECIFIC);
+		stone.addReward(new ItemStack(EN2Items.stone, 3), 100, 0);
+		stone.addReward(new ItemStack(EN2Items.stone, 1), 50, 0);
+		stone.addReward(new ItemStack(EN2Items.stone, 1), 50, 0);
+		add(stone);
+		
 		HammerRegistryEntry cobble = new HammerRegistryEntry(Blocks.cobblestone.getDefaultState(), EnumMetadataBehavior.SPECIFIC);
 		cobble.addReward(new ItemStack(Blocks.gravel), 100, 0);
 		add(cobble);

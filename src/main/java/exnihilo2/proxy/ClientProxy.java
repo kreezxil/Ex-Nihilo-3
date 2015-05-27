@@ -16,6 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -25,6 +26,8 @@ import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.blocks.sieves.renderer.SieveRenderer;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
+import exnihilo2.entities.thrown.stone.EntityStone;
+import exnihilo2.entities.thrown.stone.EntityStoneRenderer;
 import exnihilo2.items.EN2Items;
 
 //Commands that only execute on the client.
@@ -35,6 +38,7 @@ public class ClientProxy extends Proxy {
 	{
 		registerItemRenderers();
 		registerBlockRenderers();
+		registerEntityRenderers();
 	}
 	
 	private void registerItemRenderers()
@@ -48,6 +52,7 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Items.hammer_diamond);
 		registerRenderer(EN2Items.mesh_silk_white);
 		registerRenderer(EN2Items.mesh_wood);
+		registerRenderer(EN2Items.stone);
 	}
 	
 	private void registerBlockRenderers()
@@ -61,6 +66,11 @@ public class ClientProxy extends Proxy {
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, new BarrelRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySieve.class, new SieveRenderer());
+	}
+	
+	private void registerEntityRenderers()
+	{
+		RenderingRegistry.registerEntityRenderingHandler(EntityStone.class, new EntityStoneRenderer(Minecraft.getMinecraft().getRenderManager()));
 	}
 	
 	private static void registerRenderer(Block block)

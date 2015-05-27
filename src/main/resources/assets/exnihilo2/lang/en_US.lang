@@ -7,6 +7,7 @@ item.hammer_gold.name=Gold Hammer
 item.hammer_diamond.name=Diamond Hammer
 item.mesh_silk_white.name=Silk Mesh
 item.mesh_wood.name=Wooden Mesh
+item.stone.name=Small Stone
 tile.barrel_glass.name=Glass Barrel
 tile.barrel_glass_colored_white.name=White Glass Barrel
 tile.barrel_glass_colored_orange.name=Orange Glass Barrel

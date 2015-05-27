@@ -20,6 +20,7 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -33,9 +34,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.crafting.EN2Crafting;
+import exnihilo2.entities.EN2Entities;
 import exnihilo2.items.EN2Items;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
+import exnihilo2.registries.EN2Registries;
 import exnihilo2.registries.composting.CompostRegistry;
 import exnihilo2.registries.hammering.HammerRegistry;
 import exnihilo2.registries.sifting.SieveRegistry;
@@ -45,6 +48,9 @@ import exnihilo2.world.manipulation.Moss;
 @Mod(name = EN2.NAME, modid = EN2.MODID, version = EN2.VERSION)
 public class EN2
 {
+	@Instance(EN2.MODID)
+	public static EN2 instance;
+	
 	public static final String NAME = "Ex Nihilo 2";
 	public static final String MODID = "exnihilo2";
 	public static final String VERSION = "@EN2_VERSION@";
@@ -74,10 +80,8 @@ public class EN2
 
 		EN2Blocks.registerTileEntities();
 		EN2Crafting.registerRecipes();
-		
-		CompostRegistry.initialize();
-		HammerRegistry.initialize();
-		SieveRegistry.initialize();
+		EN2Entities.initialize();
+		EN2Registries.initialize(config);
 		
 		if(config.hasChanged())
 			config.save();

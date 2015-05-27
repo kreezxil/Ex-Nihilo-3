@@ -5,6 +5,7 @@ import exnihilo2.items.hammers.ItemHammer;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.items.meshs.ItemMeshSilk;
 import exnihilo2.items.meshs.ItemMeshWood;
+import exnihilo2.items.misc.ItemStone;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -26,6 +27,8 @@ public class EN2Items {
 	public static Item mesh_silk_white;
 	public static Item mesh_wood;
 	
+	public static Item stone;
+	
 	public static void initialize()
 	{
 		//Crooks
@@ -39,8 +42,12 @@ public class EN2Items {
 		hammer_gold = new ItemHammer(ToolMaterial.GOLD).setUnlocalizedName("hammer_gold");
 		hammer_diamond = new ItemHammer(ToolMaterial.EMERALD).setUnlocalizedName("hammer_diamond");
 		
+		//Sieve meshes
 		mesh_silk_white = new ItemMeshSilk().setUnlocalizedName("mesh_silk_white");
 		mesh_wood = new ItemMeshWood().setUnlocalizedName("mesh_wood");
+		
+		//Misc
+		stone = new ItemStone().setUnlocalizedName("stone");
 		
 		registerItems();
 	}
@@ -58,6 +65,8 @@ public class EN2Items {
 		
 		registerItem(mesh_silk_white);
 		registerItem(mesh_wood);
+		
+		registerItem(stone);
 	}
 	
 	private static void registerItem(Item item)

@@ -15,6 +15,6 @@ public class ItemMeshWood extends ItemMesh implements ISieveMesh {
 	@Override
 	public int getDurability() 
 	{
-		return 32;
+		return 16;
 	}
 }

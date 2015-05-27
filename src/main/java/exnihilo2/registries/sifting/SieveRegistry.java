@@ -11,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
+import exnihilo2.items.EN2Items;
+import exnihilo2.registries.EN2Registries;
 import exnihilo2.registries.hammering.HammerRegistryEntry;
 import exnihilo2.registries.hammering.files.HammerRecipeLoader;
 import exnihilo2.registries.sifting.files.SieveRecipeLoader;
@@ -22,7 +24,9 @@ public class SieveRegistry {
 	public static void initialize()
 	{
 		entries = new HashMap<String, SieveRegistryEntry>();
-		registerVanillaRecipes();
+		
+		if (EN2Registries.loadSieveDefaults)
+			registerVanillaRecipes();
 		
 		List<SieveRegistryEntry> loaded = SieveRecipeLoader.load(EN2.path + File.separator + "recipes" + File.separator + "sieve" + File.separator);
 	
@@ -76,6 +80,12 @@ public class SieveRegistry {
 	
 	public static void registerVanillaRecipes()
 	{
+		SieveRegistryEntry dirt = new SieveRegistryEntry(Blocks.dirt.getDefaultState(), EnumMetadataBehavior.IGNORED);
+		dirt.addReward(new ItemStack(EN2Items.stone, 3), 100);
+		dirt.addReward(new ItemStack(EN2Items.stone, 1), 50);
+		dirt.addReward(new ItemStack(EN2Items.stone, 1), 50);
+		add(dirt);
+		
 		SieveRegistryEntry gravel = new SieveRegistryEntry(Blocks.gravel.getDefaultState(), EnumMetadataBehavior.IGNORED);
 		gravel.addReward(new ItemStack(Items.flint, 1), 100);
 		add(gravel);

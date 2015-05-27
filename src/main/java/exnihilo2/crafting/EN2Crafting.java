@@ -3,6 +3,7 @@ package exnihilo2.crafting;
 import exnihilo2.crafting.recipes.BarrelRecipes;
 import exnihilo2.crafting.recipes.CrookRecipes;
 import exnihilo2.crafting.recipes.HammerRecipes;
+import exnihilo2.crafting.recipes.MiscRecipes;
 import exnihilo2.crafting.recipes.SieveRecipes;
 import net.minecraftforge.common.config.Configuration;
 
@@ -35,5 +36,7 @@ public class EN2Crafting {
 		
 		if (sieves_allowed)
 			SieveRecipes.register();
+		
+		MiscRecipes.register();
 	}
 }

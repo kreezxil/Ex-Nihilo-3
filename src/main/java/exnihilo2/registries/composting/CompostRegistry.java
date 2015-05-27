@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import exnihilo2.EN2;
+import exnihilo2.registries.EN2Registries;
 import exnihilo2.registries.composting.files.CompostRecipeLoader;
 import exnihilo2.util.Color;
 import exnihilo2.util.enums.EnumMetadataBehavior;
@@ -21,7 +22,10 @@ public class CompostRegistry {
 	public static void initialize()
 	{
 		entries = new HashMap<String, CompostRegistryEntry>();
-		registerVanillaRecipes();
+		
+		if (EN2Registries.loadCompostDefaults)
+			registerVanillaRecipes();
+		
 		List<CompostRegistryEntry> loaded = CompostRecipeLoader.load(EN2.path + File.separator + "recipes" + File.separator + "compost" + File.separator);
 	
 		if (loaded != null && !loaded.isEmpty())
