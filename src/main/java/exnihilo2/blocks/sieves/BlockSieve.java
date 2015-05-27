@@ -1,5 +1,6 @@
 package exnihilo2.blocks.sieves;
 
+import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
 import exnihilo2.items.meshs.ISieveMesh;
@@ -40,13 +41,39 @@ public class BlockSieve extends BlockContainer {
 
 		if (sieve != null)
 		{
-			if (item.getItem() instanceof ISieveMesh)
+			if (sieve.canWork())
 			{
-				sieve.setMesh(item);
+				sieve.doWork();
 			}
 			else
 			{
-				
+				if (sieve.hasMesh())
+				{
+					//TODO Check to see if the sieve will actually accept the block first...
+					sieve.setContents(item);
+				}
+				else
+				{
+					if (item != null && item.getItem() instanceof ISieveMesh)
+					{
+						ItemStack mesh = item.copy();
+						mesh.stackSize = 1;
+						
+						sieve.setMesh(mesh);
+						
+						if (!player.capabilities.isCreativeMode)
+						{
+							if (item.stackSize > 1)
+							{
+								item.stackSize--;
+							}
+							else
+							{
+								player.setCurrentItemOrArmor(0, null);
+							}
+						}
+					}
+				}
 			}
 		}
 

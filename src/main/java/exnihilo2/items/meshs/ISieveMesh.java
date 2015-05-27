@@ -4,5 +4,5 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 
 public interface ISieveMesh {
 	public abstract TextureAtlasSprite getMeshTexture();
-	public abstract int getMaxUses();
+	public abstract int getDurability();
 }

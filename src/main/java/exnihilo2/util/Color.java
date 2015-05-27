@@ -8,6 +8,8 @@ public class Color {
 	public float b;
 	public float a;
 	
+	public static Color WHITE = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+	
 	public Color(float red, float green, float blue, float alpha)
 	{
 		this.r = red;

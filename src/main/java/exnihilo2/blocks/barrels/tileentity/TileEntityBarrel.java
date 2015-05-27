@@ -96,9 +96,9 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 			generalTimer++;
 		}
 		
+		//Update packet throttling system
 		if (!this.worldObj.isRemote && updateTimerRunning)
 		{
-			//Update timer used to sync client and server.
 			updateTimer++;
 			
 			if (updateTimer > updateTimerMax)
@@ -108,6 +108,7 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 				{
 					updateQueued = false;
 					updateTimerRunning = false;
+					
 					getWorld().markBlockForUpdate(this.getPos());
 				}
 			}

@@ -13,7 +13,7 @@ public class ItemMeshWood extends ItemMesh implements ISieveMesh {
 	}
 
 	@Override
-	public int getMaxUses() 
+	public int getDurability() 
 	{
 		return 32;
 	}

@@ -294,7 +294,7 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 			items.appendTag(item);
 		}
 		
-		compound.setTag("item", items);
+		compound.setTag("items", items);
 
 		NBTTagList content = new NBTTagList();
 		if (contents != null)

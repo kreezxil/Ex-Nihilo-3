@@ -5,18 +5,23 @@ import org.lwjgl.opengl.GL11;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
 import exnihilo2.util.Color;
 import exnihilo2.util.helpers.ContentRenderHelper;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public class SieveRenderer extends TileEntitySpecialRenderer{
-
+	public static final double MIN_RENDER_CAPACITY = 0.58d;
+	public static final double MAX_RENDER_CAPACITY = 0.95d;
+	
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int i) 
 	{
@@ -37,7 +42,7 @@ public class SieveRenderer extends TileEntitySpecialRenderer{
 			GlStateManager.scale(0.95d, 1.0d, 0.95d);
 			
 			renderMeshTexture(sieve);
-			//TODO: Render contents.
+			renderContents(sieve);
 			
 			RenderHelper.enableStandardItemLighting();
 			GlStateManager.popMatrix();
@@ -51,8 +56,25 @@ public class SieveRenderer extends TileEntitySpecialRenderer{
 		if (mesh != null)
 		{
 			GlStateManager.disableCull();
-			ContentRenderHelper.renderContentsSimple(mesh, 0.6d, new Color("FFFFFF"));
+			ContentRenderHelper.renderContentsSimple(mesh, MIN_RENDER_CAPACITY, Color.WHITE);
 			GlStateManager.enableCull();
+		}
+	}
+	
+	private void renderContents(TileEntitySieve sieve)
+	{
+		ItemStack contents = sieve.getContents();
+		
+		if (contents != null && Block.getBlockFromItem(contents.getItem()) != null)
+		{
+			double top = ContentRenderHelper.getAdjustedContentLevel(MIN_RENDER_CAPACITY, MAX_RENDER_CAPACITY, 1.0d - (double)sieve.getProgress());
+			double height = top - MIN_RENDER_CAPACITY;
+			
+			GlStateManager.translate(0.5d, 0.5d, 0.5d); //Get the block place correctly.
+			GlStateManager.translate(0.0d, MIN_RENDER_CAPACITY + 0.01d - ((1.0d - height) * 0.5d), 0.0d); //Lift the block into the sifting box.
+			GlStateManager.scale(0.94d, height, 0.94d); //Adjust the height to fit the progress.
+			
+			Minecraft.getMinecraft().getItemRenderer().renderItem(null, contents, TransformType.NONE);
 		}
 	}
 }
