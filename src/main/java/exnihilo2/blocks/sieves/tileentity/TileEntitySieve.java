@@ -23,8 +23,9 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 	protected ItemStack contents;
 	
 	protected int work = 0;
-	protected int work_max = 1000;
-	protected int WORK_PER_CYCLE = 20;
+	protected int workMax = 1000;
+	protected int workSpeed = 20;
+	
 	protected int damage = 0;
 	
 	protected int updateTimer = 0;
@@ -32,28 +33,45 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 	protected boolean updateQueued = false;
 	protected boolean updateTimerRunning = false;
 	
+	protected int workThisCycle = 0;
+	protected int workPerCycleLimit = 130;
+	protected int workCycleTimer = 0;
+	protected int workCycleTimerMax = 20;
+	
 	@Override
-	public void update() {
-		
-		//Update packet throttling system
-		if (!this.worldObj.isRemote && updateTimerRunning)
+	public void update() 
+	{
+		if (!this.worldObj.isRemote)
 		{
-			updateTimer++;
+			//Speed throttling.
+			workCycleTimer++;
 			
-			if (updateTimer > updateTimerMax)
+			if (workCycleTimer > workCycleTimerMax)
 			{
-				updateTimer = 0;
-				if (updateQueued)
+				workThisCycle = 0;
+				workCycleTimer = 0;
+			}
+
+			//Packet throttling
+			if (updateTimerRunning)
+			{
+				updateTimer++;
+
+				if (updateTimer > updateTimerMax)
 				{
-					updateQueued = false;
-					updateTimerRunning = false;
-					
-					getWorld().markBlockForUpdate(this.getPos());
+					updateTimer = 0;
+					if (updateQueued)
+					{
+						updateQueued = false;
+						updateTimerRunning = false;
+
+						getWorld().markBlockForUpdate(this.getPos());
+					}
 				}
 			}
 		}
 	}
-	
+
 	//Send update packets to each client.
 	public void sync()
 	{
@@ -79,6 +97,7 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 	public void setMesh(ItemStack mesh)
 	{
 		this.mesh = mesh;
+		sync();
 	}
 	
 	public ItemStack getContents()
@@ -89,6 +108,7 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 	public void setContents(ItemStack input)
 	{
 		this.contents = input;
+		sync();
 	}
 	
 	public boolean canWork()
@@ -100,9 +120,9 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 	{
 		if (!this.worldObj.isRemote)
 		{
-			work += WORK_PER_CYCLE;
+			addThrottledWork(workSpeed);
 			
-			if (work > work_max)
+			if (work > workMax)
 			{
 				//TODO generate drops.
 				
@@ -115,7 +135,9 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 					
 					if (damage > ((ISieveMesh)mesh.getItem()).getDurability())
 					{
-						mesh = null;
+						getWorld().playSoundEffect(getPos().getX() + 0.5f, getPos().getY() + 0.5f, getPos().getZ() + 0.5f, "random.break", 0.5f, 2.5f);
+						setMesh(null);
+						damage = 0;
 					}
 				}
 			}
@@ -124,9 +146,21 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 		}
 	}
 	
+	private void addThrottledWork(int workIn)
+	{
+		if (workThisCycle + workIn > workPerCycleLimit)
+		{
+			this.work += workPerCycleLimit - workThisCycle;
+		}
+		else
+		{
+			this.work += workIn;
+		}
+	}
+	
 	public float getProgress()
 	{
-		return (float)work / (float)work_max;
+		return (float)work / (float)workMax;
 	}
 	
 	//Subclasses which don't want to use the replacable meshes can override this directly.

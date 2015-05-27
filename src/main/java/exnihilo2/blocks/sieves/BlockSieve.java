@@ -4,6 +4,7 @@ import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
 import exnihilo2.items.meshs.ISieveMesh;
+import exnihilo2.util.helpers.InventoryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -49,8 +50,15 @@ public class BlockSieve extends BlockContainer {
 			{
 				if (sieve.hasMesh())
 				{
-					//TODO Check to see if the sieve will actually accept the block first...
-					sieve.setContents(item);
+					if (item != null)
+					{
+						//TODO Check to see if the sieve will actually accept the block first...
+						ItemStack contents = item.copy();
+						contents.stackSize = 1;
+
+						sieve.setContents(contents);
+						InventoryHelper.consumeItem(player, item);
+					}
 				}
 				else
 				{
@@ -60,18 +68,7 @@ public class BlockSieve extends BlockContainer {
 						mesh.stackSize = 1;
 						
 						sieve.setMesh(mesh);
-						
-						if (!player.capabilities.isCreativeMode)
-						{
-							if (item.stackSize > 1)
-							{
-								item.stackSize--;
-							}
-							else
-							{
-								player.setCurrentItemOrArmor(0, null);
-							}
-						}
+						InventoryHelper.consumeItem(player, item);
 					}
 				}
 			}
