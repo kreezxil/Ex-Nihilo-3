@@ -27,6 +27,7 @@ public class MiscRecipes {
 	
 	public static void registerSmeltingRecipes()
 	{
-		GameRegistry.addSmelting(new ItemStack(Items.coal, 1, 1), new ItemStack(EN2Items.ash, 1), 0);
+		GameRegistry.addSmelting(new ItemStack(Items.stick, 1), new ItemStack(EN2Items.ash, 1), 0);
+		//GameRegistry.add
 	}
 }
