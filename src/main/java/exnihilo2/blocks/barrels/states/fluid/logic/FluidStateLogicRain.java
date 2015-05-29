@@ -12,7 +12,7 @@ public class FluidStateLogicRain extends BarrelLogic{
 	@Override
 	public boolean onUpdate(TileEntityBarrel barrel) 
 	{
-		if (barrel.getFluid() != null)
+		if (barrel.getFluid() != null && barrel.getFluid().getFluid() != null)
 		{
 			if (PositionHelper.isRainingAt(barrel.getWorld(), barrel.getPos()))
 			{
