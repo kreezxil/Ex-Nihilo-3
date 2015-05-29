@@ -31,7 +31,7 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 	
 	protected int work = 0;
 	protected int workMax = 1000;
-	protected int workSpeed = 20;
+	protected int workSpeed = 30;
 	
 	protected int damage = 0;
 	
@@ -41,7 +41,7 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 	protected boolean updateTimerRunning = false;
 	
 	protected int workThisCycle = 0;
-	protected int workPerCycleLimit = 130;
+	protected int workPerCycleLimit = 120;
 	protected int workCycleTimer = 0;
 	protected int workCycleTimerMax = 20;
 	
