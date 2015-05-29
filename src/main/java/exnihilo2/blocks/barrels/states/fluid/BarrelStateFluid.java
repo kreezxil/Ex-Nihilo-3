@@ -60,7 +60,7 @@ public class BarrelStateFluid extends BarrelState{
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {
 		FluidStack fluid = barrel.getFluid();
 
-		if (fluid != null)
+		if (fluid != null && fluid.getFluid() != null)
 		{
 			GlStateManager.pushMatrix();
 			RenderHelper.disableStandardItemLighting();
