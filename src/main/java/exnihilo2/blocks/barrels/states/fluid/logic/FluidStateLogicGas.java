@@ -10,7 +10,7 @@ public class FluidStateLogicGas extends BarrelLogic{
 	@Override
 	public boolean onUpdate(TileEntityBarrel barrel) 
 	{
-		if (barrel.getFluid() != null)
+		if (barrel.getFluid() != null && barrel.getFluid().getFluid() != null)
 		{
 			//if the fluid is gaseous...
 			if(barrel.getFluid().getFluid().isGaseous())
