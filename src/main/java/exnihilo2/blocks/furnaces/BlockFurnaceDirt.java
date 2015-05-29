@@ -38,10 +38,14 @@ public class BlockFurnaceDirt extends BlockContainer{
 	public BlockFurnaceDirt(boolean isBurning)
 	{
 		super(Material.ground);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setHardness(2.0f);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.isBurning = isBurning;
+		
+		if (!isBurning)
+		{
+			this.setCreativeTab(CreativeTabs.tabDecorations);
+		}
 	}
 
 	@Override

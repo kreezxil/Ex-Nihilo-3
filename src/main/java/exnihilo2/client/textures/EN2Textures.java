@@ -20,6 +20,9 @@ public class EN2Textures {
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/compost"));
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/sieve_mesh_silk_white"));
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/sieve_mesh_wood"));
+		map.registerSprite(new ResourceLocation("exnihilo2:blocks/furnace_mask_side"));
+		map.registerSprite(new ResourceLocation("exnihilo2:blocks/furnace_mask_front_off"));
+		map.registerSprite(new ResourceLocation("exnihilo2:blocks/furnace_mask_front_on"));
 		
 		registerDirtFurnaceTextures(map);
 	}
@@ -61,19 +64,39 @@ public class EN2Textures {
 	
 	private static void forceTextureRegistration(TextureMap map, TextureAtlasSprite sprite)
 	{
-		try 
+		if (!map.setTextureEntry(sprite.getIconName(), sprite))
 		{
-			Field f;
-			f = map.getClass().getDeclaredField("mapRegisteredSprites");
-			f.setAccessible(true);
+			EN2.log.debug("Failed to register texture: " + sprite.getIconName());
 			
-			Map mapRegisteredSprites = (Map) f.get(map);
-			
-			mapRegisteredSprites.put(sprite.getIconName(), sprite);
-		} 
-		catch (Exception e) 
-		{
-			EN2.log.error("Failed to overwrite texture: " + sprite.getIconName());
+			try 
+			{
+				Field f;
+				f = map.getClass().getDeclaredField("mapRegisteredSprites");
+				f.setAccessible(true);
+				
+				Map mapRegisteredSprites = (Map) f.get(map);
+				
+				mapRegisteredSprites.put(sprite.getIconName(), sprite);
+			} 
+			catch (Exception e1) 
+			{
+				EN2.log.debug("Failed to forcibly register texture: " + sprite.getIconName());
+				
+				try 
+				{
+					Field f;
+					f = map.getClass().getDeclaredField("field_110574_e");
+					f.setAccessible(true);
+					
+					Map mapRegisteredSprites = (Map) f.get(map);
+					
+					mapRegisteredSprites.put(sprite.getIconName(), sprite);
+				} 
+				catch (Exception e2) 
+				{
+					EN2.log.debug("Failed to forcibly register texture: " + sprite.getIconName());
+				}
+			}
 		}
 	}
 }

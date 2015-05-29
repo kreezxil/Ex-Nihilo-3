@@ -33,7 +33,7 @@ import exnihilo2.items.EN2Items;
 
 //Commands that only execute on the client.
 public class ClientProxy extends Proxy {
-	
+
 	@Override
 	public void registerRenderers()
 	{
@@ -41,7 +41,7 @@ public class ClientProxy extends Proxy {
 		registerBlockRenderers();
 		registerEntityRenderers();
 	}
-	
+
 	private void registerItemRenderers()
 	{
 		registerRenderer(EN2Items.crook_wood);
@@ -57,7 +57,7 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Items.porcelain);
 		registerRenderer(EN2Items.stone);
 	}
-	
+
 	private void registerBlockRenderers()
 	{
 		registerRenderer(EN2Blocks.barrel_wood);
@@ -68,38 +68,41 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Blocks.furnace_dirt);
 		registerRenderer(EN2Blocks.furnace_dirt_lit);
 		registerRenderer(EN2Blocks.sieve_wood);
-		
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, new BarrelRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySieve.class, new SieveRenderer());
 	}
-	
+
 	private void registerEntityRenderers()
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntityStone.class, new EntityStoneRenderer(Minecraft.getMinecraft().getRenderManager()));
 	}
-	
+
 	private static void registerRenderer(Block block)
 	{
 		Item item = Item.getItemFromBlock(block);
 
-		if (item.getHasSubtypes())
+		if (item != null)
 		{
-			ArrayList<ItemStack> list = new ArrayList<ItemStack>();
-			
-			block.getSubBlocks(item, null, list);
-			
-			for (ItemStack i : list)
+			if (item.getHasSubtypes())
 			{
-				ModelBakery.addVariantName(i.getItem(), EN2.MODID + ":" + i.getUnlocalizedName().substring(5));
-				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, i.getItemDamage(), new ModelResourceLocation(EN2.MODID + ":" + i.getUnlocalizedName().substring(5), "inventory"));
+				ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+
+				block.getSubBlocks(item, null, list);
+
+				for (ItemStack i : list)
+				{
+					ModelBakery.addVariantName(i.getItem(), EN2.MODID + ":" + i.getUnlocalizedName().substring(5));
+					Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, i.getItemDamage(), new ModelResourceLocation(EN2.MODID + ":" + i.getUnlocalizedName().substring(5), "inventory"));
+				}
+			}
+			else
+			{
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(EN2.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
 			}
 		}
-		else
-		{
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(EN2.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
-		}
 	}
-	
+
 	private static void registerRenderer(Item item)
 	{
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(EN2.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));

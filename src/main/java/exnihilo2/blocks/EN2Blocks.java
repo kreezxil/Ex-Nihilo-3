@@ -56,7 +56,7 @@ public class EN2Blocks {
 		
 		dust = new BlockDust().setUnlocalizedName("dust");
 		furnace_dirt = new BlockFurnaceDirt(false).setUnlocalizedName("furnace_dirt");
-		furnace_dirt_lit = new BlockFurnaceDirt(true).setUnlocalizedName("furnace_dirt_lit");
+		furnace_dirt_lit = new BlockFurnaceDirt(true).setUnlocalizedName("furnace_dirt_lit").setLightLevel(0.875F);
 		
 		sieve_wood = new BlockSieveWood(Material.wood).setUnlocalizedName("sieve_wood");
 		
