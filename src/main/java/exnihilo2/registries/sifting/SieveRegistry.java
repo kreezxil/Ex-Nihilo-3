@@ -81,8 +81,8 @@ public class SieveRegistry {
 	public static void registerVanillaRecipes()
 	{
 		SieveRegistryEntry dirt = new SieveRegistryEntry(Blocks.dirt.getDefaultState(), EnumMetadataBehavior.IGNORED);
-		dirt.addReward(new ItemStack(EN2Items.stone, 3), 100);
-		dirt.addReward(new ItemStack(EN2Items.stone, 1), 50);
+		dirt.addReward(new ItemStack(EN2Items.stone, 1), 100);
+		dirt.addReward(new ItemStack(EN2Items.stone, 1), 75);
 		dirt.addReward(new ItemStack(EN2Items.stone, 1), 50);
 		add(dirt);
 		
