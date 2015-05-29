@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import exnihilo2.EN2;
+import exnihilo2.items.EN2Items;
 import exnihilo2.registries.EN2Registries;
 import exnihilo2.registries.composting.files.CompostRecipeLoader;
 import exnihilo2.util.Color;
@@ -228,5 +229,7 @@ public class CompostRegistry {
 		add(new CompostRegistryEntry(new ItemStack(Items.reeds, 1), 80, new Color("9BFF8A"), EnumMetadataBehavior.IGNORED));
 		//string
 		add(new CompostRegistryEntry(new ItemStack(Items.string, 1), 40, new Color("FFFFFF"), EnumMetadataBehavior.IGNORED));
+		//ash
+		add(new CompostRegistryEntry(new ItemStack(EN2Items.ash, 1), 40, new Color("C2D6FF"), EnumMetadataBehavior.IGNORED));
 	}
 }
