@@ -5,12 +5,21 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.items.EN2Items;
 
 public class MiscRecipes {
 	public static void register()
 	{
 		registerSmeltingRecipes();
+		
+		//dirt furnace
+		GameRegistry.addRecipe(
+				new ShapedOreRecipe(new ItemStack(EN2Blocks.furnace_dirt, 1),
+						"xxx",
+						"x x",
+						"xxx",
+						'x', new ItemStack(Blocks.dirt, 1, 0)));
 		
 		//cobble from stones
 		GameRegistry.addRecipe(
@@ -23,6 +32,8 @@ public class MiscRecipes {
 				new ItemStack(Items.clay_ball, 1), 
 				new ItemStack(EN2Items.ash), 
 				new ItemStack(Items.dye, 1, 15)); //bonemeal
+		
+		
 	}
 	
 	public static void registerSmeltingRecipes()

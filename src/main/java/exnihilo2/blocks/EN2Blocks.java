@@ -8,6 +8,8 @@ import exnihilo2.blocks.barrels.BlockBarrelGlassColored;
 import exnihilo2.blocks.barrels.BlockBarrelWood;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
+import exnihilo2.blocks.furnaces.tileentity.TileEntityFurnaceDirt;
 import exnihilo2.blocks.misc.BlockDust;
 import exnihilo2.blocks.sieves.BlockSieveWood;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
@@ -40,6 +42,9 @@ public class EN2Blocks {
 	
 	public static Block dust;
 	
+	public static Block furnace_dirt;
+	public static Block furnace_dirt_lit;
+	
 	public static Block sieve_wood;
 
 	public static void initialize()
@@ -50,6 +55,8 @@ public class EN2Blocks {
 		barrel_glass_colored = new BlockBarrelGlassColored(Material.glass).setUnlocalizedName("barrel_glass_colored");
 		
 		dust = new BlockDust().setUnlocalizedName("dust");
+		furnace_dirt = new BlockFurnaceDirt(false).setUnlocalizedName("furnace_dirt");
+		furnace_dirt_lit = new BlockFurnaceDirt(true).setUnlocalizedName("furnace_dirt_lit");
 		
 		sieve_wood = new BlockSieveWood(Material.wood).setUnlocalizedName("sieve_wood");
 		
@@ -64,6 +71,8 @@ public class EN2Blocks {
 		registerBlock(barrel_glass_colored, ItemBarrelGlassColored.class);
 		
 		registerBlock(dust);
+		registerBlock(furnace_dirt);
+		registerBlock(furnace_dirt_lit);
 		
 		registerBlock(sieve_wood, ItemSieveWood.class);
 	}
@@ -72,6 +81,7 @@ public class EN2Blocks {
 	{
 		GameRegistry.registerTileEntity(TileEntityBarrel.class, EN2.MODID + ":tile_entity_barrel");
 		GameRegistry.registerTileEntity(TileEntitySieve.class, EN2.MODID + ":tile_entity_sieve");
+		GameRegistry.registerTileEntity(TileEntityFurnaceDirt.class, EN2.MODID + ":tile_entity_furnace_dirt");
 	}
 	
 	private static void registerBlock(Block block)

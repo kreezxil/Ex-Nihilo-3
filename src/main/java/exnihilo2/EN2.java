@@ -7,12 +7,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkProviderServer;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -33,6 +36,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.barrels.states.BarrelStates;
+import exnihilo2.client.models.EN2Models;
+import exnihilo2.client.models.furnaces.ModelFurnaceDirt;
+import exnihilo2.client.textures.EN2Textures;
 import exnihilo2.crafting.EN2Crafting;
 import exnihilo2.entities.EN2Entities;
 import exnihilo2.items.EN2Items;
@@ -104,10 +110,15 @@ public class EN2
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onTextureStitchEvent(TextureStitchEvent.Pre e) {
-		e.map.registerSprite(new ResourceLocation("exnihilo2:blocks/compost"));
-		e.map.registerSprite(new ResourceLocation("exnihilo2:blocks/sieve_mesh_silk_white"));
-		e.map.registerSprite(new ResourceLocation("exnihilo2:blocks/sieve_mesh_wood"));
+		EN2Textures.registerCustomTextures(e.map);
 	}
+	
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+    public void onModelBakeEvent(ModelBakeEvent event)
+    {
+		EN2Models.register(event);
+    }
 
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load e)

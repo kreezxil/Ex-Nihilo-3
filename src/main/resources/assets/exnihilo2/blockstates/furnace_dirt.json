@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "exnihilo2:furnace_dirt" },
+        "facing=south": { "model": "exnihilo2:furnace_dirt", "y": 180 },
+        "facing=west":  { "model": "exnihilo2:furnace_dirt", "y": 270 },
+        "facing=east":  { "model": "exnihilo2:furnace_dirt", "y": 90 }
+    }
+}
