@@ -159,6 +159,15 @@ public class BarrelStates {
 		mycelium = new BarrelStateMycelium();
 		grass = new BarrelStateGrass();
 		coarse_dirt = new BarrelStateCoarseDirt();
+		
+		BarrelStates.registerState(empty);
+		BarrelStates.registerState(output);
+		BarrelStates.registerState(fluid);
+		BarrelStates.registerState(compost);
+		BarrelStates.registerState(podzol);
+		BarrelStates.registerState(mycelium);
+		BarrelStates.registerState(grass);
+		BarrelStates.registerState(coarse_dirt);
 	}
 	
 	private static void buildBehaviorTree()

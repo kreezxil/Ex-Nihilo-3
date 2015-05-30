@@ -23,14 +23,7 @@ public abstract class BarrelState
 	private ArrayList<BarrelLogic> triggers = new ArrayList<BarrelLogic>();
 	
 	public abstract String getUniqueIdentifier();
-	
-	public BarrelState()
-	{
-		super();
-		
-		BarrelStates.registerState(this);
-	}
-	
+
 	public void activate(TileEntityBarrel barrel)
 	{
 		boolean triggered = false;
