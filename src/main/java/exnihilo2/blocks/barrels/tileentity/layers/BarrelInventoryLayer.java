@@ -43,6 +43,7 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 		if (item != null)
 		{
 			this.contents = item;
+			((TileEntityBarrel)this).requestSync();
 		}
 		else
 		{
