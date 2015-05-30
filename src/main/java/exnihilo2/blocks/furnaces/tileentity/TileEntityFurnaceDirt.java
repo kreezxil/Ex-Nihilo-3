@@ -4,6 +4,7 @@ import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -25,11 +26,16 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityLockable;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+//Most of this code was taken directly from vanilla and modified.
+//I'll clean it up sometime. It's really messy, probably from the decompilation process.
+//At least I got it down to one single block instead of two.
 public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdatePlayerListBox, ISidedInventory{
 	    private static final int[] slotsTop = new int[] {0};
 	    private static final int[] slotsBottom = new int[] {2, 1};
@@ -40,14 +46,13 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	    private int cookTime;
 	    private int totalCookTime;
 	    private String furnaceCustomName;
-	    private static final String __OBFID = "CL_00000357";
 
 	    public int getSizeInventory()
 	    {
 	        return this.furnaceItemStacks.length;
 	    }
 
-	    public ItemStack getStackInSlot(int index)
+		public ItemStack getStackInSlot(int index)
 	    {
 	        return this.furnaceItemStacks[index];
 	    }
@@ -335,18 +340,11 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	        }
 	    }
 
-	    public static boolean isItemFuel(ItemStack p_145954_0_)
+	    public static boolean isItemFuel(ItemStack item)
 	    {
-	        /**
-	         * Returns the number of ticks that the supplied fuel item will keep the furnace burning, or 0 if the item isn't
-	         * fuel
-	         */
-	        return getItemBurnTime(p_145954_0_) > 0;
+	        return getItemBurnTime(item) > 0;
 	    }
 
-	    /**
-	     * Do not make give this method the name canInteractWith because it clashes with Container
-	     */
 	    public boolean isUseableByPlayer(EntityPlayer player)
 	    {
 	        return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;

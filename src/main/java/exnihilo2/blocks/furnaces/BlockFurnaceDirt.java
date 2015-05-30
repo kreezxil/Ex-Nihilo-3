@@ -2,6 +2,7 @@ package exnihilo2.blocks.furnaces;
 
 import java.util.Random;
 
+import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.furnaces.tileentity.TileEntityFurnaceDirt;
 import net.minecraft.block.Block;
@@ -9,6 +10,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -30,22 +32,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+//Most of this code was taken directly from vanilla and modified.
+//I'll clean it up sometime. It's really messy, probably from the decompilation process.
+//At least I got it down to one single block instead of two.
 public class BlockFurnaceDirt extends BlockContainer{
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-	private final boolean isBurning;
-	private static boolean keepInventory;
+	public static final PropertyBool BURNING = PropertyBool.create("burning");
 
-	public BlockFurnaceDirt(boolean isBurning)
+	public BlockFurnaceDirt()
 	{
 		super(Material.ground);
 		this.setHardness(2.0f);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		this.isBurning = isBurning;
-		
-		if (!isBurning)
-		{
-			this.setCreativeTab(CreativeTabs.tabDecorations);
-		}
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURNING, false));
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 
 	@Override
@@ -101,7 +100,7 @@ public class BlockFurnaceDirt extends BlockContainer{
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (this.isBurning)
+		if ((Boolean) state.getValue(BURNING))
 		{
 			EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
 			double d0 = (double)pos.getX() + 0.5D;
@@ -154,21 +153,9 @@ public class BlockFurnaceDirt extends BlockContainer{
 	public static void setState(boolean active, World worldIn, BlockPos pos)
 	{
 		IBlockState iblockstate = worldIn.getBlockState(pos);
-		TileEntity tileentity = worldIn.getTileEntity(pos);
-		keepInventory = true;
+		TileEntityFurnaceDirt tileentity = (TileEntityFurnaceDirt)worldIn.getTileEntity(pos);
 
-		if (active)
-		{
-			worldIn.setBlockState(pos, EN2Blocks.furnace_dirt_lit.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-			worldIn.setBlockState(pos, EN2Blocks.furnace_dirt_lit.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-		}
-		else
-		{
-			worldIn.setBlockState(pos, EN2Blocks.furnace_dirt.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-			worldIn.setBlockState(pos, EN2Blocks.furnace_dirt.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-		}
-
-		keepInventory = false;
+		worldIn.setBlockState(pos, EN2Blocks.furnace_dirt.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(BURNING, tileentity.isBurning()), 3);
 
 		if (tileentity != null)
 		{
@@ -208,17 +195,14 @@ public class BlockFurnaceDirt extends BlockContainer{
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
-		if (!keepInventory)
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+
+		if (tileentity instanceof TileEntityFurnaceDirt)
 		{
-			TileEntity tileentity = worldIn.getTileEntity(pos);
-
-			if (tileentity instanceof TileEntityFurnaceDirt)
-			{
-				InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityFurnaceDirt)tileentity);
-				worldIn.updateComparatorOutputLevel(pos, this);
-			}
+			InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityFurnaceDirt)tileentity);
+			worldIn.updateComparatorOutputLevel(pos, this);
 		}
-
+		
 		super.breakBlock(worldIn, pos, state);
 	}
 
@@ -257,33 +241,36 @@ public class BlockFurnaceDirt extends BlockContainer{
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		EnumFacing facing = EnumFacing.getFront(meta);
 
-		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+		if (facing.getAxis() == EnumFacing.Axis.Y)
 		{
-			enumfacing = EnumFacing.NORTH;
+			facing = EnumFacing.NORTH;
 		}
-
-		return this.getDefaultState().withProperty(FACING, enumfacing);
+		
+		Boolean burning = ((meta >> 2) == 1);
+		
+		return this.getDefaultState().withProperty(FACING, facing).withProperty(BURNING, burning);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((EnumFacing)state.getValue(FACING)).getIndex();
+		int facing = ((EnumFacing)state.getValue(FACING)).getIndex();
+		int burning = (((Boolean)state.getValue(BURNING)) ? 1 : 0) << 2;
+		return facing | burning;
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] {FACING});
+		return new BlockState(this, new IProperty[] {FACING, BURNING});
 	}
 
 	@SideOnly(Side.CLIENT)
 	static final class SwitchEnumFacing
 	{
 		static final int[] FACING_LOOKUP = new int[EnumFacing.values().length];
-		private static final String __OBFID = "CL_00002111";
 
 		static
 		{

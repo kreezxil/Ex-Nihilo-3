@@ -6,7 +6,9 @@ import java.util.List;
 
 import com.google.common.primitives.Ints;
 
+import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
+import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 import exnihilo2.client.textures.files.TextureLocations;
 import exnihilo2.util.Color;
 import net.minecraft.block.BlockFurnace;
@@ -169,6 +171,6 @@ public class ModelFurnaceDirt implements IFlexibleBakedModel, ISmartBlockModel {
 
 	@Override
 	public IBakedModel handleBlockState(IBlockState state) {
-		return new ModelFurnaceDirt((EnumFacing)state.getValue(BlockFurnace.FACING), !state.getBlock().equals(EN2Blocks.furnace_dirt));
+		return new ModelFurnaceDirt((EnumFacing)state.getValue(BlockFurnaceDirt.FACING), ((Boolean)state.getValue(BlockFurnaceDirt.BURNING)).booleanValue());
 	}
 }

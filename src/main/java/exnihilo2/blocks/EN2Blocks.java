@@ -43,7 +43,6 @@ public class EN2Blocks {
 	public static Block dust;
 	
 	public static Block furnace_dirt;
-	public static Block furnace_dirt_lit;
 	
 	public static Block sieve_wood;
 
@@ -55,8 +54,7 @@ public class EN2Blocks {
 		barrel_glass_colored = new BlockBarrelGlassColored(Material.glass).setUnlocalizedName("barrel_glass_colored");
 		
 		dust = new BlockDust().setUnlocalizedName("dust");
-		furnace_dirt = new BlockFurnaceDirt(false).setUnlocalizedName("furnace_dirt");
-		furnace_dirt_lit = new BlockFurnaceDirt(true).setUnlocalizedName("furnace_dirt_lit").setLightLevel(0.875F);
+		furnace_dirt = new BlockFurnaceDirt().setUnlocalizedName("furnace_dirt");
 		
 		sieve_wood = new BlockSieveWood(Material.wood).setUnlocalizedName("sieve_wood");
 		
@@ -72,7 +70,6 @@ public class EN2Blocks {
 		
 		registerBlock(dust);
 		registerBlock(furnace_dirt);
-		registerBlock(furnace_dirt_lit);
 		
 		registerBlock(sieve_wood, ItemSieveWood.class);
 	}
