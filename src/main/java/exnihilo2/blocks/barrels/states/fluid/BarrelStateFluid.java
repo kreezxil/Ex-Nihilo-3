@@ -34,6 +34,7 @@ import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.util.Color;
 
 public class BarrelStateFluid extends BarrelState{
+	private static String[] description = new String[]{""};
 	
 	@Override
 	public String getUniqueIdentifier() {
@@ -86,6 +87,20 @@ public class BarrelStateFluid extends BarrelState{
 			
 			RenderHelper.enableStandardItemLighting();
 			GlStateManager.popMatrix();
+		}
+	}
+	
+	@Override
+	public String[] getWailaBody(TileEntityBarrel barrel)
+	{
+		if (barrel.getFluid() != null)
+		{
+			description[0] = barrel.getFluid().getLocalizedName();
+			return description;
+		}
+		else
+		{
+			return null;
 		}
 	}
 }

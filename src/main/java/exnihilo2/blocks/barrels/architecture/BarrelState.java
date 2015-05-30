@@ -20,6 +20,7 @@ import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
 public abstract class BarrelState
 {
+	private static String[] EMPTY_STRING_ARRAY = new String[] {};
 	private ArrayList<BarrelLogic> triggers = new ArrayList<BarrelLogic>();
 	
 	public abstract String getUniqueIdentifier();
@@ -98,6 +99,11 @@ public abstract class BarrelState
 	}
 
 	public void render(TileEntityBarrel barrel, double x, double y, double z) {}
+	
+	public String[] getWailaBody(TileEntityBarrel barrel)
+	{
+		return EMPTY_STRING_ARRAY;
+	}
 
 	public void addLogic(BarrelLogic logic) 
 	{

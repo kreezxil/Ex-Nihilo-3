@@ -28,6 +28,7 @@ import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 
 public class BarrelStateOutput extends BarrelState{	
+	private static String[] description = new String[]{""};
 	
 	@Override
 	public String getUniqueIdentifier() {
@@ -59,5 +60,19 @@ public class BarrelStateOutput extends BarrelState{
 	public boolean canExtractContents(TileEntityBarrel barrel)
 	{
 		return true;
+	}
+	
+	@Override
+	public String[] getWailaBody(TileEntityBarrel barrel)
+	{
+		if (barrel.getContents() != null)
+		{
+			description[0] = barrel.getContents().getDisplayName();
+			return description;
+		}
+		else
+		{
+			return null;
+		}
 	}
 }

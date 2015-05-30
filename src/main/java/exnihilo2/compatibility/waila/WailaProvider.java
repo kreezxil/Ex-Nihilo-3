@@ -4,6 +4,8 @@ import com.ibm.icu.text.DecimalFormat;
 
 import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
+import exnihilo2.blocks.barrels.BlockBarrel;
+import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 import exnihilo2.blocks.sieves.BlockSieve;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
@@ -26,6 +28,7 @@ public class WailaProvider implements IWailaDataProvider{
 		WailaProvider instance = new WailaProvider();
 		registrar.registerStackProvider(instance, BlockFurnaceDirt.class);
 		registrar.registerBodyProvider(instance, BlockSieve.class);
+		registrar.registerBodyProvider(instance, BlockBarrel.class);
 	}
 	
 	@Override
@@ -52,6 +55,11 @@ public class WailaProvider implements IWailaDataProvider{
 		{
 			TileEntitySieve sieve = (TileEntitySieve) accessor.getTileEntity();
 			addSieveBody(sieve, currenttip);
+		}
+		else if (accessor.getBlock() instanceof BlockBarrel) 
+		{
+			TileEntityBarrel barrel = (TileEntityBarrel) accessor.getTileEntity();
+			addBarrelBody(barrel, currenttip);
 		}
 		
 		return currenttip;
@@ -86,6 +94,19 @@ public class WailaProvider implements IWailaDataProvider{
 			else
 			{
 				tip.add("Processing " + sieve.getContents().getDisplayName() + ": " + format(sieve.getProgress() * 100) + "%");
+			}
+		}
+	}
+	
+	public void addBarrelBody(TileEntityBarrel barrel, ITipList tip)
+	{
+		String[] body = barrel.getState().getWailaBody(barrel);
+		
+		if (body != null)
+		{
+			for (String s : body)
+			{
+				tip.add(s);
 			}
 		}
 	}

@@ -171,6 +171,11 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		return this.MAX_VOLUME;
 	}
 	
+	public double getVolumeProportion()
+	{
+		return (double)this.getVolume() / (double)this.getVolumeMax();
+	}
+	
 	public Color getColor()
 	{
 		return color;

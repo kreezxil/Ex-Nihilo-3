@@ -25,6 +25,7 @@ import exnihilo2.util.Color;
 
 public class BarrelStateCompost extends BarrelState{
 	protected static Color white = new Color("FFFFFF");
+	private static String[] description = new String[]{""};
 	
 	@Override
 	public String getUniqueIdentifier() {
@@ -87,12 +88,27 @@ public class BarrelStateCompost extends BarrelState{
 			
 			if (barrel.getBlockType().getMaterial().isOpaque())
 			{
-				BarrelRenderer.renderContentsSimple(compost, (double)barrel.getVolume() / (double)barrel.getVolumeMax(), colorB);
+				BarrelRenderer.renderContentsSimple(compost, barrel.getVolumeProportion(), colorB);
 			}
 			else
 			{
-				BarrelRenderer.renderContentsComplex(compost, (double)barrel.getVolume() / (double)barrel.getVolumeMax(), colorB);
+				BarrelRenderer.renderContentsComplex(compost, barrel.getVolumeProportion(), colorB);
 			}
+		}
+	}
+	
+	@Override
+	public String[] getWailaBody(TileEntityBarrel barrel)
+	{
+		if (barrel.getTimerStatus() == -1.0d)
+		{
+			description[0] = "Collecting Compost Materials " + String.format("%.0f", barrel.getVolumeProportion() * 100) + "%";
+			return description;
+		}
+		else
+		{
+			description[0] = "Composting " + String.format("%.0f", barrel.getTimerStatus() * 100) + "%";
+			return description;
 		}
 	}
 }

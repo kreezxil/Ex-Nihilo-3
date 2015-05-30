@@ -20,6 +20,7 @@ import exnihilo2.util.Color;
 
 //Does nothing. Renders nothing. Is simply a container for triggers.
 public class BarrelStateEmpty extends BarrelState{
+	private static String[] description = {"Empty"};
 	
 	@Override
 	public String getUniqueIdentifier() {
@@ -29,5 +30,11 @@ public class BarrelStateEmpty extends BarrelState{
 	@Override
 	public boolean canManipulateFluids(TileEntityBarrel barrel) {
 		return true;
+	}
+	
+	@Override
+	public String[] getWailaBody(TileEntityBarrel barrel)
+	{
+		return description;
 	}
 }
