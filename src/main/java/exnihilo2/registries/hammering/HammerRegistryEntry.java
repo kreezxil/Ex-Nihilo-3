@@ -28,6 +28,11 @@ public class HammerRegistryEntry {
 		this.behavior = behavior;
 	}
 	
+	public IBlockState getInput()
+	{
+		return input;
+	}
+	
 	public void addReward(ItemStack item, int base_chance, int luck_modifier)
 	{
 		this.rewards.add(new HammerReward(item, base_chance, luck_modifier));

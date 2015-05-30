@@ -1,6 +1,7 @@
 package exnihilo2.registries.composting;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,7 @@ public class CompostRegistryEntry {
 		this.color = color;
 		this.value = value;
 	}
-	
+
 	public CompostRegistryEntry(ItemStack input, int value, Color color, EnumMetadataBehavior behavior)
 	{
 		this(input, value, color);

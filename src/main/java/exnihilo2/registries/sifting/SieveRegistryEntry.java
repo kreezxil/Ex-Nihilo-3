@@ -30,6 +30,11 @@ public class SieveRegistryEntry {
 		this.behavior = behavior;
 	}
 	
+	public IBlockState getInput()
+	{
+		return input;
+	}
+	
 	public void addReward(ItemStack item, int base_chance)
 	{
 		this.rewards.add(new SieveReward(item, base_chance));
