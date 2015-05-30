@@ -26,6 +26,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -99,12 +100,13 @@ public class EN2
 		proxy.registerRenderers();
 
 		EN2World.registerWorldProviders();
+		FMLInterModComms.sendMessage("Waila", "register", "exnihilo2.compatibility.waila.WailaProvider.register");
 	}
 
 	@EventHandler
 	public void postInitialize(FMLPostInitializationEvent event)
 	{
-
+		
 	}
 
 	@SubscribeEvent
