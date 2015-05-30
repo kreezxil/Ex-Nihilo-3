@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.vecmath.Matrix4f;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.primitives.Ints;
 
 import exnihilo2.EN2;
@@ -16,19 +20,23 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.client.model.Attributes;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
+import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.client.model.ISmartBlockModel;
 
 public class ModelFurnaceDirt implements IFlexibleBakedModel, ISmartBlockModel {
 	public static final ModelResourceLocation modelResourceLocation = new ModelResourceLocation("exnihilo2:model_furnace_dirt");
+	public static final ItemStack furnace = new ItemStack(Blocks.furnace);
 	private EnumFacing facing;
 	private boolean burning;
 	
@@ -60,8 +68,9 @@ public class ModelFurnaceDirt implements IFlexibleBakedModel, ISmartBlockModel {
 	}
 
 	@Override
-	public ItemCameraTransforms getItemCameraTransforms() {
-		return ItemCameraTransforms.DEFAULT;
+	public ItemCameraTransforms getItemCameraTransforms() 
+	{
+		return Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(furnace).getItemCameraTransforms();
 	}
 
 	@Override
