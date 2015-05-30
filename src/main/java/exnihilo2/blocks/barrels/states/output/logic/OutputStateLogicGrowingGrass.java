@@ -15,7 +15,7 @@ public class OutputStateLogicGrowingGrass extends BarrelLogic{
 	@Override
 	public boolean onUpdate(TileEntityBarrel barrel) 
 	{
-		if (barrel.getContents().getItem() == Item.getItemFromBlock(Blocks.dirt))
+		if (barrel.getContents().getItem() == Item.getItemFromBlock(Blocks.dirt) && barrel.getContents().getMetadata() == 0)
 		{
 			if (barrel.getWorld().rand.nextInt(1000) == 0)
 			{
