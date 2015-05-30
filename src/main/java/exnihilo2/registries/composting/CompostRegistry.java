@@ -9,6 +9,7 @@ import exnihilo2.EN2;
 import exnihilo2.items.EN2Items;
 import exnihilo2.registries.EN2Registries;
 import exnihilo2.registries.composting.files.CompostRecipeLoader;
+import exnihilo2.registries.hammering.HammerRegistryEntry;
 import exnihilo2.util.Color;
 import exnihilo2.util.enums.EnumMetadataBehavior;
 import net.minecraft.init.Blocks;
@@ -43,6 +44,11 @@ public class CompostRegistry {
 				}
 			}
 		}
+	}
+	
+	public static HashMap<String, CompostRegistryEntry> getEntryMap()
+	{
+		return entries;
 	}
 	
 	public static void add(CompostRegistryEntry entry)

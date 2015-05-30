@@ -15,6 +15,7 @@ import exnihilo2.registries.EN2Registries;
 import exnihilo2.registries.composting.CompostRegistryEntry;
 import exnihilo2.registries.composting.files.CompostRecipeLoader;
 import exnihilo2.registries.hammering.files.HammerRecipeLoader;
+import exnihilo2.registries.sifting.SieveRegistryEntry;
 import exnihilo2.util.enums.EnumMetadataBehavior;
 
 public class HammerRegistry {
@@ -43,6 +44,11 @@ public class HammerRegistry {
 				}
 			}
 		}
+	}
+	
+	public static HashMap<String, HammerRegistryEntry> getEntryMap()
+	{
+		return entries;
 	}
 	
 	public static void add(HammerRegistryEntry entry)

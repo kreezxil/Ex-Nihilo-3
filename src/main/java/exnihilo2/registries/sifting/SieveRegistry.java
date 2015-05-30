@@ -46,6 +46,11 @@ public class SieveRegistry {
 		}
 	}
 	
+	public static HashMap<String, SieveRegistryEntry> getEntryMap()
+	{
+		return entries;
+	}
+	
 	public static void add(SieveRegistryEntry entry)
 	{
 		if (entry != null)
