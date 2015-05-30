@@ -118,6 +118,11 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 		return this.mesh != null;
 	}
 	
+	public ItemStack getMesh()
+	{
+		return this.mesh;
+	}
+	
 	public void setMesh(ItemStack mesh)
 	{
 		this.mesh = mesh;
