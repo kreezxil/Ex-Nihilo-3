@@ -35,9 +35,12 @@ import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicGas;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicHot;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicItems;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicRain;
+import exnihilo2.blocks.barrels.states.fluid.logic.FluidSummonSlimeTrigger;
 import exnihilo2.blocks.barrels.states.output.BarrelStateOutput;
 import exnihilo2.blocks.barrels.states.output.logic.OutputStateLogicGrowingGrass;
 import exnihilo2.blocks.barrels.states.output.logic.OutputStateLogicGrowingMycelium;
+import exnihilo2.blocks.barrels.states.slime.BarrelStateSlime;
+import exnihilo2.blocks.barrels.states.slime.logic.SlimeStateLogic;
 
 public class BarrelStates {
 	public static HashMap<String, BarrelState> states = new HashMap<String, BarrelState>();
@@ -51,6 +54,7 @@ public class BarrelStates {
 	public static BarrelState mycelium;
 	public static BarrelState grass;
 	public static BarrelState coarse_dirt;
+	public static BarrelState slime_green;
 	
 	//Logic
 	//-empty
@@ -73,6 +77,7 @@ public class BarrelStates {
 	public static BarrelLogic fluid_state_trigger_crafting_clay;
 	public static BarrelLogic fluid_state_trigger_crafting_obsidian;
 	public static BarrelLogic fluid_state_trigger_crafting_stone;
+	public static BarrelLogic fluid_state_trigger_summon_slime;
 	
 	//-compost
 	public static BarrelLogic compost_state_logic_items;
@@ -87,6 +92,9 @@ public class BarrelStates {
 	public static BarrelLogic grass_state_trigger_complete;
 	public static BarrelLogic coarse_dirt_state_trigger_complete;
 	
+	//slime
+	public static BarrelLogic slime_state_logic;
+	
 	private static final String CATEGORY_BARREL_OPTIONS = "barrel options";
 	public static boolean allow_compost;
 	public static boolean allow_rain_filling;
@@ -95,6 +103,7 @@ public class BarrelStates {
 	public static boolean allow_crafting_clay;
 	public static boolean allow_crafting_obsidian;
 	public static boolean allow_crafting_stone;
+	public static boolean allow_slime_summoning;
 	
 	public static void initialize(Configuration config)
 	{
@@ -115,6 +124,7 @@ public class BarrelStates {
 		allow_crafting_clay = config.get(CATEGORY_BARREL_OPTIONS, "allow creating clay", true).getBoolean(true);
 		allow_crafting_obsidian = config.get(CATEGORY_BARREL_OPTIONS, "allow creating obsidian", true).getBoolean(true);
 		allow_crafting_stone = config.get(CATEGORY_BARREL_OPTIONS, "allow creating stone and cobblestone", true).getBoolean(true);
+		allow_slime_summoning = config.get(CATEGORY_BARREL_OPTIONS, "allow creating slimes", true).getBoolean(true);
 	}
 	
 	private static void initializeLogic()
@@ -136,6 +146,7 @@ public class BarrelStates {
 		fluid_state_trigger_crafting_clay = new FluidCraftClayTrigger();
 		fluid_state_trigger_crafting_obsidian = new FluidCraftObsidianTrigger();
 		fluid_state_trigger_crafting_stone = new FluidCraftStoneTrigger();
+		fluid_state_trigger_summon_slime = new FluidSummonSlimeTrigger();
 
 		compost_state_logic_items = new CompostStateLogicItems();
 		compost_state_trigger_complete = new CompostStateLogicComplete();
@@ -147,6 +158,8 @@ public class BarrelStates {
 		mycelium_state_trigger_complete = new MyceliumStateLogicComplete();
 		grass_state_trigger_complete = new GrassStateLogicComplete();
 		coarse_dirt_state_trigger_complete = new CoarseDirtStateLogicComplete();
+		
+		slime_state_logic = new SlimeStateLogic();
 	}
 	
 	private static void initializeStates()
@@ -159,6 +172,7 @@ public class BarrelStates {
 		mycelium = new BarrelStateMycelium();
 		grass = new BarrelStateGrass();
 		coarse_dirt = new BarrelStateCoarseDirt();
+		slime_green = new BarrelStateSlime();
 		
 		BarrelStates.registerState(empty);
 		BarrelStates.registerState(output);
@@ -168,6 +182,7 @@ public class BarrelStates {
 		BarrelStates.registerState(mycelium);
 		BarrelStates.registerState(grass);
 		BarrelStates.registerState(coarse_dirt);
+		BarrelStates.registerState(slime_green);
 	}
 	
 	private static void buildBehaviorTree()
@@ -198,6 +213,8 @@ public class BarrelStates {
 			BarrelStates.fluid.addLogic(fluid_state_trigger_crafting_obsidian);
 		if (allow_crafting_stone)
 			BarrelStates.fluid.addLogic(fluid_state_trigger_crafting_stone);
+		if (allow_slime_summoning)
+			BarrelStates.fluid.addLogic(fluid_state_trigger_summon_slime);
 
 		if (allow_compost)
 		{
@@ -225,6 +242,8 @@ public class BarrelStates {
 			BarrelStates.coarse_dirt.addLogic(compost_state_logic_items);
 			BarrelStates.coarse_dirt.addLogic(coarse_dirt_state_trigger_complete);
 		}
+		
+		BarrelStates.slime_green.addLogic(slime_state_logic);
 	}
 	
 	public static void registerState(BarrelState state)
