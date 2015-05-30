@@ -288,7 +288,7 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 			
 			if (time > 0)
 			{
-				return time / 2;
+				return time;
 			}
 
 			return 0;
