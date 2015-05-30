@@ -45,6 +45,13 @@ minecraft {
     replace "@EN2_VERSION@", project.version
 }
 
+repositories {
+    maven {
+        name = "ProfMobius"
+        url = "http://mobiusstrip.eu/maven"
+    }
+}
+
 dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
@@ -59,6 +66,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+    compile "mcp.mobius.waila:Waila:${config.waila_version}:dev"
 }
 
 processResources
