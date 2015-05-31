@@ -12,6 +12,7 @@ import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.ITaggedList.ITipList;
 import mcp.mobius.waila.api.IWailaConfigHandler;
@@ -20,12 +21,17 @@ import mcp.mobius.waila.api.IWailaDataAccessorServer;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
 
-public class WailaProvider implements IWailaDataProvider{
+public class WailaCompatibility implements IWailaDataProvider{
 	private static ItemStack furnace_dirt_stack = new ItemStack(EN2Blocks.furnace_dirt);
+	
+	public static void initialize()
+	{
+		FMLInterModComms.sendMessage("Waila", "register", "exnihilo2.compatibility.waila.WailaProvider.register");
+	}
 	
 	public static void register(IWailaRegistrar registrar)
 	{
-		WailaProvider instance = new WailaProvider();
+		WailaCompatibility instance = new WailaCompatibility();
 		registrar.registerStackProvider(instance, BlockFurnaceDirt.class);
 		registrar.registerBodyProvider(instance, BlockSieve.class);
 		registrar.registerBodyProvider(instance, BlockBarrel.class);

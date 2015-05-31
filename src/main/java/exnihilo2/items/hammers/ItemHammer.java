@@ -3,9 +3,12 @@ package exnihilo2.items.hammers;
 import exnihilo2.EN2;
 import exnihilo2.registries.hammering.HammerRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
@@ -58,4 +61,18 @@ public class ItemHammer extends Item{
 		
 		return false;
 	}
+	
+	@Override
+	public boolean canHarvestBlock(Block block)
+    {
+		return !block.equals(Blocks.air);
+    }
+	
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
+    {
+        ItemStack mat = this.material.getRepairItemStack();
+        if (mat != null && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) return true;
+        return super.getIsRepairable(toRepair, repair);
+    }
 }

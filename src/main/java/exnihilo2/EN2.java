@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldServer;
@@ -29,6 +30,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
@@ -40,6 +42,8 @@ import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.client.models.EN2Models;
 import exnihilo2.client.models.furnaces.ModelFurnaceDirt;
 import exnihilo2.client.textures.EN2Textures;
+import exnihilo2.compatibility.veinminer.VeinMinerCompatibility;
+import exnihilo2.compatibility.waila.WailaCompatibility;
 import exnihilo2.crafting.EN2Crafting;
 import exnihilo2.entities.EN2Entities;
 import exnihilo2.items.EN2Items;
@@ -100,7 +104,10 @@ public class EN2
 		proxy.registerRenderers();
 
 		EN2World.registerWorldProviders();
-		FMLInterModComms.sendMessage("Waila", "register", "exnihilo2.compatibility.waila.WailaProvider.register");
+		WailaCompatibility.initialize();
+		VeinMinerCompatibility.initialize();
+		
+		
 	}
 
 	@EventHandler
@@ -138,5 +145,12 @@ public class EN2
 		{
 			EN2World.tick(e.world);
 		}
+	}
+	
+	//VeinMiner
+	@SubscribeEvent
+	public void genericEvent(Event e)
+	{
+		VeinMinerCompatibility.handleEvent(e);
 	}
 }
