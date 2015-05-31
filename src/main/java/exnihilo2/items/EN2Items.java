@@ -3,14 +3,14 @@ package exnihilo2.items;
 import exnihilo2.items.crooks.ItemCrook;
 import exnihilo2.items.hammers.ItemHammer;
 import exnihilo2.items.materials.EN2ToolMaterials;
-import exnihilo2.items.meshs.ItemMeshSilk;
-import exnihilo2.items.meshs.ItemMeshWood;
+import exnihilo2.items.meshs.ItemMesh;
 import exnihilo2.items.misc.ItemAsh;
 import exnihilo2.items.misc.ItemPorcelain;
 import exnihilo2.items.misc.ItemStone;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -47,8 +47,8 @@ public class EN2Items {
 		hammer_diamond = new ItemHammer(ToolMaterial.EMERALD).setUnlocalizedName("hammer_diamond");
 		
 		//Sieve meshes
-		mesh_silk_white = new ItemMeshSilk().setUnlocalizedName("mesh_silk_white");
-		mesh_wood = new ItemMeshWood().setUnlocalizedName("mesh_wood");
+		mesh_silk_white = new ItemMesh("exnihilo2:blocks/sieve_mesh_silk_white").setUnlocalizedName("mesh_silk_white").setMaxDamage(64);
+		mesh_wood = new ItemMesh("exnihilo2:blocks/sieve_mesh_wood").setUnlocalizedName("mesh_wood").setMaxDamage(10);
 		
 		//Misc
 		ash = new ItemAsh().setUnlocalizedName("ash");

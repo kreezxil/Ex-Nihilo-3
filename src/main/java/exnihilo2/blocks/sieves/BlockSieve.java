@@ -3,7 +3,7 @@ package exnihilo2.blocks.sieves;
 import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
-import exnihilo2.items.meshs.ISieveMesh;
+import exnihilo2.items.meshs.ItemMesh;
 import exnihilo2.registries.sifting.SieveRegistry;
 import exnihilo2.util.helpers.InventoryHelper;
 import net.minecraft.block.Block;
@@ -52,7 +52,17 @@ public class BlockSieve extends BlockContainer {
 			{
 				if (sieve.hasMesh())
 				{
-					if (item != null)
+					if (player.isSneaking())
+					{
+						if (!world.isRemote)
+						{
+							EntityItem entity = new EntityItem(world, pos.getX() + 0.5f, pos.getY() + 1.2f, pos.getZ() + 0.5f, sieve.getMesh());
+							world.spawnEntityInWorld(entity);
+						}
+						
+						sieve.setMesh(null);
+					}
+					else if (item != null)
 					{
 						Block block = Block.getBlockFromItem(item.getItem());
 						
@@ -70,13 +80,13 @@ public class BlockSieve extends BlockContainer {
 				}
 				else
 				{
-					if (item != null && item.getItem() instanceof ISieveMesh)
+					if (item != null && item.getItem() instanceof ItemMesh)
 					{
 						ItemStack mesh = item.copy();
 						mesh.stackSize = 1;
 						
 						sieve.setMesh(mesh);
-						InventoryHelper.consumeItem(player, item);
+						player.setCurrentItemOrArmor(0, null);
 					}
 				}
 			}

@@ -2,7 +2,7 @@ package exnihilo2.blocks.sieves.tileentity;
 
 import exnihilo2.EN2;
 import exnihilo2.client.particles.ParticleSieve;
-import exnihilo2.items.meshs.ISieveMesh;
+import exnihilo2.items.meshs.ItemMesh;
 import exnihilo2.registries.sifting.SieveRegistry;
 import exnihilo2.util.Color;
 import net.minecraft.block.Block;
@@ -32,8 +32,6 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 	protected int work = 0;
 	protected int workMax = 1000;
 	protected int workSpeed = 30;
-	
-	protected int damage = 0;
 	
 	protected int updateTimer = 0;
 	protected int updateTimerMax = 8; //Sync if an update is required.
@@ -179,13 +177,10 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 				
 				if (this.mesh != null)
 				{
-					damage++;
-					
-					if (damage > ((ISieveMesh)mesh.getItem()).getDurability())
+					if (mesh.attemptDamageItem(1, worldObj.rand))
 					{
 						getWorld().playSoundEffect(getPos().getX() + 0.5f, getPos().getY() + 0.5f, getPos().getZ() + 0.5f, "random.break", 0.5f, 2.5f);
 						setMesh(null);
-						damage = 0;
 					}
 				}
 			}
@@ -215,7 +210,7 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 	public TextureAtlasSprite getMeshTexture()
 	{
 		if (mesh != null)
-			return ((ISieveMesh) mesh.getItem()).getMeshTexture();
+			return ((ItemMesh) mesh.getItem()).getMeshTexture();
 		else
 			return null;
 	}
@@ -258,7 +253,6 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 		super.readFromNBT(compound);
 		
 		work = compound.getInteger("work");
-		damage = compound.getInteger("damage");
 		if(compound.getBoolean("particles"))
 			startSpawningParticles();
 		
@@ -277,7 +271,6 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 		super.writeToNBT(compound);
 		
 		compound.setInteger("work", work);
-		compound.setInteger("damage", damage);
 		compound.setBoolean("particles", spawningParticles);
 		
 		NBTTagList items = new NBTTagList();
