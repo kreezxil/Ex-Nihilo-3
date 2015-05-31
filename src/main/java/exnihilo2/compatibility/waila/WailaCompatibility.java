@@ -24,7 +24,7 @@ public class WailaCompatibility implements IWailaDataProvider{
 	
 	public static void initialize()
 	{
-		FMLInterModComms.sendMessage("Waila", "register", WailaCompatibility.class.getCanonicalName());
+		FMLInterModComms.sendMessage("Waila", "register", "exnihilo2.compatibility.waila.WailaCompatibility.register");
 	}
 	
 	public static void register(IWailaRegistrar registrar)
