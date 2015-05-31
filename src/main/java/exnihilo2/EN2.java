@@ -23,6 +23,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -105,10 +106,15 @@ public class EN2
 		proxy.registerRenderers();
 
 		EN2World.registerWorldProviders();
-		WailaCompatibility.initialize();
-		VeinMinerCompatibility.initialize();
+		if (Loader.isModLoaded("Waila"))
+		{
+			WailaCompatibility.initialize();
+		}
 		
-		
+		if (Loader.isModLoaded("VeinMiner"))
+		{
+			VeinMinerCompatibility.initialize();
+		}
 	}
 
 	@EventHandler
@@ -147,11 +153,4 @@ public class EN2
 			EN2World.tick(e.world);
 		}
 	}
-	
-//	//VeinMiner
-//	@SubscribeEvent
-//	public void genericEvent(Event e)
-//	{
-//		VeinMinerCompatibility.handleEvent(e);
-//	}
 }

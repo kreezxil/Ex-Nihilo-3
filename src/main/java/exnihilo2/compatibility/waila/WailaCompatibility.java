@@ -1,7 +1,5 @@
 package exnihilo2.compatibility.waila;
 
-import com.ibm.icu.text.DecimalFormat;
-
 import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.barrels.BlockBarrel;
@@ -26,7 +24,7 @@ public class WailaCompatibility implements IWailaDataProvider{
 	
 	public static void initialize()
 	{
-		FMLInterModComms.sendMessage("Waila", "register", "exnihilo2.compatibility.waila.WailaCompatibility.register");
+		FMLInterModComms.sendMessage("Waila", "register", WailaCompatibility.class.getCanonicalName());
 	}
 	
 	public static void register(IWailaRegistrar registrar)
