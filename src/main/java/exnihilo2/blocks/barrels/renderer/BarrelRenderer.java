@@ -57,7 +57,6 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 	public static void renderContentsMultiTexture(TextureAtlasSprite topTexture, TextureAtlasSprite sideTexture, TextureAtlasSprite bottomTexture, double height, Color color)
 	{
 		GlStateManager.pushMatrix();
-		GlStateManager.disableCull();
 		
 		double heightA = getAdjustedContentLevel(height);
 		
@@ -134,7 +133,6 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 		renderTexturedQuad(renderer, sideTexture, west, color, height);
 		tessellator.draw();
 		
-		GlStateManager.enableCull();
 		GlStateManager.popMatrix();
 	}
 	

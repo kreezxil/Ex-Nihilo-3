@@ -34,8 +34,7 @@ public class BarrelStateSlime extends BarrelState{
 			GlStateManager.pushMatrix();
 			RenderHelper.disableStandardItemLighting();
 			
-			GlStateManager.enableBlend();
-			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GlStateManager.disableBlend();
 
 			Minecraft mc = Minecraft.getMinecraft();
 			mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
@@ -63,12 +62,12 @@ public class BarrelStateSlime extends BarrelState{
 	{
 		if (barrel.getTimerStatus() >= 0 && barrel.getTimerStatus() < 1.0d )
 		{
-			description[0] = "Getting Slimy " + String.format("%.0f", barrel.getTimerStatus() * 100) + "%";
+			description[0] = "Growing Slime " + String.format("%.0f", barrel.getTimerStatus() * 100) + "%";
 			return description;
 		}
-		else if (barrel.getTimerStatus() > 1.0d)
+		else if (barrel.getTimerStatus() >= 1.0d)
 		{
-			description[0] = "Incoming!";
+			description[0] = "Slime Wants Out!";
 			return description;
 		}
 		

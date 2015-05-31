@@ -24,7 +24,8 @@ public class SlimeStateLogic extends BarrelLogic{
 			if (!barrel.getWorld().isRemote)
 			{
 				EntitySlime slime = new EntitySlime(barrel.getWorld());
-				slime.setPosition(barrel.getPos().getX(), barrel.getPos().getY() + 1, barrel.getPos().getZ());
+				slime.setPosition(barrel.getPos().getX() + 0.5d, barrel.getPos().getY() + 1.25d, barrel.getPos().getZ() + 0.5d);
+				//slime.setRotation(barrel.getWorld().rand.nextFloat() * 360f, 0.0f);
 
 				barrel.getWorld().spawnEntityInWorld(slime);
 			}
