@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 
 import exnihilo2.EN2;
+import exnihilo2.compatibility.EN2Compatibility;
 import exnihilo2.items.hammers.ItemHammer;
 import exnihilo2.registries.hammering.HammerRegistry;
 import exnihilo2.registries.hammering.HammerRegistryEntry;
@@ -108,36 +109,45 @@ public class VeinMinerCompatibility {
 	
 	public static void registerBlocksAndTools()
 	{
-		//crooks
-		VeinMinerAPI.addToolType("crook", "Crook", "exnihilo2:crook_wood");
-		VeinMinerAPI.addTool("crook", "exnihilo2:crook_wood");
-		VeinMinerAPI.addTool("crook", "exnihilo2:crook_bone");
-		
-		//hammers
-		VeinMinerAPI.addToolType("hammer", "Hammer", "exnihilo2:hammer_diamond");
-		VeinMinerAPI.addTool("hammer", "exnihilo2:hammer_wood");
-        VeinMinerAPI.addTool("hammer", "exnihilo2:hammer_stone");
-        VeinMinerAPI.addTool("hammer", "exnihilo2:hammer_iron");
-        VeinMinerAPI.addTool("hammer", "exnihilo2:hammer_gold");
-        VeinMinerAPI.addTool("hammer", "exnihilo2:hammer_diamond");
-         
-        Iterator blocks = GameData.getBlockRegistry().iterator();
-        while(blocks.hasNext()) 
-        {
-           Block block = (Block)blocks.next();
-           
-           if (block.getMaterial() == Material.leaves || block instanceof BlockTallGrass)
-           {
-        	   VeinMinerAPI.addBlock("crook", GameRegistry.findUniqueIdentifierFor(block).toString());
-           }
-        }
-        
-        Iterator smashables = HammerRegistry.getEntryMap().values().iterator();
-        while(smashables.hasNext())
-        {
-        	HammerRegistryEntry entry = (HammerRegistryEntry)smashables.next();
-        	
-        	VeinMinerAPI.addBlock("hammer", GameRegistry.findUniqueIdentifierFor(entry.getInput().getBlock()).toString());
-        }
+		if (EN2Compatibility.register_veinminer_tools)
+		{
+			//crooks
+			VeinMinerAPI.addToolType("crook", "Crook", "exnihilo2:crook_wood");
+			VeinMinerAPI.addTool("crook", "exnihilo2:crook_wood");
+			VeinMinerAPI.addTool("crook", "exnihilo2:crook_bone");
+			
+			//hammers
+			VeinMinerAPI.addToolType("hammer", "Hammer", "exnihilo2:hammer_diamond");
+			VeinMinerAPI.addTool("hammer", "exnihilo2:hammer_wood");
+	        VeinMinerAPI.addTool("hammer", "exnihilo2:hammer_stone");
+	        VeinMinerAPI.addTool("hammer", "exnihilo2:hammer_iron");
+	        VeinMinerAPI.addTool("hammer", "exnihilo2:hammer_gold");
+	        VeinMinerAPI.addTool("hammer", "exnihilo2:hammer_diamond");
+	         
+	        Iterator blocks = GameData.getBlockRegistry().iterator();
+	        while(blocks.hasNext()) 
+	        {
+	        	if (EN2Compatibility.register_veinminer_recipes_crook)
+	        	{
+	        		Block block = (Block)blocks.next();
+	 	           
+	 	           if (block.getMaterial() == Material.leaves || block instanceof BlockTallGrass)
+	 	           {
+	 	        	   VeinMinerAPI.addBlock("crook", GameRegistry.findUniqueIdentifierFor(block).toString());
+	 	           }
+	        	}
+	           
+	           if (EN2Compatibility.register_veinminer_recipes_hammer)
+	           {
+	        	   Iterator smashables = HammerRegistry.getEntryMap().values().iterator();
+		           while(smashables.hasNext())
+		           {
+		           	HammerRegistryEntry entry = (HammerRegistryEntry)smashables.next();
+		           	
+		           	VeinMinerAPI.addBlock("hammer", GameRegistry.findUniqueIdentifierFor(entry.getInput().getBlock()).toString());
+		           }
+	           }
+	        }
+		}
 	}
 }

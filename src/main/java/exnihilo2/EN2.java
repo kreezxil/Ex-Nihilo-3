@@ -44,6 +44,7 @@ import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.client.models.EN2Models;
 import exnihilo2.client.models.furnaces.ModelFurnaceDirt;
 import exnihilo2.client.textures.EN2Textures;
+import exnihilo2.compatibility.EN2Compatibility;
 import exnihilo2.compatibility.veinminer.VeinMinerCompatibility;
 import exnihilo2.compatibility.waila.WailaCompatibility;
 import exnihilo2.crafting.EN2Crafting;
@@ -95,6 +96,7 @@ public class EN2
 		EN2Crafting.registerRecipes();
 		EN2Entities.initialize();
 		EN2Registries.initialize(config);
+		EN2Compatibility.configure(config);
 		
 		if(config.hasChanged())
 			config.save();
@@ -106,15 +108,7 @@ public class EN2
 		proxy.registerRenderers();
 
 		EN2World.registerWorldProviders();
-		if (Loader.isModLoaded("Waila"))
-		{
-			WailaCompatibility.initialize();
-		}
-		
-		if (Loader.isModLoaded("VeinMiner"))
-		{
-			VeinMinerCompatibility.initialize();
-		}
+		EN2Compatibility.initialize();
 	}
 
 	@EventHandler
