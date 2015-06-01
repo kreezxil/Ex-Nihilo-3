@@ -56,6 +56,8 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Items.ash);
 		registerRenderer(EN2Items.porcelain);
 		registerRenderer(EN2Items.stone);
+		registerRenderer(EN2Items.slimeball_black);
+		registerRenderer(EN2Items.emerald_black);
 	}
 
 	private void registerBlockRenderers()

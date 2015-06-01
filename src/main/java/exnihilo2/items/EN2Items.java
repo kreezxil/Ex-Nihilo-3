@@ -5,7 +5,9 @@ import exnihilo2.items.hammers.ItemHammer;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.items.meshs.ItemMesh;
 import exnihilo2.items.misc.ItemAsh;
+import exnihilo2.items.misc.ItemEmeraldBlack;
 import exnihilo2.items.misc.ItemPorcelain;
+import exnihilo2.items.misc.ItemSlimeballBlack;
 import exnihilo2.items.misc.ItemStone;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -32,6 +34,8 @@ public class EN2Items {
 	public static Item ash;
 	public static Item porcelain;
 	public static Item stone;
+	public static Item emerald_black;
+	public static Item slimeball_black;
 	
 	public static void initialize()
 	{
@@ -54,6 +58,8 @@ public class EN2Items {
 		ash = new ItemAsh().setUnlocalizedName("ash");
 		porcelain = new ItemPorcelain().setUnlocalizedName("porcelain");
 		stone = new ItemStone().setUnlocalizedName("stone");
+		emerald_black = new ItemEmeraldBlack().setUnlocalizedName("emerald_black");
+		slimeball_black = new ItemSlimeballBlack().setUnlocalizedName("slimeball_black");
 		
 		registerItems();
 	}
@@ -75,6 +81,8 @@ public class EN2Items {
 		registerItem(ash);
 		registerItem(porcelain);
 		registerItem(stone);
+		registerItem(emerald_black);
+		registerItem(slimeball_black);
 	}
 	
 	private static void registerItem(Item item)

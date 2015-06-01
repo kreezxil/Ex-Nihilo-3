@@ -14,6 +14,7 @@ public class EN2Crafting {
 	public static boolean crooks_allowed;
 	public static boolean hammers_allowed;
 	public static boolean sieves_allowed;
+	public static boolean diamond_manufacture_allowed;
 	
 	public static void initialize(Configuration config)
 	{
@@ -21,6 +22,7 @@ public class EN2Crafting {
 		crooks_allowed = config.get(CATEGORY_CRAFTING_OPTIONS, "allow crooks", true).getBoolean(true);
 		hammers_allowed = config.get(CATEGORY_CRAFTING_OPTIONS, "allow hammers", true).getBoolean(true);
 		sieves_allowed = config.get(CATEGORY_CRAFTING_OPTIONS, "allow sieves", true).getBoolean(true);
+		diamond_manufacture_allowed = config.get(CATEGORY_CRAFTING_OPTIONS, "allow creating diamonds", true).getBoolean(true);
 	}
 
 	public static void registerRecipes()
@@ -37,6 +39,10 @@ public class EN2Crafting {
 		if (sieves_allowed)
 			SieveRecipes.register();
 		
-		MiscRecipes.register();
+		if (diamond_manufacture_allowed)
+			MiscRecipes.registerDiamondRecipes();
+		
+		MiscRecipes.registerSmeltingRecipes();
+		MiscRecipes.registerOtherRecipes();
 	}
 }
