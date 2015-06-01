@@ -4,6 +4,7 @@ import java.util.Random;
 
 import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
+import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.blocks.furnaces.tileentity.TileEntityFurnaceDirt;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -28,6 +29,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -310,5 +312,17 @@ public class BlockFurnaceDirt extends BlockContainer{
 				;
 			}
 		}
+	}
+	
+	@Override
+	public int getLightValue(IBlockAccess world, BlockPos pos) {
+		IBlockState furnace = world.getBlockState(pos);
+		
+		if (furnace != null)
+		{
+			return !(Boolean)(furnace.getValue(BlockFurnaceDirt.BURNING)) ? 0 : 13;
+		}
+		
+		return 0;
 	}
 }

@@ -268,6 +268,7 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	            {
 	                flag1 = true;
 	                BlockFurnaceDirt.setState(this.isBurning(), this.worldObj, this.pos);
+	                getWorld().checkLight(getPos());
 	            }
 	        }
 
