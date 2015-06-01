@@ -40,10 +40,17 @@ public class FluidSummonSlimeTrigger extends BarrelLogic{
 				&& barrel.getFluidAmount() == barrel.getCapacity()
 				&& barrel.getWorld().getDifficulty() != EnumDifficulty.PEACEFUL)
 		{
-			
-			if (!player.capabilities.isCreativeMode)
+			if (player != null)
 			{
-				player.setCurrentItemOrArmor(0, new ItemStack(Items.bucket));
+				if (!player.capabilities.isCreativeMode)
+				{
+					player.setCurrentItemOrArmor(0, new ItemStack(Items.bucket));
+				}
+			}
+			else
+			{
+				barrel.addOutput(new ItemStack(Items.bucket, 1));
+				item = null;
 			}
 			
 			barrel.setState(BarrelStates.slime_green);
