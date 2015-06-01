@@ -34,15 +34,20 @@ public class EntityItemEmeraldBlack extends EntityItem{
         {
         	if (isBlockSurrounded(this.getEntityWorld(),this.getPosition()))
         	{
-        		int survived = 0;
-        		
-        		for (int x = 0; x < this.getEntityItem().stackSize; x++)
+        		if (!this.getEntityWorld().isRemote)
         		{
-        			if (getEntityWorld().rand.nextInt(100) < SURVIVAL_CHANCE)
-        				survived++;
+        			int survived = 0;
+            		
+            		for (int x = 0; x < this.getEntityItem().stackSize; x++)
+            		{
+            			if (getEntityWorld().rand.nextInt(100) < SURVIVAL_CHANCE)
+            				survived++;
+            		}
+            		
+            		this.dropItem(Items.diamond, survived);
         		}
         		
-        		this.dropItem(Items.diamond, survived);
+        		this.setDead();
         	}
         }
         
