@@ -14,7 +14,7 @@ public class FluidCraftNetherrackTrigger extends BarrelLogic{
 	@Override
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) {
 		
-		if (item.getItem() == Items.redstone && barrel.getFluid().fluidID == FluidRegistry.LAVA.getID() && barrel.getFluidAmount() == barrel.getCapacity())
+		if (item.getItem() == Items.redstone && barrel.getFluid().getFluidID() == FluidRegistry.LAVA.getID() && barrel.getFluidAmount() == barrel.getCapacity())
 		{
 			return true;
 		}
@@ -24,7 +24,7 @@ public class FluidCraftNetherrackTrigger extends BarrelLogic{
 
 	@Override
 	public boolean onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) {
-		if (item.getItem() == Items.redstone && barrel.getFluid().fluidID == FluidRegistry.LAVA.getID() && barrel.getFluidAmount() == barrel.getCapacity())
+		if (item.getItem() == Items.redstone && barrel.getFluid().getFluidID() == FluidRegistry.LAVA.getID() && barrel.getFluidAmount() == barrel.getCapacity())
 		{
 			barrel.setState(BarrelStates.output);
 			barrel.setContents(new ItemStack(Blocks.netherrack, 1));

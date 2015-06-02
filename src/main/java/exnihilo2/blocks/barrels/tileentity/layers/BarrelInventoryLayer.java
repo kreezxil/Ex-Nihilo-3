@@ -193,8 +193,7 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	}
 
 	@Override
-	public String getName() 
-	{
+	public String getCommandSenderName() {
 		TileEntityBarrel barrel = (TileEntityBarrel)this;
 		return barrel.getBlockType().getUnlocalizedName();
 	}

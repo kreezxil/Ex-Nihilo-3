@@ -60,9 +60,9 @@ public class ParticleSieve extends EntityFX{
     {
         return 1;
     }
-    
+
     @Override
-    public void func_180434_a(WorldRenderer p_180434_1_, Entity p_180434_2_, float p_180434_3_, float p_180434_4_, float p_180434_5_, float p_180434_6_, float p_180434_7_, float p_180434_8_)
+    public void renderParticle(WorldRenderer p_180434_1_, Entity p_180434_2_, float p_180434_3_, float p_180434_4_, float p_180434_5_, float p_180434_6_, float p_180434_7_, float p_180434_8_)
     {
         float f10 = 0.1F * this.particleScale;
 

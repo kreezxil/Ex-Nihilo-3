@@ -3,6 +3,7 @@ package exnihilo2.world.generation;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_BRIDGE;
 
 import java.lang.reflect.Field;
+import java.util.Random;
 
 import exnihilo2.EN2;
 import exnihilo2.util.helpers.PositionHelper;
@@ -40,7 +41,7 @@ public class ChunkProviderVoidHell extends ChunkProviderHell{
         
         if (EN2World.getNetherFortressesAllowed() && fortresses != null)
         {
-            this.fortresses.func_175792_a(this, world, x, z, primer);
+            this.fortresses.generate(this, world, x, z, primer);
         }
         
         chunk.generateSkylightMap();
@@ -66,7 +67,7 @@ public class ChunkProviderVoidHell extends ChunkProviderHell{
     	
     	if (EN2World.getNetherFortressesAllowed() && fortresses != null)
         {	
-    		fortresses.func_175794_a(world, world.rand, new ChunkCoordIntPair(x,z));
+    		fortresses.generateStructure(world, world.rand, new ChunkCoordIntPair(x,z));
         }
     }
     

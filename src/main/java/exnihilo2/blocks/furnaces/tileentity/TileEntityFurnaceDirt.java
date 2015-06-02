@@ -1,5 +1,6 @@
 package exnihilo2.blocks.furnaces.tileentity;
 
+import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
@@ -118,11 +119,12 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	            this.markDirty();
 	        }
 	    }
+	    
+	    @Override
+		public String getCommandSenderName() {
+			return this.getBlockType().getUnlocalizedName();
+		}
 
-	    public String getName()
-	    {
-	        return this.hasCustomName() ? this.furnaceCustomName : "container.furnace";
-	    }
 
 	    public boolean hasCustomName()
 	    {
