@@ -59,7 +59,7 @@ import exnihilo2.registries.sifting.SieveRegistry;
 import exnihilo2.world.EN2World;
 import exnihilo2.world.manipulation.Moss;
 
-@Mod(name = EN2.NAME, modid = EN2.MODID, version = EN2.VERSION, dependencies = "required-after:Forge@[11.14.2.1423,)")
+@Mod(name = EN2.NAME, modid = EN2.MODID, version = EN2.VERSION) //, dependencies = "required-after:Forge@[11.14.2.1423,)"
 public class EN2
 {
 	@Instance(EN2.MODID)
