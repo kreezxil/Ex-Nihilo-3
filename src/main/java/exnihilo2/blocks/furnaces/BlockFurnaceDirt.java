@@ -154,11 +154,13 @@ public class BlockFurnaceDirt extends BlockContainer{
 
 	public static void setState(boolean active, World worldIn, BlockPos pos)
 	{
-		IBlockState iblockstate = worldIn.getBlockState(pos);
+		IBlockState preState = worldIn.getBlockState(pos);
+		IBlockState postState = EN2Blocks.furnace_dirt.getDefaultState().withProperty(FACING, preState.getValue(FACING)).withProperty(BURNING, active);
+
 		TileEntityFurnaceDirt tileentity = (TileEntityFurnaceDirt)worldIn.getTileEntity(pos);
 
-		worldIn.setBlockState(pos, EN2Blocks.furnace_dirt.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(BURNING, tileentity.isBurning()), 3);
-
+		worldIn.setBlockState(pos, postState, 3);
+		
 		if (tileentity != null)
 		{
 			tileentity.validate();
@@ -182,16 +184,6 @@ public class BlockFurnaceDirt extends BlockContainer{
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
 		worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
-
-		if (stack.hasDisplayName())
-		{
-			TileEntity tileentity = worldIn.getTileEntity(pos);
-
-			if (tileentity instanceof TileEntityFurnaceDirt)
-			{
-				((TileEntityFurnaceDirt)tileentity).setCustomInventoryName(stack.getDisplayName());
-			}
-		}
 	}
 
 	@Override
@@ -243,14 +235,14 @@ public class BlockFurnaceDirt extends BlockContainer{
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing facing = EnumFacing.getFront(meta);
+		EnumFacing facing = EnumFacing.getFront(meta & 0xf);
 
 		if (facing.getAxis() == EnumFacing.Axis.Y)
 		{
 			facing = EnumFacing.NORTH;
 		}
 		
-		Boolean burning = ((meta >> 2) == 1);
+		Boolean burning = (((meta & 0x30) >> 2) == 1);
 		
 		return this.getDefaultState().withProperty(FACING, facing).withProperty(BURNING, burning);
 	}
@@ -258,8 +250,9 @@ public class BlockFurnaceDirt extends BlockContainer{
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		int facing = ((EnumFacing)state.getValue(FACING)).getIndex();
+		int facing = ((EnumFacing)state.getValue(FACING)).getHorizontalIndex();
 		int burning = (((Boolean)state.getValue(BURNING)) ? 1 : 0) << 2;
+		
 		return facing | burning;
 	}
 

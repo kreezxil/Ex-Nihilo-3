@@ -1,5 +1,6 @@
 package exnihilo2.blocks.furnaces.tileentity;
 
+import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 import net.minecraft.block.Block;
@@ -46,7 +47,6 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	    private int currentItemBurnTime;
 	    private int cookTime;
 	    private int totalCookTime;
-	    private String furnaceCustomName;
 
 	    public int getSizeInventory()
 	    {
@@ -124,16 +124,10 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 		public String getCommandSenderName() {
 			return this.getBlockType().getUnlocalizedName();
 		}
-
-
+	    
 	    public boolean hasCustomName()
 	    {
-	        return this.furnaceCustomName != null && this.furnaceCustomName.length() > 0;
-	    }
-
-	    public void setCustomInventoryName(String name)
-	    {
-	        this.furnaceCustomName = name;
+	        return false;
 	    }
 
 	    public void readFromNBT(NBTTagCompound compound)
@@ -157,11 +151,6 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	        this.cookTime = compound.getShort("CookTime");
 	        this.totalCookTime = compound.getShort("CookTimeTotal");
 	        this.currentItemBurnTime = getItemBurnTime(this.furnaceItemStacks[1]);
-
-	        if (compound.hasKey("CustomName", 8))
-	        {
-	            this.furnaceCustomName = compound.getString("CustomName");
-	        }
 	    }
 
 	    public void writeToNBT(NBTTagCompound compound)
@@ -184,11 +173,6 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	        }
 
 	        compound.setTag("Items", nbttaglist);
-
-	        if (this.hasCustomName())
-	        {
-	            compound.setString("CustomName", this.furnaceCustomName);
-	        }
 	    }
 
 	    public int getInventoryStackLimit()
@@ -270,7 +254,6 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	            {
 	                flag1 = true;
 	                BlockFurnaceDirt.setState(this.isBurning(), this.worldObj, this.pos);
-	                getWorld().checkLight(getPos());
 	            }
 	        }
 
@@ -447,4 +430,10 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	            this.furnaceItemStacks[i] = null;
 	        }
 	    }
+
+//	    @Override
+//		public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) 
+//		{
+//			return !oldState.getBlock().equals(newState.getBlock());
+//		}
 	}
