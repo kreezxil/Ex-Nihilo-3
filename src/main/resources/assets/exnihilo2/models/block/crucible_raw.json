@@ -1,0 +1,8 @@
+{
+    "parent": "exnihilo2:block/crucible",
+    "ambientocclusion": false,
+    "textures": {
+        "side": "exnihilo2:blocks/crucible_side_raw",
+        "bottom": "exnihilo2:blocks/crucible_bottom_raw"
+    }
+}
