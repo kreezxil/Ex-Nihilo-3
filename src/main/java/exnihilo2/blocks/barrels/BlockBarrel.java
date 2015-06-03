@@ -72,6 +72,7 @@ public class BlockBarrel extends BlockContainer
 					entityitem.motionX = world.rand.nextGaussian() * f3;
 					entityitem.motionY = (0.2d);
 					entityitem.motionZ = world.rand.nextGaussian() * f3;
+					entityitem.setDefaultPickupDelay();
 
 					world.spawnEntityInWorld(entityitem);
 				}

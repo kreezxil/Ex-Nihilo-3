@@ -26,7 +26,8 @@ public class SieveReward {
 			entityitem.motionX = world.rand.nextGaussian() * 0.05F;
 			entityitem.motionY = (0.2d);
 			entityitem.motionZ = world.rand.nextGaussian() * 0.05F;
-
+			entityitem.setDefaultPickupDelay();
+			
 			world.spawnEntityInWorld(entityitem);
 		}
 	}

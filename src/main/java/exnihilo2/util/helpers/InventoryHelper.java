@@ -28,7 +28,10 @@ public class InventoryHelper {
 		
 		if (!given && !player.worldObj.isRemote)
 		{
-			player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, item));
+			EntityItem entity = new EntityItem(player.worldObj, player.posX + 0.5d, player.posY + 0.5d, player.posZ + 0.5d, item);
+			entity.setDefaultPickupDelay();
+			
+			player.worldObj.spawnEntityInWorld(entity);
 		}
 	}
 	
