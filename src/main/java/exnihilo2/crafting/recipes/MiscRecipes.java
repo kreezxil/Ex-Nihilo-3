@@ -20,6 +20,15 @@ public class MiscRecipes {
 						"xxx",
 						'x', new ItemStack(Blocks.dirt, 1, 0)));
 		
+		//web
+		GameRegistry.addRecipe(
+				new ShapedOreRecipe(new ItemStack(Blocks.web, 1),
+						"xxx",
+						"xyx",
+						"xxx",
+						'x', new ItemStack(Items.string, 1),
+						'y', new ItemStack(Items.slime_ball, 1)));
+		
 		//cobble from stones
 		GameRegistry.addRecipe(
 				new ShapedOreRecipe(new ItemStack(Blocks.cobblestone, 1),
