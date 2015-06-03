@@ -72,9 +72,12 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 					if (updateQueued)
 					{
 						updateQueued = false;
-						updateTimerRunning = false;
 
 						getWorld().markBlockForUpdate(this.getPos());
+					}
+					else
+					{
+						updateTimerRunning = false;
 					}
 				}
 			}

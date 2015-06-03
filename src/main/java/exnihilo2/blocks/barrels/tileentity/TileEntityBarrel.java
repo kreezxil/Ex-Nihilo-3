@@ -107,9 +107,12 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 				if (updateQueued)
 				{
 					updateQueued = false;
-					updateTimerRunning = false;
 					
 					getWorld().markBlockForUpdate(this.getPos());
+				}
+				else
+				{
+					updateTimerRunning = false;
 				}
 			}
 		}
