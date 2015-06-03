@@ -8,6 +8,7 @@ import exnihilo2.blocks.barrels.BlockBarrelGlassColored;
 import exnihilo2.blocks.barrels.BlockBarrelWood;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.crucibles.BlockCrucibleRaw;
 import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 import exnihilo2.blocks.furnaces.tileentity.TileEntityFurnaceDirt;
 import exnihilo2.blocks.misc.BlockDust;
@@ -39,11 +40,10 @@ public class EN2Blocks {
 	public static Block barrel_stone;
 	public static Block barrel_glass;
 	public static Block barrel_glass_colored;
-	
+	public static Block crucible;
+	public static Block crucible_raw;
 	public static Block dust;
-	
 	public static Block furnace_dirt;
-	
 	public static Block sieve_wood;
 
 	public static void configure()
@@ -52,10 +52,10 @@ public class EN2Blocks {
 		barrel_stone = new BlockBarrel(Material.rock).setUnlocalizedName("barrel_stone");
 		barrel_glass = new BlockBarrel(Material.glass).setUnlocalizedName("barrel_glass");
 		barrel_glass_colored = new BlockBarrelGlassColored(Material.glass).setUnlocalizedName("barrel_glass_colored");
-		
+		crucible = new BlockCrucibleRaw().setUnlocalizedName("crucible");
+		crucible_raw = new BlockCrucibleRaw().setUnlocalizedName("crucible_raw");
 		dust = new BlockDust().setUnlocalizedName("dust");
 		furnace_dirt = new BlockFurnaceDirt().setUnlocalizedName("furnace_dirt");
-		
 		sieve_wood = new BlockSieveWood(Material.wood).setUnlocalizedName("sieve_wood");
 		
 		registerBlocks();
@@ -67,10 +67,10 @@ public class EN2Blocks {
 		registerBlock(barrel_stone);
 		registerBlock(barrel_glass);
 		registerBlock(barrel_glass_colored, ItemBarrelGlassColored.class);
-		
+		registerBlock(crucible);
+		registerBlock(crucible_raw);
 		registerBlock(dust);
 		registerBlock(furnace_dirt);
-		
 		registerBlock(sieve_wood, ItemSieveWood.class);
 	}
 	

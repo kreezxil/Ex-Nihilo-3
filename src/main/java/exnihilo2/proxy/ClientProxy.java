@@ -66,6 +66,8 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Blocks.barrel_stone);
 		registerRenderer(EN2Blocks.barrel_glass);
 		registerRenderer(EN2Blocks.barrel_glass_colored);
+		registerRenderer(EN2Blocks.crucible);
+		registerRenderer(EN2Blocks.crucible_raw);
 		registerRenderer(EN2Blocks.dust);
 		registerRenderer(EN2Blocks.furnace_dirt);
 		registerRenderer(EN2Blocks.sieve_wood);

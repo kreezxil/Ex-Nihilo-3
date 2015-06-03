@@ -2,6 +2,7 @@
     "parent": "exnihilo2:block/crucible",
     "ambientocclusion": false,
     "textures": {
+        "particle": "exnihilo2:blocks/crucible_bottom_raw",
         "side": "exnihilo2:blocks/crucible_side_raw",
         "bottom": "exnihilo2:blocks/crucible_bottom_raw"
     }
