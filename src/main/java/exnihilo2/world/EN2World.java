@@ -7,6 +7,8 @@ import exnihilo2.world.generation.WorldProviderVoidSurface;
 import exnihilo2.world.generation.WorldProviderVoidEnd;
 import exnihilo2.world.generation.WorldProviderVoidHell;
 import exnihilo2.world.generation.templates.TemplateLoader;
+import exnihilo2.world.generation.templates.defaults.TemplateExNihiloEasy;
+import exnihilo2.world.generation.templates.defaults.TemplateExNihiloHard;
 import exnihilo2.world.generation.templates.defaults.TemplateExNihiloModerate;
 import exnihilo2.world.generation.templates.defaults.TemplateSkyblock21;
 import exnihilo2.world.generation.templates.pojos.Template;
@@ -42,7 +44,9 @@ public class EN2World {
 		
 		String template_path = EN2.path + File.separator + "templates";
 		TemplateSkyblock21.generate(template_path);
+		TemplateExNihiloEasy.generate(template_path);
 		TemplateExNihiloModerate.generate(template_path);
+		TemplateExNihiloHard.generate(template_path);
 		
 		String template_overworld_name = config.get(CATEGORY_WORLD_GEN, "void overworld template", "skyblock_2-1_overworld.json").getString();
 		String template_nether_name = config.get(CATEGORY_WORLD_GEN, "void nether template", "skyblock_2-1_nether.json").getString();
