@@ -121,6 +121,7 @@ public class EN2
 	@SideOnly(Side.CLIENT)
 	public void onTextureStitchEvent(TextureStitchEvent.Pre e) {
 		EN2Textures.registerCustomTextures(e.map);
+		EN2Textures.setMeshTextures();
 	}
 	
 	@SubscribeEvent

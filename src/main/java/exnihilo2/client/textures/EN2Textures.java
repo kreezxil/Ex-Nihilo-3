@@ -27,10 +27,9 @@ public class EN2Textures {
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/furnace_mask_front_on"));
 		
 		registerDirtFurnaceTextures(map);
-		setMeshTextures();
 	}
 	
-	private static void setMeshTextures()
+	public static void setMeshTextures()
 	{
 		((ItemMesh)EN2Items.mesh_silk_white).setMeshTexture("exnihilo2:blocks/sieve_mesh_silk_white");
 		((ItemMesh)EN2Items.mesh_wood).setMeshTexture("exnihilo2:blocks/sieve_mesh_wood");
