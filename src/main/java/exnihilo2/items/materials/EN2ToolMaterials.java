@@ -10,7 +10,7 @@ public class EN2ToolMaterials{
 	public static ToolMaterial Stick;
 	public static ToolMaterial Bone;
 	
-	public static void initialize()
+	public static void configure()
 	{
 		Stick = EnumHelper.addToolMaterial("Stick", 0, 59, 2.0F, 0.0F, 15);
 		Stick.setRepairItem(new ItemStack(Items.stick, 0));

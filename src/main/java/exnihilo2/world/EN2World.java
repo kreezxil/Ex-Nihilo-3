@@ -31,7 +31,7 @@ public class EN2World {
 	private static boolean gen_end;
 	private static boolean gen_end_allow_crystals;
 	
-	public static void initialize(Configuration config)
+	public static void configure(Configuration config)
 	{
 		gen_surface = config.get(CATEGORY_WORLD_GEN, "void overworld", false).getBoolean(false);
 		gen_nether = config.get(CATEGORY_WORLD_GEN, "void nether", false).getBoolean(false);

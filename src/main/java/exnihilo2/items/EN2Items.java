@@ -37,7 +37,7 @@ public class EN2Items {
 	public static Item emerald_black;
 	public static Item slimeball_black;
 	
-	public static void initialize()
+	public static void configure()
 	{
 		//Crooks
 		crook_wood = new ItemCrook(EN2ToolMaterials.Stick).setUnlocalizedName("crook_wood");

@@ -46,7 +46,7 @@ public class EN2Blocks {
 	
 	public static Block sieve_wood;
 
-	public static void initialize()
+	public static void configure()
 	{
 		barrel_wood = new BlockBarrelWood(Material.wood).setUnlocalizedName("barrel_wood");
 		barrel_stone = new BlockBarrel(Material.rock).setUnlocalizedName("barrel_stone");

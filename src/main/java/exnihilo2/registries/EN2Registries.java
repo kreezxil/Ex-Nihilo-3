@@ -12,7 +12,7 @@ public class EN2Registries {
 	public static boolean loadHammerDefaults = true;
 	public static boolean loadSieveDefaults = true;
 	
-	public static void initialize(Configuration config)
+	public static void configure(Configuration config)
 	{
 		loadCompostDefaults = config.get(CATEGORY_DEFAULT_RECIPES, "load default compost recipes", true).getBoolean(true);
 		loadHammerDefaults = config.get(CATEGORY_DEFAULT_RECIPES, "load default hammer recipes", true).getBoolean(true);

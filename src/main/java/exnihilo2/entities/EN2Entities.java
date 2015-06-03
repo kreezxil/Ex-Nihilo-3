@@ -9,7 +9,7 @@ public class EN2Entities {
 	public static final int STONE_ID = 0;
 	public static final int EMERALD_ID = 1;
 	
-	public static void initialize()
+	public static void configure()
 	{
 		EntityRegistry.registerModEntity(EntityStone.class, "stone", STONE_ID, EN2.instance, 64, 10, true);
 		EntityRegistry.registerModEntity(EntityItemEmeraldBlack.class, "emerald_black", EMERALD_ID, EN2.instance, 64, 10, true);

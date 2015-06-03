@@ -85,17 +85,17 @@ public class EN2
 		path = event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "ExNihilo2" + File.separator;
 		config = new Configuration(new File(path + "ExNihilo2.cfg"));
 
-		EN2ToolMaterials.initialize();
-		EN2Items.initialize();
-		EN2Blocks.initialize();
-		EN2Crafting.initialize(config);
-		BarrelStates.initialize(config);
-		EN2World.initialize(config);
+		EN2ToolMaterials.configure();
+		EN2Items.configure();
+		EN2Blocks.configure();
+		EN2Crafting.configure(config);
+		BarrelStates.configure(config);
+		EN2World.configure(config);
 
 		EN2Blocks.registerTileEntities();
 		EN2Crafting.registerRecipes();
-		EN2Entities.initialize();
-		EN2Registries.initialize(config);
+		EN2Entities.configure();
+		EN2Registries.configure(config);
 		EN2Compatibility.configure(config);
 		
 		if(config.hasChanged())

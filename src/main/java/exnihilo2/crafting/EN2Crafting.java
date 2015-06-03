@@ -16,7 +16,7 @@ public class EN2Crafting {
 	public static boolean sieves_allowed;
 	public static boolean diamond_manufacture_allowed;
 	
-	public static void initialize(Configuration config)
+	public static void configure(Configuration config)
 	{
 		barrels_allowed = config.get(CATEGORY_CRAFTING_OPTIONS, "allow barrels", true).getBoolean(true);
 		crooks_allowed = config.get(CATEGORY_CRAFTING_OPTIONS, "allow crooks", true).getBoolean(true);

@@ -105,7 +105,7 @@ public class BarrelStates {
 	public static boolean allow_crafting_stone;
 	public static boolean allow_slime_summoning;
 	
-	public static void initialize(Configuration config)
+	public static void configure(Configuration config)
 	{
 		loadSettings(config);
 		
