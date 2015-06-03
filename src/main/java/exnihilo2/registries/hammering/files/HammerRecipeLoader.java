@@ -17,7 +17,7 @@ import exnihilo2.registries.composting.pojos.CompostRecipeList;
 import exnihilo2.registries.hammering.HammerRegistryEntry;
 import exnihilo2.registries.hammering.pojos.HammerRecipe;
 import exnihilo2.registries.hammering.pojos.HammerRecipeList;
-import exnihilo2.world.generation.templates.TemplateDefaults;
+import exnihilo2.world.generation.templates.defaults.TemplateSkyblock21;
 import exnihilo2.world.generation.templates.pojos.Template;
 
 public class HammerRecipeLoader {

@@ -14,7 +14,7 @@ import exnihilo2.EN2;
 import exnihilo2.registries.composting.CompostRegistryEntry;
 import exnihilo2.registries.composting.pojos.CompostRecipe;
 import exnihilo2.registries.composting.pojos.CompostRecipeList;
-import exnihilo2.world.generation.templates.TemplateDefaults;
+import exnihilo2.world.generation.templates.defaults.TemplateSkyblock21;
 import exnihilo2.world.generation.templates.pojos.Template;
 
 public class CompostRecipeLoader {

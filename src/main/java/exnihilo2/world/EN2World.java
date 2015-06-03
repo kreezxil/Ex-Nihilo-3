@@ -6,8 +6,9 @@ import exnihilo2.EN2;
 import exnihilo2.world.generation.WorldProviderVoidSurface;
 import exnihilo2.world.generation.WorldProviderVoidEnd;
 import exnihilo2.world.generation.WorldProviderVoidHell;
-import exnihilo2.world.generation.templates.TemplateDefaults;
 import exnihilo2.world.generation.templates.TemplateLoader;
+import exnihilo2.world.generation.templates.defaults.TemplateExNihiloModerate;
+import exnihilo2.world.generation.templates.defaults.TemplateSkyblock21;
 import exnihilo2.world.generation.templates.pojos.Template;
 import exnihilo2.world.manipulation.Moss;
 import exnihilo2.world.manipulation.Mycelium;
@@ -39,7 +40,10 @@ public class EN2World {
 		gen_end = config.get(CATEGORY_WORLD_GEN, "void end", false).getBoolean(false);
 		gen_end_allow_crystals = config.get(CATEGORY_WORLD_GEN, "void end generate crystals", false).getBoolean(false);
 		
-		TemplateDefaults.generateDefaultTemplateFiles(EN2.path + File.separator + "templates");
+		String template_path = EN2.path + File.separator + "templates";
+		TemplateSkyblock21.generate(template_path);
+		TemplateExNihiloModerate.generate(template_path);
+		
 		String template_overworld_name = config.get(CATEGORY_WORLD_GEN, "void overworld template", "skyblock_2-1_overworld.json").getString();
 		String template_nether_name = config.get(CATEGORY_WORLD_GEN, "void nether template", "skyblock_2-1_nether.json").getString();
 		String template_end_name = config.get(CATEGORY_WORLD_GEN, "void end template", "none").getString();

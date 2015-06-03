@@ -20,7 +20,7 @@ import exnihilo2.registries.hammering.pojos.HammerRecipeList;
 import exnihilo2.registries.sifting.SieveRegistryEntry;
 import exnihilo2.registries.sifting.pojos.SieveRecipe;
 import exnihilo2.registries.sifting.pojos.SieveRecipeList;
-import exnihilo2.world.generation.templates.TemplateDefaults;
+import exnihilo2.world.generation.templates.defaults.TemplateSkyblock21;
 import exnihilo2.world.generation.templates.pojos.Template;
 
 public class SieveRecipeLoader {
