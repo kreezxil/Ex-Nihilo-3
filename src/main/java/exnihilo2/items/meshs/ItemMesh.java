@@ -16,12 +16,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemMesh extends Item{
 	private String texture_location;
 	
-	public ItemMesh(String texture_location)
+	public ItemMesh()
 	{
 		super();
 		
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		this.setMeshTexture(texture_location);
 		this.setMaxStackSize(1);
 		
 		EnchantmentHelper.mapEnchantmentData(this.getItemEnchantability(), new ItemStack(this));

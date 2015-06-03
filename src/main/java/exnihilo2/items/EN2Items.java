@@ -51,8 +51,8 @@ public class EN2Items {
 		hammer_diamond = new ItemHammer(ToolMaterial.EMERALD).setUnlocalizedName("hammer_diamond");
 		
 		//Sieve meshes
-		mesh_silk_white = new ItemMesh("exnihilo2:blocks/sieve_mesh_silk_white").setUnlocalizedName("mesh_silk_white").setMaxDamage(64);
-		mesh_wood = new ItemMesh("exnihilo2:blocks/sieve_mesh_wood").setUnlocalizedName("mesh_wood").setMaxDamage(10);
+		mesh_silk_white = new ItemMesh().setUnlocalizedName("mesh_silk_white").setMaxDamage(64);
+		mesh_wood = new ItemMesh().setUnlocalizedName("mesh_wood").setMaxDamage(10);
 		
 		//Misc
 		ash = new ItemAsh().setUnlocalizedName("ash");

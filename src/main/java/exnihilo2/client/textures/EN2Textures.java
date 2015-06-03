@@ -9,6 +9,8 @@ import exnihilo2.client.textures.files.TextureAtlasSpriteDynamic;
 import exnihilo2.client.textures.files.TextureLoader;
 import exnihilo2.client.textures.files.TextureLocations;
 import exnihilo2.client.textures.manipulation.TextureCompositing;
+import exnihilo2.items.EN2Items;
+import exnihilo2.items.meshs.ItemMesh;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -25,6 +27,13 @@ public class EN2Textures {
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/furnace_mask_front_on"));
 		
 		registerDirtFurnaceTextures(map);
+		setMeshTextures();
+	}
+	
+	private static void setMeshTextures()
+	{
+		((ItemMesh)EN2Items.mesh_silk_white).setMeshTexture("exnihilo2:blocks/sieve_mesh_silk_white");
+		((ItemMesh)EN2Items.mesh_wood).setMeshTexture("exnihilo2:blocks/sieve_mesh_wood");
 	}
 	
 	private static void registerDirtFurnaceTextures(TextureMap map)
