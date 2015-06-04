@@ -61,7 +61,7 @@ public class TemplateExNihiloEasy extends TemplateGeneratorBase{
 		blocks.add(new TemplateBlock("minecraft:dirt", 0, 2, -2, 2));
 
 		//CHEST
-		TemplateBlock chest = new TemplateBlock("minecraft:chest", 5, 1, 1, 0);
+		TemplateBlock chest = new TemplateBlock("minecraft:chest", 2, 1, 1, 0);
 		chest.setContents(new ArrayList<TemplateItem>());
 		chest.getContents().add(new TemplateItem("minecraft:dye", 64, 15)); //Bone Meal
 		chest.getContents().add(new TemplateItem("minecraft:dye", 64, 15));
@@ -70,80 +70,80 @@ public class TemplateExNihiloEasy extends TemplateGeneratorBase{
 
 		//TREE
 		//logs
-		blocks.add(new TemplateBlock("minecraft:log", 0, 0, 1, 0));
-		blocks.add(new TemplateBlock("minecraft:log", 0, 0, 2, 0));
-		blocks.add(new TemplateBlock("minecraft:log", 0, 0, 3, 0));
-		blocks.add(new TemplateBlock("minecraft:log", 0, 0, 4, 0));
-		blocks.add(new TemplateBlock("minecraft:log", 0, 0, 5, 0));
-		blocks.add(new TemplateBlock("minecraft:log", 0, 0, 6, 0));
+		blocks.add(new TemplateBlock("minecraft:log", 0, 1, 1, 1));
+		blocks.add(new TemplateBlock("minecraft:log", 0, 1, 2, 1));
+		blocks.add(new TemplateBlock("minecraft:log", 0, 1, 3, 1));
+		blocks.add(new TemplateBlock("minecraft:log", 0, 1, 4, 1));
+		blocks.add(new TemplateBlock("minecraft:log", 0, 1, 5, 1));
+		blocks.add(new TemplateBlock("minecraft:log", 0, 1, 6, 1));
 
 		//leaves layer 0
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -2, 4, 1));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -2, 4, 0));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -2, 4, -1));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -2, 4, -2));
-
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 4, 2));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 4, 1));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 4, 0));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 4, -1));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 4, -2));
 
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 4, 3));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 4, 2));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 4, 1));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 4, 0));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 4, -1));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 4, -2));
 
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 4, 3));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 4, 2));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 4, 1));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 4, 0));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 4, -1));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 4, -2));
 
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 2, 4, 3));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 2, 4, 2));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 2, 4, 1));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 2, 4, 0));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 2, 4, -1));
 
-		//leaves layer 1
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -2, 5, 1));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -2, 5, 0));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -2, 5, -1));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 3, 4, 3));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 3, 4, 2));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 3, 4, 1));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 3, 4, 0));
 
+		//leaves layer 1
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 5, 2));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 5, 1));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 5, 0));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 5, -1));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 5, -2));
 
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 5, 3));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 5, 2));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 5, 1));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 5, 0));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 5, -1));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 5, -2));
 
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 5, 3));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 5, 2));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 5, 1));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 5, 0));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 5, -1));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 5, -2));
 
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 2, 5, 3));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 2, 5, 2));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 2, 5, 1));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 2, 5, 0));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 2, 5, -1));
+
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 3, 5, 2));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 3, 5, 1));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 3, 5, 0));
 		
 		//leaves layer 2
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 6, 1));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 6, 0));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 6, 2));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 6, 1));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 6, -1));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 6, 2));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 6, 0));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 2, 6, 1));
 
 		//leaves layer 3
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, -1, 7, 0));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 7, 1));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 7, 0));
-		blocks.add(new TemplateBlock("minecraft:leaves", 0, 0, 7, -1));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 7, 2));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 7, 1));
 		blocks.add(new TemplateBlock("minecraft:leaves", 0, 1, 7, 0));
+		blocks.add(new TemplateBlock("minecraft:leaves", 0, 2, 7, 1));
 
 		return map;
 	}

@@ -13,8 +13,6 @@ import net.minecraft.world.World;
 public class ItemAsh extends Item{
 	public ItemAsh()
 	{
-		super();
-		
 		this.setCreativeTab(CreativeTabs.tabMaterials);
 	}
 
