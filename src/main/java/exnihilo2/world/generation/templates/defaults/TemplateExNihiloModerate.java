@@ -63,7 +63,7 @@ public class TemplateExNihiloModerate extends TemplateGeneratorBase{
 				//CHEST
 				TemplateBlock chest = new TemplateBlock("minecraft:chest", 2, 1, 1, 0);
 				chest.setContents(new ArrayList<TemplateItem>());
-				chest.getContents().add(new TemplateItem("exnihilo2:ash", 64, 15)); //Bone Meal
+				chest.getContents().add(new TemplateItem("exnihilo2:ash", 64, 0)); //Bone Meal
 				blocks.add(chest);
 				
 				//TREE
