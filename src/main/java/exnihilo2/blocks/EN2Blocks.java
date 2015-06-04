@@ -8,7 +8,9 @@ import exnihilo2.blocks.barrels.BlockBarrelGlassColored;
 import exnihilo2.blocks.barrels.BlockBarrelWood;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.crucibles.BlockCrucible;
 import exnihilo2.blocks.crucibles.BlockCrucibleRaw;
+import exnihilo2.blocks.crucibles.tileentity.TileEntityCrucible;
 import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 import exnihilo2.blocks.furnaces.tileentity.TileEntityFurnaceDirt;
 import exnihilo2.blocks.misc.BlockDust;
@@ -52,7 +54,7 @@ public class EN2Blocks {
 		barrel_stone = new BlockBarrel(Material.rock).setUnlocalizedName("barrel_stone");
 		barrel_glass = new BlockBarrel(Material.glass).setUnlocalizedName("barrel_glass");
 		barrel_glass_colored = new BlockBarrelGlassColored(Material.glass).setUnlocalizedName("barrel_glass_colored");
-		crucible = new BlockCrucibleRaw().setUnlocalizedName("crucible");
+		crucible = new BlockCrucible().setUnlocalizedName("crucible");
 		crucible_raw = new BlockCrucibleRaw().setUnlocalizedName("crucible_raw");
 		dust = new BlockDust().setUnlocalizedName("dust");
 		furnace_dirt = new BlockFurnaceDirt().setUnlocalizedName("furnace_dirt");
@@ -78,6 +80,7 @@ public class EN2Blocks {
 	{
 		GameRegistry.registerTileEntity(TileEntityBarrel.class, EN2.MODID + ":tile_entity_barrel");
 		GameRegistry.registerTileEntity(TileEntitySieve.class, EN2.MODID + ":tile_entity_sieve");
+		GameRegistry.registerTileEntity(TileEntityCrucible.class, EN2.MODID + ":tile_entity_crucible");
 		GameRegistry.registerTileEntity(TileEntityFurnaceDirt.class, EN2.MODID + ":tile_entity_furnace_dirt");
 	}
 	

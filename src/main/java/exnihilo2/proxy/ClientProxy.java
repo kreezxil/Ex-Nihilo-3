@@ -24,6 +24,8 @@ import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.crucibles.renderer.CrucibleRenderer;
+import exnihilo2.blocks.crucibles.tileentity.TileEntityCrucible;
 import exnihilo2.blocks.furnaces.tileentity.TileEntityFurnaceDirt;
 import exnihilo2.blocks.sieves.renderer.SieveRenderer;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
@@ -74,6 +76,7 @@ public class ClientProxy extends Proxy {
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, new BarrelRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySieve.class, new SieveRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrucible.class, new CrucibleRenderer());
 	}
 
 	private void registerEntityRenderers()

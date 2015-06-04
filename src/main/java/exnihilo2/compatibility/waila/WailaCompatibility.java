@@ -4,12 +4,15 @@ import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.barrels.BlockBarrel;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.blocks.crucibles.BlockCrucible;
+import exnihilo2.blocks.crucibles.tileentity.TileEntityCrucible;
 import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 import exnihilo2.blocks.sieves.BlockSieve;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.ITaggedList.ITipList;
@@ -33,6 +36,7 @@ public class WailaCompatibility implements IWailaDataProvider{
 		registrar.registerStackProvider(instance, BlockFurnaceDirt.class);
 		registrar.registerBodyProvider(instance, BlockSieve.class);
 		registrar.registerBodyProvider(instance, BlockBarrel.class);
+		registrar.registerBodyProvider(instance, BlockCrucible.class);
 	}
 	
 	@Override
@@ -64,6 +68,11 @@ public class WailaCompatibility implements IWailaDataProvider{
 		{
 			TileEntityBarrel barrel = (TileEntityBarrel) accessor.getTileEntity();
 			addBarrelBody(barrel, currenttip);
+		}
+		else if(accessor.getBlock() instanceof BlockCrucible)
+		{
+			TileEntityCrucible crucible = (TileEntityCrucible) accessor.getTileEntity();
+			addCrucibleBody(crucible, currenttip);
 		}
 		
 		return currenttip;
@@ -113,6 +122,18 @@ public class WailaCompatibility implements IWailaDataProvider{
 				tip.add(s);
 			}
 		}
+	}
+	
+	public void addCrucibleBody(TileEntityCrucible crucible, ITipList tip)
+	{
+		FluidStack fluid = crucible.getCurrentFluid();
+		
+		if (fluid != null)
+		{
+			tip.add(fluid.getLocalizedName() + " " + fluid.amount + " mb");
+		}
+		
+		tip.add("Speed " + crucible.getMeltingSpeed());
 	}
 	
 	public String format(float input)
