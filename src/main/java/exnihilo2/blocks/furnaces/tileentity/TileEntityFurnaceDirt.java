@@ -48,16 +48,19 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	    private int cookTime;
 	    private int totalCookTime;
 
+	    @Override
 	    public int getSizeInventory()
 	    {
 	        return this.furnaceItemStacks.length;
 	    }
 
+	    @Override
 		public ItemStack getStackInSlot(int index)
 	    {
 	        return this.furnaceItemStacks[index];
 	    }
 
+		@Override
 	    public ItemStack decrStackSize(int index, int count)
 	    {
 	        if (this.furnaceItemStacks[index] != null)
@@ -88,6 +91,7 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	        }
 	    }
 
+	    @Override
 	    public ItemStack getStackInSlotOnClosing(int index)
 	    {
 	        if (this.furnaceItemStacks[index] != null)
@@ -102,6 +106,7 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	        }
 	    }
 
+	    @Override
 	    public void setInventorySlotContents(int index, ItemStack stack)
 	    {
 	        boolean flag = stack != null && stack.isItemEqual(this.furnaceItemStacks[index]) && ItemStack.areItemStackTagsEqual(stack, this.furnaceItemStacks[index]);
@@ -122,14 +127,16 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	    
 	    @Override
 		public String getCommandSenderName() {
-			return this.getBlockType().getUnlocalizedName();
+			return this.getBlockType().getLocalizedName();
 		}
 	    
+	    @Override
 	    public boolean hasCustomName()
 	    {
 	        return false;
 	    }
 
+	    @Override
 	    public void readFromNBT(NBTTagCompound compound)
 	    {
 	        super.readFromNBT(compound);
@@ -153,6 +160,7 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	        this.currentItemBurnTime = getItemBurnTime(this.furnaceItemStacks[1]);
 	    }
 
+	    @Override
 	    public void writeToNBT(NBTTagCompound compound)
 	    {
 	        super.writeToNBT(compound);
@@ -175,6 +183,7 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	        compound.setTag("Items", nbttaglist);
 	    }
 
+	    @Override
 	    public int getInventoryStackLimit()
 	    {
 	        return 64;
@@ -191,6 +200,7 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	        return inv.getField(0) > 0;
 	    }
 
+	    @Override
 	    public void update()
 	    {
 	        boolean flag = this.isBurning();
@@ -431,9 +441,9 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	        }
 	    }
 
-//	    @Override
-//		public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) 
-//		{
-//			return !oldState.getBlock().equals(newState.getBlock());
-//		}
+	    @Override
+		public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) 
+		{
+			return !oldState.getBlock().equals(newState.getBlock());
+		}
 	}
