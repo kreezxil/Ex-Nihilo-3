@@ -98,6 +98,8 @@ public class EN2
 		EN2Registries.configure(config);
 		EN2Compatibility.configure(config);
 		
+		proxy.registerModels();
+		
 		if(config.hasChanged())
 			config.save();
 	}
@@ -128,7 +130,7 @@ public class EN2
 	@SideOnly(Side.CLIENT)
     public void onModelBakeEvent(ModelBakeEvent event)
     {
-		EN2Models.register(event);
+		EN2Models.bake(event);
     }
 
 	@SubscribeEvent

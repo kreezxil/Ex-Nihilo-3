@@ -29,12 +29,19 @@ import exnihilo2.blocks.crucibles.tileentity.TileEntityCrucible;
 import exnihilo2.blocks.furnaces.tileentity.TileEntityFurnaceDirt;
 import exnihilo2.blocks.sieves.renderer.SieveRenderer;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
+import exnihilo2.client.models.EN2Models;
 import exnihilo2.entities.thrown.stone.EntityStone;
 import exnihilo2.entities.thrown.stone.EntityStoneRenderer;
 import exnihilo2.items.EN2Items;
 
 //Commands that only execute on the client.
 public class ClientProxy extends Proxy {
+	
+	@Override
+	public void registerModels()
+	{
+		EN2Models.register();
+	}
 
 	@Override
 	public void registerRenderers()

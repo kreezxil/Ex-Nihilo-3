@@ -35,7 +35,9 @@ import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.client.model.ISmartBlockModel;
 
 public class ModelFurnaceDirt implements IFlexibleBakedModel, ISmartBlockModel {
-	public static final ModelResourceLocation modelResourceLocation = new ModelResourceLocation("exnihilo2:model_furnace_dirt");
+	public static final ModelResourceLocation model_normal = new ModelResourceLocation("exnihilo2:model_furnace_dirt", "normal");
+	public static final ModelResourceLocation model_inv = new ModelResourceLocation("exnihilo2:furnace_dirt", "inventory");
+	
 	public static final ItemStack furnace = new ItemStack(Blocks.furnace);
 	private EnumFacing facing;
 	private boolean burning;

@@ -2,25 +2,28 @@ package exnihilo2.client.models;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.client.models.furnaces.ModelFurnaceDirt;
+import exnihilo2.client.models.furnaces.StateMapperFurnaceDirt;
 
 public class EN2Models {
-	public static void register(ModelBakeEvent event)
+	public static StateMapperBase furnace_dirt_states = new StateMapperFurnaceDirt();
+	public static ModelFurnaceDirt furnace_dirt_model = new ModelFurnaceDirt();
+	public static ModelResourceLocation furnace_dirt_model_normal = new ModelResourceLocation("exnihilo2:furnace_dirt", "normal");
+	
+	public static void register()
 	{
-		ModelFurnaceDirt dirt_furnace_model = new ModelFurnaceDirt();
-		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:furnace_dirt", "normal"), dirt_furnace_model);
-		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:furnace_dirt", "inventory"), dirt_furnace_model);
-		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:furnace_dirt", "burning=false,facing=north"), dirt_furnace_model);
-		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:furnace_dirt", "burning=false,facing=east"), dirt_furnace_model);
-		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:furnace_dirt", "burning=false,facing=south"), dirt_furnace_model);
-		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:furnace_dirt", "burning=false,facing=west"), dirt_furnace_model);
-		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:furnace_dirt", "burning=true,facing=north"), dirt_furnace_model);
-		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:furnace_dirt", "burning=true,facing=east"), dirt_furnace_model);
-		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:furnace_dirt", "burning=true,facing=south"), dirt_furnace_model);
-		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:furnace_dirt", "burning=true,facing=west"), dirt_furnace_model);
+		ModelLoader.setCustomStateMapper(EN2Blocks.furnace_dirt, furnace_dirt_states);
+	}
+	
+	public static void bake(ModelBakeEvent event)
+	{
+		event.modelRegistry.putObject(ModelFurnaceDirt.model_normal, furnace_dirt_model);
+		event.modelRegistry.putObject(ModelFurnaceDirt.model_inv, furnace_dirt_model);
 	}
 }
