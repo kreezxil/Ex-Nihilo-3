@@ -62,6 +62,7 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Items.hammer_diamond);
 		registerRenderer(EN2Items.mesh_silk_white);
 		registerRenderer(EN2Items.mesh_wood);
+		registerRenderer(EN2Items.ore_salts);
 		registerRenderer(EN2Items.ash);
 		registerRenderer(EN2Items.porcelain);
 		registerRenderer(EN2Items.stone);
@@ -118,6 +119,21 @@ public class ClientProxy extends Proxy {
 
 	private static void registerRenderer(Item item)
 	{
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(EN2.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
+		if (item.getHasSubtypes())
+		{
+			ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+			
+			item.getSubItems(item, null, list);
+
+			for (ItemStack i : list)
+			{
+				ModelBakery.addVariantName(i.getItem(), EN2.MODID + ":" + i.getUnlocalizedName().substring(5));
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, i.getItemDamage(), new ModelResourceLocation(EN2.MODID + ":" + i.getUnlocalizedName().substring(5), "inventory"));
+			}
+		}
+		else
+		{
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(EN2.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
+		}
 	}
 }

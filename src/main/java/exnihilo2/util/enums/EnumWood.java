@@ -1,6 +1,5 @@
 package exnihilo2.util.enums;
 
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.IStringSerializable;
 
 public enum EnumWood implements IStringSerializable{

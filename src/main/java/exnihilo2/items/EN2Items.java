@@ -9,6 +9,7 @@ import exnihilo2.items.misc.ItemEmeraldBlack;
 import exnihilo2.items.misc.ItemPorcelain;
 import exnihilo2.items.misc.ItemSlimeballBlack;
 import exnihilo2.items.misc.ItemStone;
+import exnihilo2.items.ores.ItemOreSalts;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -30,6 +31,8 @@ public class EN2Items {
 	
 	public static Item mesh_silk_white;
 	public static Item mesh_wood;
+	
+	public static Item ore_salts;
 	
 	public static Item ash;
 	public static Item porcelain;
@@ -54,6 +57,8 @@ public class EN2Items {
 		mesh_silk_white = new ItemMesh().setUnlocalizedName("mesh_silk_white").setMaxDamage(64);
 		mesh_wood = new ItemMesh().setUnlocalizedName("mesh_wood").setMaxDamage(10);
 		
+		ore_salts = new ItemOreSalts().setUnlocalizedName("ore_salts");
+		
 		//Misc
 		ash = new ItemAsh().setUnlocalizedName("ash");
 		porcelain = new ItemPorcelain().setUnlocalizedName("porcelain");
@@ -77,6 +82,8 @@ public class EN2Items {
 		
 		registerItem(mesh_silk_white);
 		registerItem(mesh_wood);
+		
+		registerItem(ore_salts);
 		
 		registerItem(ash);
 		registerItem(porcelain);

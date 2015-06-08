@@ -1,0 +1,23 @@
+{
+    "parent": "exnihilo2:item/ore_salts",
+    "textures": {
+        "0": "exnihilo2:items/ore_salts_copper"
+    },
+    "display": {
+        "thirdperson": {
+            "rotation": [ 10, -90, 85 ],
+            "translation": [ 0, 1.0, -3.4 ],
+            "scale": [ 0.55, 0.55, 0.55 ]
+        },
+        "firstperson": {
+            "rotation": [ 0, -135, 25 ],
+            "translation": [ 0, 4, 2 ],
+            "scale": [ 1.7, 1.7, 1.7 ]
+        },
+        "gui": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 3, 0 ],
+            "scale": [ 1.7, 1.7, 1.7 ]
+        }
+    }
+}

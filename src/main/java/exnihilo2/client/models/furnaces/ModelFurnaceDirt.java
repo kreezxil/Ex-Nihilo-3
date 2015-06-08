@@ -15,6 +15,7 @@ import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 import exnihilo2.client.textures.files.TextureLocations;
 import exnihilo2.util.Color;
+import exnihilo2.util.Vertex;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -134,10 +135,10 @@ public class ModelFurnaceDirt implements IFlexibleBakedModel, ISmartBlockModel {
 		Vec3[] v = getVectorsForSide(vectors, side);
 		
 		return new BakedQuad(Ints.concat(
-	            vertexToInts((float)v[0].xCoord, (float)v[0].yCoord, (float)v[0].zCoord, -1, texture, 16, 16),
-	            vertexToInts((float)v[1].xCoord, (float)v[1].yCoord, (float)v[1].zCoord, -1, texture, 16, 0),
-	            vertexToInts((float)v[2].xCoord, (float)v[2].yCoord, (float)v[2].zCoord, -1, texture, 0, 0),
-	            vertexToInts((float)v[3].xCoord, (float)v[3].yCoord, (float)v[3].zCoord, -1, texture, 0, 16)
+	            new Vertex((float)v[0].xCoord, (float)v[0].yCoord, (float)v[0].zCoord, Color.WHITE, texture.getInterpolatedU(16f),texture.getInterpolatedV(16f)).toIntArray(),
+	            new Vertex((float)v[1].xCoord, (float)v[1].yCoord, (float)v[1].zCoord, Color.WHITE, texture.getInterpolatedU(16f),texture.getInterpolatedV(0f)).toIntArray(),
+	            new Vertex((float)v[2].xCoord, (float)v[2].yCoord, (float)v[2].zCoord, Color.WHITE, texture.getInterpolatedU(0f),texture.getInterpolatedV(0f)).toIntArray(),
+	            new Vertex((float)v[3].xCoord, (float)v[3].yCoord, (float)v[3].zCoord, Color.WHITE, texture.getInterpolatedU(0f),texture.getInterpolatedV(16f)).toIntArray()
 	        ), 0, side);
 	}
 	
@@ -164,20 +165,7 @@ public class ModelFurnaceDirt implements IFlexibleBakedModel, ISmartBlockModel {
 
 	@Override
 	public VertexFormat getFormat() {
-		return Attributes.DEFAULT_BAKED_FORMAT;
-	}
-
-	private static int[] vertexToInts(float x, float y, float z, int color, TextureAtlasSprite texture, float u, float v)
-	{
-		return new int[] {
-				Float.floatToRawIntBits(x),
-				Float.floatToRawIntBits(y),
-				Float.floatToRawIntBits(z),
-				color,
-				Float.floatToRawIntBits(texture.getInterpolatedU(u)),
-				Float.floatToRawIntBits(texture.getInterpolatedV(v)),
-				0
-		};
+		return Vertex.getFormat();
 	}
 
 	@Override

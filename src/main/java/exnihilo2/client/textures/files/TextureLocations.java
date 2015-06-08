@@ -21,7 +21,7 @@ public class TextureLocations {
 		return new ResourceLocation(source, name);
 	}
 
-	public static ResourceLocation getItemTextureLocation(String source, String name) 
+	public static ResourceLocation getItemLocation(String source, String name) 
 	{
 		int ind = name.indexOf(58);
 

@@ -22,9 +22,6 @@ public class EN2Textures {
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/compost"));
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/sieve_mesh_silk_white"));
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/sieve_mesh_wood"));
-		map.registerSprite(new ResourceLocation("exnihilo2:blocks/furnace_mask_side"));
-		map.registerSprite(new ResourceLocation("exnihilo2:blocks/furnace_mask_front_off"));
-		map.registerSprite(new ResourceLocation("exnihilo2:blocks/furnace_mask_front_on"));
 		
 		registerDirtFurnaceTextures(map);
 	}
@@ -37,6 +34,10 @@ public class EN2Textures {
 	
 	private static void registerDirtFurnaceTextures(TextureMap map)
 	{
+		map.registerSprite(new ResourceLocation("exnihilo2:blocks/furnace_mask_side"));
+		map.registerSprite(new ResourceLocation("exnihilo2:blocks/furnace_mask_front_off"));
+		map.registerSprite(new ResourceLocation("exnihilo2:blocks/furnace_mask_front_on"));
+		
 		try
 		{
 			BufferedImage dirt = TextureLoader.load(TextureLocations.getBlockLocation("minecraft", "dirt"));
@@ -67,7 +68,6 @@ public class EN2Textures {
 		{
 			EN2.log.error("Critical error occured while generating furnace textures.");
 		}
-		
 	}
 	
 	private static void forceTextureRegistration(TextureMap map, TextureAtlasSprite sprite)
