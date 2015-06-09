@@ -4,6 +4,7 @@ import exnihilo2.crafting.recipes.BarrelRecipes;
 import exnihilo2.crafting.recipes.CrookRecipes;
 import exnihilo2.crafting.recipes.CrucibleRecipes;
 import exnihilo2.crafting.recipes.FishingRecipes;
+import exnihilo2.crafting.recipes.GrassDropRecipes;
 import exnihilo2.crafting.recipes.HammerRecipes;
 import exnihilo2.crafting.recipes.MiscRecipes;
 import exnihilo2.crafting.recipes.SieveRecipes;
@@ -53,5 +54,6 @@ public class EN2Crafting {
 		MiscRecipes.registerOtherRecipes();
 		
 		FishingRecipes.register();
+		GrassDropRecipes.register();
 	}
 }
