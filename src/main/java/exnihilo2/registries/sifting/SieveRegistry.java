@@ -93,6 +93,7 @@ public class SieveRegistry {
 		
 		SieveRegistryEntry gravel = new SieveRegistryEntry(Blocks.gravel.getDefaultState(), EnumMetadataBehavior.IGNORED);
 		gravel.addReward(new ItemStack(Items.flint, 1), 100);
+		gravel.addReward(new ItemStack(EN2Items.rust, 1), 15);
 		add(gravel);
 		
 		SieveRegistryEntry soulsand = new SieveRegistryEntry(Blocks.soul_sand.getDefaultState(), EnumMetadataBehavior.IGNORED);

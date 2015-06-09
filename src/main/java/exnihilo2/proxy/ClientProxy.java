@@ -62,6 +62,7 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Items.hammer_diamond);
 		registerRenderer(EN2Items.mesh_silk_white);
 		registerRenderer(EN2Items.mesh_wood);
+		registerRenderer(EN2Items.rust);
 		registerRenderer(EN2Items.ore_salts);
 		registerRenderer(EN2Items.ash);
 		registerRenderer(EN2Items.porcelain);

@@ -19,6 +19,7 @@ item.ore_salts_silver.name=Silver Salts
 item.ore_salts_nickel.name=Nickel Salts
 item.ore_salts_platinum.name=Platinum Salts
 item.porcelain.name=Porcelain Clay
+item.rust.name=Rust
 item.stone.name=Small Stone
 tile.barrel_glass.name=Glass Barrel
 tile.barrel_glass_colored_white.name=White Glass Barrel

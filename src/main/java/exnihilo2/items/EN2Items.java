@@ -7,6 +7,7 @@ import exnihilo2.items.meshs.ItemMesh;
 import exnihilo2.items.misc.ItemAsh;
 import exnihilo2.items.misc.ItemEmeraldBlack;
 import exnihilo2.items.misc.ItemPorcelain;
+import exnihilo2.items.misc.ItemRust;
 import exnihilo2.items.misc.ItemSlimeballBlack;
 import exnihilo2.items.misc.ItemStone;
 import exnihilo2.items.ores.ItemOreSalts;
@@ -32,6 +33,7 @@ public class EN2Items {
 	public static Item mesh_silk_white;
 	public static Item mesh_wood;
 	
+	public static Item rust;
 	public static Item ore_salts;
 	
 	public static Item ash;
@@ -57,6 +59,7 @@ public class EN2Items {
 		mesh_silk_white = new ItemMesh().setUnlocalizedName("mesh_silk_white").setMaxDamage(64);
 		mesh_wood = new ItemMesh().setUnlocalizedName("mesh_wood").setMaxDamage(10);
 		
+		rust = new ItemRust().setUnlocalizedName("rust");
 		ore_salts = new ItemOreSalts().setUnlocalizedName("ore_salts");
 		
 		//Misc
@@ -83,6 +86,7 @@ public class EN2Items {
 		registerItem(mesh_silk_white);
 		registerItem(mesh_wood);
 		
+		registerItem(rust);
 		registerItem(ore_salts);
 		
 		registerItem(ash);

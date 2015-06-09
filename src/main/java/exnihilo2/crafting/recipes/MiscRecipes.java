@@ -48,6 +48,7 @@ public class MiscRecipes {
 		GameRegistry.addSmelting(new ItemStack(EN2Items.slimeball_black, 1), new ItemStack(Items.coal, 1, 0), 0);
 		GameRegistry.addSmelting(new ItemStack(Blocks.mossy_cobblestone, 1, 0), new ItemStack(Blocks.cobblestone, 1, 0), 0);
 		GameRegistry.addSmelting(new ItemStack(Blocks.stonebrick, 1, 1), new ItemStack(Blocks.stonebrick, 1, 2), 0);
+		GameRegistry.addSmelting(new ItemStack(EN2Items.rust, 1), new ItemStack(Items.iron_ingot, 1), 1);
 	}
 	
 	public static void registerDiamondRecipes()
