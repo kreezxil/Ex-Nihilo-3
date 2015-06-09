@@ -50,14 +50,6 @@ public class SieveRegistryEntry {
 		return this.behavior;
 	}
 	
-	public void dropRewards(World world, BlockPos pos)
-	{
-		for (SieveReward reward : rewards)
-		{
-			reward.dropReward(world, pos);
-		}
-	}
-	
 	public String getKey()
 	{
 		String s = GameRegistry.findUniqueIdentifierFor(input.getBlock()).toString();

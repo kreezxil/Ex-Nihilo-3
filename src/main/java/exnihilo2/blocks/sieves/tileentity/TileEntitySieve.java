@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -172,7 +173,17 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 			{
 				if (contentsState != null)
 				{
-					SieveRegistry.getEntryForBlockState(contentsState).dropRewards(worldObj, pos.up());
+					for (ItemStack i : SieveRegistry.generateRewards(contentsState))
+					{
+						EntityItem entityitem = new EntityItem(getWorld(), pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, i);
+
+						entityitem.motionX = getWorld().rand.nextGaussian() * 0.05F;
+						entityitem.motionY = (0.2d);
+						entityitem.motionZ = getWorld().rand.nextGaussian() * 0.05F;
+						entityitem.setDefaultPickupDelay();
+						
+						getWorld().spawnEntityInWorld(entityitem);
+					}
 				}
 				
 				work = 0;

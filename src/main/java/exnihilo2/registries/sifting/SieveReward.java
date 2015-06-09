@@ -1,5 +1,7 @@
 package exnihilo2.registries.sifting;
 
+import java.util.Random;
+
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,6 +10,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 public class SieveReward {
+	private static Random rand = new Random();
+	
 	private int base_chance;
 	private ItemStack item;
 	
@@ -16,20 +20,15 @@ public class SieveReward {
 		this.item = item;
 		this.base_chance = base_chance;
 	}
-
-	public void dropReward(World world, BlockPos pos)
+	
+	public ItemStack generateReward()
 	{
-		if (world.rand.nextInt(100) < base_chance)
+		if (rand.nextInt(100) < base_chance)
 		{
-			EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, item.copy());
-
-			entityitem.motionX = world.rand.nextGaussian() * 0.05F;
-			entityitem.motionY = (0.2d);
-			entityitem.motionZ = world.rand.nextGaussian() * 0.05F;
-			entityitem.setDefaultPickupDelay();
-			
-			world.spawnEntityInWorld(entityitem);
+			return item.copy();
 		}
+		
+		return null;
 	}
 
 	public int getBaseChance() {
