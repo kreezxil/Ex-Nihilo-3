@@ -3,6 +3,7 @@ package exnihilo2.crafting;
 import exnihilo2.crafting.recipes.BarrelRecipes;
 import exnihilo2.crafting.recipes.CrookRecipes;
 import exnihilo2.crafting.recipes.CrucibleRecipes;
+import exnihilo2.crafting.recipes.FishingRecipes;
 import exnihilo2.crafting.recipes.HammerRecipes;
 import exnihilo2.crafting.recipes.MiscRecipes;
 import exnihilo2.crafting.recipes.SieveRecipes;
@@ -50,5 +51,7 @@ public class EN2Crafting {
 		
 		MiscRecipes.registerSmeltingRecipes();
 		MiscRecipes.registerOtherRecipes();
+		
+		FishingRecipes.register();
 	}
 }
