@@ -175,7 +175,7 @@ public class TileEntitySieve extends TileEntity implements IUpdatePlayerListBox 
 				{
 					for (ItemStack i : SieveRegistry.generateRewards(contentsState))
 					{
-						EntityItem entityitem = new EntityItem(getWorld(), pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, i);
+						EntityItem entityitem = new EntityItem(getWorld(), pos.getX() + 0.5f, pos.up().getY() + 0.5f, pos.getZ() + 0.5f, i);
 
 						entityitem.motionX = getWorld().rand.nextGaussian() * 0.05F;
 						entityitem.motionY = (0.2d);
