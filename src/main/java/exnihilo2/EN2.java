@@ -21,6 +21,7 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
@@ -48,6 +49,7 @@ import exnihilo2.compatibility.EN2Compatibility;
 import exnihilo2.compatibility.veinminer.VeinMinerCompatibility;
 import exnihilo2.compatibility.waila.WailaCompatibility;
 import exnihilo2.crafting.EN2Crafting;
+import exnihilo2.crafting.recipes.MobDrops;
 import exnihilo2.entities.EN2Entities;
 import exnihilo2.items.EN2Items;
 import exnihilo2.items.materials.EN2ToolMaterials;
@@ -149,5 +151,11 @@ public class EN2
 		{
 			EN2World.tick(e.world);
 		}
+	}
+	
+	@SubscribeEvent
+	public void onEntityDrop(LivingDropsEvent event) 
+	{
+		MobDrops.onMobDeath(event);
 	}
 }

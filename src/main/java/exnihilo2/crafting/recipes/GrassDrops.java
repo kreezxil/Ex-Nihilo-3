@@ -4,7 +4,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
-public class GrassDropRecipes {
+public class GrassDrops {
 	public static void register()
 	{
 		MinecraftForge.addGrassSeed(new ItemStack(Items.pumpkin_seeds, 1), 1);
