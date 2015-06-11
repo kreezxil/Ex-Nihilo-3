@@ -19,7 +19,7 @@ public class ItemBucketPorcelain extends ItemBucket{
 	{
 		super(block);
 		
-		this.setMaxStackSize(16);
+		this.setMaxStackSize(1);
 		this.setCreativeTab(CreativeTabs.tabMisc);
 	}
 	
