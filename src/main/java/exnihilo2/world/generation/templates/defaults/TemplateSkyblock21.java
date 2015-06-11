@@ -9,11 +9,12 @@ import com.google.gson.GsonBuilder;
 
 import net.minecraft.init.Items;
 import exnihilo2.EN2;
+import exnihilo2.world.generation.templates.io.TemplateGenerator;
 import exnihilo2.world.generation.templates.pojos.Template;
 import exnihilo2.world.generation.templates.pojos.TemplateBlock;
 import exnihilo2.world.generation.templates.pojos.TemplateItem;
 
-public class TemplateSkyblock21 extends TemplateGeneratorBase {
+public class TemplateSkyblock21 extends TemplateGenerator {
 	public static void generate(String path)
 	{
 		generateTemplateFile(path + File.separator + "skyblock_2-1_overworld.json", getOverworldTemplate());

@@ -72,7 +72,17 @@ public class Template {
 								Item item = GameRegistryHelper.findItem(contentItem.getId());
 								
 								if (item != null)
-									inv.setInventorySlotContents(i, new ItemStack(item, contentItem.getCount(), contentItem.getMeta()));
+								{
+									if (contentItem.getSlot() > -1)
+									{
+										inv.setInventorySlotContents(contentItem.getSlot(), new ItemStack(item, contentItem.getCount(), contentItem.getMeta()));
+									}
+									else
+									{
+										inv.setInventorySlotContents(i, new ItemStack(item, contentItem.getCount(), contentItem.getMeta()));
+									}
+								}
+									
 							}
 								
 							i++;

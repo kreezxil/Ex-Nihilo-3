@@ -13,6 +13,7 @@ item.hammer_stone.name=Stone Hammer
 item.hammer_iron.name=Iron Hammer
 item.hammer_gold.name=Gold Hammer
 item.hammer_diamond.name=Diamond Hammer
+item.astrolabe_jade.name=Jade Astrolabe
 item.mesh_silk_white.name=Silk Mesh
 item.mesh_wood.name=Wooden Mesh
 item.ore_salts_iron.name=Iron Salts

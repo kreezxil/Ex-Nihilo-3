@@ -8,6 +8,7 @@ import exnihilo2.items.hammers.ItemHammer;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.items.meshs.ItemMesh;
 import exnihilo2.items.misc.ItemAsh;
+import exnihilo2.items.misc.ItemAstrolabe;
 import exnihilo2.items.misc.ItemEmeraldBlack;
 import exnihilo2.items.misc.ItemPorcelain;
 import exnihilo2.items.misc.ItemRust;
@@ -26,6 +27,8 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class EN2Items {
+	public static Item astrolabe_jade;
+	
 	public static Item bucket_porcelain_raw;
 	public static Item bucket_porcelain_empty;
 	public static Item bucket_porcelain_water;
@@ -55,6 +58,8 @@ public class EN2Items {
 	
 	public static void configure()
 	{
+		astrolabe_jade = new ItemAstrolabe().setUnlocalizedName("astrolabe_jade");
+		
 		//Buckets
 		bucket_porcelain_raw = new ItemBucketRaw().setUnlocalizedName("bucket_porcelain_raw");
 		bucket_porcelain_empty = new ItemBucketPorcelain(Blocks.air).setUnlocalizedName("bucket_porcelain_empty").setMaxStackSize(16);
@@ -92,6 +97,8 @@ public class EN2Items {
 	
 	private static void registerItems()
 	{
+		registerItem(astrolabe_jade);
+		
 		registerItem(bucket_porcelain_raw);
 		registerItem(bucket_porcelain_empty);
 		registerItem(bucket_porcelain_water);

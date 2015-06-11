@@ -47,11 +47,10 @@ public class EN2World {
 		gen_end = config.get(CATEGORY_WORLD_GEN, "void end", false).getBoolean(false);
 		gen_end_allow_crystals = config.get(CATEGORY_WORLD_GEN, "void end generate crystals", false).getBoolean(false);
 		
-		String template_path = EN2.path + File.separator + "templates";
-		TemplateSkyblock21.generate(template_path);
-		TemplateExNihiloEasy.generate(template_path);
-		TemplateExNihiloModerate.generate(template_path);
-		TemplateExNihiloHard.generate(template_path);
+		TemplateSkyblock21.generate(getTemplatePath());
+		TemplateExNihiloEasy.generate(getTemplatePath());
+		TemplateExNihiloModerate.generate(getTemplatePath());
+		TemplateExNihiloHard.generate(getTemplatePath());
 		
 		String template_overworld_name = config.get(CATEGORY_WORLD_GEN, "void overworld template", "skyblock_2-1_overworld.json").getString();
 		String template_nether_name = config.get(CATEGORY_WORLD_GEN, "void nether template", "skyblock_2-1_nether.json").getString();
@@ -75,6 +74,11 @@ public class EN2World {
 		Moss.setSpreadsWhileRaining(moss_spread_with_rain);
 		Mycelium.setGrowth(mycelium_sprout_speed);
 		Mycelium.setSpreadsWhileRaining(mycelium_sprout_with_rain);
+	}
+	
+	public static String getTemplatePath()
+	{
+		return EN2.path + File.separator + "templates";
 	}
 	
 	public static Template getOverworldTemplate()
@@ -150,6 +154,24 @@ public class EN2World {
 		catch (Exception e)
 		{
 			EN2.log.error("Failed to hijack world provider for the Nether.");	
+		}
+	}
+	
+	public static boolean isWorldGenerationOverridden(int dimension)
+	{
+		switch (dimension)
+		{
+		case -1:
+			return gen_nether;
+			
+		case 0:
+			return gen_surface;
+			
+		case 1:
+			return gen_end;
+			
+		default:
+			return false;
 		}
 	}
 	

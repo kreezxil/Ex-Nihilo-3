@@ -53,6 +53,7 @@ public class ClientProxy extends Proxy {
 
 	private void registerItemRenderers()
 	{
+		registerRenderer(EN2Items.astrolabe_jade);
 		registerRenderer(EN2Items.bucket_porcelain_raw);
 		registerRenderer(EN2Items.bucket_porcelain_empty);
 		registerRenderer(EN2Items.bucket_porcelain_water);

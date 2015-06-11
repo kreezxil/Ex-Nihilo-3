@@ -3,10 +3,11 @@ package exnihilo2.world.generation.templates.defaults;
 import java.io.File;
 import java.util.ArrayList;
 
+import exnihilo2.world.generation.templates.io.TemplateGenerator;
 import exnihilo2.world.generation.templates.pojos.Template;
 import exnihilo2.world.generation.templates.pojos.TemplateBlock;
 
-public class TemplateExNihiloHard extends TemplateGeneratorBase{
+public class TemplateExNihiloHard extends TemplateGenerator{
 
 	public static void generate(String path)
 	{
