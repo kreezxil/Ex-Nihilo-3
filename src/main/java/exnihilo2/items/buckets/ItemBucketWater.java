@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 public class ItemBucketWater extends Item{
 	public ItemBucketWater()
 	{
+		this.setMaxStackSize(1);
 		this.setCreativeTab(CreativeTabs.tabMisc);
 	}
 }

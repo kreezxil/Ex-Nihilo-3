@@ -43,10 +43,18 @@ public class MiscRecipes {
 						"xx",
 						'x', new ItemStack(EN2Items.stone, 1)));
 		
+		//porcelain
 		GameRegistry.addShapelessRecipe(new ItemStack(EN2Items.porcelain, 1), 
 				new ItemStack(Items.clay_ball, 1), 
 				new ItemStack(EN2Items.ash), 
 				new ItemStack(Items.dye, 1, 15)); //bonemeal
+		
+		//porcelain bucket
+		GameRegistry.addRecipe(
+				new ShapedOreRecipe(new ItemStack(EN2Items.bucket_porcelain_raw, 1),
+						"x x",
+						" x ",
+						'x', new ItemStack(EN2Items.porcelain, 1)));
 	}
 	
 	public static void registerSmeltingRecipes()
@@ -56,6 +64,7 @@ public class MiscRecipes {
 		GameRegistry.addSmelting(new ItemStack(Blocks.mossy_cobblestone, 1, 0), new ItemStack(Blocks.cobblestone, 1, 0), 0);
 		GameRegistry.addSmelting(new ItemStack(Blocks.stonebrick, 1, 1), new ItemStack(Blocks.stonebrick, 1, 2), 0);
 		GameRegistry.addSmelting(new ItemStack(EN2Items.rust, 1), new ItemStack(Items.iron_ingot, 1), 1);
+		GameRegistry.addSmelting(new ItemStack(EN2Items.bucket_porcelain_raw, 1), new ItemStack(EN2Items.bucket_porcelain_empty, 1), 0);
 	}
 	
 	public static void registerDiamondRecipes()

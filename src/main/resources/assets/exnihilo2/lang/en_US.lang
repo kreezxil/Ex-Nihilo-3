@@ -1,9 +1,9 @@
 item.ash.name=Ash
-item.bucket_porcelain_raw=Unfired Bucket
-item.bucket_porcelain_empty=Empty Bucket
-item.bucket_porcelain_water=Water Bucket
-item.bucket_porcelain_lava=Lava Bucket
-item.bucket_porcelain_milk=Milk Bucket
+item.bucket_porcelain_raw.name=Unfired Bucket
+item.bucket_porcelain_empty.name=Empty Bucket
+item.bucket_porcelain_water.name=Water Bucket
+item.bucket_porcelain_lava.name=Lava Bucket
+item.bucket_porcelain_milk.name=Milk Bucket
 item.emerald_black.name=Black Emerald
 item.slimeball_black.name=Black Slimeball
 item.crook_wood.name=Wooden Crook

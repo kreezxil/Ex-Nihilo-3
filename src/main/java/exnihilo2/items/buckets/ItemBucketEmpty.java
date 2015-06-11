@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 public class ItemBucketEmpty extends Item{
 	public ItemBucketEmpty()
 	{
+		this.setMaxStackSize(16);
 		this.setCreativeTab(CreativeTabs.tabMisc);
 	}
 }
