@@ -102,5 +102,23 @@ public class HammerRegistry {
 		HammerRegistryEntry sand = new HammerRegistryEntry(Blocks.sand.getDefaultState(), EnumMetadataBehavior.SPECIFIC);
 		sand.addReward(new ItemStack(EN2Blocks.dust), 100, 0);
 		add(sand);
+		
+		HammerRegistryEntry furnace = new HammerRegistryEntry(Blocks.furnace.getDefaultState(), EnumMetadataBehavior.IGNORED);
+		furnace.addReward(new ItemStack(Blocks.cobblestone, 6), 100, 0);
+		furnace.addReward(new ItemStack(Blocks.cobblestone, 1), 50, 10);
+		furnace.addReward(new ItemStack(Blocks.cobblestone, 1), 50, 10);
+		add(furnace);
+		
+		HammerRegistryEntry furnace_lit = new HammerRegistryEntry(Blocks.lit_furnace.getDefaultState(), EnumMetadataBehavior.IGNORED);
+		furnace_lit.addReward(new ItemStack(Blocks.cobblestone, 6), 100, 0);
+		furnace_lit.addReward(new ItemStack(Blocks.cobblestone, 1), 50, 10);
+		furnace_lit.addReward(new ItemStack(Blocks.cobblestone, 1), 50, 10);
+		add(furnace);
+		
+		HammerRegistryEntry furnace_dirt = new HammerRegistryEntry(EN2Blocks.furnace_dirt.getDefaultState(), EnumMetadataBehavior.IGNORED);
+		furnace_dirt.addReward(new ItemStack(Blocks.dirt, 6), 100, 0);
+		furnace_dirt.addReward(new ItemStack(Blocks.dirt, 1), 50, 10);
+		furnace_dirt.addReward(new ItemStack(Blocks.dirt, 1), 50, 10);
+		add(furnace_dirt);
 	}
 }
