@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.architecture.BarrelLogic;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.util.helpers.InventoryHelper;
@@ -66,6 +67,7 @@ public class FluidStateLogicItems extends BarrelLogic{
 			if (FluidContainerRegistry.isEmptyContainer(item) && fluid.amount >= barrel.getCapacity())
 			{
 				ItemStack full = FluidContainerRegistry.fillFluidContainer(fluid, item);
+				EN2.log.error("FILLED! " + full.getDisplayName());
 
 				if (full != null)
 				{

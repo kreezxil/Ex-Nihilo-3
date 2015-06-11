@@ -1,5 +1,6 @@
 package exnihilo2.util.helpers;
 
+import exnihilo2.EN2;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -24,15 +25,11 @@ public class InventoryHelper {
 	
 	public static void giveItemStackToPlayer(EntityPlayer player, ItemStack item)
 	{
-		boolean given = player.inventory.addItemStackToInventory(InventoryHelper.getContainer(item));
-		
-		if (!given && !player.worldObj.isRemote)
+		if(!player.worldObj.isRemote)
 		{
 			EntityItem entity = new EntityItem(player.worldObj, player.posX + 0.5d, player.posY + 0.5d, player.posZ + 0.5d, item);
-			entity.setDefaultPickupDelay();
-			
 			player.worldObj.spawnEntityInWorld(entity);
-		}
+		}	
 	}
 	
 	public static void consumeItem(EntityPlayer player, ItemStack item)

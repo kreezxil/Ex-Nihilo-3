@@ -58,8 +58,8 @@ public class EN2Items {
 		//Buckets
 		bucket_porcelain_raw = new ItemBucketRaw().setUnlocalizedName("bucket_porcelain_raw");
 		bucket_porcelain_empty = new ItemBucketPorcelain(Blocks.air).setUnlocalizedName("bucket_porcelain_empty");
-		bucket_porcelain_water = new ItemBucketPorcelain(Blocks.water).setUnlocalizedName("bucket_porcelain_water").setContainerItem(bucket_porcelain_empty);
-		bucket_porcelain_lava = new ItemBucketPorcelain(Blocks.lava).setUnlocalizedName("bucket_porcelain_lava").setContainerItem(bucket_porcelain_empty);
+		bucket_porcelain_water = new ItemBucketPorcelain(Blocks.flowing_water).setUnlocalizedName("bucket_porcelain_water").setContainerItem(bucket_porcelain_empty);
+		bucket_porcelain_lava = new ItemBucketPorcelain(Blocks.flowing_lava).setUnlocalizedName("bucket_porcelain_lava").setContainerItem(bucket_porcelain_empty);
 		bucket_porcelain_milk = new ItemBucketMilk().setUnlocalizedName("bucket_porcelain_milk");
 		
 		//Crooks
