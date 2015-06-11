@@ -1,5 +1,10 @@
 package exnihilo2.items;
 
+import exnihilo2.items.buckets.ItemBucketEmpty;
+import exnihilo2.items.buckets.ItemBucketLava;
+import exnihilo2.items.buckets.ItemBucketMilk;
+import exnihilo2.items.buckets.ItemBucketRaw;
+import exnihilo2.items.buckets.ItemBucketWater;
 import exnihilo2.items.crooks.ItemCrook;
 import exnihilo2.items.hammers.ItemHammer;
 import exnihilo2.items.materials.EN2ToolMaterials;
@@ -21,6 +26,12 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class EN2Items {
+	public static Item bucket_porcelain_raw;
+	public static Item bucket_porcelain_empty;
+	public static Item bucket_porcelain_water;
+	public static Item bucket_porcelain_lava;
+	public static Item bucket_porcelain_milk;
+	
 	public static Item crook_wood;
 	public static Item crook_bone;
 	
@@ -44,6 +55,13 @@ public class EN2Items {
 	
 	public static void configure()
 	{
+		//Buckets
+		bucket_porcelain_raw = new ItemBucketRaw().setUnlocalizedName("bucket_porcelain_raw");
+		bucket_porcelain_empty = new ItemBucketEmpty().setUnlocalizedName("bucket_porcelain_empty");
+		bucket_porcelain_water = new ItemBucketWater().setUnlocalizedName("bucket_porcelain_water");
+		bucket_porcelain_lava = new ItemBucketLava().setUnlocalizedName("bucket_porcelain_lava");
+		bucket_porcelain_milk = new ItemBucketMilk().setUnlocalizedName("bucket_porcelain_milk");
+		
 		//Crooks
 		crook_wood = new ItemCrook(EN2ToolMaterials.Stick).setUnlocalizedName("crook_wood");
 		crook_bone = new ItemCrook(EN2ToolMaterials.Bone).setUnlocalizedName("crook_bone");
@@ -74,6 +92,12 @@ public class EN2Items {
 	
 	private static void registerItems()
 	{
+		registerItem(bucket_porcelain_raw);
+		registerItem(bucket_porcelain_empty);
+		registerItem(bucket_porcelain_water);
+		registerItem(bucket_porcelain_lava);
+		registerItem(bucket_porcelain_milk);
+		
 		registerItem(crook_wood);
 		registerItem(crook_bone);
 		
