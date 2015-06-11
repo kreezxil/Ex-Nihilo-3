@@ -13,8 +13,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 public class Moss {
-	public static final int DEFAULT_GROWTH_SPEED = 16;
+	public static final int DEFAULT_GROWTH_SPEED = 8;
 	private static int growth = 0;
+	private static boolean rain_reactive;
 	
 	private static BlockPos pos = null;
 	private static IBlockState state = null;
@@ -26,6 +27,14 @@ public class Moss {
 	public static void setGrowth(int growth) {
 		Moss.growth = growth;
 	}
+	
+	public static boolean getSpreadsWhileRaining() {
+		return rain_reactive;
+	}
+
+	public static void setSpreadsWhileRaining(boolean spreads) {
+		Moss.rain_reactive = spreads;
+	}
 
 	public static void grow(World world, Chunk chunk)
 	{		
@@ -34,15 +43,15 @@ public class Moss {
 			pos = PositionHelper.getRandomPositionInChunk(world, chunk);
 			state = world.getBlockState(pos);
 
-			if (isValidCobblestone(state) && (PositionHelper.hasNearbyWaterSource(world, pos) || PositionHelper.canRainReach(world, pos)))
+			if (isValidCobblestone(state) && (PositionHelper.hasNearbyWaterSource(world, pos) || (getSpreadsWhileRaining() && PositionHelper.canRainReach(world, pos))))
 			{
 				world.setBlockState(pos, Blocks.mossy_cobblestone.getDefaultState());
 			}
-			else if (isValidStoneBrick(state) && (PositionHelper.hasNearbyWaterSource(world, pos) || PositionHelper.canRainReach(world, pos)))
+			else if (isValidStoneBrick(state) && (PositionHelper.hasNearbyWaterSource(world, pos) ||  (getSpreadsWhileRaining() && PositionHelper.canRainReach(world, pos))))
 			{
 				world.setBlockState(pos, Blocks.stonebrick.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY));
 			}
-			else if (isValidCobbleWall(state) && (PositionHelper.hasNearbyWaterSource(world, pos) || PositionHelper.canRainReach(world, pos)))
+			else if (isValidCobbleWall(state) && (PositionHelper.hasNearbyWaterSource(world, pos) ||  (getSpreadsWhileRaining() && PositionHelper.canRainReach(world, pos))))
 			{
 				world.setBlockState(pos, Blocks.cobblestone_wall.getDefaultState().withProperty(BlockWall.VARIANT, BlockWall.EnumType.MOSSY));
 			}

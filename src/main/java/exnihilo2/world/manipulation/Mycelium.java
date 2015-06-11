@@ -12,8 +12,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 public class Mycelium {
-	public static final int DEFAULT_GROWTH_SPEED = 16;
+	public static final int DEFAULT_GROWTH_SPEED = 8;
 	private static int growth = 0;
+	private static boolean rain_reactive;
 	
 	private static BlockPos pos = null;
 	private static IBlockState state = null;
@@ -25,6 +26,14 @@ public class Mycelium {
 
 	public static void setGrowth(int growth) {
 		Mycelium.growth = growth;
+	}
+	
+	public static boolean getSpreadsWhileRaining() {
+		return rain_reactive;
+	}
+
+	public static void setSpreadsWhileRaining(boolean spreads) {
+		Mycelium.rain_reactive = spreads;
 	}
 	
 	public static void grow(World world, Chunk chunk)
@@ -40,7 +49,7 @@ public class Mycelium {
 				{
 					spawnRandomMushroom(world, pos);
 				}
-				else if (PositionHelper.isRainingAt(world, pos))
+				else if (getSpreadsWhileRaining() && PositionHelper.isRainingAt(world, pos))
 				{
 					rng.setSeed(pos.getX() * pos.getZ());
 					rng.nextDouble(); //The first value is not very random at all. Skip that.

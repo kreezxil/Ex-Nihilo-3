@@ -34,6 +34,11 @@ public class EN2World {
 	private static boolean gen_end;
 	private static boolean gen_end_allow_crystals;
 	
+	private static boolean moss_spread_with_rain;
+	private static int moss_spread_speed;
+	private static boolean mycelium_sprout_with_rain;
+	private static int mycelium_sprout_speed;
+	
 	public static void configure(Configuration config)
 	{
 		gen_surface = config.get(CATEGORY_WORLD_GEN, "void overworld", false).getBoolean(false);
@@ -61,8 +66,15 @@ public class EN2World {
 		if (!template_end_name.equals("none") && template_end_name.trim().length() > 0)
 			template_end = TemplateLoader.load(EN2.path + File.separator + "templates" + File.separator + template_end_name);
 		
-		Moss.setGrowth(config.get(CATEGORY_WORLD_MOD, "moss growth speed", Moss.DEFAULT_GROWTH_SPEED).getInt());
-		Mycelium.setGrowth(config.get(CATEGORY_WORLD_MOD, "mycelium sprout speed", Mycelium.DEFAULT_GROWTH_SPEED).getInt());
+		moss_spread_with_rain = config.get(CATEGORY_WORLD_MOD, "moss spreads when raining", true).getBoolean(true);
+		moss_spread_speed = config.get(CATEGORY_WORLD_MOD, "moss spread speed", Moss.DEFAULT_GROWTH_SPEED).getInt();
+		mycelium_sprout_with_rain = config.get(CATEGORY_WORLD_MOD, "mycelium sprouts when raining", true).getBoolean(true);;
+		mycelium_sprout_speed = config.get(CATEGORY_WORLD_MOD, "mycelium sprout speed", Mycelium.DEFAULT_GROWTH_SPEED).getInt();
+		
+		Moss.setGrowth(moss_spread_speed);
+		Moss.setSpreadsWhileRaining(moss_spread_with_rain);
+		Mycelium.setGrowth(mycelium_sprout_speed);
+		Mycelium.setSpreadsWhileRaining(mycelium_sprout_with_rain);
 	}
 	
 	public static Template getOverworldTemplate()
