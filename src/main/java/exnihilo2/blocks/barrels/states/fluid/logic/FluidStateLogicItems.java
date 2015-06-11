@@ -67,8 +67,7 @@ public class FluidStateLogicItems extends BarrelLogic{
 			if (FluidContainerRegistry.isEmptyContainer(item) && fluid.amount >= barrel.getCapacity())
 			{
 				ItemStack full = FluidContainerRegistry.fillFluidContainer(fluid, item);
-				EN2.log.error("FILLED! " + full.getDisplayName());
-
+				
 				if (full != null)
 				{
 					if (player != null)

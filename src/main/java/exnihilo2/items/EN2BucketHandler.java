@@ -50,8 +50,6 @@ public class EN2BucketHandler {
 	@SubscribeEvent
     public void onBucketFill (FillBucketEvent event)
     {
-		EN2.log.error("BUCKET FILL EVENT FIRED!");
-		
 		if (event.current.getItem() == EN2Items.bucket_porcelain_empty && event.target.typeOfHit == MovingObjectType.BLOCK)
         {
 			if (event.entityPlayer != null && !event.entityPlayer.canPlayerEdit(event.target.getBlockPos(), event.target.sideHit, event.current))
