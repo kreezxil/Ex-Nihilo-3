@@ -1,5 +1,9 @@
 package exnihilo2.items.misc;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import exnihilo2.world.EN2World;
 import exnihilo2.world.generation.templates.io.TemplateWorldExporter;
 import exnihilo2.world.generation.templates.pojos.Template;
@@ -11,6 +15,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
 public class ItemAstrolabe extends Item{
+	private static DateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+	
 	public ItemAstrolabe()
 	{
 		this.setMaxStackSize(1);
@@ -23,8 +29,14 @@ public class ItemAstrolabe extends Item{
 		{
 			if (EN2World.isWorldGenerationOverridden(world.provider.getDimensionId()))
 			{
-				//TODO see if this item has been renamed.
-				TemplateWorldExporter.generate("test", world, player);
+				if (item.hasDisplayName())
+				{
+					TemplateWorldExporter.generate(item.getDisplayName(), world, player);
+				}
+				else
+				{
+					TemplateWorldExporter.generate("export_" + format.format(new Date()), world, player);
+				}
 			}
 			
 			player.setCurrentItemOrArmor(0, null);
