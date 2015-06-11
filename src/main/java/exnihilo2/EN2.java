@@ -38,6 +38,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import exnihilo2.blocks.EN2Blocks;
@@ -51,6 +52,8 @@ import exnihilo2.compatibility.waila.WailaCompatibility;
 import exnihilo2.crafting.EN2Crafting;
 import exnihilo2.crafting.recipes.MobDrops;
 import exnihilo2.entities.EN2Entities;
+import exnihilo2.items.EN2BucketHandler;
+import exnihilo2.items.EN2FuelHandler;
 import exnihilo2.items.EN2Items;
 import exnihilo2.items.materials.EN2ToolMaterials;
 import exnihilo2.proxy.Proxy;
@@ -95,6 +98,7 @@ public class EN2
 		EN2World.configure(config);
 
 		EN2Blocks.registerTileEntities();
+		EN2BucketHandler.registerBuckets();
 		EN2Crafting.registerRecipes();
 		EN2Entities.configure();
 		EN2Registries.configure(config);
@@ -113,12 +117,14 @@ public class EN2
 
 		EN2World.registerWorldProviders();
 		EN2Compatibility.initialize();
+		
+		GameRegistry.registerFuelHandler(new EN2FuelHandler());
 	}
 
 	@EventHandler
 	public void postInitialize(FMLPostInitializationEvent event)
 	{
-		
+		MinecraftForge.EVENT_BUS.register(new EN2BucketHandler());
 	}
 
 	@SubscribeEvent
