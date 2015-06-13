@@ -235,7 +235,7 @@ public class BlockFurnaceDirt extends BlockContainer{
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing facing = EnumFacing.getFront(meta & 0xf);
+		EnumFacing facing = EnumFacing.getHorizontal(meta & 0xf);
 
 		if (facing.getAxis() == EnumFacing.Axis.Y)
 		{
