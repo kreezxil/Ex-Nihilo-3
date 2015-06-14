@@ -52,6 +52,7 @@ import exnihilo2.compatibility.waila.WailaCompatibility;
 import exnihilo2.crafting.EN2Crafting;
 import exnihilo2.crafting.recipes.MobDrops;
 import exnihilo2.entities.EN2Entities;
+import exnihilo2.fluids.EN2Fluids;
 import exnihilo2.items.EN2BucketHandler;
 import exnihilo2.items.EN2FuelHandler;
 import exnihilo2.items.EN2Items;
@@ -90,6 +91,7 @@ public class EN2
 		path = event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "ExNihilo2" + File.separator;
 		config = new Configuration(new File(path + "ExNihilo2.cfg"));
 
+		EN2Fluids.register();
 		EN2ToolMaterials.configure();
 		EN2Items.configure();
 		EN2Blocks.configure();
@@ -129,7 +131,8 @@ public class EN2
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onTextureStitchEvent(TextureStitchEvent.Pre e) {
+	public void onTextureStitchEvent(TextureStitchEvent.Pre e)
+	{
 		EN2Textures.registerCustomTextures(e.map);
 		EN2Textures.setMeshTextures();
 	}

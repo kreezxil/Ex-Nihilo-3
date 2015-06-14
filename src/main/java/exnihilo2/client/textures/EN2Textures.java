@@ -9,6 +9,7 @@ import exnihilo2.client.textures.files.TextureAtlasSpriteDynamic;
 import exnihilo2.client.textures.files.TextureLoader;
 import exnihilo2.client.textures.files.TextureLocations;
 import exnihilo2.client.textures.manipulation.TextureCompositing;
+import exnihilo2.fluids.EN2Fluids;
 import exnihilo2.items.EN2Items;
 import exnihilo2.items.meshs.ItemMesh;
 import net.minecraft.client.Minecraft;
@@ -23,6 +24,7 @@ public class EN2Textures {
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/sieve_mesh_silk_white"));
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/sieve_mesh_wood"));
 		
+		registerFluidTextures(map);
 		registerDirtFurnaceTextures(map);
 	}
 	
@@ -30,6 +32,12 @@ public class EN2Textures {
 	{
 		((ItemMesh)EN2Items.mesh_silk_white).setMeshTexture("exnihilo2:blocks/sieve_mesh_silk_white");
 		((ItemMesh)EN2Items.mesh_wood).setMeshTexture("exnihilo2:blocks/sieve_mesh_wood");
+	}
+	
+	private static void registerFluidTextures(TextureMap map)
+	{
+		map.registerSprite(new ResourceLocation("exnihilo2:blocks/witchwater_still"));
+		map.registerSprite(new ResourceLocation("exnihilo2:blocks/witchwater_flowing"));
 	}
 	
 	private static void registerDirtFurnaceTextures(TextureMap map)

@@ -32,6 +32,7 @@ import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
 import exnihilo2.client.models.EN2Models;
 import exnihilo2.entities.thrown.stone.EntityStone;
 import exnihilo2.entities.thrown.stone.EntityStoneRenderer;
+import exnihilo2.fluids.EN2Fluids;
 import exnihilo2.items.EN2Items;
 
 //Commands that only execute on the client.
@@ -88,10 +89,14 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Blocks.dust);
 		registerRenderer(EN2Blocks.furnace_dirt);
 		registerRenderer(EN2Blocks.sieve_wood);
+		registerRenderer(EN2Blocks.witchwater);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, new BarrelRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySieve.class, new SieveRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrucible.class, new CrucibleRenderer());
+		
+		EN2Fluids.witchwater.setStillIcon(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/witchwater_still"));
+		EN2Fluids.witchwater.setFlowingIcon(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/witchwater_flowing"));
 	}
 
 	private void registerEntityRenderers()

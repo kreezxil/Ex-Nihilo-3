@@ -11,11 +11,13 @@ import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.blocks.crucibles.BlockCrucible;
 import exnihilo2.blocks.crucibles.BlockCrucibleRaw;
 import exnihilo2.blocks.crucibles.tileentity.TileEntityCrucible;
+import exnihilo2.blocks.fluids.BlockFluidWitchwater;
 import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 import exnihilo2.blocks.furnaces.tileentity.TileEntityFurnaceDirt;
 import exnihilo2.blocks.misc.BlockDust;
 import exnihilo2.blocks.sieves.BlockSieveWood;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
+import exnihilo2.fluids.EN2Fluids;
 import exnihilo2.items.itemblocks.ItemBarrelGlassColored;
 import exnihilo2.items.itemblocks.ItemBarrelWood;
 import exnihilo2.items.itemblocks.ItemSieveWood;
@@ -47,6 +49,7 @@ public class EN2Blocks {
 	public static Block dust;
 	public static Block furnace_dirt;
 	public static Block sieve_wood;
+	public static Block witchwater;
 
 	public static void configure()
 	{
@@ -59,6 +62,7 @@ public class EN2Blocks {
 		dust = new BlockDust().setUnlocalizedName("dust");
 		furnace_dirt = new BlockFurnaceDirt().setUnlocalizedName("furnace_dirt");
 		sieve_wood = new BlockSieveWood(Material.wood).setUnlocalizedName("sieve_wood");
+		witchwater = new BlockFluidWitchwater(EN2Fluids.witchwater, Material.water).setUnlocalizedName("witchwater");
 		
 		registerBlocks();
 	}
@@ -74,6 +78,7 @@ public class EN2Blocks {
 		registerBlock(dust);
 		registerBlock(furnace_dirt);
 		registerBlock(sieve_wood, ItemSieveWood.class);
+		registerBlock(witchwater);
 	}
 	
 	public static void registerTileEntities()
