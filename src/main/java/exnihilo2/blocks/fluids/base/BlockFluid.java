@@ -69,44 +69,44 @@ public class BlockFluid extends BlockFluidClassic{
 	}
 
 	private float getFluidHeight(IBlockAccess blockAccess, BlockPos blockPosIn)
-    {
-        int i = 0;
-        float f = 0.0F;
+	{
+		int i = 0;
+		float f = 0.0F;
 
-        for (int j = 0; j < 4; ++j)
-        {
-            BlockPos blockpos1 = blockPosIn.add(-(j & 1), 0, -(j >> 1 & 1));
+		for (int j = 0; j < 4; ++j)
+		{
+			BlockPos blockpos1 = blockPosIn.add(-(j & 1), 0, -(j >> 1 & 1));
 
-            if (blockAccess.getBlockState(blockpos1.up()).getBlock().getMaterial().isLiquid())
-            {
-                return 1.0F;
-            }
+			if (blockAccess.getBlockState(blockpos1.up()).getBlock().getMaterial().isLiquid())
+			{
+				return 1.0F;
+			}
 
-            IBlockState iblockstate = blockAccess.getBlockState(blockpos1);
-            Material material1 = iblockstate.getBlock().getMaterial();
+			IBlockState iblockstate = blockAccess.getBlockState(blockpos1);
+			Material material1 = iblockstate.getBlock().getMaterial();
 
-            if (material1.isLiquid())
-            {
-                int k = ((Integer)iblockstate.getValue(BlockLiquid.LEVEL)).intValue();
+			if (material1.isLiquid())
+			{
+				int k = ((Integer)iblockstate.getValue(BlockLiquid.LEVEL)).intValue();
 
-                if (k >= 8 || k == 0)
-                {
-                    f += BlockLiquid.getLiquidHeightPercent(k) * 10.0F;
-                    i += 10;
-                }
+				if (k >= 8 || k == 0)
+				{
+					f += BlockLiquid.getLiquidHeightPercent(k) * 10.0F;
+					i += 10;
+				}
 
-                f += BlockLiquid.getLiquidHeightPercent(k);
-                ++i;
-            }
-            else if (!material1.isSolid())
-            {
-                ++f;
-                ++i;
-            }
-        }
+				f += BlockLiquid.getLiquidHeightPercent(k);
+				++i;
+			}
+			else if (!material1.isSolid())
+			{
+				++f;
+				++i;
+			}
+		}
 
-        return 1.0F - f / (float)i;
-    }
+		return 1.0F - f / (float)i;
+	}
 
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
@@ -120,7 +120,7 @@ public class BlockFluid extends BlockFluidClassic{
 			return super.shouldSideBeRendered(world, pos, side);
 		}
 	}
-	
+
 	@Override
 	public int getRenderType()
 	{

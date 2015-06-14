@@ -32,7 +32,7 @@ public class ModelFluid implements IFlexibleBakedModel, ISmartBlockModel{
 	private final Map<List<Float>, ModelFluid> models = new HashMap<List<Float>, ModelFluid>();
 	private final Fluid fluid;
 	private static List EMPTY_LIST = new ArrayList();
-	
+
 	private float heightNW;
 	private float heightSW;
 	private float heightSE;
@@ -48,7 +48,7 @@ public class ModelFluid implements IFlexibleBakedModel, ISmartBlockModel{
 		this.heightNE = 1.0f;
 		this.direction = -1000f;
 	}
-	
+
 	public ModelFluid(Fluid fluid, List<Float> params)
 	{
 		this.fluid = fluid;
@@ -58,7 +58,7 @@ public class ModelFluid implements IFlexibleBakedModel, ISmartBlockModel{
 		this.heightNE = params.get(3);
 		this.direction = params.get(4);
 	}
-	
+
 	@Override
 	public IBakedModel handleBlockState(IBlockState state)
 	{
@@ -68,9 +68,9 @@ public class ModelFluid implements IFlexibleBakedModel, ISmartBlockModel{
 		float heightSE = extState.getValue(BlockFluid.HEIGHT_SE);
 		float heightNE = extState.getValue(BlockFluid.HEIGHT_NE);
 		float direction = extState.getValue(BlockFluid.DIRECTION);
-		
+
 		List<Float> params = Arrays.asList(heightSE, heightSW, heightNW, heightNE, direction);
-		
+
 		if (models.containsKey(params))
 		{
 			return models.get(params);
@@ -87,7 +87,7 @@ public class ModelFluid implements IFlexibleBakedModel, ISmartBlockModel{
 		List<BakedQuad> quads = new ArrayList<BakedQuad>();
 
 		Vec3[] vectors = getCubeVectors(0.0d, 1.0d, heightNW, heightSW, heightNE, heightSE);
-		
+
 		if (facing == EnumFacing.UP)
 		{
 			if(this.direction > -999f)
@@ -110,7 +110,7 @@ public class ModelFluid implements IFlexibleBakedModel, ISmartBlockModel{
 	public List getGeneralQuads() {
 		return EMPTY_LIST;
 	}
-	
+
 	private static Vec3[] getCubeVectors(double min, double max, double heightNW, double heightSW, double heightNE, double heightSE)
 	{
 		Vec3[] vectors = 
@@ -124,46 +124,46 @@ public class ModelFluid implements IFlexibleBakedModel, ISmartBlockModel{
 				new Vec3(max, min, min),
 				new Vec3(max, min, max)
 			};
-		
+
 		return vectors;
 	}
-	
+
 	private static BakedQuad getQuad(Vec3[] vectors, TextureAtlasSprite texture, EnumFacing side)
 	{
 		Vec3[] v = getVectorsForSide(vectors, side);
-		
+
 		return new BakedQuad(Ints.concat(
-	            new Vertex((float)v[0].xCoord, (float)v[0].yCoord, (float)v[0].zCoord, Color.WHITE, texture.getInterpolatedU(16f),texture.getInterpolatedV(16f)).toIntArray(),
-	            new Vertex((float)v[1].xCoord, (float)v[1].yCoord, (float)v[1].zCoord, Color.WHITE, texture.getInterpolatedU(16f),texture.getInterpolatedV(0f)).toIntArray(),
-	            new Vertex((float)v[2].xCoord, (float)v[2].yCoord, (float)v[2].zCoord, Color.WHITE, texture.getInterpolatedU(0f),texture.getInterpolatedV(0f)).toIntArray(),
-	            new Vertex((float)v[3].xCoord, (float)v[3].yCoord, (float)v[3].zCoord, Color.WHITE, texture.getInterpolatedU(0f),texture.getInterpolatedV(16f)).toIntArray()
-	        ), 0, side);
+				new Vertex((float)v[0].xCoord, (float)v[0].yCoord, (float)v[0].zCoord, Color.WHITE, texture.getInterpolatedU(16f),texture.getInterpolatedV(16f)).toIntArray(),
+				new Vertex((float)v[1].xCoord, (float)v[1].yCoord, (float)v[1].zCoord, Color.WHITE, texture.getInterpolatedU(16f),texture.getInterpolatedV(0f)).toIntArray(),
+				new Vertex((float)v[2].xCoord, (float)v[2].yCoord, (float)v[2].zCoord, Color.WHITE, texture.getInterpolatedU(0f),texture.getInterpolatedV(0f)).toIntArray(),
+				new Vertex((float)v[3].xCoord, (float)v[3].yCoord, (float)v[3].zCoord, Color.WHITE, texture.getInterpolatedU(0f),texture.getInterpolatedV(16f)).toIntArray()
+				), 0, side);
 	}
-	
+
 	private static BakedQuad getQuad(Vec3[] vectors, TextureAtlasSprite texture, EnumFacing side, float direction)
 	{
 		Vec3[] v = getVectorsForSide(vectors, side);
-		
+
 		float sin = MathHelper.sin(direction) * 0.25F;
-        float cos = MathHelper.cos(direction) * 0.25F;
-        
-        float f13 = texture.getInterpolatedU((double)(8.0F + (-cos -sin) * 16.0F));
-        float f17 = texture.getInterpolatedV((double)(8.0F + (-cos +sin) * 16.0F));
-        float f14 = texture.getInterpolatedU((double)(8.0F + (-cos +sin) * 16.0F));
-        float f18 = texture.getInterpolatedV((double)(8.0F + (cos +sin) * 16.0F));
-        float f15 = texture.getInterpolatedU((double)(8.0F + (cos +sin) * 16.0F));
-        float f19 = texture.getInterpolatedV((double)(8.0F + (cos -sin) * 16.0F));
-        float f16 = texture.getInterpolatedU((double)(8.0F + (cos -sin) * 16.0F));
-        float f20 = texture.getInterpolatedV((double)(8.0F + (-cos -sin) * 16.0F));
-		
+		float cos = MathHelper.cos(direction) * 0.25F;
+
+		float f13 = texture.getInterpolatedU((double)(8.0F + (-cos -sin) * 16.0F));
+		float f17 = texture.getInterpolatedV((double)(8.0F + (-cos +sin) * 16.0F));
+		float f14 = texture.getInterpolatedU((double)(8.0F + (-cos +sin) * 16.0F));
+		float f18 = texture.getInterpolatedV((double)(8.0F + (cos +sin) * 16.0F));
+		float f15 = texture.getInterpolatedU((double)(8.0F + (cos +sin) * 16.0F));
+		float f19 = texture.getInterpolatedV((double)(8.0F + (cos -sin) * 16.0F));
+		float f16 = texture.getInterpolatedU((double)(8.0F + (cos -sin) * 16.0F));
+		float f20 = texture.getInterpolatedV((double)(8.0F + (-cos -sin) * 16.0F));
+
 		return new BakedQuad(Ints.concat(
-	            new Vertex((float)v[0].xCoord, (float)v[0].yCoord, (float)v[0].zCoord, Color.WHITE, f15, f19).toIntArray(),
-	            new Vertex((float)v[1].xCoord, (float)v[1].yCoord, (float)v[1].zCoord, Color.WHITE, f16, f20).toIntArray(),
-	            new Vertex((float)v[2].xCoord, (float)v[2].yCoord, (float)v[2].zCoord, Color.WHITE, f13, f17).toIntArray(),
-	            new Vertex((float)v[3].xCoord, (float)v[3].yCoord, (float)v[3].zCoord, Color.WHITE, f14, f18).toIntArray()
-	        ), 0, side);
+				new Vertex((float)v[0].xCoord, (float)v[0].yCoord, (float)v[0].zCoord, Color.WHITE, f15, f19).toIntArray(),
+				new Vertex((float)v[1].xCoord, (float)v[1].yCoord, (float)v[1].zCoord, Color.WHITE, f16, f20).toIntArray(),
+				new Vertex((float)v[2].xCoord, (float)v[2].yCoord, (float)v[2].zCoord, Color.WHITE, f13, f17).toIntArray(),
+				new Vertex((float)v[3].xCoord, (float)v[3].yCoord, (float)v[3].zCoord, Color.WHITE, f14, f18).toIntArray()
+				), 0, side);
 	}
-	
+
 	private static Vec3[] getVectorsForSide(Vec3[] vectors, EnumFacing side)
 	{
 		switch (side)
@@ -181,10 +181,10 @@ public class ModelFluid implements IFlexibleBakedModel, ISmartBlockModel{
 		case WEST:
 			return new Vec3[] { vectors[4], vectors[3], vectors[2], vectors[5] };
 		}
-		
+
 		return null;
 	}
-	
+
 	@Override
 	public boolean isAmbientOcclusion() {
 		return false;
@@ -212,7 +212,7 @@ public class ModelFluid implements IFlexibleBakedModel, ISmartBlockModel{
 	public ItemCameraTransforms getItemCameraTransforms() {
 		return Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("exnihilo2:dust", "inventory")).getItemCameraTransforms();
 	}
-	
+
 	@Override
 	public VertexFormat getFormat() {
 		return Vertex.getFormat();
