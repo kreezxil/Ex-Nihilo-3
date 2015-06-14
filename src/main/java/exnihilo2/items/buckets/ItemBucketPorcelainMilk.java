@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 
-public class ItemBucketMilk extends Item{
-	public ItemBucketMilk()
+public class ItemBucketPorcelainMilk extends Item{
+	public ItemBucketPorcelainMilk()
 	{
 		this.setContainerItem(EN2Items.bucket_porcelain_empty);
 		this.setMaxStackSize(1);

@@ -1,8 +1,8 @@
 package exnihilo2.items;
 
 import exnihilo2.items.buckets.ItemBucketPorcelain;
-import exnihilo2.items.buckets.ItemBucketMilk;
-import exnihilo2.items.buckets.ItemBucketRaw;
+import exnihilo2.items.buckets.ItemBucketPorcelainMilk;
+import exnihilo2.items.buckets.ItemBucketPorcelainRaw;
 import exnihilo2.items.crooks.ItemCrook;
 import exnihilo2.items.hammers.ItemHammer;
 import exnihilo2.items.materials.EN2ToolMaterials;
@@ -61,11 +61,11 @@ public class EN2Items {
 		astrolabe_jade = new ItemAstrolabe().setUnlocalizedName("astrolabe_jade");
 		
 		//Buckets
-		bucket_porcelain_raw = new ItemBucketRaw().setUnlocalizedName("bucket_porcelain_raw");
+		bucket_porcelain_raw = new ItemBucketPorcelainRaw().setUnlocalizedName("bucket_porcelain_raw");
 		bucket_porcelain_empty = new ItemBucketPorcelain(Blocks.air).setUnlocalizedName("bucket_porcelain_empty").setMaxStackSize(16);
 		bucket_porcelain_water = new ItemBucketPorcelain(Blocks.flowing_water).setUnlocalizedName("bucket_porcelain_water").setContainerItem(bucket_porcelain_empty);
 		bucket_porcelain_lava = new ItemBucketPorcelain(Blocks.flowing_lava).setUnlocalizedName("bucket_porcelain_lava").setContainerItem(bucket_porcelain_empty);
-		bucket_porcelain_milk = new ItemBucketMilk().setUnlocalizedName("bucket_porcelain_milk");
+		bucket_porcelain_milk = new ItemBucketPorcelainMilk().setUnlocalizedName("bucket_porcelain_milk");
 		
 		//Crooks
 		crook_wood = new ItemCrook(EN2ToolMaterials.Stick).setUnlocalizedName("crook_wood");
