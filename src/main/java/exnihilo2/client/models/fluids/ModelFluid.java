@@ -133,10 +133,10 @@ public class ModelFluid implements IFlexibleBakedModel, ISmartBlockModel{
 		Vec3[] v = getVectorsForSide(vectors, side);
 
 		return new BakedQuad(Ints.concat(
-				new Vertex((float)v[0].xCoord, (float)v[0].yCoord, (float)v[0].zCoord, Color.WHITE, texture.getInterpolatedU(16f),texture.getInterpolatedV(16f)).toIntArray(),
-				new Vertex((float)v[1].xCoord, (float)v[1].yCoord, (float)v[1].zCoord, Color.WHITE, texture.getInterpolatedU(16f),texture.getInterpolatedV(0f)).toIntArray(),
-				new Vertex((float)v[2].xCoord, (float)v[2].yCoord, (float)v[2].zCoord, Color.WHITE, texture.getInterpolatedU(0f),texture.getInterpolatedV(0f)).toIntArray(),
-				new Vertex((float)v[3].xCoord, (float)v[3].yCoord, (float)v[3].zCoord, Color.WHITE, texture.getInterpolatedU(0f),texture.getInterpolatedV(16f)).toIntArray()
+				new Vertex((float)v[0].xCoord, (float)v[0].yCoord, (float)v[0].zCoord, getColorFromSide(side), texture.getInterpolatedU(16f),texture.getInterpolatedV(16f)).toIntArray(),
+				new Vertex((float)v[1].xCoord, (float)v[1].yCoord, (float)v[1].zCoord, getColorFromSide(side), texture.getInterpolatedU(16f),texture.getInterpolatedV(0f)).toIntArray(),
+				new Vertex((float)v[2].xCoord, (float)v[2].yCoord, (float)v[2].zCoord, getColorFromSide(side), texture.getInterpolatedU(0f),texture.getInterpolatedV(0f)).toIntArray(),
+				new Vertex((float)v[3].xCoord, (float)v[3].yCoord, (float)v[3].zCoord, getColorFromSide(side), texture.getInterpolatedU(0f),texture.getInterpolatedV(16f)).toIntArray()
 				), 0, side);
 	}
 
@@ -183,6 +183,18 @@ public class ModelFluid implements IFlexibleBakedModel, ISmartBlockModel{
 		}
 
 		return null;
+	}
+	
+	private static Color getColorFromSide(EnumFacing facing)	//Copied from FaceBakery (Only the end result, and not the process)
+	{
+		if(facing == EnumFacing.DOWN)
+			return new Color(-8421505);
+		if(facing == EnumFacing.SOUTH || facing == EnumFacing.NORTH)
+			return new Color(-3355444);
+		if(facing == EnumFacing.WEST || facing == EnumFacing.EAST)
+			return new Color(-6710887);
+		
+		return new Color(-1);
 	}
 
 	@Override
