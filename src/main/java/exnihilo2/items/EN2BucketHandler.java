@@ -2,6 +2,7 @@ package exnihilo2.items;
 
 import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
+import exnihilo2.fluids.EN2Fluids;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +23,8 @@ public class EN2BucketHandler {
 	{
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(EN2Items.bucket_porcelain_water), new ItemStack(EN2Items.bucket_porcelain_empty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.LAVA, new ItemStack(EN2Items.bucket_porcelain_lava), new ItemStack(EN2Items.bucket_porcelain_empty));
+		FluidContainerRegistry.registerFluidContainer(EN2Fluids.witchwater, new ItemStack(EN2Items.bucket_porcelain_witchwater), new ItemStack(EN2Items.bucket_porcelain_empty));
+		FluidContainerRegistry.registerFluidContainer(EN2Fluids.witchwater, new ItemStack(EN2Items.bucket_witchwater), new ItemStack(Items.bucket));
 	}
 	
 	@SubscribeEvent
