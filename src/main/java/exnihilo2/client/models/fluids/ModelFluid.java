@@ -88,13 +88,20 @@ public class ModelFluid implements IFlexibleBakedModel, ISmartBlockModel{
 
 		Vec3[] vectors = getCubeVectors(0.0d, 1.0d, heightNW, heightSW, heightNE, heightSE);
 		
-		if (facing == EnumFacing.UP && this.direction > -999f)
+		if (facing == EnumFacing.UP)
 		{
-			quads.add(getQuad(vectors, this.fluid.getFlowingIcon(), facing, this.direction));
+			if(this.direction > -999f)
+			{
+				quads.add(getQuad(vectors, this.fluid.getFlowingIcon(), facing, this.direction));
+			}
+			else
+			{
+				quads.add(getQuad(vectors, this.fluid.getStillIcon(), facing));
+			}
 		}
 		else
 		{
-			quads.add(getQuad(vectors, this.fluid.getStillIcon(), facing));
+			quads.add(getQuad(vectors, this.fluid.getFlowingIcon(), facing));
 		}
 
 		return quads;
