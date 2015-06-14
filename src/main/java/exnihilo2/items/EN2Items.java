@@ -1,5 +1,6 @@
 package exnihilo2.items;
 
+import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.items.buckets.ItemBucketPorcelain;
 import exnihilo2.items.buckets.ItemBucketPorcelainMilk;
 import exnihilo2.items.buckets.ItemBucketPorcelainRaw;
@@ -22,8 +23,10 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemBucket;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class EN2Items {
@@ -34,6 +37,9 @@ public class EN2Items {
 	public static Item bucket_porcelain_water;
 	public static Item bucket_porcelain_lava;
 	public static Item bucket_porcelain_milk;
+	public static Item bucket_porcelain_witchwater;
+	
+	public static Item bucket_witchwater;
 	
 	public static Item crook_wood;
 	public static Item crook_bone;
@@ -60,12 +66,16 @@ public class EN2Items {
 	{
 		astrolabe_jade = new ItemAstrolabe().setUnlocalizedName("astrolabe_jade");
 		
-		//Buckets
+		//Buckets (Porcelain)
 		bucket_porcelain_raw = new ItemBucketPorcelainRaw().setUnlocalizedName("bucket_porcelain_raw");
 		bucket_porcelain_empty = new ItemBucketPorcelain(Blocks.air).setUnlocalizedName("bucket_porcelain_empty").setMaxStackSize(16);
 		bucket_porcelain_water = new ItemBucketPorcelain(Blocks.flowing_water).setUnlocalizedName("bucket_porcelain_water").setContainerItem(bucket_porcelain_empty);
 		bucket_porcelain_lava = new ItemBucketPorcelain(Blocks.flowing_lava).setUnlocalizedName("bucket_porcelain_lava").setContainerItem(bucket_porcelain_empty);
 		bucket_porcelain_milk = new ItemBucketPorcelainMilk().setUnlocalizedName("bucket_porcelain_milk");
+		bucket_porcelain_witchwater = new ItemBucketPorcelain(EN2Blocks.witchwater).setUnlocalizedName("bucket_porcelain_witchwater").setContainerItem(bucket_porcelain_empty);
+		
+		//Buckets (Vanilla)
+		bucket_witchwater = new ItemBucket(EN2Blocks.witchwater).setUnlocalizedName("bucket_witchwater").setContainerItem(Items.bucket);
 		
 		//Crooks
 		crook_wood = new ItemCrook(EN2ToolMaterials.Stick).setUnlocalizedName("crook_wood");
@@ -104,6 +114,9 @@ public class EN2Items {
 		registerItem(bucket_porcelain_water);
 		registerItem(bucket_porcelain_lava);
 		registerItem(bucket_porcelain_milk);
+		registerItem(bucket_porcelain_witchwater);
+		
+		registerItem(bucket_witchwater);
 		
 		registerItem(crook_wood);
 		registerItem(crook_bone);

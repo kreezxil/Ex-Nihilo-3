@@ -60,6 +60,8 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Items.bucket_porcelain_water);
 		registerRenderer(EN2Items.bucket_porcelain_lava);
 		registerRenderer(EN2Items.bucket_porcelain_milk);
+		registerRenderer(EN2Items.bucket_porcelain_witchwater);
+		registerRenderer(EN2Items.bucket_witchwater);
 		registerRenderer(EN2Items.crook_wood);
 		registerRenderer(EN2Items.crook_bone);
 		registerRenderer(EN2Items.hammer_wood);

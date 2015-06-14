@@ -1,10 +1,12 @@
 package exnihilo2.items;
 
 import exnihilo2.EN2;
+import exnihilo2.blocks.EN2Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
@@ -50,14 +52,14 @@ public class EN2BucketHandler {
 	@SubscribeEvent
     public void onBucketFill (FillBucketEvent event)
     {
+		Block block = event.world.getBlockState(event.target.getBlockPos()).getBlock();
+		
 		if (event.current.getItem() == EN2Items.bucket_porcelain_empty && event.target.typeOfHit == MovingObjectType.BLOCK)
         {
 			if (event.entityPlayer != null && !event.entityPlayer.canPlayerEdit(event.target.getBlockPos(), event.target.sideHit, event.current))
             {
                 return;
             }
-			
-			Block block = event.world.getBlockState(event.target.getBlockPos()).getBlock();
 			
 			if (block == Blocks.lava)
 			{
@@ -75,7 +77,25 @@ public class EN2BucketHandler {
 				return;
 			}
 			
+			if (block == EN2Blocks.witchwater)
+			{
+				event.setResult(Event.Result.ALLOW);
+				event.result = new ItemStack(EN2Items.bucket_porcelain_witchwater);
+				event.world.setBlockToAir(event.target.getBlockPos());
+				return;
+			}
+			
 			event.setCanceled(true);
         }
+		else if (event.current.getItem() == Items.bucket && event.target.typeOfHit == MovingObjectType.BLOCK)
+		{
+			if (block == EN2Blocks.witchwater)
+			{
+				event.setResult(Event.Result.ALLOW);
+				event.result = new ItemStack(EN2Items.bucket_witchwater);
+				event.world.setBlockToAir(event.target.getBlockPos());
+				return;
+			}
+		}
     }
 }

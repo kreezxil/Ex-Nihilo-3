@@ -93,8 +93,8 @@ public class EN2
 
 		EN2Fluids.register();
 		EN2ToolMaterials.configure();
-		EN2Items.configure();
 		EN2Blocks.configure();
+		EN2Items.configure();
 		EN2Crafting.configure(config);
 		BarrelStates.configure(config);
 		EN2World.configure(config);
