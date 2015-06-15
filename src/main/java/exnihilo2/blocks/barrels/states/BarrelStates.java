@@ -36,15 +36,18 @@ import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicHot;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicItems;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidStateLogicRain;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidSummonSlimeTrigger;
+import exnihilo2.blocks.barrels.states.fluid.logic.FluidTransformWitchwater;
 import exnihilo2.blocks.barrels.states.output.BarrelStateOutput;
 import exnihilo2.blocks.barrels.states.output.logic.OutputStateLogicGrowingGrass;
 import exnihilo2.blocks.barrels.states.output.logic.OutputStateLogicGrowingMycelium;
 import exnihilo2.blocks.barrels.states.slime.BarrelStateSlime;
 import exnihilo2.blocks.barrels.states.slime.logic.SlimeStateLogic;
+import exnihilo2.blocks.barrels.states.witchwater.BarrelStateTransformationWitchwater;
+import exnihilo2.blocks.barrels.states.witchwater.logic.WitchwaterStateLogic;
 
 public class BarrelStates {
 	public static HashMap<String, BarrelState> states = new HashMap<String, BarrelState>();
-	
+
 	//States
 	public static BarrelState empty;
 	public static BarrelState output;
@@ -55,18 +58,19 @@ public class BarrelStates {
 	public static BarrelState grass;
 	public static BarrelState coarse_dirt;
 	public static BarrelState slime_green;
-	
+	public static BarrelState transform_witchwater;
+
 	//Logic
 	//-empty
 	public static BarrelLogic empty_state_logic;
 	public static BarrelLogic empty_state_trigger_compost_item;
 	public static BarrelLogic empty_state_trigger_fluid_item;
 	public static BarrelLogic empty_state_trigger_fluid_weather;
-	
+
 	//-output
 	public static BarrelLogic output_state_logic_growing_grass;
 	public static BarrelLogic output_state_logic_growing_mycelium;
-	
+
 	//-fluid
 	public static BarrelLogic fluid_state_logic_hot;
 	public static BarrelLogic fluid_state_logic_weather;
@@ -78,7 +82,8 @@ public class BarrelStates {
 	public static BarrelLogic fluid_state_trigger_crafting_obsidian;
 	public static BarrelLogic fluid_state_trigger_crafting_stone;
 	public static BarrelLogic fluid_state_trigger_summon_slime;
-	
+	public static BarrelLogic fluid_state_trigger_transform_witchwater;
+
 	//-compost
 	public static BarrelLogic compost_state_logic_items;
 	public static BarrelLogic compost_state_logic_update;
@@ -91,10 +96,14 @@ public class BarrelStates {
 	public static BarrelLogic mycelium_state_trigger_complete;
 	public static BarrelLogic grass_state_trigger_complete;
 	public static BarrelLogic coarse_dirt_state_trigger_complete;
-	
-	//slime
+
+	//-slime
 	public static BarrelLogic slime_state_logic;
-	
+
+	//-witchwater
+	public static BarrelLogic witchwater_state_logic;
+
+	//configuration options
 	private static final String CATEGORY_BARREL_OPTIONS = "barrel options";
 	public static boolean allow_compost;
 	public static boolean allow_rain_filling;
@@ -104,17 +113,18 @@ public class BarrelStates {
 	public static boolean allow_crafting_obsidian;
 	public static boolean allow_crafting_stone;
 	public static boolean allow_slime_summoning;
-	
+	public static boolean allow_witchwater;
+
 	public static void configure(Configuration config)
 	{
 		loadSettings(config);
-		
+
 		initializeLogic();
 		initializeStates();
-		
+
 		buildBehaviorTree();
 	}
-	
+
 	private static void loadSettings(Configuration config)
 	{
 		allow_compost = config.get(CATEGORY_BARREL_OPTIONS, "allow composting", true).getBoolean(true);
@@ -125,8 +135,9 @@ public class BarrelStates {
 		allow_crafting_obsidian = config.get(CATEGORY_BARREL_OPTIONS, "allow creating obsidian", true).getBoolean(true);
 		allow_crafting_stone = config.get(CATEGORY_BARREL_OPTIONS, "allow creating stone and cobblestone", true).getBoolean(true);
 		allow_slime_summoning = config.get(CATEGORY_BARREL_OPTIONS, "allow creating slimes", true).getBoolean(true);
+		allow_witchwater = config.get(CATEGORY_BARREL_OPTIONS, "allow creating witchwater", true).getBoolean(true);
 	}
-	
+
 	private static void initializeLogic()
 	{
 		empty_state_logic = new EmptyStateLogic();
@@ -147,6 +158,7 @@ public class BarrelStates {
 		fluid_state_trigger_crafting_obsidian = new FluidCraftObsidianTrigger();
 		fluid_state_trigger_crafting_stone = new FluidCraftStoneTrigger();
 		fluid_state_trigger_summon_slime = new FluidSummonSlimeTrigger();
+		fluid_state_trigger_transform_witchwater = new FluidTransformWitchwater();
 
 		compost_state_logic_items = new CompostStateLogicItems();
 		compost_state_trigger_complete = new CompostStateLogicComplete();
@@ -158,10 +170,11 @@ public class BarrelStates {
 		mycelium_state_trigger_complete = new MyceliumStateLogicComplete();
 		grass_state_trigger_complete = new GrassStateLogicComplete();
 		coarse_dirt_state_trigger_complete = new CoarseDirtStateLogicComplete();
-		
+
 		slime_state_logic = new SlimeStateLogic();
+		witchwater_state_logic = new WitchwaterStateLogic();
 	}
-	
+
 	private static void initializeStates()
 	{
 		empty = new BarrelStateEmpty();
@@ -173,7 +186,8 @@ public class BarrelStates {
 		grass = new BarrelStateGrass();
 		coarse_dirt = new BarrelStateCoarseDirt();
 		slime_green = new BarrelStateSlime();
-		
+		transform_witchwater = new BarrelStateTransformationWitchwater();
+
 		BarrelStates.registerState(empty);
 		BarrelStates.registerState(output);
 		BarrelStates.registerState(fluid);
@@ -183,12 +197,13 @@ public class BarrelStates {
 		BarrelStates.registerState(grass);
 		BarrelStates.registerState(coarse_dirt);
 		BarrelStates.registerState(slime_green);
+		BarrelStates.registerState(transform_witchwater);
 	}
-	
+
 	private static void buildBehaviorTree()
 	{
 		BarrelStates.empty.addLogic(empty_state_logic);
-		
+
 		if (allow_compost)
 			BarrelStates.empty.addLogic(empty_state_trigger_compost_item);
 		BarrelStates.empty.addLogic(empty_state_trigger_fluid_item);
@@ -216,6 +231,12 @@ public class BarrelStates {
 		if (allow_slime_summoning)
 			BarrelStates.fluid.addLogic(fluid_state_trigger_summon_slime);
 
+		if (allow_witchwater)
+		{
+			BarrelStates.fluid.addLogic(fluid_state_trigger_transform_witchwater);
+			BarrelStates.transform_witchwater.addLogic(witchwater_state_logic);
+		}
+
 		if (allow_compost)
 		{
 			BarrelStates.compost.addLogic(compost_state_logic_items);
@@ -242,28 +263,28 @@ public class BarrelStates {
 			BarrelStates.coarse_dirt.addLogic(compost_state_logic_items);
 			BarrelStates.coarse_dirt.addLogic(coarse_dirt_state_trigger_complete);
 		}
-		
+
 		BarrelStates.slime_green.addLogic(slime_state_logic);
 	}
-	
+
 	public static void registerState(BarrelState state)
 	{
 		if (state != null)
 		{
 			String key = state.getUniqueIdentifier();
-			
+
 			if (key != null && !key.isEmpty() && !key.trim().isEmpty() && !states.containsKey(key))
 			{
 				states.put(key, state);
 			}
 		}
 	}
-	
+
 	public static void unregisterState(BarrelState state)
 	{
 		states.remove(state.getUniqueIdentifier());
 	}
-	
+
 	public static BarrelState getState(String key)
 	{
 		return states.get(key);
