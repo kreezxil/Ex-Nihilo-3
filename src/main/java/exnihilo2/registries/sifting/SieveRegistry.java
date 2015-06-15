@@ -183,5 +183,9 @@ public class SieveRegistry {
 		SieveRegistryEntry darkoak = new SieveRegistryEntry(Blocks.leaves2.getStateFromMeta(1), EnumMetadataBehavior.SPECIFIC);
 		darkoak.addReward(new ItemStack(Blocks.sapling, 1, 5), 30);
 		add(darkoak);
+		
+		SieveRegistryEntry mycelium = new SieveRegistryEntry(Blocks.mycelium.getDefaultState(), EnumMetadataBehavior.IGNORED);
+		mycelium.addReward(new ItemStack(EN2Items.spores, 1), 33);
+		add(mycelium);
 	}
 }

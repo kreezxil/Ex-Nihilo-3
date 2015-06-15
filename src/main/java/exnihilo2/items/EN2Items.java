@@ -14,6 +14,7 @@ import exnihilo2.items.misc.ItemEmeraldBlack;
 import exnihilo2.items.misc.ItemPorcelain;
 import exnihilo2.items.misc.ItemRust;
 import exnihilo2.items.misc.ItemSlimeballBlack;
+import exnihilo2.items.misc.ItemSpores;
 import exnihilo2.items.misc.ItemStone;
 import exnihilo2.items.ores.ItemOreSalts;
 import net.minecraft.block.material.Material;
@@ -61,6 +62,7 @@ public class EN2Items {
 	public static Item stone;
 	public static Item emerald_black;
 	public static Item slimeball_black;
+	public static Item spores;
 	
 	public static void configure()
 	{
@@ -101,6 +103,7 @@ public class EN2Items {
 		stone = new ItemStone().setUnlocalizedName("stone");
 		emerald_black = new ItemEmeraldBlack().setUnlocalizedName("emerald_black");
 		slimeball_black = new ItemSlimeballBlack().setUnlocalizedName("slimeball_black");
+		spores = new ItemSpores().setUnlocalizedName("spores");
 		
 		registerItems();
 	}
@@ -138,6 +141,7 @@ public class EN2Items {
 		registerItem(stone);
 		registerItem(emerald_black);
 		registerItem(slimeball_black);
+		registerItem(spores);
 	}
 	
 	private static void registerItem(Item item)
