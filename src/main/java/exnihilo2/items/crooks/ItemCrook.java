@@ -24,16 +24,16 @@ import exnihilo2.EN2;
 public class ItemCrook extends Item {
 	public static final double pullingForce = 1.5d;
 	public static final double pushingForce = 1.5d;
-	
+
 	private final Item.ToolMaterial material;
-	
+
 	public ItemCrook(ToolMaterial material) {
 		this.material = material;
 		this.maxStackSize = 1;
 		this.setMaxDamage((int)(material.getMaxUses() * 1.5));
 		this.setCreativeTab(CreativeTabs.tabTools);
 	}
-	
+
 	@Override
 	public boolean onLeftClickEntity(ItemStack item, EntityPlayer player, Entity entity)
 	{
@@ -47,22 +47,22 @@ public class ItemCrook extends Item {
 			double velX = 0 - scalarX * pushingForce;
 			double velY = 0;
 			double velZ = 0 - scalarZ * pushingForce;
-			
-			
+
+
 			if (player.posY < entity.posY)
 				velY = 0.5d;
-			
+
 			entity.addVelocity(velX, velY, velZ);
 		}
-		
+
 		//Don't do damage
 		item.damageItem(1, player);
 		return true;
 	}
-	
+
 	@Override
 	public boolean itemInteractionForEntity(ItemStack item, EntityPlayer player, EntityLivingBase entity)
-    {
+	{
 		if (!player.worldObj.isRemote)
 		{
 			double distance = Math.sqrt(Math.pow(player.posX - entity.posX, 2) + Math.pow(player.posZ - entity.posZ, 2));
@@ -73,26 +73,26 @@ public class ItemCrook extends Item {
 			double velX = scalarX * pullingForce;
 			double velY = 0;
 			double velZ = scalarZ * pullingForce;
-			
+
 			if (player.posY > entity.posY)
 				velY = 0.5d;
-			
+
 			entity.addVelocity(velX, velY, velZ);
 		}
 
 		item.damageItem(1, player);
 		return true;
-    }
-	
+	}
+
 	@Override
 	public boolean canHarvestBlock(Block block)
-    {
+	{
 		return block.getMaterial() == Material.leaves;
-    }
-	
+	}
+
 	@Override
 	public float getStrVsBlock(ItemStack item, Block block)
-    {
+	{
 		if (block.getMaterial() == Material.leaves)
 		{
 			return material.getEfficiencyOnProperMaterial() + 1;
@@ -100,34 +100,34 @@ public class ItemCrook extends Item {
 
 		return 1.0F;
 	}
-	
+
 	@Override
 	public boolean onBlockStartBreak(ItemStack item, BlockPos pos, EntityPlayer player)
-    {
+	{
 		Block block = player.worldObj.getBlockState(pos).getBlock();
-		
+
 		if (block.getMaterial() == Material.leaves || block instanceof BlockTallGrass)
 		{
 			//Simulate a block break to cause the first round of items to drop.
 			block.dropBlockAsItem(player.worldObj, pos, player.worldObj.getBlockState(pos), EnchantmentHelper.getFortuneModifier(player));
 		}
-		
+
 		//Returning false causes the leaves/grass to break as normal and causes items to drop a second time.
-        return false;
-    }
-	
+		return false;
+	}
+
 	@Override
 	public boolean onBlockDestroyed(ItemStack item, World world, Block block, BlockPos pos, EntityLivingBase player)
-    {
+	{
 		item.damageItem(1, player);
 		return true;
-    }
-	
+	}
+
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
-    {
-        ItemStack mat = this.material.getRepairItemStack();
-        if (mat != null && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) return true;
-        return super.getIsRepairable(toRepair, repair);
-    }
+	{
+		ItemStack mat = this.material.getRepairItemStack();
+		if (mat != null && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) return true;
+		return super.getIsRepairable(toRepair, repair);
+	}
 }
