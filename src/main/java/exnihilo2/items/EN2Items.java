@@ -55,7 +55,7 @@ public class EN2Items {
 	public static Item mesh_wood;
 	
 	public static Item rust;
-	public static Item ore_salts;
+	public static Item metal_crystals;
 	
 	public static Item ash;
 	public static Item porcelain;
@@ -95,7 +95,7 @@ public class EN2Items {
 		mesh_wood = new ItemMesh().setUnlocalizedName("mesh_wood").setMaxDamage(10);
 		
 		rust = new ItemRust().setUnlocalizedName("rust");
-		ore_salts = new ItemOreSalts().setUnlocalizedName("ore_salts");
+		metal_crystals = new ItemOreSalts().setUnlocalizedName("ore_salts");
 		
 		//Misc
 		ash = new ItemAsh().setUnlocalizedName("ash");
@@ -134,7 +134,7 @@ public class EN2Items {
 		registerItem(mesh_wood);
 		
 		registerItem(rust);
-		registerItem(ore_salts);
+		registerItem(metal_crystals);
 		
 		registerItem(ash);
 		registerItem(porcelain);

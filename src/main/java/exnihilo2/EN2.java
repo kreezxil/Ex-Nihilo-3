@@ -41,6 +41,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import exnihilo2.alchemy.EN2Alchemy;
 import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.client.models.EN2Models;
@@ -105,6 +106,8 @@ public class EN2
 		EN2Entities.configure();
 		EN2Registries.configure(config);
 		EN2Compatibility.configure(config);
+		
+		EN2Alchemy.configure();
 		
 		proxy.registerModels();
 		
