@@ -23,6 +23,7 @@ public class EN2Textures {
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/compost"));
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/sieve_mesh_silk_white"));
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/sieve_mesh_wood"));
+		map.registerSprite(new ResourceLocation("exnihilo2:blocks/metal_salts_precipitate"));
 		
 		registerFluidTextures(map);
 		registerDirtFurnaceTextures(map);
