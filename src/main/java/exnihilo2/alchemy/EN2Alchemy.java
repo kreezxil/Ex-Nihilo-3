@@ -41,6 +41,11 @@ public class EN2Alchemy {
 			config.save();
 	}
 	
+	public static void loadFromOreDictionary()
+	{
+		//TODO search the metals map for anything null, try to find a match in the ore dictionary for that ore.
+	}
+	
 	public static void registerMetal(String oreDictionaryName, MetalSettings settings)
 	{
 		metals.put(oreDictionaryName, settings);
