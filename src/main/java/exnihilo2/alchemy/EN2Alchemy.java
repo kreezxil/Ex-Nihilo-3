@@ -59,7 +59,7 @@ public class EN2Alchemy {
 		for (int id : ids)
 		{
 			String name = OreDictionary.getOreName(id);
-			
+
 			if (metals.containsKey(name))
 			{
 				int v = metals.get(name).getValue();

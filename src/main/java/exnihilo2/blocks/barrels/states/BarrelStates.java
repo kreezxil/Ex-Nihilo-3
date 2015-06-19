@@ -20,6 +20,7 @@ import exnihilo2.blocks.barrels.states.compost.logic.MyceliumStateLogicComplete;
 import exnihilo2.blocks.barrels.states.compost.logic.MyceliumStateTrigger;
 import exnihilo2.blocks.barrels.states.compost.logic.PodzolStateLogicComplete;
 import exnihilo2.blocks.barrels.states.compost.logic.PodzolStateTrigger;
+import exnihilo2.blocks.barrels.states.dissolve.BarrelStateDissolveMetals;
 import exnihilo2.blocks.barrels.states.empty.BarrelStateEmpty;
 import exnihilo2.blocks.barrels.states.empty.logic.CompostStateTrigger;
 import exnihilo2.blocks.barrels.states.empty.logic.EmptyStateLogic;
@@ -28,6 +29,7 @@ import exnihilo2.blocks.barrels.states.empty.logic.FluidStateTriggerWeather;
 import exnihilo2.blocks.barrels.states.fluid.BarrelStateFluid;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftClayTrigger;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftEndstoneTrigger;
+import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftDissolveMetalsTrigger;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftNetherrackTrigger;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftObsidianTrigger;
 import exnihilo2.blocks.barrels.states.fluid.logic.FluidCraftStoneTrigger;
@@ -59,6 +61,7 @@ public class BarrelStates {
 	public static BarrelState coarse_dirt;
 	public static BarrelState slime_green;
 	public static BarrelState transform_witchwater;
+	public static BarrelState dissolve_metals;
 
 	//Logic
 	//-empty
@@ -83,6 +86,7 @@ public class BarrelStates {
 	public static BarrelLogic fluid_state_trigger_crafting_stone;
 	public static BarrelLogic fluid_state_trigger_summon_slime;
 	public static BarrelLogic fluid_state_trigger_transform_witchwater;
+	public static BarrelLogic fluid_state_trigger_dissolve_metals;
 
 	//-compost
 	public static BarrelLogic compost_state_logic_items;
@@ -102,6 +106,7 @@ public class BarrelStates {
 
 	//-witchwater
 	public static BarrelLogic witchwater_state_logic;
+	public static BarrelLogic dissolve_metals_logic;
 
 	//configuration options
 	private static final String CATEGORY_BARREL_OPTIONS = "barrel options";
@@ -159,6 +164,7 @@ public class BarrelStates {
 		fluid_state_trigger_crafting_stone = new FluidCraftStoneTrigger();
 		fluid_state_trigger_summon_slime = new FluidSummonSlimeTrigger();
 		fluid_state_trigger_transform_witchwater = new FluidTransformWitchwater();
+		fluid_state_trigger_dissolve_metals = new FluidCraftDissolveMetalsTrigger();
 
 		compost_state_logic_items = new CompostStateLogicItems();
 		compost_state_trigger_complete = new CompostStateLogicComplete();
@@ -173,6 +179,7 @@ public class BarrelStates {
 
 		slime_state_logic = new SlimeStateLogic();
 		witchwater_state_logic = new WitchwaterStateLogic();
+		
 	}
 
 	private static void initializeStates()
@@ -187,6 +194,7 @@ public class BarrelStates {
 		coarse_dirt = new BarrelStateCoarseDirt();
 		slime_green = new BarrelStateSlime();
 		transform_witchwater = new BarrelStateTransformationWitchwater();
+		dissolve_metals = new BarrelStateDissolveMetals();
 
 		BarrelStates.registerState(empty);
 		BarrelStates.registerState(output);
@@ -198,6 +206,7 @@ public class BarrelStates {
 		BarrelStates.registerState(coarse_dirt);
 		BarrelStates.registerState(slime_green);
 		BarrelStates.registerState(transform_witchwater);
+		BarrelStates.registerState(dissolve_metals);
 	}
 
 	private static void buildBehaviorTree()
@@ -234,6 +243,7 @@ public class BarrelStates {
 		if (allow_witchwater)
 		{
 			BarrelStates.fluid.addLogic(fluid_state_trigger_transform_witchwater);
+			BarrelStates.fluid.addLogic(fluid_state_trigger_dissolve_metals);
 			BarrelStates.transform_witchwater.addLogic(witchwater_state_logic);
 		}
 

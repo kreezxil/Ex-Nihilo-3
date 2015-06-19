@@ -8,10 +8,10 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class MetalSettings {
-	private static String name;
-	private static Block ore;
-	private static ItemStack crystal;
-	private static int value;
+	private String name;
+	private Block ore;
+	private ItemStack crystal;
+	private int value;
 	
 	public MetalSettings(String name)
 	{
@@ -43,35 +43,35 @@ public class MetalSettings {
 		this.value = config.get(category, "value", value).getInt(value);
 	}
 
-	public static String getName() {
+	public String getName() {
 		return name;
 	}
 
-	public static void setName(String name) {
-		MetalSettings.name = name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public static Block getOre() {
+	public Block getOre() {
 		return ore;
 	}
 
-	public static void setOre(Block ore) {
-		MetalSettings.ore = ore;
+	public void setOre(Block ore) {
+		this.ore = ore;
 	}
 
-	public static ItemStack getCrystal() {
+	public ItemStack getCrystal() {
 		return crystal;
 	}
 
-	public static void setCrystal(ItemStack crystal) {
-		MetalSettings.crystal = crystal;
+	public void setCrystal(ItemStack crystal) {
+		this.crystal = crystal;
 	}
 
-	public static int getValue() {
+	public int getValue() {
 		return value;
 	}
 
-	public static void setValue(int value) {
-		MetalSettings.value = value;
+	public void setValue(int value) {
+		this.value = value;
 	}
 }

@@ -1,4 +1,4 @@
-package exnihilo2.blocks.barrels.states.witchwater;
+package exnihilo2.blocks.barrels.states.dissolve;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,12 +16,13 @@ import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.fluids.EN2Fluids;
 import exnihilo2.util.Color;
 
-public class BarrelStateTransformationWitchwater extends BarrelState{
+public class BarrelStateDissolveMetals extends BarrelState{
 	private static String[] description = new String[]{""};
+	private static TextureAtlasSprite boiling_witchwater;
 
 	@Override
 	public String getUniqueIdentifier() {
-		return "barrel.transformation.witchwater";
+		return "barrel.transformation.dissolve.metals";
 	}
 
 	@Override
@@ -32,11 +33,6 @@ public class BarrelStateTransformationWitchwater extends BarrelState{
 	@Override
 	public int getLuminosity(TileEntityBarrel barrel)
 	{
-		FluidStack fluid = barrel.getFluid();
-
-		if (fluid != null)
-			return fluid.getFluid().getLuminosity();
-
 		return 0;
 	}
 
@@ -57,16 +53,19 @@ public class BarrelStateTransformationWitchwater extends BarrelState{
 
 			GlStateManager.translate(x + 0.125d, y, z + 0.125d);
 			GlStateManager.scale(0.75d, 1.0d, 0.75d);
+			
+			if (boiling_witchwater == null)
+			{
+				boiling_witchwater = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/metal_salts_precipitate");
+			}
 
 			if (barrel.getBlockType().getMaterial().isOpaque())
 			{
-				BarrelRenderer.renderContentsSimple(FluidRegistry.WATER.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, 1.0f - (float)barrel.getTimerStatus()));
-				BarrelRenderer.renderContentsSimple(EN2Fluids.witchwater.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, (float)barrel.getTimerStatus()));
+				BarrelRenderer.renderContentsSimple(boiling_witchwater, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), Color.WHITE);
 			}
 			else
 			{
-				BarrelRenderer.renderContentsComplex(FluidRegistry.WATER.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, 1.0f - (float)barrel.getTimerStatus()));
-				BarrelRenderer.renderContentsComplex(EN2Fluids.witchwater.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, (float)barrel.getTimerStatus()));
+				BarrelRenderer.renderContentsMultiTexture(boiling_witchwater, EN2Fluids.witchwater.getStillIcon(), EN2Fluids.witchwater.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), Color.WHITE);
 			}
 
 			RenderHelper.enableStandardItemLighting();
@@ -79,7 +78,7 @@ public class BarrelStateTransformationWitchwater extends BarrelState{
 	{
 		if (barrel.getTimerStatus() > 0)
 		{
-			description[0] = "Fermenting " + String.format("%.0f", barrel.getTimerStatus() * 100) + "%";
+			description[0] = "Dissolving " + String.format("%.0f", barrel.getTimerStatus() * 100) + "%";
 			return description;
 		}
 		else
