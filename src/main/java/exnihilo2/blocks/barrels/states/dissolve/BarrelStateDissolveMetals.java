@@ -10,8 +10,10 @@ import net.minecraftforge.fluids.FluidStack;
 
 import org.lwjgl.opengl.GL11;
 
+import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
+import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.fluids.EN2Fluids;
 import exnihilo2.util.Color;
@@ -71,6 +73,24 @@ public class BarrelStateDissolveMetals extends BarrelState{
 			RenderHelper.enableStandardItemLighting();
 			GlStateManager.popMatrix();
 		}
+	}
+
+	@Override
+	public boolean canExtractContents(TileEntityBarrel barrel) 
+	{
+		EN2.log.error("Trying to extract dissolved metals.");
+		
+		if (barrel.getTimerStatus() >= 1)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public void onExtractContents(TileEntityBarrel barrel) {
+		barrel.setState(BarrelStates.fluid);
 	}
 
 	@Override
