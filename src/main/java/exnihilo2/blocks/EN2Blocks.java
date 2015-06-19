@@ -11,6 +11,7 @@ import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.blocks.crucibles.BlockCrucible;
 import exnihilo2.blocks.crucibles.BlockCrucibleRaw;
 import exnihilo2.blocks.crucibles.tileentity.TileEntityCrucible;
+import exnihilo2.blocks.fluids.BlockFluidAzoth;
 import exnihilo2.blocks.fluids.BlockFluidWitchwater;
 import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 import exnihilo2.blocks.furnaces.tileentity.TileEntityFurnaceDirt;
@@ -50,6 +51,7 @@ public class EN2Blocks {
 	public static Block furnace_dirt;
 	public static Block sieve_wood;
 	public static Block witchwater;
+	public static Block azoth;
 
 	public static void configure()
 	{
@@ -63,6 +65,7 @@ public class EN2Blocks {
 		furnace_dirt = new BlockFurnaceDirt().setUnlocalizedName("furnace_dirt");
 		sieve_wood = new BlockSieveWood(Material.wood).setUnlocalizedName("sieve_wood");
 		witchwater = new BlockFluidWitchwater(EN2Fluids.witchwater, Material.water).setUnlocalizedName("witchwater");
+		azoth = new BlockFluidAzoth(EN2Fluids.azoth, Material.water).setUnlocalizedName("azoth");
 		
 		registerBlocks();
 	}
@@ -79,6 +82,7 @@ public class EN2Blocks {
 		registerBlock(furnace_dirt);
 		registerBlock(sieve_wood, ItemSieveWood.class);
 		registerBlock(witchwater);
+		registerBlock(azoth);
 	}
 	
 	public static void registerTileEntities()

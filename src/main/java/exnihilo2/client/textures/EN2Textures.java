@@ -39,6 +39,8 @@ public class EN2Textures {
 	{
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/witchwater_still"));
 		map.registerSprite(new ResourceLocation("exnihilo2:blocks/witchwater_flowing"));
+		map.registerSprite(new ResourceLocation("exnihilo2:blocks/azoth_still"));
+		map.registerSprite(new ResourceLocation("exnihilo2:blocks/azoth_flowing"));
 	}
 	
 	private static void registerDirtFurnaceTextures(TextureMap map)

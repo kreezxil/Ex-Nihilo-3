@@ -55,6 +55,8 @@ public class ClientProxy extends Proxy {
 	private void registerItemRenderers()
 	{
 		registerRenderer(EN2Items.astrolabe_jade);
+		registerRenderer(EN2Items.bucket_azoth);
+		registerRenderer(EN2Items.bucket_porcelain_azoth);
 		registerRenderer(EN2Items.bucket_porcelain_raw);
 		registerRenderer(EN2Items.bucket_porcelain_empty);
 		registerRenderer(EN2Items.bucket_porcelain_water);
@@ -94,6 +96,7 @@ public class ClientProxy extends Proxy {
 		registerRenderer(EN2Blocks.furnace_dirt);
 		registerRenderer(EN2Blocks.sieve_wood);
 		registerRenderer(EN2Blocks.witchwater);
+		registerRenderer(EN2Blocks.azoth);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, new BarrelRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySieve.class, new SieveRenderer());
@@ -101,6 +104,8 @@ public class ClientProxy extends Proxy {
 		
 		EN2Fluids.witchwater.setStillIcon(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/witchwater_still"));
 		EN2Fluids.witchwater.setFlowingIcon(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/witchwater_flowing"));
+		EN2Fluids.azoth.setStillIcon(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/azoth_still"));
+		EN2Fluids.azoth.setFlowingIcon(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/azoth_flowing"));
 	}
 
 	private void registerEntityRenderers()

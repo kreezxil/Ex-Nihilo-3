@@ -1,6 +1,7 @@
 package exnihilo2.items;
 
 import exnihilo2.blocks.EN2Blocks;
+import exnihilo2.items.buckets.ItemBucketAzoth;
 import exnihilo2.items.buckets.ItemBucketPorcelain;
 import exnihilo2.items.buckets.ItemBucketPorcelainMilk;
 import exnihilo2.items.buckets.ItemBucketPorcelainRaw;
@@ -34,6 +35,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class EN2Items {
 	public static Item astrolabe_jade;
 	
+	public static Item bucket_porcelain_azoth;
 	public static Item bucket_porcelain_raw;
 	public static Item bucket_porcelain_empty;
 	public static Item bucket_porcelain_water;
@@ -41,6 +43,7 @@ public class EN2Items {
 	public static Item bucket_porcelain_milk;
 	public static Item bucket_porcelain_witchwater;
 	
+	public static Item bucket_azoth;
 	public static Item bucket_witchwater;
 	
 	public static Item crook_wood;
@@ -71,6 +74,7 @@ public class EN2Items {
 		astrolabe_jade = new ItemAstrolabe().setUnlocalizedName("astrolabe_jade");
 		
 		//Buckets (Porcelain)
+		bucket_porcelain_azoth = new ItemBucketAzoth(EN2Blocks.azoth).setUnlocalizedName("bucket_porcelain_azoth").setContainerItem(bucket_porcelain_empty);
 		bucket_porcelain_raw = new ItemBucketPorcelainRaw().setUnlocalizedName("bucket_porcelain_raw");
 		bucket_porcelain_empty = new ItemBucketPorcelain(Blocks.air).setUnlocalizedName("bucket_porcelain_empty").setMaxStackSize(16);
 		bucket_porcelain_water = new ItemBucketPorcelain(Blocks.flowing_water).setUnlocalizedName("bucket_porcelain_water").setContainerItem(bucket_porcelain_empty);
@@ -79,6 +83,7 @@ public class EN2Items {
 		bucket_porcelain_witchwater = new ItemBucketPorcelain(EN2Blocks.witchwater).setUnlocalizedName("bucket_porcelain_witchwater").setContainerItem(bucket_porcelain_empty);
 		
 		//Buckets (Vanilla)
+		bucket_azoth = new ItemBucketAzoth(EN2Blocks.azoth).setUnlocalizedName("bucket_azoth").setContainerItem(Items.bucket);
 		bucket_witchwater = new ItemBucket(EN2Blocks.witchwater).setUnlocalizedName("bucket_witchwater").setContainerItem(Items.bucket);
 		
 		//Crooks
@@ -115,6 +120,7 @@ public class EN2Items {
 	{
 		registerItem(astrolabe_jade);
 		
+		registerItem(bucket_porcelain_azoth);
 		registerItem(bucket_porcelain_raw);
 		registerItem(bucket_porcelain_empty);
 		registerItem(bucket_porcelain_water);
@@ -122,6 +128,7 @@ public class EN2Items {
 		registerItem(bucket_porcelain_milk);
 		registerItem(bucket_porcelain_witchwater);
 		
+		registerItem(bucket_azoth);
 		registerItem(bucket_witchwater);
 		
 		registerItem(crook_wood);

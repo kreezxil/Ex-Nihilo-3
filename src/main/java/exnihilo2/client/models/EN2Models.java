@@ -24,11 +24,14 @@ public class EN2Models {
 	
 	public static StateMapperBase witchwater_states = (new StateMap.Builder()).addPropertiesToIgnore(BlockFluidBase.LEVEL).build();
 	public static ModelFluid witchwater_model = new ModelFluid(EN2Fluids.witchwater);
+	public static StateMapperBase azoth_states = (new StateMap.Builder()).addPropertiesToIgnore(BlockFluidBase.LEVEL).build();
+	public static ModelFluid azoth_model = new ModelFluid(EN2Fluids.azoth);
 	
 	public static void register()
 	{
 		ModelLoader.setCustomStateMapper(EN2Blocks.furnace_dirt, furnace_dirt_states);
 		ModelLoader.setCustomStateMapper(EN2Blocks.witchwater, witchwater_states); 
+		ModelLoader.setCustomStateMapper(EN2Blocks.azoth, azoth_states); 
 	}
 	
 	public static void bake(ModelBakeEvent event)
@@ -37,5 +40,7 @@ public class EN2Models {
 		event.modelRegistry.putObject(ModelFurnaceDirt.model_inv, furnace_dirt_model);
 		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:witchwater", "normal"), witchwater_model);
 		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:witchwater", "inventory"), witchwater_model);
+		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:azoth", "normal"), azoth_model);
+		event.modelRegistry.putObject(new ModelResourceLocation("exnihilo2:azoth", "inventory"), azoth_model);
 	}
 }

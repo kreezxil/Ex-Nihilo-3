@@ -25,6 +25,8 @@ public class EN2BucketHandler {
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.LAVA, new ItemStack(EN2Items.bucket_porcelain_lava), new ItemStack(EN2Items.bucket_porcelain_empty));
 		FluidContainerRegistry.registerFluidContainer(EN2Fluids.witchwater, new ItemStack(EN2Items.bucket_porcelain_witchwater), new ItemStack(EN2Items.bucket_porcelain_empty));
 		FluidContainerRegistry.registerFluidContainer(EN2Fluids.witchwater, new ItemStack(EN2Items.bucket_witchwater), new ItemStack(Items.bucket));
+		FluidContainerRegistry.registerFluidContainer(EN2Fluids.azoth, new ItemStack(EN2Items.bucket_porcelain_azoth), new ItemStack(EN2Items.bucket_porcelain_empty));
+		FluidContainerRegistry.registerFluidContainer(EN2Fluids.azoth, new ItemStack(EN2Items.bucket_azoth), new ItemStack(Items.bucket));
 	}
 	
 	@SubscribeEvent
@@ -88,6 +90,14 @@ public class EN2BucketHandler {
 				return;
 			}
 			
+			if (block == EN2Blocks.azoth)
+			{
+				event.setResult(Event.Result.ALLOW);
+				event.result = new ItemStack(EN2Items.bucket_porcelain_azoth);
+				event.world.setBlockToAir(event.target.getBlockPos());
+				return;
+			}
+			
 			event.setCanceled(true);
         }
 		else if (event.current.getItem() == Items.bucket && event.target.typeOfHit == MovingObjectType.BLOCK)
@@ -96,6 +106,14 @@ public class EN2BucketHandler {
 			{
 				event.setResult(Event.Result.ALLOW);
 				event.result = new ItemStack(EN2Items.bucket_witchwater);
+				event.world.setBlockToAir(event.target.getBlockPos());
+				return;
+			}
+			
+			if (block == EN2Blocks.azoth)
+			{
+				event.setResult(Event.Result.ALLOW);
+				event.result = new ItemStack(EN2Items.bucket_azoth);
 				event.world.setBlockToAir(event.target.getBlockPos());
 				return;
 			}
