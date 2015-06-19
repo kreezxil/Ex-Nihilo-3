@@ -1,4 +1,4 @@
-package exnihilo2.blocks.barrels.states.witchwater.logic;
+package exnihilo2.blocks.barrels.states.azoth.logic;
 
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.world.EnumDifficulty;
@@ -8,7 +8,7 @@ import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.fluids.EN2Fluids;
 
-public class WitchwaterStateLogic extends BarrelLogic{
+public class AzothStateLogic extends BarrelLogic{
 	@Override
 	public boolean onUpdate(TileEntityBarrel barrel) {
 		if (barrel.getTimerStatus() == -1)
@@ -20,7 +20,7 @@ public class WitchwaterStateLogic extends BarrelLogic{
 		{
 			if (!barrel.getWorld().isRemote)
 			{
-				barrel.transformFluidTo(new FluidStack(EN2Fluids.witchwater, 1000));
+				barrel.transformFluidTo(new FluidStack(EN2Fluids.azoth, 1000));
 				barrel.setState(BarrelStates.fluid);
 			}
 			

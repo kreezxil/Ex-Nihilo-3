@@ -138,6 +138,16 @@ public class BarrelFluidLayer extends BarrelStateLayer implements IFluidTank, IF
         }
         return stack;
     }
+    
+    public void clearFluid()
+    {
+    	this.fluid = null;
+    }
+    
+    public void transformFluidTo(FluidStack input)
+    {
+    	this.fluid = input;
+    }
 
 	@Override
 	public void readFromNBT(NBTTagCompound compound)

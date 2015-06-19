@@ -1,4 +1,4 @@
-package exnihilo2.blocks.barrels.states.dissolve;
+package exnihilo2.blocks.barrels.states.azoth;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -10,21 +10,18 @@ import net.minecraftforge.fluids.FluidStack;
 
 import org.lwjgl.opengl.GL11;
 
-import exnihilo2.EN2;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
-import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
 import exnihilo2.fluids.EN2Fluids;
 import exnihilo2.util.Color;
 
-public class BarrelStateDissolveMetals extends BarrelState{
+public class BarrelStateTransformationAzoth extends BarrelState{
 	private static String[] description = new String[]{""};
-	private static TextureAtlasSprite boiling_witchwater;
 
 	@Override
 	public String getUniqueIdentifier() {
-		return "barrel.transformation.dissolve.metals";
+		return "barrel.transformation.azoth";
 	}
 
 	@Override
@@ -35,6 +32,11 @@ public class BarrelStateDissolveMetals extends BarrelState{
 	@Override
 	public int getLuminosity(TileEntityBarrel barrel)
 	{
+		FluidStack fluid = barrel.getFluid();
+
+		if (fluid != null)
+			return fluid.getFluid().getLuminosity();
+
 		return 0;
 	}
 
@@ -55,19 +57,16 @@ public class BarrelStateDissolveMetals extends BarrelState{
 
 			GlStateManager.translate(x + 0.125d, y, z + 0.125d);
 			GlStateManager.scale(0.75d, 1.0d, 0.75d);
-			
-			if (boiling_witchwater == null)
-			{
-				boiling_witchwater = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/metal_salts_precipitate");
-			}
 
 			if (barrel.getBlockType().getMaterial().isOpaque())
 			{
-				BarrelRenderer.renderContentsSimple(boiling_witchwater, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), Color.WHITE);
+				BarrelRenderer.renderContentsSimple(FluidRegistry.WATER.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, 1.0f - (float)barrel.getTimerStatus()));
+				BarrelRenderer.renderContentsSimple(EN2Fluids.azoth.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, (float)barrel.getTimerStatus()));
 			}
 			else
 			{
-				BarrelRenderer.renderContentsMultiTexture(boiling_witchwater, EN2Fluids.witchwater.getStillIcon(), EN2Fluids.witchwater.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), Color.WHITE);
+				BarrelRenderer.renderContentsComplex(FluidRegistry.WATER.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, 1.0f - (float)barrel.getTimerStatus()));
+				BarrelRenderer.renderContentsComplex(EN2Fluids.azoth.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, (float)barrel.getTimerStatus()));
 			}
 
 			RenderHelper.enableStandardItemLighting();
@@ -76,27 +75,11 @@ public class BarrelStateDissolveMetals extends BarrelState{
 	}
 
 	@Override
-	public boolean canExtractContents(TileEntityBarrel barrel) 
-	{
-		if (barrel.getTimerStatus() >= 1)
-		{
-			return true;
-		}
-		
-		return false;
-	}
-
-	@Override
-	public void onExtractContents(TileEntityBarrel barrel) {
-		barrel.setState(BarrelStates.fluid);
-	}
-
-	@Override
 	public String[] getWailaBody(TileEntityBarrel barrel)
 	{
 		if (barrel.getTimerStatus() > 0)
 		{
-			description[0] = "Dissolving " + String.format("%.0f", barrel.getTimerStatus() * 100) + "%";
+			description[0] = "Brewing " + String.format("%.0f", barrel.getTimerStatus() * 100) + "%";
 			return description;
 		}
 		else
