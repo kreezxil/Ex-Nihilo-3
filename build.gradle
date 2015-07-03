@@ -31,7 +31,7 @@ group= "exnihilo2"
 archivesBaseName = "ExNihilo2"
 
 minecraft {
-    version = "1.8-11.14.2.1423"
+    version = "1.8-11.14.3.1487"
     runDir = "eclipse"
     
     // the mappings can be changed at any time, and must be in the following format.

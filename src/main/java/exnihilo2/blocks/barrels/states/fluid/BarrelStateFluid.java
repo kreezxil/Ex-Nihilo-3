@@ -22,6 +22,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -63,30 +64,36 @@ public class BarrelStateFluid extends BarrelState{
 
 		if (fluid != null && fluid.getFluid() != null)
 		{
-			GlStateManager.pushMatrix();
-			RenderHelper.disableStandardItemLighting();
+			ResourceLocation still = fluid.getFluid().getStill();
 			
-			GlStateManager.enableBlend();
-			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-
-			Minecraft mc = Minecraft.getMinecraft();
-			mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-			TextureAtlasSprite texture = fluid.getFluid().getIcon();
-
-			GlStateManager.translate(x + 0.125d, y, z + 0.125d);
-			GlStateManager.scale(0.75d, 1.0d, 0.75d);
-			
-			if (barrel.getBlockType().getMaterial().isOpaque())
+			if (still != null)
 			{
-				BarrelRenderer.renderContentsSimple(texture, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
+				GlStateManager.pushMatrix();
+				RenderHelper.disableStandardItemLighting();
+				
+				GlStateManager.enableBlend();
+				GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+				Minecraft mc = Minecraft.getMinecraft();
+				mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
+
+				TextureAtlasSprite texture = mc.getTextureMapBlocks().getAtlasSprite(still.toString());
+
+				GlStateManager.translate(x + 0.125d, y, z + 0.125d);
+				GlStateManager.scale(0.75d, 1.0d, 0.75d);
+				
+				if (barrel.getBlockType().getMaterial().isOpaque())
+				{
+					BarrelRenderer.renderContentsSimple(texture, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
+				}
+				else
+				{
+					BarrelRenderer.renderContentsComplex(texture, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
+				}
+				
+				RenderHelper.enableStandardItemLighting();
+				GlStateManager.popMatrix();
 			}
-			else
-			{
-				BarrelRenderer.renderContentsComplex(texture, (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color("FFFFFF"));
-			}
-			
-			RenderHelper.enableStandardItemLighting();
-			GlStateManager.popMatrix();
 		}
 	}
 	

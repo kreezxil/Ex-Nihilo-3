@@ -1,6 +1,5 @@
 package exnihilo2.blocks.fluids;
 
-import exnihilo2.blocks.fluids.base.BlockFluid;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -19,9 +18,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 
-public class BlockFluidAzoth extends BlockFluid{
+public class BlockFluidAzoth extends BlockFluidClassic{
 	public BlockFluidAzoth(Fluid fluid, Material material) {
 		super(fluid, material);
 	}

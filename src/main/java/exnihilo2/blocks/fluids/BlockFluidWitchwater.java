@@ -18,10 +18,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
-import exnihilo2.blocks.fluids.base.BlockFluid;
 
-public class BlockFluidWitchwater extends BlockFluid{
+public class BlockFluidWitchwater extends BlockFluidClassic{
 
 	public BlockFluidWitchwater(Fluid fluid, Material material) {
 		super(fluid, material);
