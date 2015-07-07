@@ -28,7 +28,7 @@ public class ItemBucketAzoth extends ItemBucket{
     {
         if (!playerIn.capabilities.isCreativeMode)
         {
-            --stack.stackSize;
+            stack.stackSize--;
         }
 
         if (!worldIn.isRemote)

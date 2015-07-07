@@ -74,9 +74,9 @@ public class EN2Items {
 		astrolabe_jade = new ItemAstrolabe().setUnlocalizedName("astrolabe_jade");
 		
 		//Buckets (Porcelain)
+		bucket_porcelain_empty = new ItemBucketPorcelain(Blocks.air).setUnlocalizedName("bucket_porcelain_empty").setMaxStackSize(16);
 		bucket_porcelain_azoth = new ItemBucketAzoth(EN2Blocks.azoth).setUnlocalizedName("bucket_porcelain_azoth").setContainerItem(bucket_porcelain_empty);
 		bucket_porcelain_raw = new ItemBucketPorcelainRaw().setUnlocalizedName("bucket_porcelain_raw");
-		bucket_porcelain_empty = new ItemBucketPorcelain(Blocks.air).setUnlocalizedName("bucket_porcelain_empty").setMaxStackSize(16);
 		bucket_porcelain_water = new ItemBucketPorcelain(Blocks.flowing_water).setUnlocalizedName("bucket_porcelain_water").setContainerItem(bucket_porcelain_empty);
 		bucket_porcelain_lava = new ItemBucketPorcelain(Blocks.flowing_lava).setUnlocalizedName("bucket_porcelain_lava").setContainerItem(bucket_porcelain_empty);
 		bucket_porcelain_milk = new ItemBucketPorcelainMilk().setUnlocalizedName("bucket_porcelain_milk");
