@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.client.textures.files.TextureLocator;
 import exnihilo2.util.Color;
 
 public class BarrelStateSlime extends BarrelState{
@@ -38,7 +39,7 @@ public class BarrelStateSlime extends BarrelState{
 
 			Minecraft mc = Minecraft.getMinecraft();
 			mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-			TextureAtlasSprite water = fluid.getFluid().getIcon();
+			TextureAtlasSprite water = TextureLocator.find(fluid.getFluid().getStill());
 
 			GlStateManager.translate(x + 0.125d, y, z + 0.125d);
 			GlStateManager.scale(0.75d, 1.0d, 0.75d);

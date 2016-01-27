@@ -15,6 +15,7 @@ import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.states.BarrelStates;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.client.textures.files.TextureLocator;
 import exnihilo2.fluids.EN2Fluids;
 import exnihilo2.util.Color;
 
@@ -67,7 +68,7 @@ public class BarrelStateDissolveMetals extends BarrelState{
 			}
 			else
 			{
-				BarrelRenderer.renderContentsMultiTexture(boiling_witchwater, EN2Fluids.witchwater.getStillIcon(), EN2Fluids.witchwater.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), Color.WHITE);
+				BarrelRenderer.renderContentsMultiTexture(boiling_witchwater, TextureLocator.find(EN2Fluids.witchwater.getStill()), TextureLocator.find(EN2Fluids.witchwater.getStill()), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), Color.WHITE);
 			}
 
 			RenderHelper.enableStandardItemLighting();

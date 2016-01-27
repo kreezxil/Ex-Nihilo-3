@@ -10,8 +10,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
@@ -20,7 +20,7 @@ import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.crucibles.tileentity.layers.CrucibleInventoryLayer;
 import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 
-public class TileEntityCrucible extends CrucibleInventoryLayer implements IUpdatePlayerListBox{
+public class TileEntityCrucible extends CrucibleInventoryLayer implements ITickable{
 	protected int updateTimer = 0;
 	protected int updateTimerMax = 8; //Sync if an update is required.
 	protected boolean updateQueued = false;

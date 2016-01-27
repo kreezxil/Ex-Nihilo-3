@@ -16,8 +16,8 @@ public class GameRegistryHelper {
 		
 		//GameRegistry is currently broken. Using an ugly method I found on minecraftforgeforums instead. :(
 		//TODO: Uncomment this when someone fixes it.
-		//Block block = GameRegistry.findBlock(names[0], names[1]);
-		Block block = findBlock(names[0], names[1]);
+		Block block = GameRegistry.findBlock(names[0], names[1]);
+		//Block block = findBlock(names[0], names[1]);
 		
 		return block;
 	}
@@ -39,43 +39,43 @@ public class GameRegistryHelper {
 	* @param blockname String the block name
 	* @return Blocks.air on not finding anything or the desired block.
 	*/
-	public static Block findBlock(String modid, String blockname) {
-		Block find = GameRegistry.findBlock(modid,blockname);
-		// legit way fails?
-		if(find == null) {
-			String searchkey = modid+":"+blockname;
-			// Lets fire up the reflection...
-			// You might want to put the map somewhere so you
-			// don't have to reflect every time. saves a lot of cpu time.
-			Class x = GameData.class;
-				try {
-					Method method = x.getDeclaredMethod("getMain");
-					method.setAccessible(true);
-					GameData gamedata = (GameData)method.invoke(null);
-					// and I mean saving the below list b
-					FMLControlledNamespacedRegistry<Block> b = gamedata.getBlockRegistry();
-					// lets be gracious and give it a chance to find it this way
-					if(b.containsKey(searchkey)) {
-						find = b.getObject(searchkey);
-					}
-					else {
-						// take a wild stab. returns air if nothing found
-						find = b.getObject(searchkey);
-						if(find != Blocks.air) {
-							//WhoTookMyCookies.log.warn("Chest found: "+GameRegistry.findUniqueIdentifierFor(b.getObject("minecraft:chest")).name);
-						}
-						else {
-							if(!searchkey.equals("minecraft:air")) {
-								return null;
-							}
-						}
-					}
-				}
-				catch(Exception ex) {
-					// your error handling here
-				}
-			}
-		
-		return find;
-	}
+//	public static Block findBlock(String modid, String blockname) {
+//		Block find = GameRegistry.findBlock(modid,blockname);
+//		// legit way fails?
+//		if(find == null) {
+//			String searchkey = modid+":"+blockname;
+//			// Lets fire up the reflection...
+//			// You might want to put the map somewhere so you
+//			// don't have to reflect every time. saves a lot of cpu time.
+//			Class x = GameData.class;
+//				try {
+//					Method method = x.getDeclaredMethod("getMain");
+//					method.setAccessible(true);
+//					GameData gamedata = (GameData)method.invoke(null);
+//					// and I mean saving the below list b
+//					FMLControlledNamespacedRegistry<Block> b = gamedata.getBlockRegistry();
+//					// lets be gracious and give it a chance to find it this way
+//					if(b.containsKey(searchkey)) {
+//						find = b.getObject(searchkey);
+//					}
+//					else {
+//						// take a wild stab. returns air if nothing found
+//						find = b.getObject(searchkey);
+//						if(find != Blocks.air) {
+//							//WhoTookMyCookies.log.warn("Chest found: "+GameRegistry.findUniqueIdentifierFor(b.getObject("minecraft:chest")).name);
+//						}
+//						else {
+//							if(!searchkey.equals("minecraft:air")) {
+//								return null;
+//							}
+//						}
+//					}
+//				}
+//				catch(Exception ex) {
+//					// your error handling here
+//				}
+//			}
+//		
+//		return find;
+//	}
 }

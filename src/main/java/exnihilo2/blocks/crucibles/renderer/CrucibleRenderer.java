@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import exnihilo2.blocks.crucibles.tileentity.TileEntityCrucible;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
+import exnihilo2.client.textures.files.TextureLocator;
 import exnihilo2.util.Color;
 import exnihilo2.util.helpers.ContentRenderHelper;
 import net.minecraft.block.Block;
@@ -13,6 +14,8 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
@@ -20,6 +23,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class CrucibleRenderer extends TileEntitySpecialRenderer{
 	public static final double MIN_RENDER_CAPACITY = 0.30d;
 	public static final double MAX_RENDER_CAPACITY = 0.95d;
+	public static EntityLivingBase entity;
 	
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage) 
@@ -61,6 +65,11 @@ public class CrucibleRenderer extends TileEntitySpecialRenderer{
 		
 		if (contents != null && Block.getBlockFromItem(contents.getItem()) != null)
 		{
+		  if (entity == null)
+		  {
+		    entity = new EntityCreeper(crucible.getWorld());
+		  }
+		  
 			double top = ContentRenderHelper.getAdjustedContentLevel(MIN_RENDER_CAPACITY, MAX_RENDER_CAPACITY, (double)crucible.getSolidFullness());
 			double height = top - MIN_RENDER_CAPACITY;
 			
@@ -68,7 +77,7 @@ public class CrucibleRenderer extends TileEntitySpecialRenderer{
 			GlStateManager.translate(0.0d, MIN_RENDER_CAPACITY + 0.01d - ((1.0d - height) * 0.5d), 0.0d); //Lift the block into the sifting box.
 			GlStateManager.scale(0.94d, height, 0.94d); //Adjust the height to fit the progress.
 			
-			Minecraft.getMinecraft().getItemRenderer().renderItem(null, contents, TransformType.NONE);
+			Minecraft.getMinecraft().getItemRenderer().renderItem(entity, contents, TransformType.NONE);
 		}
 	}
 	
@@ -80,7 +89,7 @@ public class CrucibleRenderer extends TileEntitySpecialRenderer{
 		{
 			double height = ContentRenderHelper.getAdjustedContentLevel(MIN_RENDER_CAPACITY, MAX_RENDER_CAPACITY, (double)crucible.getFluidFullness());
 			
-			ContentRenderHelper.renderContentsSimple(contents.getFluid().getStillIcon(), height, Color.WHITE);
+			ContentRenderHelper.renderContentsSimple(TextureLocator.find(contents.getFluid().getStill()), height, Color.WHITE);
 		}
 	}
 }

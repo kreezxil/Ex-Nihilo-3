@@ -11,21 +11,20 @@ import exnihilo2.blocks.barrels.tileentity.layers.BarrelStateLayer;
 import exnihilo2.util.Color;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fluids.FluidStack;
 
-public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePlayerListBox 
+public class TileEntityBarrel extends BarrelInventoryLayer implements ITickable
 {
 	protected int luminosity = 0;
 	protected int volume = 0;
@@ -228,4 +227,18 @@ public class TileEntityBarrel extends BarrelInventoryLayer implements IUpdatePla
 		NBTTagCompound tag = pkt.getNbtCompound();
 		readFromNBT(tag);
 	}
+
+  @Override
+  public ItemStack removeStackFromSlot(int index)
+  {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String getName()
+  {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }

@@ -105,10 +105,10 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int index) 
-	{
-		return null;
-	}
+  public ItemStack removeStackFromSlot(int index)
+  {
+    return null;
+  }
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) 
@@ -192,11 +192,12 @@ public class BarrelInventoryLayer extends BarrelFluidLayer implements ISidedInve
 		output.clear();
 	}
 
-	@Override
-	public String getCommandSenderName() {
-		TileEntityBarrel barrel = (TileEntityBarrel)this;
-		return barrel.getBlockType().getUnlocalizedName();
-	}
+  @Override
+  public String getName()
+  {
+    TileEntityBarrel barrel = (TileEntityBarrel)this;
+    return barrel.getBlockType().getUnlocalizedName();
+  }
 
 	@Override
 	public boolean hasCustomName() 

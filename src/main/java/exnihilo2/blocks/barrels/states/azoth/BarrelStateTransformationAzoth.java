@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 import exnihilo2.blocks.barrels.architecture.BarrelState;
 import exnihilo2.blocks.barrels.renderer.BarrelRenderer;
 import exnihilo2.blocks.barrels.tileentity.TileEntityBarrel;
+import exnihilo2.client.textures.files.TextureLocator;
 import exnihilo2.fluids.EN2Fluids;
 import exnihilo2.util.Color;
 
@@ -60,13 +61,13 @@ public class BarrelStateTransformationAzoth extends BarrelState{
 
 			if (barrel.getBlockType().getMaterial().isOpaque())
 			{
-				BarrelRenderer.renderContentsSimple(FluidRegistry.WATER.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, 1.0f - (float)barrel.getTimerStatus()));
-				BarrelRenderer.renderContentsSimple(EN2Fluids.azoth.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, (float)barrel.getTimerStatus()));
+				BarrelRenderer.renderContentsSimple(TextureLocator.find(FluidRegistry.WATER.getStill()), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, 1.0f - (float)barrel.getTimerStatus()));
+				BarrelRenderer.renderContentsSimple(TextureLocator.find(EN2Fluids.azoth.getStill()), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, (float)barrel.getTimerStatus()));
 			}
 			else
 			{
-				BarrelRenderer.renderContentsComplex(FluidRegistry.WATER.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, 1.0f - (float)barrel.getTimerStatus()));
-				BarrelRenderer.renderContentsComplex(EN2Fluids.azoth.getStillIcon(), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, (float)barrel.getTimerStatus()));
+				BarrelRenderer.renderContentsComplex(TextureLocator.find(FluidRegistry.WATER.getStill()), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, 1.0f - (float)barrel.getTimerStatus()));
+				BarrelRenderer.renderContentsComplex(TextureLocator.find(EN2Fluids.azoth.getStill()), (double)barrel.getFluidAmount() / (double)barrel.getCapacity(), new Color(1.0f, 1.0f, 1.0f, (float)barrel.getTimerStatus()));
 			}
 
 			RenderHelper.enableStandardItemLighting();

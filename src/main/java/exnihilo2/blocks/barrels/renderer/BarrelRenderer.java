@@ -18,6 +18,7 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformT
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -122,9 +123,9 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 		
 		Tessellator tessellator = Tessellator.getInstance();
 		WorldRenderer renderer = tessellator.getWorldRenderer();
+		GlStateManager.color(color.r, color.g, color.b, color.a);
 		
-		renderer.startDrawingQuads();
-		renderer.setColorRGBA_F(color.r, color.g, color.b, color.a);
+		renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 		renderTexturedQuad(renderer, topTexture, top, color, 1.0d);
 		renderTexturedQuad(renderer, bottomTexture, bottom, color, 1.0d);
 		renderTexturedQuad(renderer, sideTexture, north, color, height);
@@ -143,10 +144,10 @@ public class BarrelRenderer extends TileEntitySpecialRenderer {
 		double minV = (double)texture.getInterpolatedV(texture.getIconHeight() - (texture.getIconHeight() * contentHeight));
 		double maxV = (double)texture.getMaxV();
 		
-		renderer.addVertexWithUV(vertices[0].xCoord, vertices[0].yCoord, vertices[0].zCoord, maxU, maxV);
-		renderer.addVertexWithUV(vertices[1].xCoord, vertices[1].yCoord, vertices[1].zCoord, maxU, minV);
-		renderer.addVertexWithUV(vertices[2].xCoord, vertices[2].yCoord, vertices[2].zCoord, minU, minV);
-		renderer.addVertexWithUV(vertices[3].xCoord, vertices[3].yCoord, vertices[3].zCoord, minU, maxV);
+		renderer.pos(vertices[0].xCoord, vertices[0].yCoord, vertices[0].zCoord).tex(maxU, maxV).endVertex();
+		renderer.pos(vertices[1].xCoord, vertices[1].yCoord, vertices[1].zCoord).tex(maxU, minV).endVertex();
+		renderer.pos(vertices[2].xCoord, vertices[2].yCoord, vertices[2].zCoord).tex(minU, minV).endVertex();
+		renderer.pos(vertices[3].xCoord, vertices[3].yCoord, vertices[3].zCoord).tex(minU, maxV).endVertex();
 	}
 	
 	public static void renderContentsFromItemStack(ItemStack item)

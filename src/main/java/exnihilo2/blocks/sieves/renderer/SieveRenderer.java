@@ -15,12 +15,15 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformT
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public class SieveRenderer extends TileEntitySpecialRenderer{
 	public static final double MIN_RENDER_CAPACITY = 0.58d;
 	public static final double MAX_RENDER_CAPACITY = 0.95d;
+	private static EntityLivingBase entity;
 	
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int i) 
@@ -67,6 +70,11 @@ public class SieveRenderer extends TileEntitySpecialRenderer{
 		
 		if (contents != null && Block.getBlockFromItem(contents.getItem()) != null)
 		{
+		  if (entity == null)
+		  {
+		    entity = new EntityCreeper(sieve.getWorld());
+		  }
+		  
 			double top = ContentRenderHelper.getAdjustedContentLevel(MIN_RENDER_CAPACITY, MAX_RENDER_CAPACITY, 1.0d - (double)sieve.getProgress());
 			double height = top - MIN_RENDER_CAPACITY;
 			
@@ -74,7 +82,7 @@ public class SieveRenderer extends TileEntitySpecialRenderer{
 			GlStateManager.translate(0.0d, MIN_RENDER_CAPACITY + 0.01d - ((1.0d - height) * 0.5d), 0.0d); //Lift the block into the sifting box.
 			GlStateManager.scale(0.94d, height, 0.94d); //Adjust the height to fit the progress.
 			
-			Minecraft.getMinecraft().getItemRenderer().renderItem(null, contents, TransformType.NONE);
+			Minecraft.getMinecraft().getItemRenderer().renderItem(entity, contents, TransformType.NONE);
 		}
 	}
 }

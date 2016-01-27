@@ -39,9 +39,10 @@ public class CrucibleInventoryLayer extends CrucibleFluidLayer implements ISided
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int index) {
-		return null;
-	}
+  public ItemStack removeStackFromSlot(int index)
+  {
+    return null;
+  }
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
@@ -102,10 +103,11 @@ public class CrucibleInventoryLayer extends CrucibleFluidLayer implements ISided
 	@Override
 	public void clear() {}
 
-	@Override
-	public String getCommandSenderName() {
-		return EN2Blocks.crucible.getUnlocalizedName();
-	}
+  @Override
+  public String getName()
+  {
+    return EN2Blocks.crucible.getUnlocalizedName();
+  }
 
 	@Override
 	public boolean hasCustomName() {

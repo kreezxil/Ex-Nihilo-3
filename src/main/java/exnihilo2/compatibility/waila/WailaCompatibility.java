@@ -1,5 +1,7 @@
 package exnihilo2.compatibility.waila;
 
+import java.util.List;
+
 import exnihilo2.EN2;
 import exnihilo2.blocks.EN2Blocks;
 import exnihilo2.blocks.barrels.BlockBarrel;
@@ -9,16 +11,17 @@ import exnihilo2.blocks.crucibles.tileentity.TileEntityCrucible;
 import exnihilo2.blocks.furnaces.BlockFurnaceDirt;
 import exnihilo2.blocks.sieves.BlockSieve;
 import exnihilo2.blocks.sieves.tileentity.TileEntitySieve;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import mcp.mobius.waila.Waila;
-import mcp.mobius.waila.api.ITaggedList.ITipList;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
-import mcp.mobius.waila.api.IWailaDataAccessorServer;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
 
@@ -51,13 +54,13 @@ public class WailaCompatibility implements IWailaDataProvider{
 	}
 
 	@Override
-	public ITipList getWailaHead(ItemStack itemStack, ITipList currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) 
+	public List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) 
 	{
 		return null;
 	}
 
 	@Override
-	public ITipList getWailaBody(ItemStack itemStack, ITipList currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) 
+	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) 
 	{
 		if (accessor.getBlock() instanceof BlockSieve) 
 		{
@@ -79,18 +82,12 @@ public class WailaCompatibility implements IWailaDataProvider{
 	}
 
 	@Override
-	public ITipList getWailaTail(ItemStack itemStack, ITipList currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) 
+	public List<String> getWailaTail(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) 
 	{
 		return null;
 	}
-
-	@Override
-	public NBTTagCompound getNBTData(TileEntity te, NBTTagCompound tag, IWailaDataAccessorServer accessor) {
-		
-		return null;
-	}
 	
-	public void addSieveBody(TileEntitySieve sieve, ITipList tip)
+	public void addSieveBody(TileEntitySieve sieve, List<String> tip)
 	{
 		if (!sieve.hasMesh())
 		{
@@ -111,7 +108,7 @@ public class WailaCompatibility implements IWailaDataProvider{
 		}
 	}
 	
-	public void addBarrelBody(TileEntityBarrel barrel, ITipList tip)
+	public void addBarrelBody(TileEntityBarrel barrel, List<String> tip)
 	{
 		String[] body = barrel.getState().getWailaBody(barrel);
 		
@@ -124,7 +121,7 @@ public class WailaCompatibility implements IWailaDataProvider{
 		}
 	}
 	
-	public void addCrucibleBody(TileEntityCrucible crucible, ITipList tip)
+	public void addCrucibleBody(TileEntityCrucible crucible, List<String> tip)
 	{
 		FluidStack fluid = crucible.getCurrentFluid();
 		
@@ -140,4 +137,12 @@ public class WailaCompatibility implements IWailaDataProvider{
 	{
 		return String.format("%.0f", input);
 	}
+
+  @Override
+  public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag,
+                                   World world, BlockPos pos)
+  {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }

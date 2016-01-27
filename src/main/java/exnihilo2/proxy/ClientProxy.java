@@ -101,11 +101,6 @@ public class ClientProxy extends Proxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, new BarrelRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySieve.class, new SieveRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrucible.class, new CrucibleRenderer());
-		
-		EN2Fluids.witchwater.setStillIcon(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/witchwater_still"));
-		EN2Fluids.witchwater.setFlowingIcon(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/witchwater_flowing"));
-		EN2Fluids.azoth.setStillIcon(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/azoth_still"));
-		EN2Fluids.azoth.setFlowingIcon(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/azoth_flowing"));
 	}
 
 	private void registerEntityRenderers()

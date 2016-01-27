@@ -64,12 +64,6 @@ public class ModelFurnaceDirt implements IFlexibleBakedModel, ISmartBlockModel {
     @Override
     public boolean isBuiltInRenderer() { return false; }
 
-
-	@Override
-	public TextureAtlasSprite getTexture() {
-		return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/furnace_dirt_side");
-	}
-
 	@Override
 	public ItemCameraTransforms getItemCameraTransforms() 
 	{
@@ -172,4 +166,10 @@ public class ModelFurnaceDirt implements IFlexibleBakedModel, ISmartBlockModel {
 	public IBakedModel handleBlockState(IBlockState state) {
 		return new ModelFurnaceDirt((EnumFacing)state.getValue(BlockFurnaceDirt.FACING), ((Boolean)state.getValue(BlockFurnaceDirt.BURNING)).booleanValue());
 	}
+
+  @Override
+  public TextureAtlasSprite getParticleTexture()
+  {
+    return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("exnihilo2:blocks/furnace_dirt_side");
+  }
 }

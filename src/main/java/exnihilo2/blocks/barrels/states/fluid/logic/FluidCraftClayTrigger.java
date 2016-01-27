@@ -16,7 +16,9 @@ public class FluidCraftClayTrigger extends BarrelLogic{
 	@Override
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) {
 		
-		if (item.getItem() == Item.getItemFromBlock(EN2Blocks.dust) && barrel.getFluid().getFluidID() == FluidRegistry.WATER.getID() && barrel.getFluidAmount() == barrel.getCapacity())
+		if (item.getItem() == Item.getItemFromBlock(EN2Blocks.dust) 
+		    && barrel.getFluid().getFluid() == FluidRegistry.WATER
+		    && barrel.getFluidAmount() == barrel.getCapacity())
 		{
 			return true;
 		}
@@ -26,7 +28,9 @@ public class FluidCraftClayTrigger extends BarrelLogic{
 
 	@Override
 	public boolean onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) {
-		if (item.getItem() == Item.getItemFromBlock(EN2Blocks.dust) && barrel.getFluid().getFluidID() == FluidRegistry.WATER.getID() && barrel.getFluidAmount() == barrel.getCapacity())
+		if (item.getItem() == Item.getItemFromBlock(EN2Blocks.dust) 
+		    && barrel.getFluid().getFluid() == FluidRegistry.WATER
+		    && barrel.getFluidAmount() == barrel.getCapacity())
 		{
 			barrel.setState(BarrelStates.output);
 			barrel.setContents(new ItemStack(Blocks.clay, 1));

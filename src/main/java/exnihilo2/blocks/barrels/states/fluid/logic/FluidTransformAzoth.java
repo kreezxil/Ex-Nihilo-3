@@ -15,7 +15,9 @@ public class FluidTransformAzoth extends BarrelLogic{
 	@Override
 	public boolean canUseItem(TileEntityBarrel barrel, ItemStack item) {
 		
-		if (item.getItem() == EN2Items.metal_salts && barrel.getFluid().getFluidID() == FluidRegistry.WATER.getID() && barrel.getFluidAmount() == barrel.getCapacity())
+		if (item.getItem() == EN2Items.metal_salts 
+		    && barrel.getFluid().getFluid() == FluidRegistry.WATER 
+		    && barrel.getFluidAmount() == barrel.getCapacity())
 		{
 			return true;
 		}
@@ -25,7 +27,9 @@ public class FluidTransformAzoth extends BarrelLogic{
 
 	@Override
 	public boolean onUseItem(EntityPlayer player, TileEntityBarrel barrel, ItemStack item) {
-		if (item.getItem() == EN2Items.metal_salts && barrel.getFluid().getFluidID() == FluidRegistry.WATER.getID() && barrel.getFluidAmount() == barrel.getCapacity())
+		if (item.getItem() == EN2Items.metal_salts 
+		    && barrel.getFluid().getFluid() == FluidRegistry.WATER
+		    && barrel.getFluidAmount() == barrel.getCapacity())
 		{
 			barrel.setState(BarrelStates.transform_azoth);
 			consumeItem(player, item);

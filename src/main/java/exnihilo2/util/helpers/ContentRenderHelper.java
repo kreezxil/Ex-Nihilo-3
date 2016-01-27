@@ -1,9 +1,12 @@
 package exnihilo2.util.helpers;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import exnihilo2.util.Color;
 
 public class ContentRenderHelper 
@@ -28,13 +31,13 @@ public class ContentRenderHelper
 		
 		Tessellator tessellator = Tessellator.getInstance();
 		WorldRenderer renderer = tessellator.getWorldRenderer();
+		GlStateManager.color(color.r, color.g, color.b, color.a);
 		
-		renderer.startDrawingQuads();
-		renderer.setColorRGBA_F(color.r, color.g, color.b, color.a);
-		renderer.addVertexWithUV(1.0d, 	height, 	1.0d, 	maxU, maxV);
-		renderer.addVertexWithUV(1.0d, 	height, 	0, 		maxU, minV);
-		renderer.addVertexWithUV(0, 	height, 	0, 		minU, minV);
-		renderer.addVertexWithUV(0, 	height, 	1.0d, 	minU, maxV);
+		renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+		renderer.pos(1.0d, 	height, 	1.0d).tex(maxU, maxV).endVertex();
+		renderer.pos(1.0d, 	height, 	0).tex(maxU, minV).endVertex();
+		renderer.pos(0, 	height, 	0).tex(minU, minV).endVertex();
+		renderer.pos(0, 	height, 	1.0d).tex(minU, maxV).endVertex();
 		tessellator.draw();
 		
 		GlStateManager.popMatrix();

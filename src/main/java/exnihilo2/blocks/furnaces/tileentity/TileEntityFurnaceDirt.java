@@ -25,11 +25,11 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -38,7 +38,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 //Most of this code was taken directly from vanilla and modified.
 //I'll clean it up sometime. It's really messy, probably from the decompilation process.
 //At least I got it down to one single block instead of two.
-public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdatePlayerListBox, ISidedInventory{
+public class TileEntityFurnaceDirt extends TileEntityLockable implements ITickable, ISidedInventory{
 	    private static final int[] slotsTop = new int[] {0};
 	    private static final int[] slotsBottom = new int[] {2, 1};
 	    private static final int[] slotsSides = new int[] {1};
@@ -90,21 +90,21 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	            return null;
 	        }
 	    }
-
+	    
 	    @Override
-	    public ItemStack getStackInSlotOnClosing(int index)
-	    {
-	        if (this.furnaceItemStacks[index] != null)
-	        {
-	            ItemStack itemstack = this.furnaceItemStacks[index];
-	            this.furnaceItemStacks[index] = null;
-	            return itemstack;
-	        }
-	        else
-	        {
-	            return null;
-	        }
-	    }
+      public ItemStack removeStackFromSlot(int index)
+      {
+	      if (this.furnaceItemStacks[index] != null)
+        {
+            ItemStack itemstack = this.furnaceItemStacks[index];
+            this.furnaceItemStacks[index] = null;
+            return itemstack;
+        }
+        else
+        {
+            return null;
+        }
+      }
 
 	    @Override
 	    public void setInventorySlotContents(int index, ItemStack stack)
@@ -126,9 +126,10 @@ public class TileEntityFurnaceDirt extends TileEntityLockable implements IUpdate
 	    }
 	    
 	    @Override
-		public String getCommandSenderName() {
-			return this.getBlockType().getLocalizedName();
-		}
+      public String getName()
+      {
+        return this.getBlockType().getLocalizedName();
+      }
 	    
 	    @Override
 	    public boolean hasCustomName()
