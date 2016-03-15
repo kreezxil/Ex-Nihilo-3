@@ -1,3 +1,6 @@
+# default to automatic eol normalization
+* text=auto
+
 # text stuff
 *.java text
 *.sh text eol=lf
